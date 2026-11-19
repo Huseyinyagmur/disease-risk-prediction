@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-Scope: this license covers the source code in this repository. It does not cover
-the third-party datasets used to train or validate the models (NHANES, PTB-XL,
-PhysioNet/CinC Challenge 2021, UCI Heart Disease, Mendeley Data), which remain
-under their own terms, nor third-party software such as ECGDeli (GPL-3.0) or
-GNU Octave, which are not included. See README.md, "Veri kaynakları ve lisanslar".

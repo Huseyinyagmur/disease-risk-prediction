@@ -1,0 +1,27 @@
+﻿
+ RUN  v3.1.3 C:/Bitirme/HealthRisk_AI_Research_V2/app/frontend
+
+ ✓ src/lib/form.test.ts (12 tests) 21ms
+ ✓ src/demo/profiles.test.ts (5 tests) 24ms
+ ✓ src/components/disclaimer.test.tsx (4 tests) 1313ms
+   ✓ sabit uyarı — tek kaynak backend > arayüz backend ne gönderirse onu gösterir (her ekranda; Giriş ve Hakkında dahil)  1261ms
+ ✓ src/pages/Results.test.tsx (3 tests) 2555ms
+   ✓ sonuç ekranı > ana modüller üstte, deneyseller ayrı bölümde; olasılık gösterilmez  1262ms
+   ✓ sonuç ekranı > karar metinleri: eşik üstü -> "İleri değerlendirme önerilir"; ABSTAIN -> neden; kanıt ve metrik tablosu  678ms
+   ✓ sonuç ekranı > hedefi tanımlayan girdi uyarısı (HbA1c) kartta gösterilir  612ms
+ ✓ src/pages/DataEntry.test.tsx (9 tests) 10521ms
+   ✓ veri giriş formu > bölümler ve alanlar şemadan üretilir; sabit uyarı görünür  1097ms
+   ✓ veri giriş formu > koşullu soru: kadın seçilince gebelik (zorunlu) ve GDM soruları açılır, erkekte kapanır  2132ms
+   ✓ veri giriş formu > birim seçici: mmol/L seçilince değer ve birim olduğu gibi sunucuya gider (frontend dönüştürmez)  2956ms
+   ✓ veri giriş formu > aralık hatası: sunucunun field_errors mesajı alanın altında gösterilir  1644ms
+   ✓ veri giriş formu > biçim hatası: sayı olmayan girdi alan altında gösterilir ve hesaplama engellenir  1139ms
+   ✓ canlı yönlendirme paneli > durum rozetleri: Çalışabilir / Eksik: … / Kapsam dışı: … ve modül etiketleri  432ms
+   ✓ canlı yönlendirme paneli > Karar verilemez durumu (ör. gebelik "bilmiyorum") gerekçesiyle gösterilir  431ms
+   ✓ canlı yönlendirme paneli > sunucuya ulaşılamazsa panel hata gösterir  481ms
+
+ Test Files  5 passed (5)
+      Tests  33 passed (33)
+   Start at  23:29:42
+   Duration  18.53s (transform 961ms, setup 6.91s, collect 12.62s, tests 14.43s, environment 12.82s, prepare 6.00s)
+
+JUNIT report written to C:/Bitirme/HealthRisk_AI_Research_V2/phase_xlv/results/vitest_junit.xml

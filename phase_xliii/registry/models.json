@@ -1,0 +1,6650 @@
+{
+ "registry_version": "1.0",
+ "phase": "XLIII",
+ "created_utc": "2026-11-19",
+ "note": "Uygulama için donmuş model kaydı. Model yeniden fit edilmez; eşik, kalibrasyon, feature sırası ve birimler değiştirilmez. Tüm model çıktıları araştırma skorudur: clinical_probability_eligibility=false (klinik olasılık olarak sunulamaz). Kanıt düzeyleri ayrı tutulur: iç test / zamansal / dış doğrulama. Bulunamayan bilgi BULUNAMADI.",
+ "clinical_probability_eligibility": false,
+ "research_targets": {
+  "precision_min": 0.7,
+  "recall_min": 0.75,
+  "fpr_max": 0.15,
+  "note": "Araştırma hedefleri; klinik onay kriteri değildir."
+ },
+ "venvs": {
+  "Focused_Current_Disease_Improvement_2026/.venv": {
+   "python": "3.13.3",
+   "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.1",
+    "scipy": "1.16.3",
+    "sklearn": "1.8.0",
+    "imblearn": "0.14.2",
+    "joblib": "1.5.3",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.4.1",
+    "catboost": "1.2.10"
+   }
+  },
+  ".venv": {
+   "python": "3.13.3",
+   "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.1",
+    "scipy": "1.16.3",
+    "sklearn": "1.8.0",
+    "imblearn": "0.14.2",
+    "joblib": "1.5.3",
+    "lightgbm": "4.6.0",
+    "xgboost": null,
+    "catboost": null
+   }
+  }
+ },
+ "models": {
+  "af_S4_DEVICE": {
+   "disease": "Atriyal fibrilasyon (AF)",
+   "disease_key": "af",
+   "role": "primary",
+   "phase_of_origin": "Phase21 (All_Disease_Improvement_Phase21); pipeline: phase_xxviii",
+   "model_file": {
+    "path": "All_Disease_Improvement_Phase21/models/af_S4_DEVICE.joblib",
+    "sha256": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "size_bytes": 817194,
+    "sha256_in_lock": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "lock_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "All_Disease_Improvement_Phase21/config/environment.json: sklearn 1.8.0, lightgbm 4.7.0, python 3.13.3",
+    "extra_sys_path_for_pickle": "All_Disease_Improvement_Phase21/src",
+    "pickle_wrapper": "CalibratedResearchModel",
+    "final_estimator": "LGBMClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "LightGBM (CalibratedResearchModel sarmalayıcı, ham skor)",
+   "target_definition": "PTB-XL kayıtlarında insan-doğrulamalı 12 derivasyonlu EKG ritminin atriyal fibrilasyon mu sinüs ritmi mi olduğu (AF vs SR; mevcut ritim).",
+   "population": "≥18 yaş, hasta başına ilk EKG, yalnız insan-doğrulamalı AFIB xor SR; 10 s, 500 Hz EKG. Diğer ritimler (AFL, taşikardi, bradikardi, PAC, PVC vb.) eğitimde negatif DEĞİLDİ.",
+   "input_source_note": "10 EKG feature yalnız kilitli AF-ECGDELI-OCTAVE-v1 (Octave + ECGDeli v1.1) pipeline çıktısıdır: phase_xxviii/config/af_pipeline_lock.json (SHA256 sidecar: af_pipeline_lock.sha256).",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      18,
+      89
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap89_ptbxl",
+     "synthetic_check_value": 63
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "female"
+    },
+    {
+     "name": "RR_Mean_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      300,
+      2000
+     ],
+     "input_field": "ecg_af_RR_Mean_Global",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 842.0
+    },
+    {
+     "name": "RR_Mean_Global_iqr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0,
+      1500
+     ],
+     "input_field": "ecg_af_RR_Mean_Global_iqr",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 24.0
+    },
+    {
+     "name": "QRS_Dur_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      40,
+      400
+     ],
+     "input_field": "ecg_af_QRS_Dur_Global",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 158.0
+    },
+    {
+     "name": "QRS_Dur_Global_iqr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0,
+      300
+     ],
+     "input_field": "ecg_af_QRS_Dur_Global_iqr",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 11.5
+    },
+    {
+     "name": "PR_Int_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      50,
+      600
+     ],
+     "input_field": "ecg_af_PR_Int_Global",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 270.0
+    },
+    {
+     "name": "PR_Int_Global_iqr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0,
+      400
+     ],
+     "input_field": "ecg_af_PR_Int_Global_iqr",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 22.5
+    },
+    {
+     "name": "P_Dur_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      20,
+      400
+     ],
+     "input_field": "ecg_af_P_Dur_Global",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 196.0
+    },
+    {
+     "name": "P_Dur_Global_iqr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0,
+      300
+     ],
+     "input_field": "ecg_af_P_Dur_Global_iqr",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "QT_Int_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      200,
+      900
+     ],
+     "input_field": "ecg_af_QT_Int_Global",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 499.0
+    },
+    {
+     "name": "QT_Int_Global_iqr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0,
+      400
+     ],
+     "input_field": "ecg_af_QT_Int_Global_iqr",
+     "transform": "ecg_pipeline_output",
+     "synthetic_check_value": 48.0
+    }
+   ],
+   "n_features": 12,
+   "feature_order_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.2360882763700418,
+     "rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+    },
+    "secondary": {},
+    "source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "raw (kalibrasyon uygulanmadı)",
+    "manifest_value": "raw"
+   },
+   "evidence": {
+    "highest_tier": "dış doğrulama (bağımsız, farklı kaynaklar; donmuş model + kilitli pipeline bileşimi)",
+    "internal_test": {
+     "source": "Phase XXVII (PTB-XL, hasta düzeyinde ayrık)",
+     "n": 1572,
+     "n_pos": 114,
+     "precision": {
+      "value": 0.873,
+      "ci95": [
+       0.801,
+       0.921
+      ]
+     },
+     "recall": {
+      "value": 0.904,
+      "ci95": [
+       0.835,
+       0.945
+      ]
+     },
+     "fpr": {
+      "value": 0.01,
+      "ci95": [
+       0.006,
+       0.017
+      ]
+     },
+     "auc": {
+      "value": 0.98,
+      "ci95": [
+       0.959,
+       0.995
+      ]
+     },
+     "threshold": 0.2360882763700418
+    },
+    "temporal": null,
+    "external": {
+     "source": "Phase XXXIII A2 (Challenge 2021: CPSC2018, CPSC-Extra, Chapman-Shaoxing, Georgia; AF vs SR, tam örneklem, havuz)",
+     "n": 7817,
+     "n_pos": 3497,
+     "precision": null,
+     "recall": {
+      "value": 0.929,
+      "ci95": [
+       0.919,
+       0.937
+      ]
+     },
+     "fpr": {
+      "value": 0.003,
+      "ci95": [
+       0.001,
+       0.005
+      ]
+     },
+     "auc": {
+      "value": 0.99,
+      "ci95": [
+       0.987,
+       0.992
+      ]
+     },
+     "threshold": 0.2360882763700418,
+     "precision_note": "P havuzda 0,997 ama örneklem prevalansı gerçek popülasyonu temsil etmez; hedef karşılaştırması için KULLANILMAZ.",
+     "other_rhythms": {
+      "source": "Phase XXXIII B (AF vs diğer ritimler, havuz)",
+      "n": 5477,
+      "n_pos": 3497,
+      "precision": null,
+      "recall": {
+       "value": 0.929,
+       "ci95": [
+        0.919,
+        0.937
+       ]
+      },
+      "fpr": {
+       "value": 0.072,
+       "ci95": [
+        0.062,
+        0.084
+       ]
+      },
+      "auc": {
+       "value": 0.965,
+       "ci95": [
+        0.96,
+        0.97
+       ]
+      },
+      "threshold": 0.2360882763700418
+     },
+     "georgia": {
+      "recall": 0.764,
+      "fpr": 0.002,
+      "note": "Georgia en zayıf kaynak (Recall 0,764)"
+     }
+    },
+    "research_target_note": "Üç hedef AF vs SR iç testte GA ile birlikte sağlandı; dış doğrulamada P prevalansa bağlı olduğu için değerlendirilemez. Diğer ritimlerde FPR 0,072 (sinüs taşikardisinde 0,181; PVC 0,306)."
+   },
+   "limitations": [
+    "Model yalnız AF vs sinüs ritmi ayırır; diğer ritimlere karşı FPR 0,072, sinüs taşikardisinde 0,181, PVC 0,306.",
+    "Feature'lar yalnız AF-ECGDELI-OCTAVE-v1 ile üretilebilir (Octave 10.3.0 + ECGDeli v1.1 + vendor WFDB). Pipeline-golden uyumu: karar uyumu 0,99 (Wilson alt sınır 0,946); QT ve P/PR sapması sürüyor.",
+    "Georgia kaynağında Recall 0,764; RR düzensizliği göstermeyen ilk 10 s'lik AF kayıtları kaçıyor.",
+    "Pipeline başarısızlığı (zero_beats, ecgdeli_error, feature_error) → tahmin üretilmez.",
+    "Olasılıklar kalibre değil; yalnız sabit eşikte karar. Pipeline sapması AF kayıtlarında olasılığı kaydırabilir (p95 |Δp| 0,24).",
+    "Tek ritim kaydı; semptom/klinik bağlam yok. Klinik tanı DEĞİL."
+   ],
+   "app_feasibility": "ECG sinyali + kilitli Octave pipeline gerekir (≈3,6 s/kayıt). Tek başına mobil/web formu ile ÜRETİLEMEZ.",
+   "missing_input_rule": "ZORUNLU: 12 feature'ın tamamı. Pipeline herhangi birini üretemezse (NaN) tahmin üretilmez. Yaş ≥ 90 → tahmin yok. Dondurulmuş imputer uygulama tarafında KULLANILMAZ.",
+   "app_visible": true,
+   "app_mode": "ecg_upload_demo",
+   "app_mode_reason": "EKG yükleme + kilitli Octave pipeline; demo",
+   "clinical_probability_eligibility": false
+  },
+  "mi_model": {
+   "disease": "Miyokard enfarktüsü (EKG bulgusu)",
+   "disease_key": "mi",
+   "role": "primary",
+   "phase_of_origin": "phase_xxxviii",
+   "model_file": {
+    "path": "phase_xxxviii/models/mi_model.joblib",
+    "sha256": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "size_bytes": 1249339,
+    "sha256_in_lock": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "lock_source": "phase_xxxviii/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "phase_xxxviii/PHASE_XXXVIII_REPORT.md §7: ilk çalıştırma kök .venv'de catboost yokluğundan durdu, Focused 2026 .venv ile tekrarlandı (lightgbm 4.7.0).",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LGBMClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "LightGBM (sınıf ağırlıklı; imblearn Pipeline)",
+   "target_definition": "PTB-XL'de kardiyoloğun aynı EKG'yi MI (eski veya akut) olarak kodlamasının NORM kayıtlardan ayrımı (kod: MI; hedef = EKG okuması, troponin/görüntüleme değil).",
+   "population": "≥18 yaş, hasta başına ilk doğrulanmış EKG; MI vs NORM (başka anormallikler negatifte yok).",
+   "input_source_note": "168 feature = PTB-XL+ ECGDeli dışa aktarımının kayıt başına medyanı. Kilitli AF pipeline'ı bu feature'ları ÜRETMEZ.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      18,
+      90
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 60.0,
+     "note": "PTB-XL: >89 yaş 90 olarak kodlandı"
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "PTB-XL kodu 0=erkek 1=kadın",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 1.0
+    },
+    {
+     "name": "PQ_Int_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 160.0
+    },
+    {
+     "name": "PQ_Int_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 162.0
+    },
+    {
+     "name": "PQ_Int_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 175.0
+    },
+    {
+     "name": "PQ_Int_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 168.0
+    },
+    {
+     "name": "PQ_Int_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 180.0
+    },
+    {
+     "name": "PQ_Int_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 170.0
+    },
+    {
+     "name": "PQ_Int_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 164.0
+    },
+    {
+     "name": "PQ_Int_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 162.0
+    },
+    {
+     "name": "PQ_Int_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 162.0
+    },
+    {
+     "name": "PQ_Int_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 169.0
+    },
+    {
+     "name": "PQ_Int_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 174.0
+    },
+    {
+     "name": "PQ_Int_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 158.0
+    },
+    {
+     "name": "PQ_Int_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 210.0
+    },
+    {
+     "name": "PR_Int_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 219.0
+    },
+    {
+     "name": "PR_Int_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 221.0
+    },
+    {
+     "name": "PR_Int_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 234.0
+    },
+    {
+     "name": "PR_Int_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 227.0
+    },
+    {
+     "name": "PR_Int_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 238.0
+    },
+    {
+     "name": "PR_Int_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 228.0
+    },
+    {
+     "name": "PR_Int_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 222.0
+    },
+    {
+     "name": "PR_Int_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 220.0
+    },
+    {
+     "name": "PR_Int_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 220.0
+    },
+    {
+     "name": "PR_Int_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 228.0
+    },
+    {
+     "name": "PR_Int_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 232.0
+    },
+    {
+     "name": "PR_Int_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 217.0
+    },
+    {
+     "name": "PR_Int_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 266.0
+    },
+    {
+     "name": "P_Amp_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.02
+    },
+    {
+     "name": "P_Amp_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.055
+    },
+    {
+     "name": "P_Amp_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.04
+    },
+    {
+     "name": "P_Amp_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.01
+    },
+    {
+     "name": "P_Amp_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.015
+    },
+    {
+     "name": "P_Amp_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.03
+    },
+    {
+     "name": "P_Amp_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.02
+    },
+    {
+     "name": "P_Amp_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.015
+    },
+    {
+     "name": "P_Amp_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.01
+    },
+    {
+     "name": "P_Amp_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.04999999999999995
+    },
+    {
+     "name": "P_Amp_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "P_Amp_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.04
+    },
+    {
+     "name": "P_DurFull_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 139.0
+    },
+    {
+     "name": "P_DurFull_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 136.0
+    },
+    {
+     "name": "P_DurFull_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 136.0
+    },
+    {
+     "name": "P_DurFull_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 130.0
+    },
+    {
+     "name": "P_DurFull_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 138.0
+    },
+    {
+     "name": "P_DurFull_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 138.0
+    },
+    {
+     "name": "P_DurFull_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 140.0
+    },
+    {
+     "name": "P_DurFull_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 142.0
+    },
+    {
+     "name": "P_DurFull_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 143.0
+    },
+    {
+     "name": "P_DurFull_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 134.0
+    },
+    {
+     "name": "P_DurFull_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 146.0
+    },
+    {
+     "name": "P_DurFull_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 136.0
+    },
+    {
+     "name": "P_Dur_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 192.0
+    },
+    {
+     "name": "Q_Amp_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.08
+    },
+    {
+     "name": "Q_Amp_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.09
+    },
+    {
+     "name": "Q_Amp_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "Q_Amp_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.13
+    },
+    {
+     "name": "Q_Amp_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.26
+    },
+    {
+     "name": "Q_Amp_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.095
+    },
+    {
+     "name": "Q_Amp_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.08
+    },
+    {
+     "name": "Q_Amp_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.095
+    },
+    {
+     "name": "Q_Amp_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.1
+    },
+    {
+     "name": "Q_Amp_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.05
+    },
+    {
+     "name": "Q_Amp_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.04
+    },
+    {
+     "name": "Q_Amp_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.08
+    },
+    {
+     "name": "QRS_Dur_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 116.0
+    },
+    {
+     "name": "QRS_Dur_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 116.0
+    },
+    {
+     "name": "QRS_Dur_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 122.0
+    },
+    {
+     "name": "QRS_Dur_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 140.0
+    },
+    {
+     "name": "QRS_Dur_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 132.0
+    },
+    {
+     "name": "QRS_Dur_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 123.0
+    },
+    {
+     "name": "QRS_Dur_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 112.0
+    },
+    {
+     "name": "QRS_Dur_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 112.0
+    },
+    {
+     "name": "QRS_Dur_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 114.0
+    },
+    {
+     "name": "QRS_Dur_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 120.0
+    },
+    {
+     "name": "QRS_Dur_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 118.0
+    },
+    {
+     "name": "QRS_Dur_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 114.0
+    },
+    {
+     "name": "QRS_Dur_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 157.0
+    },
+    {
+     "name": "QT_IntCorr_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 440.23749999999995
+    },
+    {
+     "name": "QT_IntCorr_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 428.65
+    },
+    {
+     "name": "QT_IntCorr_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 487.16499999999996
+    },
+    {
+     "name": "QT_IntCorr_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 452.47249999999997
+    },
+    {
+     "name": "QT_IntCorr_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 403.2875
+    },
+    {
+     "name": "QT_IntCorr_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 411.4525
+    },
+    {
+     "name": "QT_IntCorr_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 417.715
+    },
+    {
+     "name": "QT_IntCorr_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 419.39
+    },
+    {
+     "name": "QT_IntCorr_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 421.06
+    },
+    {
+     "name": "QT_IntCorr_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 441.4975
+    },
+    {
+     "name": "QT_IntCorr_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 479.97749999999996
+    },
+    {
+     "name": "QT_IntCorr_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 424.78499999999997
+    },
+    {
+     "name": "QT_IntFramingham_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 518.9475
+    },
+    {
+     "name": "QT_Int_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 414.0
+    },
+    {
+     "name": "QT_Int_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 406.0
+    },
+    {
+     "name": "QT_Int_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 461.5
+    },
+    {
+     "name": "QT_Int_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 426.0
+    },
+    {
+     "name": "QT_Int_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 380.0
+    },
+    {
+     "name": "QT_Int_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 388.0
+    },
+    {
+     "name": "QT_Int_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 396.0
+    },
+    {
+     "name": "QT_Int_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 398.0
+    },
+    {
+     "name": "QT_Int_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 398.0
+    },
+    {
+     "name": "QT_Int_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 416.0
+    },
+    {
+     "name": "QT_Int_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 456.0
+    },
+    {
+     "name": "QT_Int_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 402.0
+    },
+    {
+     "name": "QT_Int_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 496.0
+    },
+    {
+     "name": "R_Amp_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.68
+    },
+    {
+     "name": "R_Amp_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.66
+    },
+    {
+     "name": "R_Amp_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.21
+    },
+    {
+     "name": "R_Amp_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.79
+    },
+    {
+     "name": "R_Amp_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -1.1
+    },
+    {
+     "name": "R_Amp_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.68
+    },
+    {
+     "name": "R_Amp_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 1.08
+    },
+    {
+     "name": "R_Amp_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 1.18
+    },
+    {
+     "name": "R_Amp_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.98
+    },
+    {
+     "name": "R_Amp_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.315
+    },
+    {
+     "name": "R_Amp_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.41
+    },
+    {
+     "name": "R_Amp_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.68
+    },
+    {
+     "name": "RR_Mean_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 852.0
+    },
+    {
+     "name": "S_Amp_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.09
+    },
+    {
+     "name": "S_Amp_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.105
+    },
+    {
+     "name": "S_Amp_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.0099999999999999
+    },
+    {
+     "name": "S_Amp_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.05
+    },
+    {
+     "name": "S_Amp_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "S_Amp_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.07
+    },
+    {
+     "name": "S_Amp_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.32
+    },
+    {
+     "name": "S_Amp_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.21
+    },
+    {
+     "name": "S_Amp_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.11
+    },
+    {
+     "name": "S_Amp_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.05
+    },
+    {
+     "name": "S_Amp_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.04
+    },
+    {
+     "name": "S_Amp_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.1
+    },
+    {
+     "name": "ST_Elev_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.05
+    },
+    {
+     "name": "ST_Elev_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.005
+    },
+    {
+     "name": "ST_Elev_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.055
+    },
+    {
+     "name": "ST_Elev_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.23
+    },
+    {
+     "name": "ST_Elev_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.25
+    },
+    {
+     "name": "ST_Elev_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.18
+    },
+    {
+     "name": "ST_Elev_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.1
+    },
+    {
+     "name": "ST_Elev_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.045
+    },
+    {
+     "name": "ST_Elev_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.02
+    },
+    {
+     "name": "ST_Elev_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.01
+    },
+    {
+     "name": "ST_Elev_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.07
+    },
+    {
+     "name": "ST_Elev_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.02
+    },
+    {
+     "name": "T_Amp_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.12
+    },
+    {
+     "name": "T_Amp_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.145
+    },
+    {
+     "name": "T_Amp_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.03
+    },
+    {
+     "name": "T_Amp_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.01
+    },
+    {
+     "name": "T_Amp_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.29
+    },
+    {
+     "name": "T_Amp_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.3
+    },
+    {
+     "name": "T_Amp_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.23
+    },
+    {
+     "name": "T_Amp_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.18
+    },
+    {
+     "name": "T_Amp_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.135
+    },
+    {
+     "name": "T_Amp_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.0849999999999999
+    },
+    {
+     "name": "T_Amp_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.04
+    },
+    {
+     "name": "T_Amp_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mV",
+     "allowed_range": [
+      -10.0,
+      10.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": -0.145
+    },
+    {
+     "name": "T_DurFull_I",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 164.0
+    },
+    {
+     "name": "T_DurFull_II",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 152.0
+    },
+    {
+     "name": "T_DurFull_III",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 230.0
+    },
+    {
+     "name": "T_DurFull_V1",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 190.0
+    },
+    {
+     "name": "T_DurFull_V2",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 156.0
+    },
+    {
+     "name": "T_DurFull_V3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 153.0
+    },
+    {
+     "name": "T_DurFull_V4",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 150.0
+    },
+    {
+     "name": "T_DurFull_V5",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 148.0
+    },
+    {
+     "name": "T_DurFull_V6",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 148.0
+    },
+    {
+     "name": "T_DurFull_aVF",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 162.0
+    },
+    {
+     "name": "T_DurFull_aVL",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 223.0
+    },
+    {
+     "name": "T_DurFull_aVR",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 152.0
+    },
+    {
+     "name": "T_Dur_Global",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ms",
+     "allowed_range": [
+      0.0,
+      3000.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 274.0
+    },
+    {
+     "name": "HA__Global",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "ECGDeli elektriksel aks kategorisi (1–6, string float)",
+     "learned_categories": [
+      "1.0",
+      "2.0",
+      "3.0",
+      "4.0",
+      "5.0",
+      "6.0"
+     ],
+     "allowed_values": [
+      "1.0",
+      "2.0",
+      "3.0",
+      "4.0",
+      "5.0",
+      "6.0"
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": "2.0"
+    },
+    {
+     "name": "ST_Elev_missing",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "ecg_ptbxl_ecgdeli_168",
+     "transform": "ptbxl_group",
+     "synthetic_check_value": 0.0,
+     "note": "12 ST_Elev sütununun hepsi NaN ise 1 (eğitimde göstergeli medyan doldurma)"
+    }
+   ],
+   "n_features": 168,
+   "feature_order_source": "phase_xxxviii/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.04425664273332783,
+     "rule": "birincil_P>=0.70_FPR<=0.15_maxR"
+    },
+    "secondary": {
+     "threshold_recall075_reporting_only": 0.8634035917435882
+    },
+    "source": "phase_xxxviii/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor, class_weight)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test",
+    "internal_test": {
+     "source": "Phase XXXVIII (PTB-XL/PTB-XL+ ; tüm test; %75'i AF eşik seçiminde görülmüş kişi: PREVIOUSLY_EXPOSED)",
+     "n": 1474,
+     "n_pos": 521,
+     "precision": {
+      "value": 0.781,
+      "ci95": [
+       0.747,
+       0.811
+      ]
+     },
+     "recall": {
+      "value": 0.942,
+      "ci95": [
+       0.919,
+       0.959
+      ]
+     },
+     "fpr": {
+      "value": 0.145,
+      "ci95": [
+       0.124,
+       0.169
+      ]
+     },
+     "auc": {
+      "value": 0.973,
+      "ci95": [
+       0.965,
+       0.98
+      ]
+     },
+     "threshold": 0.04425664273332783,
+     "clean_subset": {
+      "n": 368,
+      "n_pos": 160,
+      "precision": {
+       "value": 0.812,
+       "ci95": [
+        0.751,
+        0.861
+       ]
+      },
+      "recall": {
+       "value": 0.975,
+       "ci95": [
+        0.937,
+        0.99
+       ]
+      },
+      "fpr": {
+       "value": 0.173,
+       "ci95": [
+        0.128,
+        0.23
+       ]
+      },
+      "auc": {
+       "value": 0.972,
+       "ci95": [
+        0.958,
+        0.984
+       ]
+      },
+      "threshold": 0.04425664273332783
+     },
+     "sensitivity_all_non_mi_negatives": {
+      "n": 2207,
+      "n_pos": 521,
+      "precision": 0.424,
+      "recall": 0.942,
+      "fpr": 0.396,
+      "auc": {
+       "value": 0.857,
+       "ci95": [
+        0.841,
+        0.873
+       ]
+      },
+      "threshold": 0.04425664273332783
+     }
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Tüm testte 3 hedef nokta tahminiyle sağlandı (FPR GA üst sınırı 0,169 > 0,15); temiz alt kümede FPR 0,173 (hedef yok). MI dışı anormallikler negatife katılınca FPR 0,396."
+   },
+   "limitations": [
+    "Zamansal doğrulama ve bağımsız dış doğrulama YAPILMADI.",
+    "Etiket ve feature aynı EKG'den gelir; yüksek AUC klinik MI tanı doğruluğu anlamına gelmez (troponin/görüntüleme referansı yok; MI çoğunlukla eski/evresi belirsiz).",
+    "MI'ya özgüllük sınırlı: STTC/CD/HYP kayıtları negatife eklenince FPR 0,40–0,50; model büyük ölçüde \"anormal EKG\" ayırıyor. Yaş ≥ 65'te FPR 0,28.",
+    "Kural baseline'ı (B2) geçersiz çıktı (AUC 0,31); geçerli basit kurala göre ML katkısı ÖLÇÜLEMEDİ. Ölçülebilen katkı yaş+cinsiyete göre +0,155 AUC.",
+    "Eşik FPR sınırında (OOF FPR 0,149). İkincil eşik (0,8634) yalnız raporlama içindir, kilitli karar eşiği değildir.",
+    "Feature üretim pipeline'ı YOK (lead bazlı genlikler); dış veride/uygulamada feature üretilemez."
+   ],
+   "app_feasibility": "UYGULAMAYA ALINAMAZ (şimdilik): 168 lead bazlı ECGDeli feature'ını üretecek kilitli pipeline mevcut değil.",
+   "missing_input_rule": "ZORUNLU: 168 feature. Yalnız PTB-XL+ eğitiminde olduğu gibi ST_Elev ailesi (12 sütun) birlikte NaN ise ve ST_Elev_missing=1 ise kabul; diğer her eksik → tahmin yok.",
+   "app_visible": false,
+   "app_mode": "registry_only",
+   "app_mode_reason": "feature üretim pipeline'ı yok; yalnız iç test",
+   "clinical_probability_eligibility": false
+  },
+  "cad_DEVICE": {
+   "disease": "Koroner arter hastalığı (CAD)",
+   "disease_key": "cad",
+   "role": "primary",
+   "phase_of_origin": "V2 başlangıcı (kök models/cad); düzeltilmiş teknik tekrar: phase_xli",
+   "model_file": {
+    "path": "models/cad/DEVICE.joblib",
+    "sha256": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "size_bytes": 8142,
+    "sha256_in_lock": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "lock_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "BULUNAMADI",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "CalibratedClassifierCV",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon + sigmoid kalibrasyon (CalibratedClassifierCV, OOF)",
+   "target_definition": "UCI kohortlarında anjiyografik >%50 koroner daralma (num>0) bulunup bulunmaması (mevcut durum).",
+   "population": "UCI Cleveland eğitim (n=303 türevi; eğitim 181); hastane kohortu, semptomatik/anjiyografiye yönlendirilmiş kişiler (genel popülasyon DEĞİL).",
+   "input_source_note": "Efor testi (thalach, oldpeak, slope, exang) ve istirahat EKG gerektirir.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      100
+     ],
+     "input_field": "age_years",
+     "transform": "identity",
+     "synthetic_check_value": 56
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "0.0",
+      "1.0"
+     ],
+     "allowed_values": [
+      "0.0",
+      "1.0"
+     ],
+     "input_field": "sex",
+     "transform": "cad_sex_strfloat",
+     "synthetic_check_value": "0.0"
+    },
+    {
+     "name": "cp",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "1.0",
+      "2.0",
+      "3.0",
+      "4.0"
+     ],
+     "allowed_values": [
+      "1.0",
+      "2.0",
+      "3.0",
+      "4.0"
+     ],
+     "input_field": "cad_chest_pain_type",
+     "transform": "cad_cp_strfloat",
+     "synthetic_check_value": "1.0"
+    },
+    {
+     "name": "trestbps",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      50,
+      300
+     ],
+     "input_field": "sbp_1_mmhg",
+     "transform": "cad_trestbps",
+     "synthetic_check_value": 130.0
+    },
+    {
+     "name": "chol",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      30,
+      1000
+     ],
+     "input_field": "total_chol_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 243.0
+    },
+    {
+     "name": "fbs",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "0.0",
+      "1.0"
+     ],
+     "allowed_values": [
+      "0.0",
+      "1.0"
+     ],
+     "input_field": "glucose_fasting_mgdl",
+     "transform": "fasting_gt120_strfloat",
+     "synthetic_check_value": "0.0"
+    },
+    {
+     "name": "restecg",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "0.0",
+      "1.0",
+      "2.0"
+     ],
+     "allowed_values": [
+      "0.0",
+      "1.0",
+      "2.0"
+     ],
+     "input_field": "cad_resting_ecg",
+     "transform": "cad_restecg_strfloat",
+     "synthetic_check_value": "0.0"
+    },
+    {
+     "name": "thalach",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "atım/dk",
+     "allowed_range": [
+      20,
+      260
+     ],
+     "input_field": "cad_max_hr_bpm",
+     "transform": "identity",
+     "synthetic_check_value": 152.0
+    },
+    {
+     "name": "exang",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "0.0",
+      "1.0"
+     ],
+     "allowed_values": [
+      "0.0",
+      "1.0"
+     ],
+     "input_field": "cad_exercise_angina",
+     "transform": "cad_exang_strfloat",
+     "synthetic_check_value": "0.0"
+    },
+    {
+     "name": "oldpeak",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mm",
+     "allowed_range": [
+      -10,
+      20
+     ],
+     "input_field": "cad_st_depression_mm",
+     "transform": "identity",
+     "synthetic_check_value": 0.8
+    },
+    {
+     "name": "slope",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "1.0",
+      "2.0",
+      "3.0"
+     ],
+     "allowed_values": [
+      "1.0",
+      "2.0",
+      "3.0"
+     ],
+     "input_field": "cad_st_slope",
+     "transform": "cad_slope_strfloat",
+     "synthetic_check_value": "1.0"
+    }
+   ],
+   "n_features": 11,
+   "feature_order_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.5401802969539393,
+     "rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+    },
+    "secondary": {},
+    "source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "sigmoid_oof (Platt; yine de klinik olasılık DEĞİL)",
+    "manifest_value": "sigmoid_oof"
+   },
+   "evidence": {
+    "highest_tier": "iç test + düzeltilmiş teknik tekrar (bağımsız dış doğrulama DEĞİL)",
+    "internal_test": {
+     "source": "Cleveland UCI test (phase_xxvii; önceden görülmüş)",
+     "n": 61,
+     "n_pos": 28,
+     "precision": {
+      "value": 0.885,
+      "ci95": [
+       0.71,
+       0.96
+      ]
+     },
+     "recall": {
+      "value": 0.821,
+      "ci95": [
+       0.644,
+       0.921
+      ]
+     },
+     "fpr": {
+      "value": 0.091,
+      "ci95": [
+       0.031,
+       0.236
+      ]
+     },
+     "auc": {
+      "value": 0.948,
+      "ci95": [
+       0.888,
+       0.99
+      ]
+     },
+     "threshold": 0.5401802969539393
+    },
+    "temporal": null,
+    "external": {
+     "source": "Phase XLI düzeltilmiş teknik tekrar (UCI Hungarian n=95, VA n=64; eksiksiz-vaka, seçilmiş, PREVIOUSLY_EXPOSED; bağımsız dış doğrulama DEĞİL)",
+     "hungarian": {
+      "n": 95,
+      "n_pos": 68,
+      "precision": {
+       "value": 0.857,
+       "ci95": [
+        0.757,
+        0.921
+       ]
+      },
+      "recall": {
+       "value": 0.882,
+       "ci95": [
+        0.785,
+        0.939
+       ]
+      },
+      "fpr": {
+       "value": 0.37,
+       "ci95": [
+        0.215,
+        0.558
+       ]
+      },
+      "auc": {
+       "value": 0.852,
+       "ci95": [
+        0.766,
+        0.928
+       ]
+      },
+      "threshold": 0.5401802969539393
+     },
+     "va": {
+      "n": 64,
+      "n_pos": 54,
+      "precision": {
+       "value": 0.885,
+       "ci95": [
+        0.782,
+        0.943
+       ]
+      },
+      "recall": {
+       "value": 1.0,
+       "ci95": [
+        0.934,
+        1.0
+       ]
+      },
+      "fpr": {
+       "value": 0.7,
+       "ci95": [
+        0.397,
+        0.892
+       ]
+      },
+      "auc": {
+       "value": 0.667,
+       "ci95": [
+        0.437,
+        0.859
+       ]
+      },
+      "threshold": 0.5401802969539393
+     },
+     "note": "Switzerland YAPILAMAZ (chol %100 eksik). Eski V2 dış sonuçları (R≈0,51) kodlama hatası nedeniyle GEÇERSİZ: phase_xlii/ERRATA_CAD_V2.md."
+    },
+    "research_target_note": "İç testte 3 hedef nokta tahminiyle sağlandı (GA ile değil; n=61). Düzeltilmiş dış tekrarlarda FPR 0,37–0,70 (hedef yok)."
+   },
+   "limitations": [
+    "Kategorik girdiler string-float biçiminde olmalı ('1.0'); '1' biçimi sessizce bilinmeyen sayılır ve one-hot sıfırlanır (V2 kodlama hatası, ERRATA_CAD_V2.md). Uygulama dönüşüm tablosunu birebir uygulamalı.",
+    "İç test n=61 (28 pozitif): geniş GA. Düzeltilmiş dış tekrar seçilmiş eksiksiz-vaka alt kümesi (Hungarian 95, VA 64; negatif 27 ve 10).",
+    "Girdiler efor testi ve EKG gerektirir; genel popülasyon taraması için uygun değil. Hedef anjiyografik darlık (klinik semptom/risk değil).",
+    "BASIC/LAB panelleri yeniden skorlanmadı ve bu kayda alınmadı. Doğrulanmış tek düzeltilmiş kanıt: phase_xli DEVICE teknik tekrarı.",
+    "Eğitim verisinde kişi kimliği yok (satır = kişi varsayımı)."
+   ],
+   "app_feasibility": "Efor testi sonuçları ve istirahat EKG'si olan klinik girdi gerekir; kendi beyanıyla doldurulamaz.",
+   "missing_input_rule": "ZORUNLU: 11 feature. Herhangi biri eksikse tahmin üretilmez (model manifesti: \"inference abstains on any missing required input\"). Kategori string-float biçimine dönüştürülemiyorsa tahmin yok.",
+   "app_visible": true,
+   "app_mode": "clinical_mode",
+   "app_mode_reason": "efor testi/EKG girdisi; klinik ortamda girilir",
+   "clinical_probability_eligibility": false
+  },
+  "dm_A": {
+   "disease": "Diyabet (teşhis edilmemiş)",
+   "disease_key": "diabetes",
+   "role": "primary",
+   "phase_of_origin": "phase_xlii",
+   "model_file": {
+    "path": "phase_xlii/models/dm_A_final.joblib",
+    "sha256": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "size_bytes": 2657,
+    "sha256_in_lock": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "lock_source": "phase_xlii/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "Yalnız LR (sklearn 1.8.0); phase_xlii'de venv kaydı BULUNAMADI",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon (class_weight; imputer+scaler+LR)",
+   "target_definition": "Farkında olmayan erişkinde tek ziyaret ölçümüyle HbA1c ≥ 6,5% veya (açlık alt örnekleminde) FPG ≥ 126 mg/dL olması (teşhis edilmemiş diyabet; mevcut durum).",
+   "population": "NHANES ≥20 yaş, gebe değil, diyabet tanısı/ilacı yok (DIQ010≠1, insülin/hap yok), HbA1c ölçülmüş. Prevalans ≈ %4,4.",
+   "input_source_note": "Laboratuvarsız: yaş, cinsiyet, ırk, BMI, bel, tansiyon, hipertansiyon öyküsü/ilacı, aile öyküsü, GDM, aktivite, sigara.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex_male",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex",
+     "transform": "sex_male01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_mexam",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_mexam",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_othhisp",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_othhisp",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_black",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_black",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_other",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_other",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "sbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      70,
+      260
+     ],
+     "input_field": "sbp_1..3_mmhg",
+     "transform": "sbp_mean_all",
+     "synthetic_check_value": 120.0
+    },
+    {
+     "name": "dbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      30,
+      150
+     ],
+     "input_field": "dbp_1..3_mmhg",
+     "transform": "dbp_mean_all",
+     "synthetic_check_value": 75.0
+    },
+    {
+     "name": "htn_dx_med",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension+on_bp_medication",
+     "transform": "htn_dx_med",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "fam_dm",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "family_hx_diabetes",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "gdm",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex+gestational_diabetes_hx",
+     "transform": "gdm_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "pa_rec",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "recreational_activity",
+     "transform": "bool01",
+     "synthetic_check_value": 1.0
+    },
+    {
+     "name": "smoke_current",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_current01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_former",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_former01",
+     "synthetic_check_value": 0.0
+    }
+   ],
+   "n_features": 16,
+   "feature_order_source": "phase_xlii/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.4958988256379918,
+     "rule": "havuzlu OOF Recall>=0.75 sağlayan en yüksek eşik"
+    },
+    "secondary": {
+     "referral_matched": 0.47041760192278687
+    },
+    "source": "phase_xlii/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (class_weight nedeniyle olasılık şişik; ham skor)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test (NHANES içi; zamansal değil; PREVIOUSLY_EXPOSED_PERSONS başka hedef; diyabet hedefinde yeni kişiler)",
+    "internal_test": {
+     "source": "Phase XLII (NHANES G 2011–12 + H 2013–14, kilitli tek sefer)",
+     "n": 8895,
+     "n_pos": 389,
+     "precision": {
+      "value": 0.103,
+      "ci95": [
+       0.092,
+       0.115
+      ]
+     },
+     "recall": {
+      "value": 0.733,
+      "ci95": [
+       0.687,
+       0.774
+      ]
+     },
+     "fpr": {
+      "value": 0.292,
+      "ci95": [
+       0.282,
+       0.302
+      ]
+     },
+     "auc": {
+      "value": 0.8,
+      "ci95": [
+       0.781,
+       0.819
+      ]
+     },
+     "threshold": 0.4958988256379918,
+     "npv": 0.983,
+     "adamatched_threshold": {
+      "threshold": 0.47041760192278687,
+      "precision": 0.099,
+      "recall": {
+       "value": 0.761,
+       "ci95": [
+        0.716,
+        0.801
+       ]
+      },
+      "fpr": 0.317
+     },
+     "delta_auc_vs_ADA": {
+      "value": 0.042,
+      "ci95": [
+       0.028,
+       0.055
+      ]
+     }
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Hiçbir eşikte sağlanmadı (P 0,09–0,12; %4,4 prevalansta yapısal olarak zor). Birincil eşikte Recall ≥ 0,75 testte korunmadı (0,733)."
+   },
+   "limitations": [
+    "Tarama sıralayıcısı; P ≈ 0,10: pozitif yönlendirilenlerin ~%10'u gerçekten pozitif. Kişilerin ≈ %1/3'ü yönlendiriliyor. NPV 0,983.",
+    "Etiket tek ziyaret ölçümüdür; ADA doğrulama testi yok. FPG yalnız açlık alt örnekleminde (%45) ölçülmüş.",
+    "Bağımsız (NHANES dışı) dış doğrulama ve zamansal olmayan iç test. ADA skoruna göre ΔAUC +0,042 (küçük).",
+    "Survey ağırlığı/PSU/strata kullanılmadı. ADA fiziksel aktivite maddesi operasyonel; ADA GDM'li güncel formu BULUNAMADI.",
+    "\"Diğer/çok ırklı\" grupta tüm kurallarda Recall düşük; <45 yaşta Recall 0,47–0,58.",
+    "Model yalnız diyabet TANISI almamış kişi için geçerli; tanılı/ilaç kullananlara uygulanmaz."
+   ],
+   "app_feasibility": "Kullanıcı formuyla doldurulabilir (ölçüm gerektiren: boy/kilo/bel/tansiyon).",
+   "missing_input_rule": "ZORUNLU: 16 feature (gdm: erkek için otomatik 0). Kadında GDM yanıtı yoksa tahmin yok. Diyabet tanısı/ilacı varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN (varsayım yok).",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "dm_B": {
+   "disease": "Diyabet (teşhis edilmemiş) — laboratuvarlı",
+   "disease_key": "diabetes",
+   "role": "secondary (laboratuvar varsa)",
+   "phase_of_origin": "phase_xlii",
+   "model_file": {
+    "path": "phase_xlii/models/dm_B_final.joblib",
+    "sha256": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "size_bytes": 2881,
+    "sha256_in_lock": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "lock_source": "phase_xlii/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "Yalnız LR (sklearn 1.8.0); venv kaydı BULUNAMADI",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon (class_weight)",
+   "target_definition": "Model A ile aynı (teşhis edilmemiş diyabet: HbA1c ≥ 6,5% veya açlıkta FPG ≥ 126 mg/dL; HbA1c/glukoz girdi DEĞİL).",
+   "population": "Model A ile aynı.",
+   "input_source_note": "Model A + rutin biyokimya: total kolesterol, HDL, trigliserit (ln), ALT (ln), ürik asit. HbA1c ve glukoz girdi olamaz.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex_male",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex",
+     "transform": "sex_male01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_mexam",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_mexam",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_othhisp",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_othhisp",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_black",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_black",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_other",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_other",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "sbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      70,
+      260
+     ],
+     "input_field": "sbp_1..3_mmhg",
+     "transform": "sbp_mean_all",
+     "synthetic_check_value": 120.0
+    },
+    {
+     "name": "dbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      30,
+      150
+     ],
+     "input_field": "dbp_1..3_mmhg",
+     "transform": "dbp_mean_all",
+     "synthetic_check_value": 75.0
+    },
+    {
+     "name": "htn_dx_med",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension+on_bp_medication",
+     "transform": "htn_dx_med",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "fam_dm",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "family_hx_diabetes",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "gdm",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex+gestational_diabetes_hx",
+     "transform": "gdm_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "pa_rec",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "recreational_activity",
+     "transform": "bool01",
+     "synthetic_check_value": 1.0
+    },
+    {
+     "name": "smoke_current",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_current01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_former",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_former01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "tc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      50,
+      600
+     ],
+     "input_field": "total_chol_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 190.0
+    },
+    {
+     "name": "hdl",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      5,
+      200
+     ],
+     "input_field": "hdl_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 50.0
+    },
+    {
+     "name": "tg_log",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ln(mg/dL)",
+     "allowed_range": [
+      2.3026,
+      8.5172
+     ],
+     "input_field": "tg_mgdl",
+     "transform": "ln_clip1",
+     "synthetic_check_value": 4.6052,
+     "note": "ln(TG mg/dL)"
+    },
+    {
+     "name": "alt_log",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ln(U/L)",
+     "allowed_range": [
+      1.0986,
+      6.9078
+     ],
+     "input_field": "alt_ul",
+     "transform": "ln_clip1",
+     "synthetic_check_value": 3.1781,
+     "note": "ln(ALT U/L)"
+    },
+    {
+     "name": "uric_acid",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      0.5,
+      20
+     ],
+     "input_field": "uric_acid_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 5.4
+    }
+   ],
+   "n_features": 21,
+   "feature_order_source": "phase_xlii/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.5314872247498732,
+     "rule": "havuzlu OOF Recall>=0.75 sağlayan en yüksek eşik"
+    },
+    "secondary": {
+     "referral_matched": 0.4549296164608561
+    },
+    "source": "phase_xlii/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test (NHANES içi; zamansal değil)",
+    "internal_test": {
+     "source": "Phase XLII (G+H, kilitli tek sefer)",
+     "n": 8895,
+     "n_pos": 389,
+     "precision": {
+      "value": 0.122,
+      "ci95": [
+       0.109,
+       0.136
+      ]
+     },
+     "recall": {
+      "value": 0.715,
+      "ci95": [
+       0.668,
+       0.757
+      ]
+     },
+     "fpr": {
+      "value": 0.236,
+      "ci95": [
+       0.227,
+       0.245
+      ]
+     },
+     "auc": {
+      "value": 0.826,
+      "ci95": [
+       0.808,
+       0.843
+      ]
+     },
+     "threshold": 0.5314872247498732,
+     "npv": 0.983,
+     "delta_auc_vs_A": {
+      "value": 0.025,
+      "ci95": [
+       0.014,
+       0.036
+      ]
+     },
+     "delta_auc_vs_ADA": {
+      "value": 0.067,
+      "ci95": [
+       0.05,
+       0.083
+      ]
+     }
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Hiçbir eşikte sağlanmadı (P 0,10–0,12)."
+   },
+   "limitations": [
+    "Model A'nın tüm sınırlılıkları geçerli. Rutin lab katkısı küçük ama anlamlı (ΔAUC B−A +0,025).",
+    "TG biyokimya değeri (LBXSTR; CDC LBXTR önerir); E-2007 LX20 analitleri düzeltmesiz; J laboratuvarlarına CDC geri denklemi uygulanmıştı (eğitim).",
+    "Kullanıcı HbA1c/glukoz bilse bile modele girilmez (hedefi tanımlar); bu değerler varsa doğrudan tanı eşikleri kullanılmalıdır."
+   ],
+   "app_feasibility": "Rutin biyokimya sonuçları gerekir.",
+   "missing_input_rule": "ZORUNLU: 21 feature. Lab alanlarından biri eksikse B üretilmez; A'ya geri dönülebilir (A kendi kuralını sağlıyorsa). Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "anemia_LR16": {
+   "disease": "Anemi",
+   "disease_key": "anemia",
+   "role": "primary",
+   "phase_of_origin": "Clinical_Optimization_Phase25 (CBC_MATCHED16); dış doğrulama phase_xl",
+   "model_file": {
+    "path": "Clinical_Optimization_Phase25/models/anemia_CBC_MATCHED16.joblib",
+    "sha256": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "size_bytes": 6698,
+    "sha256_in_lock": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "lock_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "BULUNAMADI",
+    "extra_sys_path_for_pickle": "Clinical_Optimization_Phase25/src",
+    "pickle_wrapper": "CalibratedResearchModel",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon + sigmoid kalibrasyon (CalibratedResearchModel)",
+   "target_definition": "Uygun yetişkinlerde düşük hemoglobin: erkek 20–65 yaş Hb < 13 g/dL; kadın 20–44 yaş, gebe olmadığı doğrulanmış, Hb < 12 g/dL (demir eksikliği anemisi DEĞİL).",
+   "population": "NHANES erkek 20–65, kadın 20–44 (gebe değil, RIDEXPRG=2). Hb, MCH, MCHC, hematokrit girdi değil.",
+   "input_source_note": "Tam kan sayımı (RBC, MCV, RDW, WBC) + biyokimya (HbA1c, ALT, AST, TC, HDL, kreatinin, albümin) + antropometri.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      65
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 35
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "female"
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "smoker",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoker_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "hba1c",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "%",
+     "allowed_range": [
+      3.0,
+      18.0
+     ],
+     "input_field": "hba1c_pct",
+     "transform": "identity",
+     "synthetic_check_value": 5.3
+    },
+    {
+     "name": "alt",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      3,
+      1000
+     ],
+     "input_field": "alt_ul",
+     "transform": "identity",
+     "synthetic_check_value": 23.0
+    },
+    {
+     "name": "ast",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      3,
+      1000
+     ],
+     "input_field": "ast_ul",
+     "transform": "identity",
+     "synthetic_check_value": 23.0
+    },
+    {
+     "name": "tc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      50,
+      600
+     ],
+     "input_field": "total_chol_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 190.0
+    },
+    {
+     "name": "hdl",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      5,
+      200
+     ],
+     "input_field": "hdl_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 50.0
+    },
+    {
+     "name": "creatinine",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      0.2,
+      15
+     ],
+     "input_field": "creatinine_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 0.85
+    },
+    {
+     "name": "wbc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "10^3/µL",
+     "allowed_range": [
+      0.5,
+      100
+     ],
+     "input_field": "wbc_k_ul",
+     "transform": "identity",
+     "synthetic_check_value": 7.0
+    },
+    {
+     "name": "rbc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "10^6/µL",
+     "allowed_range": [
+      1.0,
+      9.0
+     ],
+     "input_field": "rbc_m_ul",
+     "transform": "identity",
+     "synthetic_check_value": 4.8
+    },
+    {
+     "name": "mcv",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "fL",
+     "allowed_range": [
+      50,
+      140
+     ],
+     "input_field": "mcv_fl",
+     "transform": "identity",
+     "synthetic_check_value": 90.0
+    },
+    {
+     "name": "rdw",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "%",
+     "allowed_range": [
+      8,
+      35
+     ],
+     "input_field": "rdw_pct",
+     "transform": "identity",
+     "synthetic_check_value": 12.5
+    },
+    {
+     "name": "albumin",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "g/dL",
+     "allowed_range": [
+      1.0,
+      6.5
+     ],
+     "input_field": "albumin_gdl",
+     "transform": "identity",
+     "synthetic_check_value": 4.4
+    }
+   ],
+   "n_features": 16,
+   "feature_order_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.27030089895763654,
+     "rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+    },
+    "secondary": {},
+    "source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "sigmoid (OOF Platt; klinik olasılık DEĞİL)",
+    "manifest_value": "sigmoid"
+   },
+   "evidence": {
+    "highest_tier": "dış doğrulama (NHANES farklı döngüler; aynı anket programı, PREVIOUSLY_EXPOSED başka hedef) — bağımsız kurum doğrulaması DEĞİL",
+    "internal_test": {
+     "source": "Phase XXVII (NHANES 1999–2000 A, önceden görülmüş)",
+     "n": 410,
+     "n_pos": 21,
+     "precision": {
+      "value": 0.81,
+      "ci95": [
+       0.6,
+       0.923
+      ]
+     },
+     "recall": {
+      "value": 0.81,
+      "ci95": [
+       0.6,
+       0.923
+      ]
+     },
+     "fpr": {
+      "value": 0.01,
+      "ci95": [
+       0.004,
+       0.026
+      ]
+     },
+     "auc": {
+      "value": 0.991,
+      "ci95": [
+       0.98,
+       0.999
+      ]
+     },
+     "threshold": 0.27030089895763654
+    },
+    "temporal": null,
+    "external": {
+     "source": "Phase XL (NHANES C, E, F, I birleşik)",
+     "n": 11171,
+     "n_pos": 669,
+     "precision": {
+      "value": 0.709,
+      "ci95": [
+       0.678,
+       0.739
+      ]
+     },
+     "recall": {
+      "value": 0.883,
+      "ci95": [
+       0.857,
+       0.906
+      ]
+     },
+     "fpr": {
+      "value": 0.023,
+      "ci95": [
+       0.02,
+       0.026
+      ]
+     },
+     "auc": {
+      "value": 0.991,
+      "ci95": [
+       0.989,
+       0.993
+      ]
+     },
+     "threshold": 0.27030089895763654,
+     "per_cycle": {
+      "C": {
+       "precision": 0.766,
+       "recall": 0.921,
+       "fpr": 0.011
+      },
+      "E": {
+       "precision": 0.637,
+       "recall": 0.955,
+       "fpr": 0.031
+      },
+      "F": {
+       "precision": 0.618,
+       "recall": 0.902,
+       "fpr": 0.034
+      },
+      "I": {
+       "precision": 0.867,
+       "recall": 0.809,
+       "fpr": 0.012
+      }
+     },
+     "delta_auc_vs_hct_rule": {
+      "value": 0.0037,
+      "ci95": [
+       0.0021,
+       0.0054
+      ]
+     }
+    },
+    "research_target_note": "İç testte 3 hedef nokta tahminiyle sağlandı (GA ile değil). Dış: P hedefte C/I'da (0,77/0,87), E/F'de altında (0,64/0,62); Recall ≥ 0,75 ve FPR ≤ 0,15 tüm döngülerde sağlandı."
+   },
+   "limitations": [
+    "ML katkısı pratikte YOK: Hct_proxy = RBC×MCV/10 kuralına göre ΔAUC +0,002…+0,004 (eşdeğer). Model Hb'yi aynı hemogramdan yeniden hesaplıyor (Hb varyansının R²=0,943'ü RBC ve MCV ile açıklanıyor).",
+    "İç test küçük (21 pozitif). Dış test aynı anket programı; E/F döngülerinde Precision hedefin altında.",
+    "Etiyoloji yok (demir eksikliği vb.); yükseklik/sigara Hb düzeltmesi yok. Gebelik durumu bilinmeyen kadın uygun değil.",
+    "Kreatinin standardize ölçek (E-2007 CDC düzeltmesi yayımlanmış dosyada uygulanmış); I döngüsü CBC yöntemi (DxH 800) Phase XL'de belgelenmiş, diğer yöntem farkları sınırlılık.",
+    "Anemi için doğrudan Hb ölçümü varken bu modelin klinik katkısı yoktur; uygulama değeri \"Hb yokken CBC ile tarama\" ile sınırlı."
+   ],
+   "app_feasibility": "Tam kan sayımı + biyokimya sonuçları gerekir; 16 alan.",
+   "missing_input_rule": "ZORUNLU: 16 feature. Hb ölçülmüşse model yerine Hb eşiği kullanılmalı. Kadın için gebelik dışlanamıyorsa (ve yaş 20–44 dışındaysa) uygulanmaz. Dondurulmuş imputer kullanılmaz.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "copd_S4_DEVICE": {
+   "disease": "KOAH (post-bronkodilatör hava akımı obstrüksiyonunun sürmesi)",
+   "disease_key": "copd",
+   "role": "primary",
+   "phase_of_origin": "Phase21; zamansal tekrar phase_xxvii",
+   "model_file": {
+    "path": "All_Disease_Improvement_Phase21/models/copd_S4_DEVICE.joblib",
+    "sha256": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "size_bytes": 5585,
+    "sha256_in_lock": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "lock_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "All_Disease_Improvement_Phase21/config/environment.json: sklearn 1.8.0",
+    "extra_sys_path_for_pickle": "All_Disease_Improvement_Phase21/src",
+    "pickle_wrapper": "CalibratedResearchModel",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon (CalibratedResearchModel, ham skor)",
+   "target_definition": "Post-bronkodilatör FEV1/FVC < 0,70 (sabit oran) olması; popülasyon: bronkodilatör testine seçilmiş kişiler.",
+   "population": "NHANES 40–79 yaş, pre-BD FEV1/FVC < LLN ve/veya < 0,70 nedeniyle bronkodilatör testi yapılmış ve ATS A/B kalitesinde tamamlamış kişiler. Negatif = bronkodilatörle düzelen kişiler (sağlıklı popülasyon DEĞİL).",
+   "input_source_note": "Pre-BD spirometri (FEV1, FVC mL) + yaş, cinsiyet, BMI, sigara.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      40,
+      79
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 62
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "male"
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "smoker",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoker_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "fev1_pre",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mL",
+     "allowed_range": [
+      200,
+      7000
+     ],
+     "input_field": "fev1_pre_ml",
+     "transform": "identity",
+     "synthetic_check_value": 2350.0
+    },
+    {
+     "name": "fvc_pre",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mL",
+     "allowed_range": [
+      300,
+      9000
+     ],
+     "input_field": "fvc_pre_ml",
+     "transform": "identity",
+     "synthetic_check_value": 3600.0
+    }
+   ],
+   "n_features": 6,
+   "feature_order_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.5707211331015863,
+     "rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+    },
+    "secondary": {},
+    "source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "raw",
+    "manifest_value": "raw"
+   },
+   "evidence": {
+    "highest_tier": "zamansal tekrar (aynı anket, farklı döngü; PREVIOUSLY_EXPOSED) — bağımsız klinik kohort DEĞİL",
+    "internal_test": {
+     "source": "Phase XXVII (NHANES G 2011–12)",
+     "n": 37,
+     "n_pos": 20,
+     "precision": {
+      "value": 1.0,
+      "ci95": [
+       0.772,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.65,
+      "ci95": [
+       0.433,
+       0.819
+      ]
+     },
+     "fpr": {
+      "value": 0.0,
+      "ci95": [
+       0.0,
+       0.184
+      ]
+     },
+     "auc": {
+      "value": 0.921,
+      "ci95": [
+       0.824,
+       0.988
+      ]
+     },
+     "threshold": 0.5707211331015863
+    },
+    "temporal": {
+     "source": "Phase XXVII (NHANES F 2009–10)",
+     "n": 250,
+     "n_pos": 156,
+     "precision": {
+      "value": 0.929,
+      "ci95": [
+       0.871,
+       0.962
+      ]
+     },
+     "recall": {
+      "value": 0.756,
+      "ci95": [
+       0.683,
+       0.817
+      ]
+     },
+     "fpr": {
+      "value": 0.096,
+      "ci95": [
+       0.051,
+       0.172
+      ]
+     },
+     "auc": {
+      "value": 0.898,
+      "ci95": [
+       0.857,
+       0.934
+      ]
+     },
+     "threshold": 0.5707211331015863,
+     "E_2007_2008": {
+      "n": 274,
+      "n_pos": 163,
+      "precision": {
+       "value": 0.929,
+       "ci95": [
+        0.87,
+        0.962
+       ]
+      },
+      "recall": {
+       "value": 0.718,
+       "ci95": [
+        0.644,
+        0.781
+       ]
+      },
+      "fpr": {
+       "value": 0.081,
+       "ci95": [
+        0.043,
+        0.147
+       ]
+      },
+      "auc": {
+       "value": 0.901,
+       "ci95": [
+        0.865,
+        0.933
+       ]
+      },
+      "threshold": 0.5707211331015863
+     }
+    },
+    "external": null,
+    "research_target_note": "F 2009–10'da 3 hedef nokta tahminiyle sağlandı (GA ile değil; E 2007–08'de Recall 0,718 < 0,75). Seçilmiş popülasyonda P/FPR genel popülasyona taşınamaz."
+   },
+   "limitations": [
+    "Hedef popülasyon dar: yalnız pre-BD spirometride obstrüksiyon saptanıp BD testine alınmış kişiler. Genel popülasyon KOAH taramasında KULLANILAMAZ; FPR/Precision genel popülasyona taşınamaz.",
+    "Model pre-BD FEV1/FVC < 0,70 kuralına eşdeğer: ΔAUC +0,009 (−0,059…+0,076).",
+    "İç test n=37 (20 pozitif). Zamansal tekrar aynı anket programı; kişi takibi yok.",
+    "Astımı ayırt etmez; klinik KOAH tanısı DEĞİL (post-BD sabit oran).",
+    "Sigara = şu an içen (never/former → no); paket-yıl yok."
+   ],
+   "app_feasibility": "Kalite-kontrollü spirometri (pre-BD FEV1 ve FVC, mL) gerekir ve kişi yalnız pre-BD obstrüksiyon saptanmış 40–79 yaş olmalıdır.",
+   "missing_input_rule": "ZORUNLU: 6 feature. Yaş 40–79 dışı veya pre-BD FEV1/FVC ≥ 0,70 ise model uygulanmaz (eğitim popülasyonu dışı). fev1_pre ≤ fvc_pre. Dondurulmuş imputer kullanılmaz.",
+   "app_visible": true,
+   "app_mode": "clinical_mode",
+   "app_mode_reason": "kaliteli pre-BD spirometri; dar hedef popülasyon",
+   "clinical_probability_eligibility": false
+  },
+  "hf_S2_BASIC_LAB": {
+   "disease": "Kalp yetmezliği",
+   "disease_key": "heart_failure",
+   "role": "primary (araştırma amaçlı)",
+   "phase_of_origin": "Phase21; baseline karşılaştırması phase_xxvii; dondurulmuş manifest Strong_Model_External_Validation_Phase26",
+   "model_file": {
+    "path": "All_Disease_Improvement_Phase21/models/heart_failure_S2_BASIC_LAB.joblib",
+    "sha256": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "size_bytes": 183098,
+    "sha256_in_lock": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "lock_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "All_Disease_Improvement_Phase21/config/environment.json: xgboost 3.4.1, sklearn 1.8.0",
+    "extra_sys_path_for_pickle": "All_Disease_Improvement_Phase21/src",
+    "pickle_wrapper": "CalibratedResearchModel",
+    "final_estimator": "XGBClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "XGBoost + sigmoid kalibrasyon (CalibratedResearchModel)",
+   "target_definition": "Kaynak veri setinde klinik olarak tanılı kalp yetmezliği (HF) ile sağlıklı kontrol ayrımı (vaka-kontrol; mevcut durum).",
+   "population": "Mendeley 7v4w66wxj8.1 (özel RIP3 ELISA çalışması): HF hastaları (akut/kronik karışık) vs sağlıklı kontrol; fit n=110. Semptomlu kontrol veya genel popülasyon DEĞİL.",
+   "input_source_note": "RIP3 özel ELISA assay değeri (pg/mL) gerekir.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      18,
+      100
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 56
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "male"
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "smoker",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoker_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "rip3",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "pg/mL",
+     "allowed_range": [
+      0,
+      5000
+     ],
+     "input_field": "rip3_pgml",
+     "transform": "identity",
+     "synthetic_check_value": 338.0
+    }
+   ],
+   "n_features": 5,
+   "feature_order_source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.4476970841762816,
+     "rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+    },
+    "secondary": {},
+    "source": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "sigmoid (Platt; klinik olasılık DEĞİL)",
+    "manifest_value": "sigmoid"
+   },
+   "evidence": {
+    "highest_tier": "iç test (n=37)",
+    "internal_test": {
+     "source": "Phase XXVII (Mendeley 7v4w66wxj8.1)",
+     "n": 37,
+     "n_pos": 18,
+     "precision": {
+      "value": 0.824,
+      "ci95": [
+       0.59,
+       0.938
+      ]
+     },
+     "recall": {
+      "value": 0.778,
+      "ci95": [
+       0.548,
+       0.91
+      ]
+     },
+     "fpr": {
+      "value": 0.158,
+      "ci95": [
+       0.055,
+       0.376
+      ]
+     },
+     "auc": {
+      "value": 0.95,
+      "ci95": [
+       0.877,
+       0.997
+      ]
+     },
+     "threshold": 0.4476970841762816
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "İç testte P ve Recall hedefte, FPR 0,158 > 0,15 (GA geniş). Dış doğrulama YAPILAMADI (Phase XXXIX: uyumlu RIP3 assay'li başka veri BULUNAMADI)."
+   },
+   "limitations": [
+    "Eğitim n=110, test n=37 (18 pozitif): GA çok geniş; sonuç kararsız.",
+    "Tek değişkene (RIP3) eşdeğer: ΔAUC vs RIP3 −0,006 (−0,044…+0,023); çok değişkenli katkı kanıtı yok.",
+    "Vaka-kontrol tasarımı (sağlıklı kontrol); genel popülasyon veya semptomlu kişilerde performans bilinmiyor. HF alt tipi/LVEF/BNP yok.",
+    "RIP3 rutin klinik test değildir; assay/birim uyumu başka laboratuvarlarda doğrulanmadı (BULUNAMADI).",
+    "Dış doğrulama YOK."
+   ],
+   "app_feasibility": "UYGULAMAYA ALINAMAZ (şimdilik): RIP3 özel assay değeri ve sağlıklı-kontrol tasarımı; kullanıcı girdisiyle üretilemez.",
+   "missing_input_rule": "ZORUNLU: 5 feature (rip3 dahil). rip3 yoksa model yok (S1_BASIC kayıtlı değil). Dondurulmuş imputer kullanılmaz.",
+   "app_visible": false,
+   "app_mode": "registry_only",
+   "app_mode_reason": "RIP3 özel assay; n=37; dış doğrulama yok",
+   "clinical_probability_eligibility": false
+  },
+  "htn_M1": {
+   "disease": "Hipertansiyon",
+   "disease_key": "hypertension",
+   "role": "primary",
+   "phase_of_origin": "phase_xxxvii",
+   "model_file": {
+    "path": "phase_xxxvii/models/htn3_M1.joblib",
+    "sha256": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "size_bytes": 140438,
+    "sha256_in_lock": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "lock_source": "phase_xxxvii/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "phase_xxxvii/PHASE_XXXVII_REPORT.md §5.9: geliştirme ve test Focused 2026 .venv ile (XXXII ile aynı sklearn ve imbalanced-learn)",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon (RandomOverSampler; imblearn Pipeline)",
+   "target_definition": "Tek ziyarette ölçülen kan basıncı ≥ 140/90 mmHg VEYA antihipertansif ilaç kullanımı (mevcut durum; ölçülen tansiyon girdi DEĞİL).",
+   "population": "NHANES ≥ 18 yaş, gebe değil, ≥2 geçerli BP okuması. Geliştirme P+L (2017–2023), test C (2003–04).",
+   "input_source_note": "Laboratuvar gerektirir: HbA1c, total kolesterol, HDL, kreatinin (eGFR), idrar albümini ve kreatinini (UACR).",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      18,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "female"
+    },
+    {
+     "name": "race",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "mexican_american",
+      "nh_black",
+      "nh_white",
+      "other_hispanic",
+      "other_incl_multi"
+     ],
+     "allowed_values": [
+      "mexican_american",
+      "nh_black",
+      "nh_white",
+      "other_hispanic",
+      "other_incl_multi"
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_str",
+     "synthetic_check_value": "nh_white"
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "smoking",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "current",
+      "former",
+      "never"
+     ],
+     "allowed_values": [
+      "current",
+      "former",
+      "never"
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoking_str",
+     "synthetic_check_value": "never"
+    },
+    {
+     "name": "alcohol_dpd",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "içki/gün",
+     "allowed_range": [
+      0,
+      30
+     ],
+     "input_field": "alcohol_drinks_per_day",
+     "transform": "alcohol_dpd",
+     "synthetic_check_value": 0.2
+    },
+    {
+     "name": "diabetes",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "told_diabetes+on_insulin+on_diabetes_pills",
+     "transform": "diabetes_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "hba1c",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "%",
+     "allowed_range": [
+      3.0,
+      18.0
+     ],
+     "input_field": "hba1c_pct",
+     "transform": "identity",
+     "synthetic_check_value": 5.4
+    },
+    {
+     "name": "tc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      50,
+      600
+     ],
+     "input_field": "total_chol_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 190.0
+    },
+    {
+     "name": "hdl",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      5,
+      200
+     ],
+     "input_field": "hdl_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 50.0
+    },
+    {
+     "name": "egfr",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mL/dk/1.73m2",
+     "allowed_range": [
+      5,
+      160
+     ],
+     "input_field": "creatinine_mgdl+age_years+sex",
+     "transform": "egfr_ckdepi2021",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "uacr_log",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "ln(1+mg/g)",
+     "allowed_range": [
+      0.0,
+      10.4
+     ],
+     "input_field": "urine_albumin_mgl+urine_creatinine_mgdl",
+     "transform": "uacr_log1p",
+     "synthetic_check_value": 2.5
+    }
+   ],
+   "n_features": 13,
+   "feature_order_source": "phase_xxxvii/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.5397445646616527,
+     "rule": "Recall>=0.75_max_esik"
+    },
+    "secondary": {
+     "secondary_fpr015": 0.645872880615415
+    },
+    "source": "phase_xxxvii/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ROS nedeniyle olasılıklar yüksek; gözlenen/tahmin 0,88)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "zamansal test (C 2003–04; ölçüm yöntemi kaymalı: auskültatuvar vs oskilometrik) — bağımsız kurum doğrulaması DEĞİL",
+    "internal_test": null,
+    "temporal": {
+     "source": "Phase XXXVII (NHANES C 2003–04, kilitli tek sefer; hiçbir hedefte önceden kullanılmamış kişiler)",
+     "n": 2798,
+     "n_pos": 1001,
+     "precision": {
+      "value": 0.702,
+      "ci95": [
+       0.675,
+       0.729
+      ]
+     },
+     "recall": {
+      "value": 0.766,
+      "ci95": [
+       0.739,
+       0.791
+      ]
+     },
+     "fpr": {
+      "value": 0.181,
+      "ci95": [
+       0.164,
+       0.199
+      ]
+     },
+     "auc": {
+      "value": 0.875,
+      "ci95": [
+       0.862,
+       0.887
+      ]
+     },
+     "threshold": 0.5397445646616527,
+     "secondary_threshold": {
+      "n": 2798,
+      "n_pos": 1001,
+      "precision": {
+       "value": 0.744,
+       "ci95": [
+        0.715,
+        0.772
+       ]
+      },
+      "recall": {
+       "value": 0.665,
+       "ci95": [
+        0.636,
+        0.694
+       ]
+      },
+      "fpr": {
+       "value": 0.127,
+       "ci95": [
+        0.113,
+        0.144
+       ]
+      },
+      "auc": null,
+      "threshold": 0.645872880615415
+     },
+     "delta_auc_vs_age_sex_bmi": {
+      "value": 0.012,
+      "ci95": [
+       0.007,
+       0.018
+      ]
+     }
+    },
+    "external": null,
+    "research_target_note": "Hiçbir eşikte üçlü hedef sağlanmadı (birincil: FPR 0,181; ikincil: Recall 0,665)."
+   },
+   "limitations": [
+    "Yaş+cinsiyet+BMI baseline'ına katkı yalnız +0,012 AUC (GA +0,007…+0,018): ML katkısı çok küçük; tek eşik pratikte yaş kuralı gibi çalışıyor (≥60 yaşta FPR 0,85, <60 yaşta Recall 0,31).",
+    "Test etiketi auskültatuvar (hekim, cıvalı) — geliştirme oskilometrik (Omron): etiket ölçeği kayması ölçülmedi. Test 14–20 yıl önce.",
+    "Tek ziyaret fenotipi; beyaz önlük/maskeli HTN ayırt edilemez. Test kümesi seçilmiş C alt kümesi.",
+    "Kalibrasyon: ROS nedeniyle olasılıklar yüksek (O/E 0,88). Klinik olasılık değildir.",
+    "Ölçülen tansiyon girdi DEĞİL: kullanıcının tansiyonu biliniyorsa doğrudan ≥140/90 kuralı kullanılmalı.",
+    "Bu kayıtta laboratuvarsız HTN modeli YOK: M1 (kullanıcı ön seçimi) beş laboratuvar girdisi ister; phase_xxxii modelleri kayda alınmadı (L testi CONTAMINATED etiketli, phase_xxxvi §2)."
+   ],
+   "app_feasibility": "Laboratuvar sonuçları gerekir (HbA1c, TC, HDL, kreatinin, idrar albümin/kreatinin). Laboratuvarsız kullanıcı için tahmin üretilmez.",
+   "missing_input_rule": "ZORUNLU: 13 feature. Sigara/alkol eksikse (C testinde medyan/mod ile doldurulmuştu) uygulamada TAHMİN ÜRETİLMEZ. race_ethnicity yanıtsızsa ABSTAIN. Dondurulmuş imputer kullanılmaz.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "fibrosis_final": {
+   "disease": "Karaciğer fibrozisi (LSM ≥ 8 kPa)",
+   "disease_key": "liver_fibrosis",
+   "role": "primary",
+   "phase_of_origin": "phase_xxxi",
+   "model_file": {
+    "path": "phase_xxxi/models/fibrosis_final.joblib",
+    "sha256": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "size_bytes": 78968,
+    "sha256_in_lock": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "lock_source": "phase_xxxi/config/fibrosis_model_lock.json"
+   },
+   "runtime": {
+    "required_venv": "Focused_Current_Disease_Improvement_2026/.venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.7.0",
+     "xgboost": "3.4.1",
+     "catboost": "1.2.10"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "phase_xxxi: CatBoost 1.2.10 gerektirir (yalnız Focused/New 2026 .venv); lightgbm/xgboost kullanılmaz",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "CatBoostClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "CatBoost (imblearn Pipeline, strateji yok)",
+   "target_definition": "FibroScan karaciğer sertliği (LSM) ≥ 8,0 kPa (AASLD 2023 VCTE bandı) olması; histolojik ≥F2 ile birebir değil (mevcut durum).",
+   "population": "NHANES ≥ 20 yaş, gebe değil, FibroScan kalitesi tam (LUAXSTAT=1), ALT/AST/trombosit/albümin/BMI mevcut. Açlık şartı aranmadı.",
+   "input_source_note": "Biyokimya (ALT, AST, GGT, ALP, albümin, glukoz, TG, HDL), HbA1c, trombosit + antropometri + alkol.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "female"
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "weight",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg",
+     "allowed_range": [
+      25,
+      300
+     ],
+     "input_field": "weight_kg",
+     "transform": "identity",
+     "synthetic_check_value": 80.0
+    },
+    {
+     "name": "alt",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      3,
+      1000
+     ],
+     "input_field": "alt_ul",
+     "transform": "identity",
+     "synthetic_check_value": 20.0
+    },
+    {
+     "name": "ast",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      3,
+      1000
+     ],
+     "input_field": "ast_ul",
+     "transform": "identity",
+     "synthetic_check_value": 20.0
+    },
+    {
+     "name": "ggt",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      1,
+      2000
+     ],
+     "input_field": "ggt_ul",
+     "transform": "identity",
+     "synthetic_check_value": 22.0
+    },
+    {
+     "name": "alp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "U/L",
+     "allowed_range": [
+      10,
+      1500
+     ],
+     "input_field": "alp_ul",
+     "transform": "identity",
+     "synthetic_check_value": 74.0
+    },
+    {
+     "name": "albumin",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "g/dL",
+     "allowed_range": [
+      1.0,
+      6.5
+     ],
+     "input_field": "albumin_gdl",
+     "transform": "identity",
+     "synthetic_check_value": 4.2
+    },
+    {
+     "name": "platelets",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "10^3/µL",
+     "allowed_range": [
+      10,
+      1500
+     ],
+     "input_field": "platelets_k_ul",
+     "transform": "identity",
+     "synthetic_check_value": 240.0
+    },
+    {
+     "name": "glucose",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      30,
+      800
+     ],
+     "input_field": "glucose_serum_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "hba1c",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "%",
+     "allowed_range": [
+      3.0,
+      18.0
+     ],
+     "input_field": "hba1c_pct",
+     "transform": "identity",
+     "synthetic_check_value": 5.4
+    },
+    {
+     "name": "diabetes",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "told_diabetes+on_insulin+on_diabetes_pills",
+     "transform": "diabetes_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "tg",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      10,
+      5000
+     ],
+     "input_field": "tg_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 110.0
+    },
+    {
+     "name": "hdl",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      5,
+      200
+     ],
+     "input_field": "hdl_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 50.0
+    },
+    {
+     "name": "alcohol_dpd",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "içki/gün",
+     "allowed_range": [
+      0,
+      30
+     ],
+     "input_field": "alcohol_drinks_per_day",
+     "transform": "alcohol_dpd",
+     "synthetic_check_value": 0.2
+    }
+   ],
+   "n_features": 17,
+   "feature_order_source": "phase_xxxi/config/fibrosis_model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.06149696006866034,
+     "rule": "Recall>=0.85_max_esik"
+    },
+    "secondary": {
+     "female_secondary": 0.06347537018476614,
+     "male_secondary": 0.058273753061930736,
+     "fib4_matched_secondary": 0.2660743165261133
+    },
+    "source": "phase_xxxi/config/fibrosis_model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test (NHANES L 2021–23; PREVIOUSLY_EXPOSED: kişiler CAP hedefi için görülmüş)",
+    "internal_test": {
+     "source": "Phase XXXI (NHANES L, kilitli tek sefer)",
+     "n": 4714,
+     "n_pos": null,
+     "precision": {
+      "value": 0.24,
+      "ci95": [
+       0.221,
+       0.26
+      ]
+     },
+     "recall": {
+      "value": 0.768,
+      "ci95": [
+       0.733,
+       0.801
+      ]
+     },
+     "fpr": {
+      "value": 0.346,
+      "ci95": [
+       0.332,
+       0.361
+      ]
+     },
+     "auc": {
+      "value": 0.794,
+      "ci95": [
+       0.773,
+       0.813
+      ]
+     },
+     "threshold": 0.06149696006866034,
+     "prevalence": 0.125,
+     "npv": {
+      "value": 0.952,
+      "ci95": [
+       0.943,
+       0.959
+      ]
+     },
+     "n_pos_note": "n_pos BULUNAMADI (raporda yalnız prevalans 0,125); FIB-4 AUC 0,597, NFS AUC 0,698 (aynı kişiler)"
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Üçlü hedef sağlanmadı; eşik Recall ≥ 0,85 hedefiyle seçilmişti, testte 0,768 (tarama hedefi 0,85 altında). Yönlendirme oranı 0,399."
+   },
+   "limitations": [
+    "CV AUC 0,835 → test AUC 0,794: kayma işareti. Test PREVIOUSLY_EXPOSED; bağımsız dış doğrulama ve zamansal doğrulama yok.",
+    "Açlıksız serum glukoz/TG kullanıldı (protokolde gerekçeli sapma). LSM ≥ 8 kPa histolojik fibrozisle birebir değildir; hedef ölçüm (LSM) girdi DEĞİL.",
+    "FIB-4'e göre ΔAUC +0,197, NFS'ye göre +0,096 (ikisi de anlamlı), ancak FIB-4/NFS bu hedef için kalibre edilmemiş basit baseline'lardır.",
+    "Düşük P (0,24) ve FPR 0,35: yalnız ön tarama sıralayıcısı. Cinsiyete özgü eşikler yalnız ikincil.",
+    "Hepatit B/C ve alkol dışı etiyoloji ayrımı yok. Klinik tanı DEĞİL."
+   ],
+   "app_feasibility": "Biyokimya + CBC (trombosit) + HbA1c sonuçları gerekir; formla doldurulabilir ama 17 alan.",
+   "missing_input_rule": "ZORUNLU: 17 feature. Dondurulmuş imputer kullanılmaz. Diyabet durumu (told/insulin/pills) yanıtlanmamışsa tahmin yok.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "osteo_final": {
+   "disease": "Osteoporoz (DXA femur T-skoru ≤ −2,5)",
+   "disease_key": "osteoporosis",
+   "role": "primary",
+   "phase_of_origin": "phase_xxx (kilitli; klinik fayda phase_xxxi)",
+   "model_file": {
+    "path": "phase_xxx/models/osteo_final.joblib",
+    "sha256": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "size_bytes": 7110,
+    "sha256_in_lock": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "lock_source": "phase_xxx/config/osteo_model_lock.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "Yalnız LR (sklearn 1.8.0); venv kaydı BULUNAMADI",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LogisticRegression",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "Lojistik regresyon (imblearn Pipeline; strateji yok)",
+   "target_definition": "DXA ile min(femur boynu, total femur) T-skoru ≤ −2,5 (NHANES III 20–29 yaş beyaz kadın referansı) olması (mevcut durum; DXA girdi DEĞİL).",
+   "population": "NHANES ≥ 50 yaş, geçerli femur DXA; erkek ve kadın (kadın referansla). Osteoporoz prevalansı %7 civarı.",
+   "input_source_note": "FRAX benzeri öykü girdileri + kilo/boy/BMI; laboratuvar ve DXA gerekmez.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      50,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 64
+    },
+    {
+     "name": "sex",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "female",
+      "male"
+     ],
+     "allowed_values": [
+      "female",
+      "male"
+     ],
+     "input_field": "sex",
+     "transform": "sex_str",
+     "synthetic_check_value": "female"
+    },
+    {
+     "name": "weight",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg",
+     "allowed_range": [
+      25,
+      300
+     ],
+     "input_field": "weight_kg",
+     "transform": "identity",
+     "synthetic_check_value": 77.0
+    },
+    {
+     "name": "height",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      100,
+      230
+     ],
+     "input_field": "height_cm",
+     "transform": "identity",
+     "synthetic_check_value": 166.0
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "smoker_current",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoker_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "alcohol_3plus",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "alcohol_drinks_per_day",
+     "transform": "alcohol_ge3_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "glucocorticoid",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "glucocorticoid_ge1month",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "fx_hip",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "fracture_hip",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "fx_wrist",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "fracture_wrist",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "fx_spine",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "fracture_spine",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "fx_after20",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes"
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "fracture_after_age20",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "parent_hip_fx",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "no",
+      "yes"
+     ],
+     "input_field": "parent_hip_fracture",
+     "transform": "bool_yesno",
+     "synthetic_check_value": "no"
+    },
+    {
+     "name": "no_period_12m",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "na_male",
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "na_male",
+      "no",
+      "yes"
+     ],
+     "input_field": "sex+menses_absent_12m",
+     "transform": "osteo_period_yesno",
+     "synthetic_check_value": "yes"
+    },
+    {
+     "name": "age_last_period",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      10,
+      70
+     ],
+     "input_field": "age_last_period_years",
+     "transform": "osteo_age_last_period",
+     "synthetic_check_value": 48.0,
+     "note": "erkekte/adeti süren kadında yapısal boş (null) kabul; sentetik kontrol dolu değerle yapılır"
+    },
+    {
+     "name": "hrt_ever",
+     "type": "categorical",
+     "model_dtype": "str",
+     "unit": "kategori",
+     "learned_categories": [
+      "na_male",
+      "no",
+      "yes",
+      null
+     ],
+     "allowed_values": [
+      "na_male",
+      "no",
+      "yes"
+     ],
+     "input_field": "sex+hrt_ever",
+     "transform": "osteo_hrt",
+     "synthetic_check_value": "no"
+    }
+   ],
+   "n_features": 16,
+   "feature_order_source": "phase_xxx/config/osteo_model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.0602885709255003,
+     "rule": "Recall>=0.85_max_esik"
+    },
+    "secondary": {},
+    "source": "phase_xxx/config/osteo_model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor; Phase XXXI: eğim 0,98, O/E 1,17)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "zamansal test (NHANES J 2017–18; DXA etiketi ilk kez) — bağımsız kurum doğrulaması DEĞİL",
+    "internal_test": null,
+    "temporal": {
+     "source": "Phase XXX (NHANES J, kilitli tek sefer)",
+     "n": 2275,
+     "n_pos": 164,
+     "precision": {
+      "value": 0.208,
+      "ci95": [
+       0.178,
+       0.242
+      ]
+     },
+     "recall": {
+      "value": 0.78,
+      "ci95": [
+       0.711,
+       0.837
+      ]
+     },
+     "fpr": {
+      "value": 0.23,
+      "ci95": [
+       0.213,
+       0.249
+      ]
+     },
+     "auc": {
+      "value": 0.849,
+      "ci95": [
+       0.818,
+       0.88
+      ]
+     },
+     "threshold": 0.0602885709255003,
+     "delta_auc_vs_OST": {
+      "value": 0.025,
+      "ci95": [
+       0.012,
+       0.038
+      ]
+     },
+     "male_recall": 0.48
+    },
+    "external": null,
+    "research_target_note": "Üçlü hedef (ve tarama hedefi Recall ≥ 0,85) sağlanmadı; eşik Recall ≥ 0,85 için seçilmişti, testte 0,780."
+   },
+   "limitations": [
+    "Cinsiyetler arası Recall çok farklı: erkeklerde 0,48 (tek eşik). Cinsiyete özgü eşik yok.",
+    "Düşük P (0,21; prevalans düşük). CV havuzlu OOF OST'yi geçemedi; testte OST'ye göre ΔAUC +0,025 (küçük ama anlamlı). Phase XXXI: eşit Recall'da yönlendirme farkları GA 0'ı içeriyor.",
+    "DXA cihaz/yazılım çapraz kalibrasyonu BULUNAMADI (yalnız-H duyarlılık modeli benzer sonuç). Romatoid artrit/ikincil osteoporoz girdisi BULUNAMADI. Kadın OST eşiği ikincil kaynaktan.",
+    "Alkol harmonizasyonu (D–H: ALQ120Q/U×ALQ130; J: ALQ121×ALQ130) sabit tabloyla; uygulamada alkol ≥3 içki/gün sorusu doğrudan sorulmalı.",
+    "Hedef osteoporoz DXA tanımıdır, kırık riski değil. KNHANES doğrulaması yapılamadı (steroid ve ebeveyn kalça kırığı girdisi yok)."
+   ],
+   "app_feasibility": "Formla doldurulabilir (laboratuvarsız). Yaş 50–80 ve cinsiyete özgü sorular gerekir.",
+   "missing_input_rule": "ZORUNLU: 16 feature. Kadında no_period_12m/hrt_ever yanıtı zorunlu; erkekte 'na_male' otomatik. age_last_period: yalnız adeti kesilmiş kadında zorunlu, diğerlerinde yapısal boş. Yaş < 50 → model uygulanmaz.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "ckd_A": {
+   "disease": "Böbrek (farkında olunmayan tek ziyaret renal anormalliği)",
+   "disease_key": "kidney",
+   "role": "primary",
+   "phase_of_origin": "phase_xxxv",
+   "model_file": {
+    "path": "phase_xxxv/models/ckd_A_final.joblib",
+    "sha256": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "size_bytes": 467094,
+    "sha256_in_lock": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "lock_source": "phase_xxxv/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "phase_xxxv/PHASE_XXXV_REPORT.md: lightgbm 4.6.0 kök .venv'e kuruldu ve kullanıldı",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LGBMClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "LightGBM (imputer + LGBM)",
+   "target_definition": "Farkında olmayan erişkinde tek ziyaret eGFR < 60 (CKD-EPI 2021) VEYA UACR ≥ 30 mg/g (böbrek hastalığı tanısı DEĞİL; KDIGO 3 ay şartı karşılanmaz).",
+   "population": "NHANES ≥ 20 yaş, gebe/diyaliz değil, \"doktor zayıf/başarısız böbrek dedi mi\" = Hayır. Prevalans ≈ %15.",
+   "input_source_note": "Laboratuvarsız: antropometri, tansiyon, hipertansiyon/diyabet/KKH/KY/inme öyküsü, ilaçlar, sigara.",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex_female",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex",
+     "transform": "sex_female01",
+     "synthetic_check_value": 1.0
+    },
+    {
+     "name": "race_mexam",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_mexam",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_othhisp",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_othhisp",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_black",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_black",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_other",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_other",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "sbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      70,
+      260
+     ],
+     "input_field": "sbp_1..3_mmhg",
+     "transform": "sbp_mean_23",
+     "synthetic_check_value": 120.0
+    },
+    {
+     "name": "dbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      30,
+      150
+     ],
+     "input_field": "dbp_1..3_mmhg",
+     "transform": "dbp_mean_23",
+     "synthetic_check_value": 75.0
+    },
+    {
+     "name": "htn_told",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_told",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "chd_hist",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_coronary_disease",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "chf",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_heart_failure",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "stroke",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_stroke",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "htn_med",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension+on_bp_medication",
+     "transform": "htn_med_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_insulin",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes+on_insulin",
+     "transform": "dm_insulin_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_pills",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes+on_diabetes_pills",
+     "transform": "dm_pills_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_current",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_current01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_former",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_former01",
+     "synthetic_check_value": 0.0
+    }
+   ],
+   "n_features": 20,
+   "feature_order_source": "phase_xxxv/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.12660209600798616,
+     "rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+    },
+    "secondary": {
+     "referral_matched": 0.13016014538174722
+    },
+    "source": "phase_xxxv/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test (NHANES I 2015–16; PREVIOUSLY_EXPOSED başka hedef; zamansal değil)",
+    "internal_test": {
+     "source": "Phase XXXV (NHANES I, kilitli tek sefer)",
+     "n": 4812,
+     "n_pos": 716,
+     "precision": {
+      "value": 0.293,
+      "ci95": [
+       0.273,
+       0.314
+      ]
+     },
+     "recall": {
+      "value": 0.767,
+      "ci95": [
+       0.734,
+       0.796
+      ]
+     },
+     "fpr": {
+      "value": 0.323,
+      "ci95": [
+       0.309,
+       0.337
+      ]
+     },
+     "auc": {
+      "value": 0.791,
+      "ci95": [
+       0.773,
+       0.809
+      ]
+     },
+     "threshold": 0.12660209600798616,
+     "npv": {
+      "value": 0.943,
+      "ci95": [
+       0.934,
+       0.951
+      ]
+     },
+     "referral_rate": {
+      "value": 0.389,
+      "ci95": [
+       0.375,
+       0.403
+      ]
+     },
+     "delta_auc_vs_modified_SCORED": {
+      "value": 0.032,
+      "ci95": [
+       0.02,
+       0.043
+      ]
+     }
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Hiçbir model ve eşikte sağlanmadı (P 0,29–0,31, FPR 0,29–0,32; %15 prevalansta P ≥ 0,70 yapısal olarak zor)."
+   },
+   "limitations": [
+    "Kazanç esas olarak yalnız-UACR pozitiflerinde ve < 60 yaşta; ≥ 60 yaşta tarama kuralı fiilen \"yaşa göre herkese test\" (FPR 0,74–0,90).",
+    "Etiket tek ziyaret; geçici albüminüri dışlanamaz; KIQ022 öz-bildirim. Yaş ve cinsiyet eGFR denkleminin girdisidir (hedef bileşeniyle mekanik bağ).",
+    "Modifiye SCORED karşılaştırması orijinal yayınla karşılaştırılamaz (PVD/proteinüri yok; SCORED puanları birincil metinle doğrulanamadı).",
+    "Test tek dönem (2015–16), PREVIOUSLY_EXPOSED; bağımsız dış doğrulama yok. Survey tasarımı kullanılmadı.",
+    "Kullanıcı biliyorsa eGFR/UACR doğrudan kullanılmalı (hedefi tanımlar)."
+   ],
+   "app_feasibility": "Formla doldurulabilir (laboratuvarsız; ölçüm gerektiren: boy/kilo/bel/tansiyon).",
+   "missing_input_rule": "ZORUNLU: 20 feature (htn_med, dm_insulin, dm_pills: yapısal atlama kurallarıyla 0). Tanılı böbrek hastalığı/diyaliz varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  },
+  "ckd_B": {
+   "disease": "Böbrek — laboratuvarlı",
+   "disease_key": "kidney",
+   "role": "secondary (laboratuvar varsa)",
+   "phase_of_origin": "phase_xxxv",
+   "model_file": {
+    "path": "phase_xxxv/models/ckd_B_final.joblib",
+    "sha256": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "size_bytes": 316662,
+    "sha256_in_lock": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "lock_source": "phase_xxxv/config/model_lock.json"
+   },
+   "runtime": {
+    "required_venv": ".venv",
+    "python": "3.13.3",
+    "packages": {
+     "numpy": "2.2.6",
+     "pandas": "2.3.1",
+     "scipy": "1.16.3",
+     "sklearn": "1.8.0",
+     "imblearn": "0.14.2",
+     "joblib": "1.5.3",
+     "lightgbm": "4.6.0"
+    },
+    "fit_sklearn_version": "1.8.0",
+    "fit_environment_evidence": "phase_xxxv/PHASE_XXXV_REPORT.md: lightgbm 4.6.0 kök .venv",
+    "extra_sys_path_for_pickle": null,
+    "pickle_wrapper": "Pipeline",
+    "final_estimator": "LGBMClassifier",
+    "note": "Pickle yalnız bu venv sürümleriyle doğrulanmıştır (registry_check). Farklı sürümde yükleme sessiz uyarı verebilir; yeniden fit YASAK."
+   },
+   "family": "LightGBM",
+   "target_definition": "Model A ile aynı.",
+   "population": "Model A ile aynı.",
+   "input_source_note": "Model A + serum glukoz, HbA1c, total kolesterol, HDL, hemoglobin (kreatinin, albümin/UACR, ürik asit girdi olamaz).",
+   "features": [
+    {
+     "name": "age",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "yıl",
+     "allowed_range": [
+      20,
+      80
+     ],
+     "input_field": "age_years",
+     "transform": "age_cap80",
+     "synthetic_check_value": 55
+    },
+    {
+     "name": "sex_female",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "sex",
+     "transform": "sex_female01",
+     "synthetic_check_value": 1.0
+    },
+    {
+     "name": "race_mexam",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_mexam",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_othhisp",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_othhisp",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_black",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_black",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "race_other",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "race_ethnicity",
+     "transform": "race_other",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "bmi",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "kg/m2",
+     "allowed_range": [
+      12,
+      80
+     ],
+     "input_field": "height_cm+weight_kg",
+     "transform": "bmi_kgm2",
+     "synthetic_check_value": 27.0
+    },
+    {
+     "name": "waist",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "cm",
+     "allowed_range": [
+      40,
+      200
+     ],
+     "input_field": "waist_cm",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "sbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      70,
+      260
+     ],
+     "input_field": "sbp_1..3_mmhg",
+     "transform": "sbp_mean_23",
+     "synthetic_check_value": 120.0
+    },
+    {
+     "name": "dbp",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mmHg",
+     "allowed_range": [
+      30,
+      150
+     ],
+     "input_field": "dbp_1..3_mmhg",
+     "transform": "dbp_mean_23",
+     "synthetic_check_value": 75.0
+    },
+    {
+     "name": "htn_told",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_told",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "chd_hist",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_coronary_disease",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "chf",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_heart_failure",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "stroke",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "hx_stroke",
+     "transform": "bool01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "htn_med",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_hypertension+on_bp_medication",
+     "transform": "htn_med_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_insulin",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes+on_insulin",
+     "transform": "dm_insulin_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "dm_pills",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "told_diabetes+on_diabetes_pills",
+     "transform": "dm_pills_rule",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_current",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_current01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "smoke_former",
+     "type": "categorical",
+     "model_dtype": "float",
+     "encoding": "binary_0_1_numeric",
+     "unit": "0/1",
+     "allowed_values": [
+      0.0,
+      1.0
+     ],
+     "input_field": "smoking_status",
+     "transform": "smoke_former01",
+     "synthetic_check_value": 0.0
+    },
+    {
+     "name": "glucose",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      30,
+      800
+     ],
+     "input_field": "glucose_serum_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 95.0
+    },
+    {
+     "name": "hba1c",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "%",
+     "allowed_range": [
+      3.0,
+      18.0
+     ],
+     "input_field": "hba1c_pct",
+     "transform": "identity",
+     "synthetic_check_value": 5.4
+    },
+    {
+     "name": "tc",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      50,
+      600
+     ],
+     "input_field": "total_chol_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 190.0
+    },
+    {
+     "name": "hdl",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "mg/dL",
+     "allowed_range": [
+      5,
+      200
+     ],
+     "input_field": "hdl_mgdl",
+     "transform": "identity",
+     "synthetic_check_value": 50.0
+    },
+    {
+     "name": "hemoglobin",
+     "type": "numeric",
+     "model_dtype": "float",
+     "unit": "g/dL",
+     "allowed_range": [
+      3,
+      22
+     ],
+     "input_field": "hemoglobin_gdl",
+     "transform": "identity",
+     "synthetic_check_value": 14.0
+    }
+   ],
+   "n_features": 25,
+   "feature_order_source": "phase_xxxv/config/model_lock.json",
+   "thresholds": {
+    "primary": {
+     "value": 0.13832509192715003,
+     "rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+    },
+    "secondary": {
+     "referral_matched": 0.12953317254036145
+    },
+    "source": "phase_xxxv/config/model_lock.json",
+    "note": "Eşikler dondurulmuştur; uygulamada değiştirilmez. Karar yalnız bu eşikte \"araştırma sınıflaması\"dır, klinik karar değildir."
+   },
+   "calibration": {
+    "status": "yok (ham skor)",
+    "manifest_value": null
+   },
+   "evidence": {
+    "highest_tier": "iç test (NHANES I; PREVIOUSLY_EXPOSED)",
+    "internal_test": {
+     "source": "Phase XXXV (NHANES I, kilitli tek sefer)",
+     "n": 4812,
+     "n_pos": 716,
+     "precision": {
+      "value": 0.313,
+      "ci95": [
+       0.291,
+       0.335
+      ]
+     },
+     "recall": {
+      "value": 0.754,
+      "ci95": [
+       0.721,
+       0.784
+      ]
+     },
+     "fpr": {
+      "value": 0.29,
+      "ci95": [
+       0.276,
+       0.304
+      ]
+     },
+     "auc": {
+      "value": 0.805,
+      "ci95": [
+       0.788,
+       0.823
+      ]
+     },
+     "threshold": 0.13832509192715003,
+     "npv": {
+      "value": 0.943,
+      "ci95": [
+       0.934,
+       0.951
+      ]
+     },
+     "referral_rate": {
+      "value": 0.359,
+      "ci95": [
+       0.345,
+       0.373
+      ]
+     },
+     "delta_auc_B_minus_A": {
+      "value": 0.015,
+      "ci95": [
+       0.009,
+       0.021
+      ]
+     }
+    },
+    "temporal": null,
+    "external": null,
+    "research_target_note": "Hiçbir eşikte sağlanmadı."
+   },
+   "limitations": [
+    "Model A'nın tüm sınırlılıkları geçerli. Rutin lab katkısı küçük: B−A ΔAUC +0,015.",
+    "Hemoglobin yalnız B'de (SCORED anemi bileşeni lab olduğu için)."
+   ],
+   "app_feasibility": "Rutin laboratuvar sonuçları gerekir.",
+   "missing_input_rule": "ZORUNLU: 25 feature. Lab eksikse B üretilmez; A'ya düşülür. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_visible": true,
+   "app_mode": "standard",
+   "app_mode_reason": "kullanıcı formu / laboratuvar girdisi",
+   "clinical_probability_eligibility": false
+  }
+ },
+ "candidates_not_registered": {
+  "fatty_liver": {
+   "disease": "Karaciğer yağlanması",
+   "recommendation": "ALMA (şimdilik)",
+   "candidate": "phase_xxx/models/liver_final.joblib (XGBoost, FibroScan CAP ≥ 274)",
+   "rationale": [
+    "Test etiketi CONTAMINATED (L CAP etiketleri V2 başlangıcı ve Focused fazında model/eşik seçiminde kullanılmış); bağımsız test sayılamaz.",
+    "FLI baseline'ına testte ΔAUC +0,005 (−0,003…+0,013): anlamlı katkı yok; HSI'ya göre var. TG ile FLI zaten formülle hesaplanabilir.",
+    "Açık dış CAP verisi BULUNAMADI (KNHANES/CHARLS/CHNS dahil); dış doğrulama yolu şimdilik yok.",
+    "Üçlü hedef sağlanmadı (P 0,720, R 0,648, FPR 0,166)."
+   ],
+   "evidence_summary": "Phase XXX test (CONTAMINATED): AUC 0,845; P 0,720; R 0,648; FPR 0,166.",
+   "user_decision": "ALMA (kullanıcı onayladı, Phase XLIII sonrası)"
+  },
+  "lipid": {
+   "disease": "Lipid bozukluğu (dislipidemi)",
+   "recommendation": "ALMA",
+   "candidate": "Phase21/Phase24 dyslipidemia modelleri (kilitli son model yok; phase_xxix_b yalnız CV)",
+   "rationale": [
+    "Lipidler hedefi tanımladığı için girdi olamıyor; kalan rutin girdilerle AUC ≈ 0,70 (CV) ve P ≥ 0,70 eşiğinde Recall ≈ 0,17.",
+    "Doğrudan lipid ölçümü varken ML'in klinik katkısı yok; tarama değeri kanıtlanmadı. Phase XXIX-B sonrası kilitli/test edilmiş yeni model YOK.",
+    "Eski modeller Phase25'te daha önce kullanılmamış A döngüsü holdout'unda değerlendirildi: üçlü hedef karşılanmadı; sonraki iyileştirme yalnız CV aday (Phase XXIX-B)."
+   ],
+   "evidence_summary": "Phase XXIX-B CV aday (test değil): AUC 0,70; en iyi aday P 0,67 / R 0,17 / FPR 0,08.",
+   "user_decision": "ALMA (kullanıcı onayladı, Phase XLIII sonrası)"
+  },
+  "asthma": {
+   "disease": "Astım",
+   "recommendation": "ALMA",
+   "candidate": "All_Disease_Improvement_Phase21/models/asthma_S1_BASIC.joblib (yaş, cinsiyet, sigara)",
+   "rationale": [
+    "Veri çok küçük (n=253; Exasens vaka-kontrol, saliva/klinik gruplar); yaş+cinsiyet LR'ye göre ΔAUC +0,001 (GA 0'ı içeriyor).",
+    "Spirometri/semptom/geri dönüşlülük verisi yok; hedef kaynak-grubu (astım vs HC/enfeksiyon) genel popülasyona taşınmaz.",
+    "Dış doğrulama yok."
+   ],
+   "evidence_summary": "Phase XXIX-B CV aday: AUC 0,758; P 0,74 / R 0,49 / FPR 0,06 (test değil).",
+   "user_decision": "ALMA (kullanıcı onayladı, Phase XLIII sonrası)"
+  },
+  "gallstone": {
+   "disease": "Safra taşı",
+   "recommendation": "ALMA",
+   "candidate": "phase_xxx/models/gallstone_final.joblib (CatBoost, NHANES III ultrason)",
+   "rationale": [
+    "Test AUC 0,751; P 0,174 (prevalans %9,4), FPR 0,365; yaş+cinsiyet+BMI LR'ye göre ΔAUC yalnız +0,012 (+0,004…+0,019).",
+    "Veri 1988–94 (NHANES III); 20 feature'ın çoğu laboratuvar (CRP, GFR, kreatinin, LDL…); zamansal test aynı kaynak içinde; kişiler karaciğer hedefi için görülmüş.",
+    "Üçlü hedef sağlanmadı; klinik karar değeri düşük (çok yüksek yanlış pozitif)."
+   ],
+   "evidence_summary": "Phase XXX zamansal test: AUC 0,751; P 0,174; R 0,741; FPR 0,365.",
+   "user_decision": "ALMA (kullanıcı onayladı, Phase XLIII sonrası)"
+  }
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "note": "phase_xxviii tolerans (parity) k\u00fcmesinden 5 kay\u0131t (en k\u00fc\u00e7\u00fck ecg_id). Ya\u015f/cinsiyet sentetik (60, male). Karar metrik olarak raporlanmaz; yaln\u0131z u\u00e7 nokta ve feature parity.",
+ "records": [
+  {
+   "ecg_id": 165,
+   "http_status": 200,
+   "status": "OK",
+   "decision_present": true,
+   "max_abs_delta_vs_phase_xxviii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.272320985794067,
+   "wall_seconds": 6.938008999975864,
+   "http_roundtrip_seconds": 6.983137499948498
+  },
+  {
+   "ecg_id": 254,
+   "http_status": 200,
+   "status": "OK",
+   "decision_present": true,
+   "max_abs_delta_vs_phase_xxviii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.4634411334991455,
+   "wall_seconds": 7.07725400000345,
+   "http_roundtrip_seconds": 7.086466500011738
+  },
+  {
+   "ecg_id": 480,
+   "http_status": 200,
+   "status": "OK",
+   "decision_present": true,
+   "max_abs_delta_vs_phase_xxviii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.276228904724121,
+   "wall_seconds": 6.920013800030574,
+   "http_roundtrip_seconds": 6.930601799977012
+  },
+  {
+   "ecg_id": 691,
+   "http_status": 200,
+   "status": "OK",
+   "decision_present": true,
+   "max_abs_delta_vs_phase_xxviii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.453150033950806,
+   "wall_seconds": 7.043362399970647,
+   "http_roundtrip_seconds": 7.05331450002268
+  },
+  {
+   "ecg_id": 1039,
+   "http_status": 200,
+   "status": "OK",
+   "decision_present": true,
+   "max_abs_delta_vs_phase_xxviii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 3.6053900718688965,
+   "wall_seconds": 6.22588879999239,
+   "http_roundtrip_seconds": 6.236734299978707
+  }
+ ]
+}

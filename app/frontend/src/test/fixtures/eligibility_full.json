@@ -1,0 +1,197 @@
+{
+ "models": [
+  {
+   "model_id": "af_S4_DEVICE",
+   "disease": "Atriyal fibrilasyon (AF)",
+   "disease_key": "af",
+   "role": "primary",
+   "app_mode": "ecg_upload_demo",
+   "module_label": "ana modül",
+   "endpoint": "/ecg/af",
+   "state": "MISSING",
+   "missing_fields": [
+    "ecg_record"
+   ],
+   "unknown_categories": [],
+   "reasons": [
+    "AF modeli yalnız EKG kaydı (.hea + .dat/.mat) yüklenerek çalışır: POST /ecg/af"
+   ]
+  },
+  {
+   "model_id": "cad_DEVICE",
+   "disease": "Koroner arter hastalığı (CAD)",
+   "disease_key": "cad",
+   "role": "primary",
+   "app_mode": "clinical_mode",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "MISSING",
+   "missing_fields": [
+    "cad_chest_pain_type",
+    "glucose_fasting_mgdl",
+    "cad_resting_ecg",
+    "cad_max_hr_bpm",
+    "cad_exercise_angina",
+    "cad_st_depression_mm",
+    "cad_st_slope"
+   ],
+   "unknown_categories": [],
+   "reasons": [
+    "eksik zorunlu alan(lar): cad_chest_pain_type, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+   ]
+  },
+  {
+   "model_id": "dm_A",
+   "disease": "Diyabet (teşhis edilmemiş)",
+   "disease_key": "diabetes",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "dm_B",
+   "disease": "Diyabet (teşhis edilmemiş) — laboratuvarlı",
+   "disease_key": "diabetes",
+   "role": "secondary (laboratuvar varsa)",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "anemia_LR16",
+   "disease": "Anemi",
+   "disease_key": "anemia",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "OUT_OF_SCOPE",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": [
+    "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+   ]
+  },
+  {
+   "model_id": "copd_S4_DEVICE",
+   "disease": "KOAH (post-bronkodilatör hava akımı obstrüksiyonunun sürmesi)",
+   "disease_key": "copd",
+   "role": "primary",
+   "app_mode": "clinical_mode",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "MISSING",
+   "missing_fields": [
+    "fev1_pre_ml",
+    "fvc_pre_ml"
+   ],
+   "unknown_categories": [],
+   "reasons": [
+    "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+   ]
+  },
+  {
+   "model_id": "htn_M1",
+   "disease": "Hipertansiyon",
+   "disease_key": "hypertension",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "fibrosis_final",
+   "disease": "Karaciğer fibrozisi (LSM ≥ 8 kPa)",
+   "disease_key": "liver_fibrosis",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "ana modül",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "osteo_final",
+   "disease": "Osteoporoz (DXA femur T-skoru ≤ −2,5)",
+   "disease_key": "osteoporosis",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "araştırma modülü",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "ckd_A",
+   "disease": "Böbrek (farkında olunmayan tek ziyaret renal anormalliği)",
+   "disease_key": "kidney",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "READY",
+   "missing_fields": [],
+   "unknown_categories": [],
+   "reasons": []
+  },
+  {
+   "model_id": "ckd_B",
+   "disease": "Böbrek — laboratuvarlı",
+   "disease_key": "kidney",
+   "role": "secondary (laboratuvar varsa)",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "endpoint": "/predict",
+   "state": "MISSING",
+   "missing_fields": [
+    "hemoglobin_gdl"
+   ],
+   "unknown_categories": [],
+   "reasons": [
+    "eksik zorunlu alan(lar): hemoglobin_gdl"
+   ]
+  }
+ ],
+ "field_errors": [],
+ "unit_conversion_notes": [],
+ "warnings": [
+  {
+   "code": "TARGET_DEFINING_INPUT",
+   "fields": [
+    "hba1c_pct"
+   ],
+   "message_tr": "Diyabet hedefini tanımlayan ölçüm girildi (HbA1c / açlık plazma glukozu). Bu durumda model yerine doğrudan klinik eşik kullanın.",
+   "disease_key": "diabetes"
+  },
+  {
+   "code": "TARGET_DEFINING_INPUT",
+   "fields": [
+    "creatinine_mgdl",
+    "urine_albumin_mgl",
+    "urine_creatinine_mgdl"
+   ],
+   "message_tr": "Böbrek hedefini tanımlayan ölçüm girildi (kreatinin → eGFR ve/veya idrar albümin/kreatinin → UACR). Bu durumda model yerine doğrudan klinik eşik kullanın.",
+   "disease_key": "kidney"
+  }
+ ],
+ "clinical_probability_eligibility": false,
+ "note": "Yalnız uygunluk/eksik alan durumu; model çalıştırılmaz, karar üretilmez.",
+ "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun."
+}

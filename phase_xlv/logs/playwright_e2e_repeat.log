@@ -1,0 +1,42 @@
+﻿node.exe : [2m[WebServer] [22m(node:21392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being 
+set.
+At C:\Program Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([2m[WebServer]... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m(node:16512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m(node:30896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:28560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › e2e\privacy.spec.ts:14:3 › @gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok (16.9s)
+  ok 2 [chromium] › e2e\privacy.spec.ts:68:3 › @gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür (683ms)
+  ok 3 [chromium] › e2e\scenarios.spec.ts:7:3 › @normal normal girdi › fibrozis: çalışabilir profil -> panel Çalışabilir -> sonuç OK, karar ve kanıt gösterilir (1.0s)
+  ok 4 [chromium] › e2e\scenarios.spec.ts:20:3 › @normal normal girdi › AF: PTB-XL AF örneği -> OK, 10 öznitelik, lead II grafiği ve RR takogramı (12.5s)
+  ok 5 [chromium] › e2e\scenarios.spec.ts:33:3 › @normal normal girdi › AF: PTB-XL sinüs ritmi örneği -> OK (15.6s)
+  ok 6 [chromium] › e2e\scenarios.spec.ts:40:3 › @normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir (15.5s)
+  ok 7 [chromium] › e2e\scenarios.spec.ts:52:3 › @eksik eksik girdi › fibrozis: eksik alanlı profil -> panel "Eksik: …" (laboratuvarlar) -> sonuç ABSTAIN ve neden (895ms)
+  ok 8 [chromium] › e2e\scenarios.spec.ts:62:3 › @eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -> Çalışabilir olur (1.6s)
+  ok 9 [chromium] › e2e\scenarios.spec.ts:72:3 › @eksik eksik girdi › AF: formda panel "Eksik: EKG kaydı" gösterir (849ms)
+  ok 10 [chromium] › e2e\scenarios.spec.ts:78:3 › @eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz (345ms)
+  ok 11 [chromium] › e2e\scenarios.spec.ts:85:3 › @eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -> ABSTAIN (eksik alan) (19.8s)
+  ok 12 [chromium] › e2e\scenarios.spec.ts:98:3 › @birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -> alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür (1.8s)
+  ok 13 [chromium] › e2e\scenarios.spec.ts:112:3 › @birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir (1.7s)
+  ok 14 [chromium] › e2e\scenarios.spec.ts:125:3 › @birim birim hatası › AF: 250 Hz başlıklı kayıt -> ABSTAIN ("500 Hz değil") (850ms)
+  ok 15 [chromium] › e2e\scenarios.spec.ts:140:3 › @birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -> sunucu 422 hatası gösterilir (862ms)
+  ok 16 [chromium] › e2e\scenarios.spec.ts:151:3 › @kapsam kapsam dışı veri › fibrozis: gebe kadın profili -> panel Kapsam dışı (gebe) -> sonuç NOT_APPLICABLE (1.2s)
+  ok 17 [chromium] › e2e\scenarios.spec.ts:160:3 › @kapsam kapsam dışı veri › fibrozis: 19 yaş -> Kapsam dışı (yaş ≥ 20) (1.0s)
+  ok 18 [chromium] › e2e\scenarios.spec.ts:167:3 › @kapsam kapsam dışı veri › fibrozis: gebelik "bilmiyorum" -> Karar verilemez (ABSTAIN) (1.2s)
+  ok 19 [chromium] › e2e\scenarios.spec.ts:175:3 › @kapsam kapsam dışı veri › AF: formda yaş 95 -> panel Kapsam dışı (1.1s)
+  ok 20 [chromium] › e2e\scenarios.spec.ts:181:3 › @kapsam kapsam dışı veri › AF: EKG ile yaş 95 -> NOT_APPLICABLE (30.1s)
+
+  20 passed (2.2m)

@@ -1,0 +1,206 @@
+{
+ "playwright": {
+  "total": 20,
+  "passed": 20,
+  "groups": {
+   "@normal": {
+    "passed": 4,
+    "total": 4,
+    "by_disease": {
+     "fibrozis": {
+      "passed": 1,
+      "total": 1
+     },
+     "AF": {
+      "passed": 3,
+      "total": 3
+     }
+    },
+    "tests": [
+     [
+      "fibrozis: çalışabilir profil -> panel Çalışabilir -> sonuç OK, karar ve kanıt gösterilir",
+      "passed",
+      1.1
+     ],
+     [
+      "AF: PTB-XL AF örneği -> OK, 10 öznitelik, lead II grafiği ve RR takogramı",
+      "passed",
+      21.6
+     ],
+     [
+      "AF: PTB-XL sinüs ritmi örneği -> OK",
+      "passed",
+      20.7
+     ],
+     [
+      "AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir",
+      "passed",
+      19.6
+     ]
+    ]
+   },
+   "@eksik": {
+    "passed": 5,
+    "total": 5,
+    "by_disease": {
+     "fibrozis": {
+      "passed": 2,
+      "total": 2
+     },
+     "AF": {
+      "passed": 3,
+      "total": 3
+     }
+    },
+    "tests": [
+     [
+      "fibrozis: eksik alanlı profil -> panel \"Eksik: …\" (laboratuvarlar) -> sonuç ABSTAIN ve neden",
+      "passed",
+      0.9
+     ],
+     [
+      "fibrozis: laboratuvarlar tamamlanınca durum Eksik -> Çalışabilir olur",
+      "passed",
+      1.7
+     ],
+     [
+      "AF: formda panel \"Eksik: EKG kaydı\" gösterir",
+      "passed",
+      0.8
+     ],
+     [
+      "AF: yalnız .hea yüklenince analiz başlatılamaz",
+      "passed",
+      0.4
+     ],
+     [
+      "AF: yaş/cinsiyet yanıtsız -> ABSTAIN (eksik alan)",
+      "passed",
+      20.7
+     ]
+    ]
+   },
+   "@birim": {
+    "passed": 4,
+    "total": 4,
+    "by_disease": {
+     "fibrozis": {
+      "passed": 1,
+      "total": 1
+     },
+     "genel": {
+      "passed": 1,
+      "total": 1
+     },
+     "AF": {
+      "passed": 2,
+      "total": 2
+     }
+    },
+    "tests": [
+     [
+      "fibrozis: albümin g/L değeri g/dL biriminde -> alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür",
+      "passed",
+      1.4
+     ],
+     [
+      "birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir",
+      "passed",
+      1.3
+     ],
+     [
+      "AF: 250 Hz başlıklı kayıt -> ABSTAIN (\"500 Hz değil\")",
+      "passed",
+      0.5
+     ],
+     [
+      "AF: yaş ay cinsinden girilmiş (720) -> sunucu 422 hatası gösterilir",
+      "passed",
+      0.6
+     ]
+    ]
+   },
+   "@kapsam": {
+    "passed": 5,
+    "total": 5,
+    "by_disease": {
+     "fibrozis": {
+      "passed": 3,
+      "total": 3
+     },
+     "AF": {
+      "passed": 2,
+      "total": 2
+     }
+    },
+    "tests": [
+     [
+      "fibrozis: gebe kadın profili -> panel Kapsam dışı (gebe) -> sonuç NOT_APPLICABLE",
+      "passed",
+      0.9
+     ],
+     [
+      "fibrozis: 19 yaş -> Kapsam dışı (yaş ≥ 20)",
+      "passed",
+      0.6
+     ],
+     [
+      "fibrozis: gebelik \"bilmiyorum\" -> Karar verilemez (ABSTAIN)",
+      "passed",
+      0.8
+     ],
+     [
+      "AF: formda yaş 95 -> panel Kapsam dışı",
+      "passed",
+      0.8
+     ],
+     [
+      "AF: EKG ile yaş 95 -> NOT_APPLICABLE",
+      "passed",
+      20.8
+     ]
+    ]
+   },
+   "@gizlilik": {
+    "passed": 2,
+    "total": 2,
+    "by_disease": {
+     "genel": {
+      "passed": 2,
+      "total": 2
+     }
+    },
+    "tests": [
+     [
+      "form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok",
+      "passed",
+      23.0
+     ],
+     [
+      "sabit uyarı her ekranda görünür",
+      "passed",
+      0.7
+     ]
+    ]
+   }
+  }
+ },
+ "vitest": {
+  "tests": 33,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 33
+ },
+ "backend_pytest": {
+  "tests": 316,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 5,
+  "passed": 311
+ },
+ "playwright_repeat": {
+  "total": 20,
+  "passed": 20
+ }
+}

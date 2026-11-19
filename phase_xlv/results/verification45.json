@@ -1,0 +1,211 @@
+{
+ "before_files": 158326,
+ "after_files": 158434,
+ "scan_scope": "V2 tümü; .venv, __pycache__, node_modules hariç",
+ "V1_outside_phase_and_app": {
+  "before": 158297,
+  "after": 158297,
+  "changed": [],
+  "deleted": [],
+  "new": [],
+  "ok": true
+ },
+ "V2_models": {
+  "ok": true,
+  "n": 13,
+  "models": {
+   "af_S4_DEVICE": {
+    "path": "All_Disease_Improvement_Phase21/models/af_S4_DEVICE.joblib",
+    "registry": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "before": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "after": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009"
+   },
+   "mi_model": {
+    "path": "phase_xxxviii/models/mi_model.joblib",
+    "registry": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "before": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "after": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef"
+   },
+   "cad_DEVICE": {
+    "path": "models/cad/DEVICE.joblib",
+    "registry": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "before": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "after": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033"
+   },
+   "dm_A": {
+    "path": "phase_xlii/models/dm_A_final.joblib",
+    "registry": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "before": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "after": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5"
+   },
+   "dm_B": {
+    "path": "phase_xlii/models/dm_B_final.joblib",
+    "registry": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "before": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "after": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6"
+   },
+   "anemia_LR16": {
+    "path": "Clinical_Optimization_Phase25/models/anemia_CBC_MATCHED16.joblib",
+    "registry": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "before": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "after": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087"
+   },
+   "copd_S4_DEVICE": {
+    "path": "All_Disease_Improvement_Phase21/models/copd_S4_DEVICE.joblib",
+    "registry": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "before": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "after": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7"
+   },
+   "hf_S2_BASIC_LAB": {
+    "path": "All_Disease_Improvement_Phase21/models/heart_failure_S2_BASIC_LAB.joblib",
+    "registry": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "before": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "after": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870"
+   },
+   "htn_M1": {
+    "path": "phase_xxxvii/models/htn3_M1.joblib",
+    "registry": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "before": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "after": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73"
+   },
+   "fibrosis_final": {
+    "path": "phase_xxxi/models/fibrosis_final.joblib",
+    "registry": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "before": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "after": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7"
+   },
+   "osteo_final": {
+    "path": "phase_xxx/models/osteo_final.joblib",
+    "registry": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "before": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "after": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d"
+   },
+   "ckd_A": {
+    "path": "phase_xxxv/models/ckd_A_final.joblib",
+    "registry": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "before": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "after": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433"
+   },
+   "ckd_B": {
+    "path": "phase_xxxv/models/ckd_B_final.joblib",
+    "registry": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "before": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "after": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988"
+   }
+  }
+ },
+ "V3_registry_schema_af_lock": {
+  "ok": true,
+  "files": {
+   "phase_xliii/registry/models.json": {
+    "expected": "5d2b88a012366f1541fc31dea37bb4781ba1a9e90e9ba882a5c48ef6b5d1c64f",
+    "before": "5d2b88a012366f1541fc31dea37bb4781ba1a9e90e9ba882a5c48ef6b5d1c64f",
+    "after": "5d2b88a012366f1541fc31dea37bb4781ba1a9e90e9ba882a5c48ef6b5d1c64f",
+    "ok": true
+   },
+   "phase_xliii/registry/input_schema.json": {
+    "expected": "70b9a9e8cda7347676325b150400b9a41ba1b3189d1eb07ca794e9eee058f350",
+    "before": "70b9a9e8cda7347676325b150400b9a41ba1b3189d1eb07ca794e9eee058f350",
+    "after": "70b9a9e8cda7347676325b150400b9a41ba1b3189d1eb07ca794e9eee058f350",
+    "ok": true
+   },
+   "phase_xliv/registry/input_schema_v2.json": {
+    "expected": "01f0241abf628ffd49a0ce32a49378eeda58179a12974f84fed9acd112900a79",
+    "before": "01f0241abf628ffd49a0ce32a49378eeda58179a12974f84fed9acd112900a79",
+    "after": "01f0241abf628ffd49a0ce32a49378eeda58179a12974f84fed9acd112900a79",
+    "ok": true
+   },
+   "phase_xxviii/config/af_pipeline_lock.json": {
+    "expected": "88aecd0769eac4ad9349fd7879f6e06ceafa34e020be09071190ae09c439341d",
+    "before": "88aecd0769eac4ad9349fd7879f6e06ceafa34e020be09071190ae09c439341d",
+    "after": "88aecd0769eac4ad9349fd7879f6e06ceafa34e020be09071190ae09c439341d",
+    "ok": true
+   },
+   "phase_xxviii/pipeline/af_pipeline_v1.py": {
+    "expected": "2bf3c307024711fdac2ffad463e63ae18368c361a1536c0a96ee1a4e7ede08a6",
+    "before": "2bf3c307024711fdac2ffad463e63ae18368c361a1536c0a96ee1a4e7ede08a6",
+    "after": "2bf3c307024711fdac2ffad463e63ae18368c361a1536c0a96ee1a4e7ede08a6",
+    "ok": true
+   }
+  }
+ },
+ "V4_app": {
+  "changed": [
+   "app/backend/README.md",
+   "app/backend/config/app_config.json",
+   "app/backend/healthrisk_api/ecg_af.py",
+   "app/backend/healthrisk_api/main.py",
+   "app/backend/healthrisk_api/service.py",
+   "app/backend/tests/test_privacy.py",
+   "app/backend/tests/test_scenarios.py"
+  ],
+  "new_count": 59,
+  "new": [
+   "app/backend/tests/test_phase45_ui_support.py",
+   "app/frontend/.gitignore",
+   "app/frontend/README.md",
+   "app/frontend/dist/assets/index-CYwC9na7.css",
+   "app/frontend/dist/assets/index-DgvaUcxm.js",
+   "app/frontend/dist/index.html",
+   "app/frontend/dist/samples/00165_hr.dat",
+   "app/frontend/dist/samples/00165_hr.hea",
+   "app/frontend/dist/samples/00691_hr.dat",
+   "app/frontend/dist/samples/00691_hr.hea",
+   "app/frontend/e2e/helpers.ts",
+   "app/frontend/e2e/privacy.spec.ts",
+   "app/frontend/e2e/scenarios.spec.ts",
+   "app/frontend/e2e/screenshots.spec.ts",
+   "app/frontend/e2e/timing.spec.ts",
+   "app/frontend/index.html",
+   "app/frontend/package-lock.json",
+   "app/frontend/package.json",
+   "app/frontend/playwright.config.ts",
+   "app/frontend/postcss.config.js",
+   "app/frontend/public/samples/00165_hr.dat",
+   "app/frontend/public/samples/00165_hr.hea",
+   "app/frontend/public/samples/00691_hr.dat",
+   "app/frontend/public/samples/00691_hr.hea",
+   "app/frontend/src/App.tsx",
+   "app/frontend/src/api/client.ts",
+   "app/frontend/src/api/types.ts",
+   "app/frontend/src/components/EcgCharts.tsx",
+   "app/frontend/src/components/EcgRrPanel.tsx",
+   "app/frontend/src/components/FieldInput.tsx",
+   "app/frontend/src/components/ResultCard.tsx",
+   "app/frontend/src/components/RoutingPanel.tsx",
+   "app/frontend/src/components/disclaimer.test.tsx",
+   "app/frontend/src/components/ui.tsx",
+   "app/frontend/src/demo/profiles.test.ts",
+   "app/frontend/src/demo/profiles.ts",
+   "app/frontend/src/index.css",
+   "app/frontend/src/lib/form.test.ts",
+   "app/frontend/src/lib/form.ts",
+   "app/frontend/src/main.tsx",
+   "app/frontend/src/pages/About.tsx",
+   "app/frontend/src/pages/DataEntry.test.tsx",
+   "app/frontend/src/pages/DataEntry.tsx",
+   "app/frontend/src/pages/EcgPage.tsx",
+   "app/frontend/src/pages/Home.tsx",
+   "app/frontend/src/pages/ModelCards.tsx",
+   "app/frontend/src/pages/Results.test.tsx",
+   "app/frontend/src/pages/Results.tsx",
+   "app/frontend/src/state/session.tsx",
+   "app/frontend/src/test/fixtures/eligibility_empty.json",
+   "app/frontend/src/test/fixtures/eligibility_full.json",
+   "app/frontend/src/test/fixtures/models.json",
+   "app/frontend/src/test/fixtures/predict_full.json",
+   "app/frontend/src/test/fixtures/schema.json",
+   "app/frontend/src/test/helpers.tsx",
+   "app/frontend/src/test/setup.ts",
+   "app/frontend/tailwind.config.js",
+   "app/frontend/tsconfig.json",
+   "app/frontend/vite.config.ts"
+  ],
+  "deleted": []
+ },
+ "V5_pyc_after_phase_start": {
+  "ok": true,
+  "files": [],
+  "n": 0
+ }
+}

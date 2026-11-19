@@ -1,0 +1,19 @@
+......................................................................xx [ 24%]
+....xxx................................................................. [ 48%]
+........................................................................ [ 72%]
+........................................................................ [ 96%]
+.........                                                                [100%]
+============================== warnings summary ===============================
+tests/test_af_e2e.py::test_af_end_to_end_feature_parity[165]
+  C:\Bitirme\HealthRisk_AI_Research_V2\app\backend\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Bitirme\HealthRisk_AI_Research_V2\phase_xliv\results\pytest_full.xml -
+=========================== short test summary info ===========================
+XFAIL tests/test_parity.py::test_parity_strict[dm_A] - e\u011fitim BMI'si d\xf6ng\xfcye g\xf6re kar\u0131\u015f\u0131k hassasiyetli (\u22642009\u201310: 0,01; sonras\u0131 0,1); tek yuvarlama ikisini birden \xfcretemez
+XFAIL tests/test_parity.py::test_parity_strict[dm_B] - e\u011fitim BMI'si d\xf6ng\xfcye g\xf6re kar\u0131\u015f\u0131k hassasiyetli (\u22642009\u201310: 0,01; sonras\u0131 0,1); tek yuvarlama ikisini birden \xfcretemez
+XFAIL tests/test_parity.py::test_parity_strict[osteo_final] - e\u011fitim BMI'si d\xf6ng\xfcye g\xf6re kar\u0131\u015f\u0131k hassasiyetli (\u22642009\u201310: 0,01; sonras\u0131 0,1); tek yuvarlama ikisini birden \xfcretemez + osteo ya\u015f (age_cap80, karar 2)
+XFAIL tests/test_parity.py::test_parity_strict[ckd_A] - e\u011fitim BMI'si d\xf6ng\xfcye g\xf6re kar\u0131\u015f\u0131k hassasiyetli (\u22642009\u201310: 0,01; sonras\u0131 0,1); tek yuvarlama ikisini birden \xfcretemez
+XFAIL tests/test_parity.py::test_parity_strict[ckd_B] - e\u011fitim BMI'si d\xf6ng\xfcye g\xf6re kar\u0131\u015f\u0131k hassasiyetli (\u22642009\u201310: 0,01; sonras\u0131 0,1); tek yuvarlama ikisini birden \xfcretemez
+292 passed, 5 xfailed, 1 warning in 94.24s (0:01:34)

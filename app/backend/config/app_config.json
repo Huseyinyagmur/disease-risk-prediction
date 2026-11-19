@@ -1,0 +1,67 @@
+{
+ "config_version": "2.0",
+ "phase": "XLIV",
+ "bind_host": "127.0.0.1",
+ "bind_port": 8000,
+ "registry_files_sha256": {
+  "phase_xliii/registry/models.json": "5d2b88a012366f1541fc31dea37bb4781ba1a9e90e9ba882a5c48ef6b5d1c64f",
+  "phase_xliii/registry/input_schema.json": "70b9a9e8cda7347676325b150400b9a41ba1b3189d1eb07ca794e9eee058f350",
+  "phase_xliv/registry/input_schema_v2.json": "01f0241abf628ffd49a0ce32a49378eeda58179a12974f84fed9acd112900a79"
+ },
+ "registry_files_sha256_note": "models.json ve v1 şema: Phase XLIII sonu değerleri. v2 şema: phase_xliv/registry/input_schema_v2.sha256. Uyuşmazlıkta TÜM modeller devre dışı.",
+ "expected_packages": {
+  "python": "3.13.3",
+  "numpy": "2.2.6",
+  "pandas": "2.3.1",
+  "scipy": "1.16.3",
+  "sklearn": "1.8.0",
+  "imblearn": "0.14.2",
+  "joblib": "1.5.3",
+  "lightgbm": "4.7.0",
+  "xgboost": "3.4.1",
+  "catboost": "1.2.10"
+ },
+ "runtime": {
+  "mode": "in_process_app_venv",
+  "evidence": "phase_xliv/results/env_equivalence.json — 13/13 model, 200 sentetik girdide kayıtlı venv ile app venv arasında |Δ| = 0 (bit düzeyinde aynı). Ayrı süreç/venv gerekmedi.",
+  "expected_packages_mismatch_policy": "Paket sürümü beklenenden farklıysa tüm modeller devre dışı (eşdeğerlik yalnız bu sürümlerde gösterildi)."
+ },
+ "eligibility_fields_note": "Gebelik, böbrek tanısı ve diyaliz uygunluk soruları şema v2 fields içinde resmileştirildi.",
+ "module_labels": {
+  "af_S4_DEVICE": "ana modül",
+  "fibrosis_final": "ana modül",
+  "osteo_final": "araştırma modülü",
+  "_default": "deneysel"
+ },
+ "module_labels_source": "Danışman isteği (Phase XLIV güncellemesi).",
+ "form": {
+  "source": "Phase XLV: yalnız sunum (bölüm sırası, kategori etiketleri). Alan listesi, birim, aralık ve koşullar şemadan gelir; model mantığını etkilemez.",
+  "sections": [
+   {"id": "temel", "title_tr": "Temel bilgiler", "optional": false},
+   {"id": "olcumler", "title_tr": "Ölçümler", "optional": false, "description_tr": "Boy, kilo, bel çevresi ve oturarak, ≥ 5 dk dinlenme sonrası ardışık 3 tansiyon okuması."},
+   {"id": "oyku", "title_tr": "Öykü ve ilaçlar", "optional": false},
+   {"id": "laboratuvar", "title_tr": "Laboratuvar ve spirometri", "optional": true, "description_tr": "İsteğe bağlı. Girilen değerler laboratuvarlı modelleri çalıştırabilir."},
+   {"id": "klinik", "title_tr": "Klinik değerlendirme ve efor testi", "optional": true, "description_tr": "İsteğe bağlı; yalnız CAD modeli (klinik mod) kullanır."}
+  ],
+  "section_rules": {
+   "temel_fields": ["age_years", "sex", "pregnant", "race_ethnicity"],
+   "olcumler_units": ["cm", "kg", "mmHg"],
+   "laboratuvar_sources": ["laboratuvar", "arastirma_assay", "spirometri"],
+   "klinik_sources": ["klinik_degerlendirme", "efor_testi"]
+  },
+  "category_labels_tr": {
+   "_boolean": {"true": "Evet", "false": "Hayır", "unknown": "Bilmiyorum"},
+   "sex": {"female": "Kadın", "male": "Erkek"},
+   "race_ethnicity": {"mexican_american": "Meksika kökenli Amerikalı", "other_hispanic": "Diğer Hispanik", "nh_white": "Hispanik olmayan beyaz", "nh_black": "Hispanik olmayan siyah", "other_incl_multi": "Diğer / çok ırklı"},
+   "smoking_status": {"never": "Hiç içmedi (yaşamı boyunca < 100 sigara)", "former": "Bıraktı", "current": "Şu an içiyor"},
+   "cad_chest_pain_type": {"typical_angina": "Tipik anjina", "atypical_angina": "Atipik anjina", "non_anginal": "Anjinal olmayan ağrı", "asymptomatic": "Asemptomatik"},
+   "cad_resting_ecg": {"normal": "Normal", "st_t_abnormality": "ST-T anormalliği", "lv_hypertrophy": "Sol ventrikül hipertrofisi"},
+   "cad_st_slope": {"upsloping": "Yukarı eğimli", "flat": "Düz", "downsloping": "Aşağı eğimli"}
+  },
+  "virtual_field_labels_tr": {"ecg_record": "EKG kaydı (.hea + .dat/.mat)"}
+ },
+ "disclaimer_tr":"Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+ "privacy": {
+  "policy": "İstek gövdeleri ve sağlık verileri hiçbir log’a yazılmaz ve diske saklanmaz. Yalnız anonim sayaçlar (uç nokta başına istek sayısı, durum kodu sayısı, toplam/ortalama süre) bellekte tutulur ve /health’te döner. /ecg/af yüklemeleri yalnız işlem süresince geçici klasörde bulunur ve yanıt öncesi silinir (kilitli Octave pipeline dosya girişi ister)."
+ }
+}

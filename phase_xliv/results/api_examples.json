@@ -1,0 +1,2221 @@
+{
+ "server": {
+  "cmd": "app/backend/.venv/Scripts/python.exe -B run_server.py --port 8765",
+  "bind": "127.0.0.1"
+ },
+ "GET /health": {
+  "status": "ok",
+  "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+  "schema_version": "2.0",
+  "disabled_models": [],
+  "packages_ok": true,
+  "af_pipeline": {
+   "enabled": true,
+   "pipeline_version": "AF-ECGDELI-OCTAVE-v1",
+   "lock_file": "phase_xxviii/config/af_pipeline_lock.json",
+   "problems": [],
+   "timeout_seconds": 60.0,
+   "pre_step": {
+    "name": "ilk 10 sn penceresi (read_first10s)",
+    "source_file": "phase_xxxiii/scripts/t3_extract.py",
+    "source_file_sha256": "2abc9e677a6ac6760e03bdb25a272d3b4a898676c08e5bfe117e58932a293dca",
+    "source_function_sha256": "4818ea0622a496813d388143c41725582685c396ed4a70a40f3bb3f01dfd8471",
+    "also_identical_logic": "phase_xxix/scripts/t3_extract.py",
+    "placement": "kilitli pipeline öncesi; kilit dosyası değişmedi"
+   }
+  },
+  "registry_problems": []
+ },
+ "GET /models": {
+  "n": 11,
+  "first": {
+   "model_id": "dm_A",
+   "disease": "Diyabet (teşhis edilmemiş)",
+   "disease_key": "diabetes",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "sbp_1_mmhg",
+     "sbp_2_mmhg",
+     "sbp_3_mmhg",
+     "dbp_1_mmhg",
+     "dbp_2_mmhg",
+     "dbp_3_mmhg",
+     "told_hypertension",
+     "family_hx_diabetes",
+     "recreational_activity",
+     "smoking_status",
+     "told_diabetes"
+    ],
+    "conditional": [
+     "on_bp_medication",
+     "gestational_diabetes_hx",
+     "pregnant",
+     "on_insulin",
+     "on_diabetes_pills"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Farkında olmayan erişkinde tek ziyaret ölçümüyle HbA1c ≥ 6,5% veya (açlık alt örnekleminde) FPG ≥ 126 mg/dL olması (teşhis edilmemiş diyabet; mevcut durum).",
+   "population": "NHANES ≥20 yaş, gebe değil, diyabet tanısı/ilacı yok (DIQ010≠1, insülin/hap yok), HbA1c ölçülmüş. Prevalans ≈ %4,4.",
+   "missing_input_rule": "ZORUNLU: 16 feature (gdm: erkek için otomatik 0). Kadında GDM yanıtı yoksa tahmin yok. Diyabet tanısı/ilacı varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN (varsayım yok).",
+   "evidence": {
+    "highest_tier": "iç test (NHANES içi; zamansal değil; PREVIOUSLY_EXPOSED_PERSONS başka hedef; diyabet hedefinde yeni kişiler)",
+    "research_target_note": "Hiçbir eşikte sağlanmadı (P 0,09–0,12; %4,4 prevalansta yapısal olarak zor). Birincil eşikte Recall ≥ 0,75 testte korunmadı (0,733).",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XLII (NHANES G 2011–12 + H 2013–14, kilitli tek sefer)",
+      "n": 8895,
+      "n_pos": 389,
+      "precision": {
+       "value": 0.103,
+       "ci95": [
+        0.092,
+        0.115
+       ]
+      },
+      "recall": {
+       "value": 0.733,
+       "ci95": [
+        0.687,
+        0.774
+       ]
+      },
+      "fpr": {
+       "value": 0.292,
+       "ci95": [
+        0.282,
+        0.302
+       ]
+      },
+      "auc": {
+       "value": 0.8,
+       "ci95": [
+        0.781,
+        0.819
+       ]
+      },
+      "npv": 0.983,
+      "delta_auc_vs_ADA": {
+       "value": 0.042,
+       "ci95": [
+        0.028,
+        0.055
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Tarama sıralayıcısı; P ≈ 0,10: pozitif yönlendirilenlerin ~%10'u gerçekten pozitif. Kişilerin ≈ %1/3'ü yönlendiriliyor. NPV 0,983.",
+    "Etiket tek ziyaret ölçümüdür; ADA doğrulama testi yok. FPG yalnız açlık alt örnekleminde (%45) ölçülmüş.",
+    "Bağımsız (NHANES dışı) dış doğrulama ve zamansal olmayan iç test. ADA skoruna göre ΔAUC +0,042 (küçük).",
+    "Survey ağırlığı/PSU/strata kullanılmadı. ADA fiziksel aktivite maddesi operasyonel; ADA GDM'li güncel formu BULUNAMADI.",
+    "\"Diğer/çok ırklı\" grupta tüm kurallarda Recall düşük; <45 yaşta Recall 0,47–0,58.",
+    "Model yalnız diyabet TANISI almamış kişi için geçerli; tanılı/ilaç kullananlara uygulanmaz."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  "ids": [
+   "af_S4_DEVICE",
+   "cad_DEVICE",
+   "dm_A",
+   "dm_B",
+   "anemia_LR16",
+   "copd_S4_DEVICE",
+   "htn_M1",
+   "fibrosis_final",
+   "osteo_final",
+   "ckd_A",
+   "ckd_B"
+  ]
+ },
+ "GET /schema": {
+  "n_fields": 78,
+  "example_field": {
+   "label_tr": "Açlık plazma glukozu (≥8 saat)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    30,
+    800
+   ],
+   "form_input": true
+  },
+  "example_units": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 18.016"
+   }
+  ],
+  "extra_eligibility": []
+ },
+ "POST /predict": {
+  "form_only": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 sağlayan en yüksek eşik"
+      },
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl"
+      ],
+      "missing_fields": [
+       "hba1c_pct",
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+      },
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "form_plus_labs_units": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false,
+     "total_chol_mgdl": {
+      "value": 5.2,
+      "unit": "mmol/L"
+     },
+     "hdl_mgdl": 55,
+     "tg_mgdl": 120,
+     "alt_ul": 22,
+     "ast_ul": 24,
+     "ggt_ul": 25,
+     "alp_ul": 70,
+     "albumin_gdl": 4.3,
+     "platelets_k_ul": 250,
+     "uric_acid_mgdl": 5.0,
+     "glucose_serum_mgdl": 95,
+     "hba1c_pct": 5.3,
+     "hemoglobin_gdl": 13.5,
+     "creatinine_mgdl": {
+      "value": 70,
+      "unit": "µmol/L"
+     },
+     "urine_albumin_mgl": 8.0,
+     "urine_creatinine_mgdl": 110
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_B",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 sağlayan en yüksek eşik"
+      },
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "hba1c_pct"
+        ],
+        "message_tr": "Diyabet hedefini tanımlayan ölçüm girildi (HbA1c / açlık plazma glukozu). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ]
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "hemoglobin_gdl"
+        ],
+        "message_tr": "Anemi hedefini tanımlayan hemoglobin değeri girildi. Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ]
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.75_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_B",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+      },
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "creatinine_mgdl",
+         "urine_albumin_mgl",
+         "urine_creatinine_mgdl"
+        ],
+        "message_tr": "Böbrek hedefini tanımlayan ölçüm girildi (kreatinin → eGFR ve/veya idrar albümin/kreatinin → UACR). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ]
+     }
+    ],
+    "unit_conversion_notes": [
+     "total_chol_mgdl: 5.2 mmol/L -> 201.084 mg/dL (x * 38.67)",
+     "creatinine_mgdl: 70 µmol/L -> 0.791855 mg/dL (x / 88.4)"
+    ],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "race_missing": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): race_ethnicity",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "race_ethnicity"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "race_ethnicity",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): race_ethnicity, hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "race_ethnicity",
+       "hba1c_pct",
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): race_ethnicity",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "race_ethnicity"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "race_ethnicity",
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "unknown_category": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "sometimes",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "şemada olmayan kategori: smoking_status='sometimes'"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [
+       {
+        "field": "smoking_status",
+        "value": "'sometimes'"
+       }
+      ],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml",
+       "şemada olmayan kategori: smoking_status='sometimes'"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [
+       {
+        "field": "smoking_status",
+        "value": "'sometimes'"
+       }
+      ],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl",
+       "şemada olmayan kategori: smoking_status='sometimes'"
+      ],
+      "missing_fields": [
+       "hba1c_pct",
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [
+       {
+        "field": "smoking_status",
+        "value": "'sometimes'"
+       }
+      ],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "ABSTAIN",
+      "reasons": [
+       "şemada olmayan kategori: smoking_status='sometimes'"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [
+       {
+        "field": "smoking_status",
+        "value": "'sometimes'"
+       }
+      ],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "şemada olmayan kategori: smoking_status='sometimes'"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [
+       {
+        "field": "smoking_status",
+        "value": "'sometimes'"
+       }
+      ],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "target_defining_inputs": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 152,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 150,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 149,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false,
+     "hba1c_pct": 6.9
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 sağlayan en yüksek eşik"
+      },
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "hba1c_pct"
+        ],
+        "message_tr": "Diyabet hedefini tanımlayan ölçüm girildi (HbA1c / açlık plazma glukozu). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl"
+      ],
+      "missing_fields": [
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "sbp_1_mmhg",
+         "dbp_1_mmhg",
+         "sbp_2_mmhg",
+         "dbp_2_mmhg",
+         "sbp_3_mmhg",
+         "dbp_3_mmhg"
+        ],
+        "message_tr": "Ölçülen tansiyon ortalaması ≥ 140/90 mmHg (hipertansiyon hedefini tanımlar). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ]
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+      },
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "glucose_serum_mgdl",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "out_of_range_422": {
+   "request": {
+    "fields": {
+     "age_years": 150,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false
+    }
+   },
+   "http_status": 422,
+   "response": {
+    "detail": [
+     {
+      "loc": [
+       "fields",
+       "age_years"
+      ],
+      "msg": "age_years=150 yıl makul aralık dışında [18, 120]"
+     }
+    ],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "pregnancy_unknown": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": "unknown",
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "gebelik durumu \"bilmiyorum\": popülasyon \"gebe değil\" doğrulanamıyor (katı yorum)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "gebelik durumu \"bilmiyorum\": popülasyon \"gebe değil\" doğrulanamıyor (katı yorum)",
+       "eksik zorunlu alan(lar): hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl"
+      ],
+      "missing_fields": [
+       "hba1c_pct",
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "gebelik durumu \"bilmiyorum\": popülasyon \"gebe değil\" doğrulanamıyor (katı yorum)",
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "gebelik durumu \"bilmiyorum\": popülasyon \"gebe değil\" doğrulanamıyor (katı yorum)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "undiagnosed_on_pills": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false,
+     "on_diabetes_pills": true,
+     "on_insulin": false
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): cad_chest_pain_type, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
+      ],
+      "missing_fields": [
+       "cad_chest_pain_type",
+       "total_chol_mgdl",
+       "glucose_fasting_mgdl",
+       "cad_resting_ecg",
+       "cad_max_hr_bpm",
+       "cad_exercise_angina",
+       "cad_st_depression_mm",
+       "cad_st_slope"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "diyabet ilacı/insülin kullanımı: eğitimde tanısız ama ilaç kullananlar dışlandı"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "NOT_APPLICABLE",
+       "missing_fields": []
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl"
+      ],
+      "missing_fields": [
+       "hba1c_pct",
+       "total_chol_mgdl",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, tg_mgdl, hdl_mgdl"
+      ],
+      "missing_fields": [
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "tg_mgdl",
+       "hdl_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "Recall>=0.85_max_esik"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_ALTI",
+       "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "havuzlu OOF Recall>=0.75 en yüksek eşik"
+      },
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "total_chol_mgdl",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "ambiguous_unit_422": {
+   "request": {
+    "fields": {
+     "age_years": 55,
+     "sex": "female",
+     "pregnant": false,
+     "race_ethnicity": "nh_white",
+     "height_cm": 165,
+     "weight_kg": 72,
+     "waist_cm": 90,
+     "sbp_1_mmhg": 128,
+     "dbp_1_mmhg": 80,
+     "sbp_2_mmhg": 126,
+     "dbp_2_mmhg": 78,
+     "sbp_3_mmhg": 124,
+     "dbp_3_mmhg": 79,
+     "smoking_status": "never",
+     "alcohol_drinks_per_day": 0.2,
+     "told_hypertension": false,
+     "told_diabetes": false,
+     "family_hx_diabetes": true,
+     "gestational_diabetes_hx": false,
+     "recreational_activity": true,
+     "hx_coronary_disease": false,
+     "hx_heart_failure": false,
+     "hx_stroke": false,
+     "told_weak_failing_kidneys": false,
+     "glucocorticoid_ge1month": false,
+     "fracture_hip": false,
+     "fracture_wrist": false,
+     "fracture_spine": false,
+     "fracture_after_age20": false,
+     "parent_hip_fracture": false,
+     "menses_absent_12m": true,
+     "age_last_period_years": 50,
+     "hrt_ever": false,
+     "glucose_fasting_mgdl": 5.4
+    }
+   },
+   "http_status": 422,
+   "response": {
+    "detail": [
+     {
+      "loc": [
+       "fields",
+       "glucose_fasting_mgdl"
+      ],
+      "msg": "glucose_fasting_mgdl=5.4 mg/dL makul aralık dışında [30, 800]"
+     }
+    ],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  },
+  "cad_clinical": {
+   "request": {
+    "fields": {
+     "age_years": 58,
+     "sex": "male",
+     "cad_chest_pain_type": "asymptomatic",
+     "sbp_1_mmhg": 140,
+     "total_chol_mgdl": 230,
+     "glucose_fasting_mgdl": 100,
+     "cad_resting_ecg": "normal",
+     "cad_max_hr_bpm": 150,
+     "cad_exercise_angina": false,
+     "cad_st_depression_mm": 1.0,
+     "cad_st_slope": "flat"
+    }
+   },
+   "http_status": 200,
+   "response": {
+    "results": [
+     {
+      "model_id": "af_S4_DEVICE",
+      "module_label": "ana modül",
+      "status": "NOT_APPLICABLE",
+      "reasons": [
+       "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)"
+      ],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "cad_DEVICE",
+      "module_label": "deneysel",
+      "status": "OK",
+      "reasons": [],
+      "missing_fields": [],
+      "unknown_categories": [],
+      "decision": {
+       "research_class": "ESIK_USTU",
+       "label_tr": "Eşik üstü — araştırma sınıflaması (klinik karar değildir)",
+       "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+       "threshold_rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+      },
+      "warnings": []
+     },
+     {
+      "model_id": "dm_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "diyabet tanısı sorusu yanıtsız: model yalnız tanısız kişide geçerli",
+       "eksik zorunlu alan(lar): told_diabetes, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_1_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, family_hx_diabetes, recreational_activity, smoking_status",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "told_diabetes",
+       "race_ethnicity",
+       "weight_kg",
+       "height_cm",
+       "waist_cm",
+       "sbp_2_mmhg",
+       "sbp_3_mmhg",
+       "dbp_1_mmhg",
+       "dbp_2_mmhg",
+       "dbp_3_mmhg",
+       "told_hypertension",
+       "family_hx_diabetes",
+       "recreational_activity",
+       "smoking_status"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "glucose_fasting_mgdl"
+        ],
+        "message_tr": "Diyabet hedefini tanımlayan ölçüm girildi (HbA1c / açlık plazma glukozu). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ],
+      "fallback_from": {
+       "model_id": "dm_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "told_diabetes",
+        "race_ethnicity",
+        "weight_kg",
+        "height_cm",
+        "waist_cm",
+        "sbp_2_mmhg",
+        "sbp_3_mmhg",
+        "dbp_1_mmhg",
+        "dbp_2_mmhg",
+        "dbp_3_mmhg",
+        "told_hypertension",
+        "family_hx_diabetes",
+        "recreational_activity",
+        "smoking_status",
+        "hdl_mgdl",
+        "tg_mgdl",
+        "alt_ul",
+        "uric_acid_mgdl"
+       ]
+      }
+     },
+     {
+      "model_id": "anemia_LR16",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): weight_kg, height_cm, waist_cm, smoking_status, hba1c_pct, alt_ul, ast_ul, hdl_mgdl, creatinine_mgdl, wbc_k_ul, rbc_m_ul, mcv_fl, rdw_pct, albumin_gdl"
+      ],
+      "missing_fields": [
+       "weight_kg",
+       "height_cm",
+       "waist_cm",
+       "smoking_status",
+       "hba1c_pct",
+       "alt_ul",
+       "ast_ul",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "wbc_k_ul",
+       "rbc_m_ul",
+       "mcv_fl",
+       "rdw_pct",
+       "albumin_gdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "copd_S4_DEVICE",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): weight_kg, height_cm, smoking_status, fev1_pre_ml, fvc_pre_ml"
+      ],
+      "missing_fields": [
+       "weight_kg",
+       "height_cm",
+       "smoking_status",
+       "fev1_pre_ml",
+       "fvc_pre_ml"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "htn_M1",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): race_ethnicity, weight_kg, height_cm, waist_cm, smoking_status, alcohol_drinks_per_day, told_diabetes, hba1c_pct, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "race_ethnicity",
+       "weight_kg",
+       "height_cm",
+       "waist_cm",
+       "smoking_status",
+       "alcohol_drinks_per_day",
+       "told_diabetes",
+       "hba1c_pct",
+       "hdl_mgdl",
+       "creatinine_mgdl",
+       "urine_albumin_mgl",
+       "urine_creatinine_mgdl"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [
+       {
+        "code": "TARGET_DEFINING_INPUT",
+        "fields": [
+         "sbp_1_mmhg"
+        ],
+        "message_tr": "Ölçülen tansiyon ortalaması ≥ 140/90 mmHg (hipertansiyon hedefini tanımlar). Bu durumda model yerine doğrudan klinik eşik kullanın."
+       }
+      ]
+     },
+     {
+      "model_id": "fibrosis_final",
+      "module_label": "ana modül",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): weight_kg, height_cm, waist_cm, alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, told_diabetes, tg_mgdl, hdl_mgdl, alcohol_drinks_per_day"
+      ],
+      "missing_fields": [
+       "weight_kg",
+       "height_cm",
+       "waist_cm",
+       "alt_ul",
+       "ast_ul",
+       "ggt_ul",
+       "alp_ul",
+       "albumin_gdl",
+       "platelets_k_ul",
+       "glucose_serum_mgdl",
+       "hba1c_pct",
+       "told_diabetes",
+       "tg_mgdl",
+       "hdl_mgdl",
+       "alcohol_drinks_per_day"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "osteo_final",
+      "module_label": "araştırma modülü",
+      "status": "ABSTAIN",
+      "reasons": [
+       "eksik zorunlu alan(lar): weight_kg, height_cm, smoking_status, alcohol_drinks_per_day, glucocorticoid_ge1month, fracture_hip, fracture_wrist, fracture_spine, fracture_after_age20, parent_hip_fracture"
+      ],
+      "missing_fields": [
+       "weight_kg",
+       "height_cm",
+       "smoking_status",
+       "alcohol_drinks_per_day",
+       "glucocorticoid_ge1month",
+       "fracture_hip",
+       "fracture_wrist",
+       "fracture_spine",
+       "fracture_after_age20",
+       "parent_hip_fracture"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": []
+     },
+     {
+      "model_id": "ckd_A",
+      "module_label": "deneysel",
+      "status": "ABSTAIN",
+      "reasons": [
+       "\"doktor zayıf/başarısız böbrek dedi mi\" yanıtsız: model yalnız farkında olmayan kişide geçerli",
+       "eksik zorunlu alan(lar): told_weak_failing_kidneys, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, told_diabetes, hx_coronary_disease, hx_heart_failure, hx_stroke, smoking_status",
+       "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
+      ],
+      "missing_fields": [
+       "told_weak_failing_kidneys",
+       "race_ethnicity",
+       "weight_kg",
+       "height_cm",
+       "waist_cm",
+       "sbp_2_mmhg",
+       "sbp_3_mmhg",
+       "dbp_2_mmhg",
+       "dbp_3_mmhg",
+       "told_hypertension",
+       "told_diabetes",
+       "hx_coronary_disease",
+       "hx_heart_failure",
+       "hx_stroke",
+       "smoking_status"
+      ],
+      "unknown_categories": [],
+      "decision": null,
+      "warnings": [],
+      "fallback_from": {
+       "model_id": "ckd_B",
+       "status": "ABSTAIN",
+       "missing_fields": [
+        "told_weak_failing_kidneys",
+        "race_ethnicity",
+        "weight_kg",
+        "height_cm",
+        "waist_cm",
+        "sbp_2_mmhg",
+        "sbp_3_mmhg",
+        "dbp_2_mmhg",
+        "dbp_3_mmhg",
+        "told_hypertension",
+        "told_diabetes",
+        "hx_coronary_disease",
+        "hx_heart_failure",
+        "hx_stroke",
+        "smoking_status",
+        "glucose_serum_mgdl",
+        "hba1c_pct",
+        "hdl_mgdl",
+        "hemoglobin_gdl"
+       ]
+      }
+     }
+    ],
+    "unit_conversion_notes": [],
+    "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırmasıdır, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+    "clinical_probability_eligibility": false
+   }
+  }
+ },
+ "ecg_af_example": {
+  "request": {
+   "header_file": "00165_hr.hea",
+   "signal_file": "00165_hr.dat",
+   "age_years": 60,
+   "sex": "male"
+  },
+  "response": {
+   "status": "OK",
+   "decision": {
+    "research_class": "ESIK_ALTI",
+    "label_tr": "Eşik altı — araştırma sınıflaması (klinik karar değildir)",
+    "threshold": "birincil donmuş eşik (registry; değiştirilmez)",
+    "threshold_rule": "BULUNAMADI (frozen_model_manifest kural metni taşımıyor; eşik değeri manifestte dondurulmuş)"
+   },
+   "reasons": [],
+   "pipeline": {
+    "version": "AF-ECGDELI-OCTAVE-v1",
+    "pre_step": "ilk 10 sn (Phase XXIX/XXXIII read_first10s, birebir)",
+    "record_samples": 5000,
+    "window": "ilk 10 sn (5000 örnek)",
+    "octave_seconds": 4.272320985794067,
+    "wall_seconds": 6.938008999975864,
+    "features_ms": {
+     "RR_Mean_Global": 912.0,
+     "RR_Mean_Global_iqr": 38.0,
+     "QRS_Dur_Global": 175.0,
+     "QRS_Dur_Global_iqr": 15.5,
+     "PR_Int_Global": 258.0,
+     "PR_Int_Global_iqr": 54.0,
+     "P_Dur_Global": 198.0,
+     "P_Dur_Global_iqr": 47.0,
+     "QT_Int_Global": 455.0,
+     "QT_Int_Global_iqr": 22.5
+    }
+   }
+  }
+ },
+ "GET /health after": {
+  "request_stats": {
+   "/health": {
+    "count": 2,
+    "status_counts": {
+     "200": 2
+    },
+    "mean_seconds": 0.0019
+   },
+   "/models": {
+    "count": 1,
+    "status_counts": {
+     "200": 1
+    },
+    "mean_seconds": 0.0027
+   },
+   "/schema": {
+    "count": 1,
+    "status_counts": {
+     "200": 1
+    },
+    "mean_seconds": 0.0018
+   },
+   "/predict": {
+    "count": 10,
+    "status_counts": {
+     "200": 8,
+     "422": 2
+    },
+    "mean_seconds": 0.0113
+   },
+   "/ecg/af": {
+    "count": 11,
+    "status_counts": {
+     "200": 11
+    },
+    "mean_seconds": 6.8349
+   }
+  }
+ },
+ "non_loopback_probe": {
+  "ip": "192.168.1.199",
+  "result": "bağlantı reddedildi/ulaşılamadı (TimeoutError)"
+ }
+}

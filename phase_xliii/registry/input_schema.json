@@ -1,0 +1,3101 @@
+{
+ "schema_version": "1.0",
+ "phase": "XLIII",
+ "created_utc": "2026-11-19",
+ "policy": {
+  "units": "Her alan tek birimde tanımlıdır (fields.*.unit). Kullanıcı farklı birim girerse arayüz unit_conversions ile çevirir; birim belirsiz ve değer aralık dışıysa tahmin üretilmez.",
+  "missing": "Hiçbir model için eksik girdi tahminle doldurulmaz. Eksik zorunlu alan → o model ABSTAIN (tahmin üretmez). Dondurulmuş imputer uygulama tarafında kullanılmaz. Yapısal atlama kuralları (ör. erkekte gdm=0, hipertansiyon yoksa htn_med=0) eğitimdeki tanımın aynısıdır ve eksik sayılmaz.",
+  "categorical_strings": "Kategorik modeller string biçimini birebir ister (ör. CAD '1.0'; MI HA__Global '2.0'). Dönüşüm tablosu (transforms) tek kaynaktır; sessiz tür dönüşümü ('1' → '1.0') YAPILMAZ, dönüşüm tablosuyla üretilir.",
+  "range_basis": "plausible_range fiziksel olarak makul giriş sınırıdır (uygulama doğrulaması); modelin eğitim kapsamı değildir. Model popülasyon sınırları models.json içinde (population, allowed_range).",
+  "applicability": "Her model yalnız kendi hedef popülasyonunda geçerlidir (models.json: population). Hedefi tanımlayan değer (ör. HbA1c/glukoz diyabet için, ölçülen tansiyon HTN için) biliniyorsa doğrudan klinik eşik kullanılmalıdır.",
+  "structural_blanks": "Yapısal boşluklarda (ör. osteo age_last_period: erkek veya adeti süren kadın) modelin kendi pipeline imputer'ı eğitimdeki gibi çalışır; kullanıcının yanıtlamadığı alanlar için ÇALIŞMAZ (o durumda model ABSTAIN eder).",
+  "optional_race": "race_ethnicity isteğe bağlı sorulur; yanıt yoksa race_ethnicity kullanan modeller (dm_A, dm_B, ckd_A, ckd_B, htn_M1) ABSTAIN eder; varsayılan sınıf atanmaz.",
+  "clinical_probability_eligibility": false
+ },
+ "fields": {
+  "age_years": {
+   "label_tr": "Yaş",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "yıl",
+   "plausible_range": [
+    18,
+    120
+   ],
+   "note": "Model popülasyon aralıkları modele göre daralır (models.json). NHANES tabanlı modellerde 80 üstü 80 olarak kırpılır (age_cap80)."
+  },
+  "sex": {
+   "label_tr": "Biyolojik cinsiyet",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "female",
+    "male"
+   ],
+   "note": "Modeller cinsiyeti kendi kodlamasıyla alır (dönüşüm tablosu)."
+  },
+  "race_ethnicity": {
+   "label_tr": "Irk/etnik köken (NHANES RIDRETH1 sınıfları)",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "mexican_american",
+    "other_hispanic",
+    "nh_white",
+    "nh_black",
+    "other_incl_multi"
+   ],
+   "note": "Yalnız NHANES tabanlı DM ve KBH modelleri (ve HTN) kullanır. Referans: nh_white. İSTEĞE BAĞLI sorulur (kullanıcı kararı, Phase XLIII sonrası): yanıt yoksa dm_A/dm_B/ckd_A/ckd_B ve htn_M1 ABSTAIN eder; varsayılan/referans sınıf ATANMAZ."
+  },
+  "height_cm": {
+   "label_tr": "Boy",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "cm",
+   "plausible_range": [
+    100,
+    230
+   ]
+  },
+  "weight_kg": {
+   "label_tr": "Kilo",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "kg",
+   "plausible_range": [
+    25,
+    300
+   ]
+  },
+  "waist_cm": {
+   "label_tr": "Bel çevresi",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "cm",
+   "plausible_range": [
+    40,
+    200
+   ],
+   "note": "NHANES protokolü: iliak krest üstü, ölçülü (kendi beyanı değil)."
+  },
+  "sbp_1_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 1",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır."
+  },
+  "dbp_1_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 1",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ]
+  },
+  "sbp_2_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 2",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır."
+  },
+  "dbp_2_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 2",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ]
+  },
+  "sbp_3_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 3",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır."
+  },
+  "dbp_3_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 3",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ]
+  },
+  "smoking_status": {
+   "label_tr": "Sigara durumu",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "never",
+    "former",
+    "current"
+   ],
+   "note": "never: yaşamında ≥100 sigara içmemiş; current: şu an içiyor; former: bıraktı."
+  },
+  "alcohol_drinks_per_day": {
+   "label_tr": "Ortalama alkol (içki/gün, son 12 ay)",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "içki/gün",
+   "plausible_range": [
+    0,
+    30
+   ],
+   "note": "NHANES ALQ121×ALQ130/365 tanımı: içme sıklığı (gün/yıl) × içilen gün başına içki sayısı / 365; hiç içmeyen 0."
+  },
+  "told_hypertension": {
+   "label_tr": "Doktor \"yüksek tansiyon\" dedi mi",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "on_bp_medication": {
+   "label_tr": "Tansiyon ilacı kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "told_hypertension = true"
+  },
+  "told_diabetes": {
+   "label_tr": "Doktor \"diyabet\" dedi mi (sınırda = hayır)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "on_insulin": {
+   "label_tr": "İnsülin kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "told_diabetes = true"
+  },
+  "on_diabetes_pills": {
+   "label_tr": "Diyabet hapı kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "told_diabetes = true"
+  },
+  "hx_coronary_disease": {
+   "label_tr": "Koroner kalp hastalığı / anjina / MI öyküsü (herhangi biri)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "hx_heart_failure": {
+   "label_tr": "Kalp yetmezliği öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "hx_stroke": {
+   "label_tr": "İnme öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "family_hx_diabetes": {
+   "label_tr": "Yakın akrabada diyabet (NHANES MCQ300C)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "gestational_diabetes_hx": {
+   "label_tr": "Gebelikte diyabet söylendi mi (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female"
+  },
+  "recreational_activity": {
+   "label_tr": "Haftalık orta/şiddetli rekreasyonel fiziksel aktivite var mı (NHANES PAQ650/PAQ665)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "glucocorticoid_ge1month": {
+   "label_tr": "≥1 ay neredeyse her gün prednizon/kortizon kullandı mı (OSQ130)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "fracture_hip": {
+   "label_tr": "Kalça kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "fracture_wrist": {
+   "label_tr": "El bileği kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "fracture_spine": {
+   "label_tr": "Omurga kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "fracture_after_age20": {
+   "label_tr": "20 yaş sonrası herhangi kırık (OSQ080)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "parent_hip_fracture": {
+   "label_tr": "Ebeveyn kalça kırığı",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "menses_absent_12m": {
+   "label_tr": "Son 12 ayda adet yok (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female"
+  },
+  "hrt_ever": {
+   "label_tr": "Hiç hormon tedavisi (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female"
+  },
+  "age_last_period_years": {
+   "label_tr": "Son adet yaşı",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "yıl",
+   "plausible_range": [
+    10,
+    70
+   ],
+   "ask_when": "sex = female ve menses_absent_12m = true",
+   "note": "Eğitimde yalnız kadınlarda ve adeti kesilmişlerde doluydu; diğerlerinde yapısal olarak boş."
+  },
+  "hba1c_pct": {
+   "label_tr": "HbA1c",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "%",
+   "plausible_range": [
+    3.0,
+    18.0
+   ]
+  },
+  "glucose_serum_mgdl": {
+   "label_tr": "Serum glukoz (açlık şartı yok)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    30,
+    800
+   ]
+  },
+  "glucose_fasting_mgdl": {
+   "label_tr": "Açlık plazma glukozu (≥8 saat)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    30,
+    800
+   ]
+  },
+  "total_chol_mgdl": {
+   "label_tr": "Total kolesterol",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    50,
+    600
+   ]
+  },
+  "hdl_mgdl": {
+   "label_tr": "HDL kolesterol",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    5,
+    200
+   ]
+  },
+  "tg_mgdl": {
+   "label_tr": "Trigliserit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    10,
+    5000
+   ]
+  },
+  "alt_ul": {
+   "label_tr": "ALT",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    3,
+    1000
+   ]
+  },
+  "ast_ul": {
+   "label_tr": "AST",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    3,
+    1000
+   ]
+  },
+  "ggt_ul": {
+   "label_tr": "GGT",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    1,
+    2000
+   ]
+  },
+  "alp_ul": {
+   "label_tr": "ALP",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    10,
+    1500
+   ]
+  },
+  "albumin_gdl": {
+   "label_tr": "Serum albümin",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "g/dL",
+   "plausible_range": [
+    1.0,
+    6.5
+   ]
+  },
+  "platelets_k_ul": {
+   "label_tr": "Trombosit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^3/µL",
+   "plausible_range": [
+    10,
+    1500
+   ]
+  },
+  "uric_acid_mgdl": {
+   "label_tr": "Ürik asit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    0.5,
+    20
+   ]
+  },
+  "creatinine_mgdl": {
+   "label_tr": "Serum kreatinin (standardize/enzimatik ölçek)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    0.2,
+    15
+   ]
+  },
+  "urine_albumin_mgl": {
+   "label_tr": "İdrar albümini",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/L",
+   "plausible_range": [
+    0.1,
+    10000
+   ]
+  },
+  "urine_creatinine_mgdl": {
+   "label_tr": "İdrar kreatinini",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    5,
+    600
+   ]
+  },
+  "wbc_k_ul": {
+   "label_tr": "Lökosit (WBC)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^3/µL",
+   "plausible_range": [
+    0.5,
+    100
+   ]
+  },
+  "rbc_m_ul": {
+   "label_tr": "Eritrosit (RBC)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^6/µL",
+   "plausible_range": [
+    1.0,
+    9.0
+   ]
+  },
+  "mcv_fl": {
+   "label_tr": "MCV",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "fL",
+   "plausible_range": [
+    50,
+    140
+   ]
+  },
+  "rdw_pct": {
+   "label_tr": "RDW",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "%",
+   "plausible_range": [
+    8,
+    35
+   ]
+  },
+  "hemoglobin_gdl": {
+   "label_tr": "Hemoglobin",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "g/dL",
+   "plausible_range": [
+    3,
+    22
+   ]
+  },
+  "rip3_pgml": {
+   "label_tr": "RIP3 (özel ELISA)",
+   "type": "numeric",
+   "input_source": "arastirma_assay",
+   "unit": "pg/mL",
+   "plausible_range": [
+    0,
+    5000
+   ],
+   "note": "Rutin klinik test DEĞİL; özel ELISA. Aralık geçici (eğitim ort. 394, SD 235 pg/mL — scaler istatistiği); assay uyumu BULUNAMADI."
+  },
+  "fev1_pre_ml": {
+   "label_tr": "Bronkodilatör ÖNCESİ FEV1",
+   "type": "numeric",
+   "input_source": "spirometri",
+   "unit": "mL",
+   "plausible_range": [
+    200,
+    7000
+   ],
+   "note": "ATS A/B kalite; birim mL (L değil)."
+  },
+  "fvc_pre_ml": {
+   "label_tr": "Bronkodilatör ÖNCESİ FVC",
+   "type": "numeric",
+   "input_source": "spirometri",
+   "unit": "mL",
+   "plausible_range": [
+    300,
+    9000
+   ],
+   "note": "fev1_pre_ml ≤ fvc_pre_ml doğrulanır."
+  },
+  "ecg_af_RR_Mean_Global": {
+   "label_tr": "EKG-ECGDeli: RR aralığı ortalaması",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    300,
+    2000
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_RR_Mean_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: RR IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    1500
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_QRS_Dur_Global": {
+   "label_tr": "EKG-ECGDeli: QRS süresi (lead’ler arası maksimum)",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    40,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_QRS_Dur_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: QRS IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    300
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_PR_Int_Global": {
+   "label_tr": "EKG-ECGDeli: PR aralığı",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    50,
+    600
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_PR_Int_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: PR IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_P_Dur_Global": {
+   "label_tr": "EKG-ECGDeli: P süresi",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    20,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_P_Dur_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: P IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    300
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_QT_Int_Global": {
+   "label_tr": "EKG-ECGDeli: QT aralığı",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    200,
+    900
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_af_QT_Int_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: QT IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz."
+  },
+  "ecg_ptbxl_ecgdeli_168": {
+   "label_tr": "PTB-XL+ ECGDeli 168 feature grubu (MI modeli)",
+   "type": "device",
+   "input_source": "ecg_pipeline_YOK",
+   "note": "Lead bazlı Q/R/S/T/P/ST genlikleri (mV) ve süreler (ms). Uygulama için üretecek pipeline YOK (MI-ECGDELI-OCTAVE-v1 yazılmadı; phase_xxxviii/PHASE_XXXVIII_REPORT.md §5)."
+  },
+  "cad_chest_pain_type": {
+   "label_tr": "Göğüs ağrısı tipi (UCI cp)",
+   "type": "categorical",
+   "input_source": "klinik_degerlendirme",
+   "categories": [
+    "typical_angina",
+    "atypical_angina",
+    "non_anginal",
+    "asymptomatic"
+   ]
+  },
+  "cad_resting_ecg": {
+   "label_tr": "İstirahat EKG (UCI restecg)",
+   "type": "categorical",
+   "input_source": "klinik_degerlendirme",
+   "categories": [
+    "normal",
+    "st_t_abnormality",
+    "lv_hypertrophy"
+   ]
+  },
+  "cad_max_hr_bpm": {
+   "label_tr": "Efor testinde ulaşılan maksimum kalp hızı",
+   "type": "numeric",
+   "input_source": "efor_testi",
+   "unit": "atım/dk",
+   "plausible_range": [
+    20,
+    260
+   ]
+  },
+  "cad_exercise_angina": {
+   "label_tr": "Efor anjinası var mı",
+   "type": "boolean",
+   "input_source": "efor_testi",
+   "categories": [
+    true,
+    false
+   ]
+  },
+  "cad_st_depression_mm": {
+   "label_tr": "Efor ST depresyonu (oldpeak)",
+   "type": "numeric",
+   "input_source": "efor_testi",
+   "unit": "mm",
+   "plausible_range": [
+    -10,
+    20
+   ]
+  },
+  "cad_st_slope": {
+   "label_tr": "Efor ST eğimi",
+   "type": "categorical",
+   "input_source": "efor_testi",
+   "categories": [
+    "upsloping",
+    "flat",
+    "downsloping"
+   ]
+  }
+ },
+ "transforms": {
+  "identity": "Değer olduğu gibi (birim: kayıtlı birim).",
+  "age_cap80": "min(age_years, 80). NHANES yaşı 80+ için 80 kodlar (eğitim dağılımı); 80 üstü modele 80 olarak girer.",
+  "age_cap89_ptbxl": "Yaş ≥ 90 ise tahmin üretilmez (PTB-XL >89 yaşları gizlilik nedeniyle 300 kodlu, eğitimde eksik sayıldı).",
+  "bmi_kgm2": "weight_kg / (height_cm/100)^2.",
+  "sex_str": "sex → 'female' | 'male' (string, birebir).",
+  "sex_male01": "sex = male → 1.0, female → 0.0.",
+  "sex_female01": "sex = female → 1.0, male → 0.0.",
+  "sex_ptbxl01": "sex = male → 0, female → 1 (PTB-XL kodu).",
+  "race_mexam": "race_ethnicity = mexican_american → 1.0 değilse 0.0.",
+  "race_othhisp": "race_ethnicity = other_hispanic → 1.0 değilse 0.0.",
+  "race_black": "race_ethnicity = nh_black → 1.0 değilse 0.0.",
+  "race_other": "race_ethnicity = other_incl_multi → 1.0 değilse 0.0 (referans nh_white: dördü de 0).",
+  "race_str": "race_ethnicity → string kategori (birebir).",
+  "sbp_mean_all": "sbp_1..3 aritmetik ortalaması (DM eğitimi: BPX okumalarının ortalaması, 1–4 okuma; uygulama 3 okuma ister).",
+  "dbp_mean_all": "dbp_1..3 aritmetik ortalaması.",
+  "sbp_mean_23": "sbp_2 ve sbp_3 ortalaması (KBH eğitimi: ilk okuma atılır).",
+  "dbp_mean_23": "dbp_2 ve dbp_3 ortalaması.",
+  "smoke_current01": "smoking_status = current → 1.0, aksi 0.0.",
+  "smoke_former01": "smoking_status = former → 1.0, aksi 0.0 (never → 0.0).",
+  "smoking_str": "smoking_status → 'current' | 'former' | 'never' (string).",
+  "smoker_yesno": "smoking_status = current → 'yes'; never veya former → 'no' (eğitim tanımı: şu an içen).",
+  "bool01": "true → 1.0, false → 0.0.",
+  "bool_yesno": "true → 'yes', false → 'no' (string).",
+  "htn_dx_med": "told_hypertension veya on_bp_medication true ise 1.0, değilse 0.0.",
+  "gdm_rule": "sex = male → 0.0 (eğitimde yapısal 0); female → gestational_diabetes_hx (bool01). Kadında yanıt yoksa tahmin üretilmez.",
+  "htn_med_rule": "told_hypertension = false → 0.0 (yapısal atlama); true → bool01(on_bp_medication).",
+  "dm_insulin_rule": "told_diabetes = false → 0.0 (yapısal atlama); true → bool01(on_insulin).",
+  "dm_pills_rule": "told_diabetes = false → 0.0 (yapısal atlama); true → bool01(on_diabetes_pills).",
+  "diabetes_yesno": "told_diabetes veya on_insulin veya on_diabetes_pills true ise 'yes', değilse 'no'.",
+  "alcohol_ge3_yesno": "alcohol_drinks_per_day ≥ 3 → 'yes', değilse 'no'.",
+  "ln_clip1": "ln(max(x, 1)) (x: model biriminde ham değer; DM eğitimindeki np.log(x.clip(lower=1)) ile aynı).",
+  "egfr_ckdepi2021": "CKD-EPI 2021 (ırksız): 142 × min(Scr/κ,1)^α × max(Scr/κ,1)^−1,200 × 0,9938^yaş × 1,012[kadın]; κ = 0,7 (K) / 0,9 (E); α = −0,241 (K) / −0,302 (E); Scr mg/dL, yaş yıl (age_cap80 DEĞİL, ham yaş — XXXVII t1_data egfr_ckdepi2021(scr, age, female); eğitimde age ham NHANES yaşı yani ≤80).",
+  "uacr_log1p": "ln(1 + 100 × urine_albumin_mgl / urine_creatinine_mgdl) — UACR mg/g.",
+  "osteo_period_yesno": "female → bool_yesno(menses_absent_12m); male → 'na_male'.",
+  "osteo_hrt": "female → bool_yesno(hrt_ever); male → 'na_male'.",
+  "osteo_age_last_period": "female ve menses_absent_12m = true → age_last_period_years; aksi (erkek / adeti süren kadın) yapısal boş (null) — eğitimde de boştu, dondurulmuş imputer eğitimdeki gibi uygular.",
+  "alcohol_dpd": "identity (içki/gün).",
+  "fasting_gt120_strfloat": "glucose_fasting_mgdl > 120 → '1.0', değilse '0.0' (UCI fbs; açlık şartı zorunlu).",
+  "cad_sex_strfloat": "female → '0.0', male → '1.0' (UCI sex; string biçim ZORUNLU, bkz. phase_xlii/ERRATA_CAD_V2.md).",
+  "cad_cp_strfloat": "typical_angina '1.0' | atypical_angina '2.0' | non_anginal '3.0' | asymptomatic '4.0'.",
+  "cad_restecg_strfloat": "normal '0.0' | st_t_abnormality '1.0' | lv_hypertrophy '2.0'.",
+  "cad_exang_strfloat": "true '1.0' | false '0.0'.",
+  "cad_slope_strfloat": "upsloping '1.0' | flat '2.0' | downsloping '3.0'.",
+  "cad_trestbps": "sbp_1 (tek istirahat sistolik okuma, mmHg).",
+  "ecg_pipeline_output": "Kilitli AF pipeline çıktısı olduğu gibi (ms).",
+  "ptbxl_group": "ECGDeli 168 feature grubu (PTB-XL+ şemasıyla birebir; HA__Global string float kodu)."
+ },
+ "unit_conversions": [
+  {
+   "field": "glucose_serum_mgdl / glucose_fasting_mgdl",
+   "from_unit": "mmol/L",
+   "to_unit": "mg/dL",
+   "op": "x * 18.016",
+   "note": "ondalık ayraç ve birim karışıklığı için arayüz birim seçtirmeli"
+  },
+  {
+   "field": "total_chol_mgdl / hdl_mgdl",
+   "from_unit": "mmol/L",
+   "to_unit": "mg/dL",
+   "op": "x * 38.67"
+  },
+  {
+   "field": "tg_mgdl",
+   "from_unit": "mmol/L",
+   "to_unit": "mg/dL",
+   "op": "x * 88.57"
+  },
+  {
+   "field": "creatinine_mgdl",
+   "from_unit": "µmol/L",
+   "to_unit": "mg/dL",
+   "op": "x / 88.4"
+  },
+  {
+   "field": "uric_acid_mgdl",
+   "from_unit": "µmol/L",
+   "to_unit": "mg/dL",
+   "op": "x / 59.48"
+  },
+  {
+   "field": "hba1c_pct",
+   "from_unit": "mmol/mol (IFCC)",
+   "to_unit": "% (NGSP)",
+   "op": "x * 0.09148 + 2.152"
+  },
+  {
+   "field": "hemoglobin_gdl / albumin_gdl",
+   "from_unit": "g/L",
+   "to_unit": "g/dL",
+   "op": "x / 10"
+  },
+  {
+   "field": "height_cm",
+   "from_unit": "inç",
+   "to_unit": "cm",
+   "op": "x * 2.54"
+  },
+  {
+   "field": "weight_kg",
+   "from_unit": "lb",
+   "to_unit": "kg",
+   "op": "x * 0.45359237"
+  },
+  {
+   "field": "waist_cm",
+   "from_unit": "inç",
+   "to_unit": "cm",
+   "op": "x * 2.54"
+  },
+  {
+   "field": "fev1_pre_ml / fvc_pre_ml",
+   "from_unit": "L",
+   "to_unit": "mL",
+   "op": "x * 1000"
+  },
+  {
+   "field": "urine_albumin_mgl",
+   "from_unit": "mg/dL",
+   "to_unit": "mg/L",
+   "op": "x * 10"
+  },
+  {
+   "field": "wbc_k_ul / platelets_k_ul",
+   "from_unit": "10^9/L",
+   "to_unit": "10^3/µL",
+   "op": "x * 1 (sayısal aynı)"
+  },
+  {
+   "field": "rbc_m_ul",
+   "from_unit": "10^12/L",
+   "to_unit": "10^6/µL",
+   "op": "x * 1 (sayısal aynı)"
+  }
+ ],
+ "unit_conversion_note": "Dönüşümler yalnız arayüz katmanında yapılır; model her zaman kayıtlı model birimini görür. Birim belirsizse (ör. mg/dL mi mmol/L mi) değer aralık kontrolünden geçmiyorsa tahmin üretilmez (örn. glukoz 5.4 → mmol/L olasılığı: mg/dL aralığı 30–800 içinde kalmadığı için reddedilir).",
+ "derived_fields": {
+  "bmi_kgm2": "weight_kg / (height_cm/100)^2",
+  "bp_means": "sbp/dbp için 3 okumanın ortalaması (DM) veya 2. ve 3. okumanın ortalaması (KBH)",
+  "egfr": "CKD-EPI 2021 ırksız (creatinine_mgdl, age_years, sex)",
+  "uacr_mg_g": "100 × urine_albumin_mgl / urine_creatinine_mgdl"
+ },
+ "model_usage": {
+  "af_S4_DEVICE": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap89_ptbxl"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "RR_Mean_Global",
+    "input_field": "ecg_af_RR_Mean_Global",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "RR_Mean_Global_iqr",
+    "input_field": "ecg_af_RR_Mean_Global_iqr",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "QRS_Dur_Global",
+    "input_field": "ecg_af_QRS_Dur_Global",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "QRS_Dur_Global_iqr",
+    "input_field": "ecg_af_QRS_Dur_Global_iqr",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "PR_Int_Global",
+    "input_field": "ecg_af_PR_Int_Global",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "PR_Int_Global_iqr",
+    "input_field": "ecg_af_PR_Int_Global_iqr",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "P_Dur_Global",
+    "input_field": "ecg_af_P_Dur_Global",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "P_Dur_Global_iqr",
+    "input_field": "ecg_af_P_Dur_Global_iqr",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "QT_Int_Global",
+    "input_field": "ecg_af_QT_Int_Global",
+    "transform": "ecg_pipeline_output"
+   },
+   {
+    "model_feature": "QT_Int_Global_iqr",
+    "input_field": "ecg_af_QT_Int_Global_iqr",
+    "transform": "ecg_pipeline_output"
+   }
+  ],
+  "mi_model": [
+   {
+    "model_feature": "age",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PQ_Int_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "PR_Int_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Amp_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_DurFull_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "P_Dur_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "Q_Amp_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QRS_Dur_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntCorr_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_IntFramingham_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "QT_Int_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "R_Amp_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "RR_Mean_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "S_Amp_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Amp_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_I",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_II",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_III",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V1",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V2",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V3",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V4",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V5",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_V6",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_aVF",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_aVL",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_DurFull_aVR",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "T_Dur_Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "HA__Global",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   },
+   {
+    "model_feature": "ST_Elev_missing",
+    "input_field": "ecg_ptbxl_ecgdeli_168",
+    "transform": "ptbxl_group"
+   }
+  ],
+  "cad_DEVICE": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "cad_sex_strfloat"
+   },
+   {
+    "model_feature": "cp",
+    "input_field": "cad_chest_pain_type",
+    "transform": "cad_cp_strfloat"
+   },
+   {
+    "model_feature": "trestbps",
+    "input_field": "sbp_1_mmhg",
+    "transform": "cad_trestbps"
+   },
+   {
+    "model_feature": "chol",
+    "input_field": "total_chol_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "fbs",
+    "input_field": "glucose_fasting_mgdl",
+    "transform": "fasting_gt120_strfloat"
+   },
+   {
+    "model_feature": "restecg",
+    "input_field": "cad_resting_ecg",
+    "transform": "cad_restecg_strfloat"
+   },
+   {
+    "model_feature": "thalach",
+    "input_field": "cad_max_hr_bpm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "exang",
+    "input_field": "cad_exercise_angina",
+    "transform": "cad_exang_strfloat"
+   },
+   {
+    "model_feature": "oldpeak",
+    "input_field": "cad_st_depression_mm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "slope",
+    "input_field": "cad_st_slope",
+    "transform": "cad_slope_strfloat"
+   }
+  ],
+  "dm_A": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex_male",
+    "input_field": "sex",
+    "transform": "sex_male01"
+   },
+   {
+    "model_feature": "race_mexam",
+    "input_field": "race_ethnicity",
+    "transform": "race_mexam"
+   },
+   {
+    "model_feature": "race_othhisp",
+    "input_field": "race_ethnicity",
+    "transform": "race_othhisp"
+   },
+   {
+    "model_feature": "race_black",
+    "input_field": "race_ethnicity",
+    "transform": "race_black"
+   },
+   {
+    "model_feature": "race_other",
+    "input_field": "race_ethnicity",
+    "transform": "race_other"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "sbp",
+    "input_field": "sbp_1..3_mmhg",
+    "transform": "sbp_mean_all"
+   },
+   {
+    "model_feature": "dbp",
+    "input_field": "dbp_1..3_mmhg",
+    "transform": "dbp_mean_all"
+   },
+   {
+    "model_feature": "htn_dx_med",
+    "input_field": "told_hypertension+on_bp_medication",
+    "transform": "htn_dx_med"
+   },
+   {
+    "model_feature": "fam_dm",
+    "input_field": "family_hx_diabetes",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "gdm",
+    "input_field": "sex+gestational_diabetes_hx",
+    "transform": "gdm_rule"
+   },
+   {
+    "model_feature": "pa_rec",
+    "input_field": "recreational_activity",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "smoke_current",
+    "input_field": "smoking_status",
+    "transform": "smoke_current01"
+   },
+   {
+    "model_feature": "smoke_former",
+    "input_field": "smoking_status",
+    "transform": "smoke_former01"
+   }
+  ],
+  "dm_B": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex_male",
+    "input_field": "sex",
+    "transform": "sex_male01"
+   },
+   {
+    "model_feature": "race_mexam",
+    "input_field": "race_ethnicity",
+    "transform": "race_mexam"
+   },
+   {
+    "model_feature": "race_othhisp",
+    "input_field": "race_ethnicity",
+    "transform": "race_othhisp"
+   },
+   {
+    "model_feature": "race_black",
+    "input_field": "race_ethnicity",
+    "transform": "race_black"
+   },
+   {
+    "model_feature": "race_other",
+    "input_field": "race_ethnicity",
+    "transform": "race_other"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "sbp",
+    "input_field": "sbp_1..3_mmhg",
+    "transform": "sbp_mean_all"
+   },
+   {
+    "model_feature": "dbp",
+    "input_field": "dbp_1..3_mmhg",
+    "transform": "dbp_mean_all"
+   },
+   {
+    "model_feature": "htn_dx_med",
+    "input_field": "told_hypertension+on_bp_medication",
+    "transform": "htn_dx_med"
+   },
+   {
+    "model_feature": "fam_dm",
+    "input_field": "family_hx_diabetes",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "gdm",
+    "input_field": "sex+gestational_diabetes_hx",
+    "transform": "gdm_rule"
+   },
+   {
+    "model_feature": "pa_rec",
+    "input_field": "recreational_activity",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "smoke_current",
+    "input_field": "smoking_status",
+    "transform": "smoke_current01"
+   },
+   {
+    "model_feature": "smoke_former",
+    "input_field": "smoking_status",
+    "transform": "smoke_former01"
+   },
+   {
+    "model_feature": "tc",
+    "input_field": "total_chol_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hdl",
+    "input_field": "hdl_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "tg_log",
+    "input_field": "tg_mgdl",
+    "transform": "ln_clip1"
+   },
+   {
+    "model_feature": "alt_log",
+    "input_field": "alt_ul",
+    "transform": "ln_clip1"
+   },
+   {
+    "model_feature": "uric_acid",
+    "input_field": "uric_acid_mgdl",
+    "transform": "identity"
+   }
+  ],
+  "anemia_LR16": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "smoker",
+    "input_field": "smoking_status",
+    "transform": "smoker_yesno"
+   },
+   {
+    "model_feature": "hba1c",
+    "input_field": "hba1c_pct",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "alt",
+    "input_field": "alt_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "ast",
+    "input_field": "ast_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "tc",
+    "input_field": "total_chol_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hdl",
+    "input_field": "hdl_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "creatinine",
+    "input_field": "creatinine_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "wbc",
+    "input_field": "wbc_k_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "rbc",
+    "input_field": "rbc_m_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "mcv",
+    "input_field": "mcv_fl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "rdw",
+    "input_field": "rdw_pct",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "albumin",
+    "input_field": "albumin_gdl",
+    "transform": "identity"
+   }
+  ],
+  "copd_S4_DEVICE": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "smoker",
+    "input_field": "smoking_status",
+    "transform": "smoker_yesno"
+   },
+   {
+    "model_feature": "fev1_pre",
+    "input_field": "fev1_pre_ml",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "fvc_pre",
+    "input_field": "fvc_pre_ml",
+    "transform": "identity"
+   }
+  ],
+  "hf_S2_BASIC_LAB": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "smoker",
+    "input_field": "smoking_status",
+    "transform": "smoker_yesno"
+   },
+   {
+    "model_feature": "rip3",
+    "input_field": "rip3_pgml",
+    "transform": "identity"
+   }
+  ],
+  "htn_M1": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "race",
+    "input_field": "race_ethnicity",
+    "transform": "race_str"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "smoking",
+    "input_field": "smoking_status",
+    "transform": "smoking_str"
+   },
+   {
+    "model_feature": "alcohol_dpd",
+    "input_field": "alcohol_drinks_per_day",
+    "transform": "alcohol_dpd"
+   },
+   {
+    "model_feature": "diabetes",
+    "input_field": "told_diabetes+on_insulin+on_diabetes_pills",
+    "transform": "diabetes_yesno"
+   },
+   {
+    "model_feature": "hba1c",
+    "input_field": "hba1c_pct",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "tc",
+    "input_field": "total_chol_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hdl",
+    "input_field": "hdl_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "egfr",
+    "input_field": "creatinine_mgdl+age_years+sex",
+    "transform": "egfr_ckdepi2021"
+   },
+   {
+    "model_feature": "uacr_log",
+    "input_field": "urine_albumin_mgl+urine_creatinine_mgdl",
+    "transform": "uacr_log1p"
+   }
+  ],
+  "fibrosis_final": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "weight",
+    "input_field": "weight_kg",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "alt",
+    "input_field": "alt_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "ast",
+    "input_field": "ast_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "ggt",
+    "input_field": "ggt_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "alp",
+    "input_field": "alp_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "albumin",
+    "input_field": "albumin_gdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "platelets",
+    "input_field": "platelets_k_ul",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "glucose",
+    "input_field": "glucose_serum_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hba1c",
+    "input_field": "hba1c_pct",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "diabetes",
+    "input_field": "told_diabetes+on_insulin+on_diabetes_pills",
+    "transform": "diabetes_yesno"
+   },
+   {
+    "model_feature": "tg",
+    "input_field": "tg_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hdl",
+    "input_field": "hdl_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "alcohol_dpd",
+    "input_field": "alcohol_drinks_per_day",
+    "transform": "alcohol_dpd"
+   }
+  ],
+  "osteo_final": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex",
+    "input_field": "sex",
+    "transform": "sex_str"
+   },
+   {
+    "model_feature": "weight",
+    "input_field": "weight_kg",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "height",
+    "input_field": "height_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "smoker_current",
+    "input_field": "smoking_status",
+    "transform": "smoker_yesno"
+   },
+   {
+    "model_feature": "alcohol_3plus",
+    "input_field": "alcohol_drinks_per_day",
+    "transform": "alcohol_ge3_yesno"
+   },
+   {
+    "model_feature": "glucocorticoid",
+    "input_field": "glucocorticoid_ge1month",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "fx_hip",
+    "input_field": "fracture_hip",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "fx_wrist",
+    "input_field": "fracture_wrist",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "fx_spine",
+    "input_field": "fracture_spine",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "fx_after20",
+    "input_field": "fracture_after_age20",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "parent_hip_fx",
+    "input_field": "parent_hip_fracture",
+    "transform": "bool_yesno"
+   },
+   {
+    "model_feature": "no_period_12m",
+    "input_field": "sex+menses_absent_12m",
+    "transform": "osteo_period_yesno"
+   },
+   {
+    "model_feature": "age_last_period",
+    "input_field": "age_last_period_years",
+    "transform": "osteo_age_last_period"
+   },
+   {
+    "model_feature": "hrt_ever",
+    "input_field": "sex+hrt_ever",
+    "transform": "osteo_hrt"
+   }
+  ],
+  "ckd_A": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex_female",
+    "input_field": "sex",
+    "transform": "sex_female01"
+   },
+   {
+    "model_feature": "race_mexam",
+    "input_field": "race_ethnicity",
+    "transform": "race_mexam"
+   },
+   {
+    "model_feature": "race_othhisp",
+    "input_field": "race_ethnicity",
+    "transform": "race_othhisp"
+   },
+   {
+    "model_feature": "race_black",
+    "input_field": "race_ethnicity",
+    "transform": "race_black"
+   },
+   {
+    "model_feature": "race_other",
+    "input_field": "race_ethnicity",
+    "transform": "race_other"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "sbp",
+    "input_field": "sbp_1..3_mmhg",
+    "transform": "sbp_mean_23"
+   },
+   {
+    "model_feature": "dbp",
+    "input_field": "dbp_1..3_mmhg",
+    "transform": "dbp_mean_23"
+   },
+   {
+    "model_feature": "htn_told",
+    "input_field": "told_hypertension",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "dm_told",
+    "input_field": "told_diabetes",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "chd_hist",
+    "input_field": "hx_coronary_disease",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "chf",
+    "input_field": "hx_heart_failure",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "stroke",
+    "input_field": "hx_stroke",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "htn_med",
+    "input_field": "told_hypertension+on_bp_medication",
+    "transform": "htn_med_rule"
+   },
+   {
+    "model_feature": "dm_insulin",
+    "input_field": "told_diabetes+on_insulin",
+    "transform": "dm_insulin_rule"
+   },
+   {
+    "model_feature": "dm_pills",
+    "input_field": "told_diabetes+on_diabetes_pills",
+    "transform": "dm_pills_rule"
+   },
+   {
+    "model_feature": "smoke_current",
+    "input_field": "smoking_status",
+    "transform": "smoke_current01"
+   },
+   {
+    "model_feature": "smoke_former",
+    "input_field": "smoking_status",
+    "transform": "smoke_former01"
+   }
+  ],
+  "ckd_B": [
+   {
+    "model_feature": "age",
+    "input_field": "age_years",
+    "transform": "age_cap80"
+   },
+   {
+    "model_feature": "sex_female",
+    "input_field": "sex",
+    "transform": "sex_female01"
+   },
+   {
+    "model_feature": "race_mexam",
+    "input_field": "race_ethnicity",
+    "transform": "race_mexam"
+   },
+   {
+    "model_feature": "race_othhisp",
+    "input_field": "race_ethnicity",
+    "transform": "race_othhisp"
+   },
+   {
+    "model_feature": "race_black",
+    "input_field": "race_ethnicity",
+    "transform": "race_black"
+   },
+   {
+    "model_feature": "race_other",
+    "input_field": "race_ethnicity",
+    "transform": "race_other"
+   },
+   {
+    "model_feature": "bmi",
+    "input_field": "height_cm+weight_kg",
+    "transform": "bmi_kgm2"
+   },
+   {
+    "model_feature": "waist",
+    "input_field": "waist_cm",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "sbp",
+    "input_field": "sbp_1..3_mmhg",
+    "transform": "sbp_mean_23"
+   },
+   {
+    "model_feature": "dbp",
+    "input_field": "dbp_1..3_mmhg",
+    "transform": "dbp_mean_23"
+   },
+   {
+    "model_feature": "htn_told",
+    "input_field": "told_hypertension",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "dm_told",
+    "input_field": "told_diabetes",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "chd_hist",
+    "input_field": "hx_coronary_disease",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "chf",
+    "input_field": "hx_heart_failure",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "stroke",
+    "input_field": "hx_stroke",
+    "transform": "bool01"
+   },
+   {
+    "model_feature": "htn_med",
+    "input_field": "told_hypertension+on_bp_medication",
+    "transform": "htn_med_rule"
+   },
+   {
+    "model_feature": "dm_insulin",
+    "input_field": "told_diabetes+on_insulin",
+    "transform": "dm_insulin_rule"
+   },
+   {
+    "model_feature": "dm_pills",
+    "input_field": "told_diabetes+on_diabetes_pills",
+    "transform": "dm_pills_rule"
+   },
+   {
+    "model_feature": "smoke_current",
+    "input_field": "smoking_status",
+    "transform": "smoke_current01"
+   },
+   {
+    "model_feature": "smoke_former",
+    "input_field": "smoking_status",
+    "transform": "smoke_former01"
+   },
+   {
+    "model_feature": "glucose",
+    "input_field": "glucose_serum_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hba1c",
+    "input_field": "hba1c_pct",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "tc",
+    "input_field": "total_chol_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hdl",
+    "input_field": "hdl_mgdl",
+    "transform": "identity"
+   },
+   {
+    "model_feature": "hemoglobin",
+    "input_field": "hemoglobin_gdl",
+    "transform": "identity"
+   }
+  ]
+ },
+ "model_missing_rule": {
+  "af_S4_DEVICE": {
+   "required_features": [
+    "age",
+    "sex",
+    "RR_Mean_Global",
+    "RR_Mean_Global_iqr",
+    "QRS_Dur_Global",
+    "QRS_Dur_Global_iqr",
+    "PR_Int_Global",
+    "PR_Int_Global_iqr",
+    "P_Dur_Global",
+    "P_Dur_Global_iqr",
+    "QT_Int_Global",
+    "QT_Int_Global_iqr"
+   ],
+   "rule": "ZORUNLU: 12 feature'ın tamamı. Pipeline herhangi birini üretemezse (NaN) tahmin üretilmez. Yaş ≥ 90 → tahmin yok. Dondurulmuş imputer uygulama tarafında KULLANILMAZ.",
+   "app_feasibility": "ECG sinyali + kilitli Octave pipeline gerekir (≈3,6 s/kayıt). Tek başına mobil/web formu ile ÜRETİLEMEZ."
+  },
+  "mi_model": {
+   "required_features": [
+    "age",
+    "sex",
+    "PQ_Int_I",
+    "PQ_Int_II",
+    "PQ_Int_III",
+    "PQ_Int_V1",
+    "PQ_Int_V2",
+    "PQ_Int_V3",
+    "PQ_Int_V4",
+    "PQ_Int_V5",
+    "PQ_Int_V6",
+    "PQ_Int_aVF",
+    "PQ_Int_aVL",
+    "PQ_Int_aVR",
+    "PQ_Int_Global",
+    "PR_Int_I",
+    "PR_Int_II",
+    "PR_Int_III",
+    "PR_Int_V1",
+    "PR_Int_V2",
+    "PR_Int_V3",
+    "PR_Int_V4",
+    "PR_Int_V5",
+    "PR_Int_V6",
+    "PR_Int_aVF",
+    "PR_Int_aVL",
+    "PR_Int_aVR",
+    "PR_Int_Global",
+    "P_Amp_I",
+    "P_Amp_II",
+    "P_Amp_III",
+    "P_Amp_V1",
+    "P_Amp_V2",
+    "P_Amp_V3",
+    "P_Amp_V4",
+    "P_Amp_V5",
+    "P_Amp_V6",
+    "P_Amp_aVF",
+    "P_Amp_aVL",
+    "P_Amp_aVR",
+    "P_DurFull_I",
+    "P_DurFull_II",
+    "P_DurFull_III",
+    "P_DurFull_V1",
+    "P_DurFull_V2",
+    "P_DurFull_V3",
+    "P_DurFull_V4",
+    "P_DurFull_V5",
+    "P_DurFull_V6",
+    "P_DurFull_aVF",
+    "P_DurFull_aVL",
+    "P_DurFull_aVR",
+    "P_Dur_Global",
+    "Q_Amp_I",
+    "Q_Amp_II",
+    "Q_Amp_III",
+    "Q_Amp_V1",
+    "Q_Amp_V2",
+    "Q_Amp_V3",
+    "Q_Amp_V4",
+    "Q_Amp_V5",
+    "Q_Amp_V6",
+    "Q_Amp_aVF",
+    "Q_Amp_aVL",
+    "Q_Amp_aVR",
+    "QRS_Dur_I",
+    "QRS_Dur_II",
+    "QRS_Dur_III",
+    "QRS_Dur_V1",
+    "QRS_Dur_V2",
+    "QRS_Dur_V3",
+    "QRS_Dur_V4",
+    "QRS_Dur_V5",
+    "QRS_Dur_V6",
+    "QRS_Dur_aVF",
+    "QRS_Dur_aVL",
+    "QRS_Dur_aVR",
+    "QRS_Dur_Global",
+    "QT_IntCorr_I",
+    "QT_IntCorr_II",
+    "QT_IntCorr_III",
+    "QT_IntCorr_V1",
+    "QT_IntCorr_V2",
+    "QT_IntCorr_V3",
+    "QT_IntCorr_V4",
+    "QT_IntCorr_V5",
+    "QT_IntCorr_V6",
+    "QT_IntCorr_aVF",
+    "QT_IntCorr_aVL",
+    "QT_IntCorr_aVR",
+    "QT_IntFramingham_Global",
+    "QT_Int_I",
+    "QT_Int_II",
+    "QT_Int_III",
+    "QT_Int_V1",
+    "QT_Int_V2",
+    "QT_Int_V3",
+    "QT_Int_V4",
+    "QT_Int_V5",
+    "QT_Int_V6",
+    "QT_Int_aVF",
+    "QT_Int_aVL",
+    "QT_Int_aVR",
+    "QT_Int_Global",
+    "R_Amp_I",
+    "R_Amp_II",
+    "R_Amp_III",
+    "R_Amp_V1",
+    "R_Amp_V2",
+    "R_Amp_V3",
+    "R_Amp_V4",
+    "R_Amp_V5",
+    "R_Amp_V6",
+    "R_Amp_aVF",
+    "R_Amp_aVL",
+    "R_Amp_aVR",
+    "RR_Mean_Global",
+    "S_Amp_I",
+    "S_Amp_II",
+    "S_Amp_III",
+    "S_Amp_V1",
+    "S_Amp_V2",
+    "S_Amp_V3",
+    "S_Amp_V4",
+    "S_Amp_V5",
+    "S_Amp_V6",
+    "S_Amp_aVF",
+    "S_Amp_aVL",
+    "S_Amp_aVR",
+    "ST_Elev_I",
+    "ST_Elev_II",
+    "ST_Elev_III",
+    "ST_Elev_V1",
+    "ST_Elev_V2",
+    "ST_Elev_V3",
+    "ST_Elev_V4",
+    "ST_Elev_V5",
+    "ST_Elev_V6",
+    "ST_Elev_aVF",
+    "ST_Elev_aVL",
+    "ST_Elev_aVR",
+    "T_Amp_I",
+    "T_Amp_II",
+    "T_Amp_III",
+    "T_Amp_V1",
+    "T_Amp_V2",
+    "T_Amp_V3",
+    "T_Amp_V4",
+    "T_Amp_V5",
+    "T_Amp_V6",
+    "T_Amp_aVF",
+    "T_Amp_aVL",
+    "T_Amp_aVR",
+    "T_DurFull_I",
+    "T_DurFull_II",
+    "T_DurFull_III",
+    "T_DurFull_V1",
+    "T_DurFull_V2",
+    "T_DurFull_V3",
+    "T_DurFull_V4",
+    "T_DurFull_V5",
+    "T_DurFull_V6",
+    "T_DurFull_aVF",
+    "T_DurFull_aVL",
+    "T_DurFull_aVR",
+    "T_Dur_Global",
+    "HA__Global",
+    "ST_Elev_missing"
+   ],
+   "rule": "ZORUNLU: 168 feature. Yalnız PTB-XL+ eğitiminde olduğu gibi ST_Elev ailesi (12 sütun) birlikte NaN ise ve ST_Elev_missing=1 ise kabul; diğer her eksik → tahmin yok.",
+   "app_feasibility": "UYGULAMAYA ALINAMAZ (şimdilik): 168 lead bazlı ECGDeli feature'ını üretecek kilitli pipeline mevcut değil."
+  },
+  "cad_DEVICE": {
+   "required_features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope"
+   ],
+   "rule": "ZORUNLU: 11 feature. Herhangi biri eksikse tahmin üretilmez (model manifesti: \"inference abstains on any missing required input\"). Kategori string-float biçimine dönüştürülemiyorsa tahmin yok.",
+   "app_feasibility": "Efor testi sonuçları ve istirahat EKG'si olan klinik girdi gerekir; kendi beyanıyla doldurulamaz."
+  },
+  "dm_A": {
+   "required_features": [
+    "age",
+    "sex_male",
+    "race_mexam",
+    "race_othhisp",
+    "race_black",
+    "race_other",
+    "bmi",
+    "waist",
+    "sbp",
+    "dbp",
+    "htn_dx_med",
+    "fam_dm",
+    "gdm",
+    "pa_rec",
+    "smoke_current",
+    "smoke_former"
+   ],
+   "rule": "ZORUNLU: 16 feature (gdm: erkek için otomatik 0). Kadında GDM yanıtı yoksa tahmin yok. Diyabet tanısı/ilacı varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN (varsayım yok).",
+   "app_feasibility": "Kullanıcı formuyla doldurulabilir (ölçüm gerektiren: boy/kilo/bel/tansiyon)."
+  },
+  "dm_B": {
+   "required_features": [
+    "age",
+    "sex_male",
+    "race_mexam",
+    "race_othhisp",
+    "race_black",
+    "race_other",
+    "bmi",
+    "waist",
+    "sbp",
+    "dbp",
+    "htn_dx_med",
+    "fam_dm",
+    "gdm",
+    "pa_rec",
+    "smoke_current",
+    "smoke_former",
+    "tc",
+    "hdl",
+    "tg_log",
+    "alt_log",
+    "uric_acid"
+   ],
+   "rule": "ZORUNLU: 21 feature. Lab alanlarından biri eksikse B üretilmez; A'ya geri dönülebilir (A kendi kuralını sağlıyorsa). Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_feasibility": "Rutin biyokimya sonuçları gerekir."
+  },
+  "anemia_LR16": {
+   "required_features": [
+    "age",
+    "sex",
+    "bmi",
+    "waist",
+    "smoker",
+    "hba1c",
+    "alt",
+    "ast",
+    "tc",
+    "hdl",
+    "creatinine",
+    "wbc",
+    "rbc",
+    "mcv",
+    "rdw",
+    "albumin"
+   ],
+   "rule": "ZORUNLU: 16 feature. Hb ölçülmüşse model yerine Hb eşiği kullanılmalı. Kadın için gebelik dışlanamıyorsa (ve yaş 20–44 dışındaysa) uygulanmaz. Dondurulmuş imputer kullanılmaz.",
+   "app_feasibility": "Tam kan sayımı + biyokimya sonuçları gerekir; 16 alan."
+  },
+  "copd_S4_DEVICE": {
+   "required_features": [
+    "age",
+    "sex",
+    "bmi",
+    "smoker",
+    "fev1_pre",
+    "fvc_pre"
+   ],
+   "rule": "ZORUNLU: 6 feature. Yaş 40–79 dışı veya pre-BD FEV1/FVC ≥ 0,70 ise model uygulanmaz (eğitim popülasyonu dışı). fev1_pre ≤ fvc_pre. Dondurulmuş imputer kullanılmaz.",
+   "app_feasibility": "Kalite-kontrollü spirometri (pre-BD FEV1 ve FVC, mL) gerekir ve kişi yalnız pre-BD obstrüksiyon saptanmış 40–79 yaş olmalıdır."
+  },
+  "hf_S2_BASIC_LAB": {
+   "required_features": [
+    "age",
+    "sex",
+    "bmi",
+    "smoker",
+    "rip3"
+   ],
+   "rule": "ZORUNLU: 5 feature (rip3 dahil). rip3 yoksa model yok (S1_BASIC kayıtlı değil). Dondurulmuş imputer kullanılmaz.",
+   "app_feasibility": "UYGULAMAYA ALINAMAZ (şimdilik): RIP3 özel assay değeri ve sağlıklı-kontrol tasarımı; kullanıcı girdisiyle üretilemez."
+  },
+  "htn_M1": {
+   "required_features": [
+    "age",
+    "sex",
+    "race",
+    "bmi",
+    "waist",
+    "smoking",
+    "alcohol_dpd",
+    "diabetes",
+    "hba1c",
+    "tc",
+    "hdl",
+    "egfr",
+    "uacr_log"
+   ],
+   "rule": "ZORUNLU: 13 feature. Sigara/alkol eksikse (C testinde medyan/mod ile doldurulmuştu) uygulamada TAHMİN ÜRETİLMEZ. race_ethnicity yanıtsızsa ABSTAIN. Dondurulmuş imputer kullanılmaz.",
+   "app_feasibility": "Laboratuvar sonuçları gerekir (HbA1c, TC, HDL, kreatinin, idrar albümin/kreatinin). Laboratuvarsız kullanıcı için tahmin üretilmez."
+  },
+  "fibrosis_final": {
+   "required_features": [
+    "age",
+    "sex",
+    "bmi",
+    "waist",
+    "weight",
+    "alt",
+    "ast",
+    "ggt",
+    "alp",
+    "albumin",
+    "platelets",
+    "glucose",
+    "hba1c",
+    "diabetes",
+    "tg",
+    "hdl",
+    "alcohol_dpd"
+   ],
+   "rule": "ZORUNLU: 17 feature. Dondurulmuş imputer kullanılmaz. Diyabet durumu (told/insulin/pills) yanıtlanmamışsa tahmin yok.",
+   "app_feasibility": "Biyokimya + CBC (trombosit) + HbA1c sonuçları gerekir; formla doldurulabilir ama 17 alan."
+  },
+  "osteo_final": {
+   "required_features": [
+    "age",
+    "sex",
+    "weight",
+    "height",
+    "bmi",
+    "smoker_current",
+    "alcohol_3plus",
+    "glucocorticoid",
+    "fx_hip",
+    "fx_wrist",
+    "fx_spine",
+    "fx_after20",
+    "parent_hip_fx",
+    "no_period_12m",
+    "age_last_period",
+    "hrt_ever"
+   ],
+   "rule": "ZORUNLU: 16 feature. Kadında no_period_12m/hrt_ever yanıtı zorunlu; erkekte 'na_male' otomatik. age_last_period: yalnız adeti kesilmiş kadında zorunlu, diğerlerinde yapısal boş. Yaş < 50 → model uygulanmaz.",
+   "app_feasibility": "Formla doldurulabilir (laboratuvarsız). Yaş 50–80 ve cinsiyete özgü sorular gerekir."
+  },
+  "ckd_A": {
+   "required_features": [
+    "age",
+    "sex_female",
+    "race_mexam",
+    "race_othhisp",
+    "race_black",
+    "race_other",
+    "bmi",
+    "waist",
+    "sbp",
+    "dbp",
+    "htn_told",
+    "dm_told",
+    "chd_hist",
+    "chf",
+    "stroke",
+    "htn_med",
+    "dm_insulin",
+    "dm_pills",
+    "smoke_current",
+    "smoke_former"
+   ],
+   "rule": "ZORUNLU: 20 feature (htn_med, dm_insulin, dm_pills: yapısal atlama kurallarıyla 0). Tanılı böbrek hastalığı/diyaliz varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_feasibility": "Formla doldurulabilir (laboratuvarsız; ölçüm gerektiren: boy/kilo/bel/tansiyon)."
+  },
+  "ckd_B": {
+   "required_features": [
+    "age",
+    "sex_female",
+    "race_mexam",
+    "race_othhisp",
+    "race_black",
+    "race_other",
+    "bmi",
+    "waist",
+    "sbp",
+    "dbp",
+    "htn_told",
+    "dm_told",
+    "chd_hist",
+    "chf",
+    "stroke",
+    "htn_med",
+    "dm_insulin",
+    "dm_pills",
+    "smoke_current",
+    "smoke_former",
+    "glucose",
+    "hba1c",
+    "tc",
+    "hdl",
+    "hemoglobin"
+   ],
+   "rule": "ZORUNLU: 25 feature. Lab eksikse B üretilmez; A'ya düşülür. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "app_feasibility": "Rutin laboratuvar sonuçları gerekir."
+  }
+ }
+}

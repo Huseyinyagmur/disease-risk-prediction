@@ -1,0 +1,189 @@
+{
+ "api_direct": {
+  "roundtrip_s": {
+   "n": 6,
+   "median": 17.654,
+   "min": 15.409,
+   "max": 25.376
+  },
+  "server_wall_s": {
+   "n": 6,
+   "median": 17.616,
+   "min": 15.387,
+   "max": 25.261
+  },
+  "octave_toc_s": {
+   "n": 6,
+   "median": 14.561,
+   "min": 12.646,
+   "max": 14.912
+  },
+  "client_overhead_s": {
+   "n": 6,
+   "median": 0.027,
+   "min": 0.022,
+   "max": 0.115
+  },
+  "json_parse_s": {
+   "n": 6,
+   "median": 0.001,
+   "min": 0.001,
+   "max": 0.001
+  },
+  "response_bytes": {
+   "n": 6,
+   "median": 19415.5,
+   "min": 19306,
+   "max": 19525
+  },
+  "display_bytes": {
+   "n": 6,
+   "median": 18589.0,
+   "min": 18484,
+   "max": 18694
+  },
+  "upload_bytes": {
+   "n": 6,
+   "median": 120607.5,
+   "min": 120606,
+   "max": 120609
+  }
+ },
+ "browser": {
+  "click_to_chart_s": {
+   "n": 6,
+   "median": 29.322,
+   "min": 28.692,
+   "max": 30.742
+  },
+  "server_wall_s": {
+   "n": 6,
+   "median": 29.197,
+   "min": 28.557,
+   "max": 30.386
+  },
+  "octave_toc_s": {
+   "n": 6,
+   "median": 18.174,
+   "min": 17.53,
+   "max": 18.959
+  },
+  "click_to_request_s": {
+   "n": 6,
+   "median": 0.037,
+   "min": 0.028,
+   "max": 0.049
+  },
+  "upload_and_queue_minus_server_s": {
+   "n": 6,
+   "median": 0.041,
+   "min": 0.037,
+   "max": 0.043
+  },
+  "download_s": {
+   "n": 6,
+   "median": 0.001,
+   "min": 0.001,
+   "max": 0.002
+  },
+  "render_after_response_s": {
+   "n": 6,
+   "median": 0.06,
+   "min": 0.043,
+   "max": 0.264
+  },
+  "non_server_total_s": {
+   "n": 6,
+   "median": 0.136,
+   "min": 0.114,
+   "max": 0.356
+  },
+  "response_bytes": {
+   "n": 6,
+   "median": 19415.5,
+   "min": 19307,
+   "max": 19525
+  }
+ },
+ "standalone": {
+  "default": {
+   "octave_bare_s": {
+    "n": 2,
+    "median": 0.663,
+    "min": 0.622,
+    "max": 0.705
+   },
+   "octave_pkgload_s": {
+    "n": 2,
+    "median": 4.63,
+    "min": 3.426,
+    "max": 5.833
+   },
+   "ecgdeli_wall_s": {
+    "n": 4,
+    "median": 19.588,
+    "min": 18.116,
+    "max": 20.646
+   },
+   "octave_toc_s": {
+    "n": 4,
+    "median": 13.27,
+    "min": 11.985,
+    "max": 13.941
+   },
+   "features_identical_to_default": true
+  },
+  "blas_1thread": {
+   "octave_bare_s": {
+    "n": 2,
+    "median": 0.738,
+    "min": 0.731,
+    "max": 0.745
+   },
+   "octave_pkgload_s": {
+    "n": 2,
+    "median": 6.165,
+    "min": 6.017,
+    "max": 6.314
+   },
+   "ecgdeli_wall_s": {
+    "n": 4,
+    "median": 22.715,
+    "min": 20.151,
+    "max": 24.108
+   },
+   "octave_toc_s": {
+    "n": 4,
+    "median": 14.812,
+    "min": 12.887,
+    "max": 16.035
+   },
+   "features_identical_to_default": true
+  }
+ },
+ "pcores_affinity": {
+  "default": {
+   "ecgdeli_wall_s": [
+    29.607,
+    28.78
+   ],
+   "octave_toc_s": [
+    18.64,
+    18.196
+   ],
+   "octave_pkgload_s": 8.44
+  },
+  "blas_1thread": {
+   "ecgdeli_wall_s": [
+    11.627,
+    15.793
+   ],
+   "octave_toc_s": [
+    7.337,
+    10.388
+   ],
+   "octave_pkgload_s": 2.982
+  }
+ },
+ "phase_xliv_reference": "phase_xliv/results/af_e2e.json: octave_seconds ≈ 4,3–4,5, wall_seconds ≈ 6,9–7,1 (aynı makine, farklı zaman)"
+}

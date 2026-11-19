@@ -1,0 +1,251 @@
+{
+ "full": {
+  "returncode": 0,
+  "summary": {
+   "passed": 292,
+   "failed": 0,
+   "xfailed": 5,
+   "skipped": 0
+  },
+  "n": 297,
+  "tail": "292 passed, 5 xfailed, 1 warning in 94.24s (0:01:34)"
+ },
+ "groups": {
+  "scenario_normal": {
+   "label": "Normal girdi",
+   "returncode": 0,
+   "summary": {
+    "passed": 8,
+    "failed": 0,
+    "xfailed": 0,
+    "skipped": 0
+   },
+   "n": 8,
+   "tail": "8 passed, 289 deselected, 1 warning in 2.71s",
+   "cases": [
+    {
+     "test": "test_scenarios::test_normal_form_only_woman",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_full_labs_woman_b_models",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_man_with_labs",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_young_woman_anemia",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_cad_clinical",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_copd_obstructed",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_meds_answered_no",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_normal_ckd_meds_training_definition",
+     "status": "passed"
+    }
+   ]
+  },
+  "scenario_missing": {
+   "label": "Eksik girdi",
+   "returncode": 0,
+   "summary": {
+    "passed": 10,
+    "failed": 0,
+    "xfailed": 0,
+    "skipped": 0
+   },
+   "n": 10,
+   "tail": "10 passed, 287 deselected, 1 warning in 2.55s",
+   "cases": [
+    {
+     "test": "test_scenarios::test_missing_waist",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_race_five_models",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_or_unknown_pregnancy[None]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_or_unknown_pregnancy[unknown]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_pregnancy_irrelevant_for_men",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_partial_labs_fallback",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_ckd_pills_when_diagnosed",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_kidney_question",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_age_last_period",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_missing_everything",
+     "status": "passed"
+    }
+   ]
+  },
+  "scenario_unit": {
+   "label": "Birim hatası",
+   "returncode": 0,
+   "summary": {
+    "passed": 10,
+    "failed": 0,
+    "xfailed": 0,
+    "skipped": 0
+   },
+   "n": 10,
+   "tail": "10 passed, 287 deselected, 1 warning in 2.62s",
+   "cases": [
+    {
+     "test": "test_scenarios::test_unit_errors_422[glukoz_mmol_birimsiz]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[kreatinin_umol_birimsiz]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[boy_metre]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[spirometri_litre]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[stone]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[mg_mL]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[kategoriye_birim]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_errors_422[ifcc_aralik_disi]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_conversion_equivalence",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_unit_notes_reported",
+     "status": "passed"
+    }
+   ]
+  },
+  "scenario_out_of_scope": {
+   "label": "Kapsam dışı veri",
+   "returncode": 0,
+   "summary": {
+    "passed": 17,
+    "failed": 0,
+    "xfailed": 0,
+    "skipped": 0
+   },
+   "n": 17,
+   "tail": "17 passed, 280 deselected, 1 warning in 2.61s",
+   "cases": [
+    {
+     "test": "test_scenarios::test_out_of_population[osteo_yas45]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[anemi_kadin50]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[anemi_erkek70]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[dm_gebe]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[ckd_gebe]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[dm_tanili]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[dm_tanisiz_insulin]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[ckd_bobrek_tanisi]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_population[ckd_diyaliz]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_scope_copd",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_model_input_range",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_scope_af_age",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_plausible_range_422[yas150]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_plausible_range_422[yas17]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_plausible_range_422[sbp300]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_plausible_range_422[bel10]",
+     "status": "passed"
+    },
+    {
+     "test": "test_scenarios::test_out_of_schema_category",
+     "status": "passed"
+    }
+   ]
+  }
+ }
+}

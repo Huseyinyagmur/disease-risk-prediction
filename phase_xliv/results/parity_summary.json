@@ -1,0 +1,1611 @@
+{
+ "seed": 20261119,
+ "n_target": 200,
+ "tolerance": 1e-06,
+ "note": "Ham alanlar -> şema alanları (adaptör) -> sunucu dönüşümleri -> registry sırası; geliştirme tablosuyla karşılaştırma. MATCH: tüm feature’lar |Δ| ≤ 1e-6 / birebir. Test/mühürlü dosya okunmadı.",
+ "models": [
+  {
+   "model": "cad_DEVICE",
+   "dev_pool_complete": 242,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 200,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 0,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 0,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 0
+   },
+   "n_mismatch_persons_decision_checked": 0,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {},
+   "features": [
+    {
+     "feature": "age",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex",
+     "transform": "cad_sex_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "cp",
+     "transform": "cad_cp_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "trestbps",
+     "transform": "cad_trestbps",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "chol",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fbs",
+     "transform": "fasting_gt120_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "restecg",
+     "transform": "cad_restecg_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "thalach",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "exang",
+     "transform": "cad_exang_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "oldpeak",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "slope",
+     "transform": "cad_slope_strfloat",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "data/processed/cad.pkl (yalnız experiments/cad_split.json train+validation)",
+    "raw": "data/raw/uci_45/processed.cleveland.data",
+    "adapter_notes": [
+     "UCI fbs yalnız ikili (açlık glukozu >120 mg/dL); adaptör temsilî değer verir: fbs=1 -> 126, fbs=0 -> 100 mg/dL (dönüşümün eşik mantığını sınar, değerin kendisini değil)"
+    ]
+   }
+  },
+  {
+   "model": "dm_A",
+   "dev_pool_complete": 15666,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 91,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 89,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 16,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 4
+   },
+   "n_mismatch_persons_decision_checked": 89,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {
+    "eksik: sbp_1_mmhg": 10,
+    "eksik: dbp_1_mmhg": 10,
+    "eksik: sbp_3_mmhg": 5,
+    "eksik: dbp_3_mmhg": 5,
+    "eksik: sbp_2_mmhg": 4,
+    "eksik: dbp_2_mmhg": 4,
+    "422: dbp_1_mmhg": 3,
+    "422: dbp_2_mmhg": 1
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex_male",
+     "transform": "sex_male01",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_mexam",
+     "transform": "race_mexam",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_othhisp",
+     "transform": "race_othhisp",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_black",
+     "transform": "race_black",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_other",
+     "transform": "race_other",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 180,
+     "n_mismatch": 89,
+     "n_explained_bmi_2dec_source_cycle": 89,
+     "max_abs_delta": 0.05000000000000071
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sbp",
+     "transform": "sbp_mean_all",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dbp",
+     "transform": "dbp_mean_all",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_dx_med",
+     "transform": "htn_dx_med",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fam_dm",
+     "transform": "bool01",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "gdm",
+     "transform": "gdm_rule",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "pa_rec",
+     "transform": "bool01",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_current",
+     "transform": "smoke_current01",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_former",
+     "transform": "smoke_former01",
+     "n_compared": 180,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xlii/data/processed/dm_dev.pkl",
+    "raw": "phase_xlii/data/nhanes/<E,F,I,J>/*.xpt",
+    "adapter_notes": [
+     "J döngüsü BIOPRO (TG/ALT/ürik asit) CDC geri denklemi fazın kendi sabitleriyle uygulandı",
+     "pregnant=False (popülasyon gebe değil); told_diabetes DIQ010 (3=sınırda -> hayır)"
+    ]
+   }
+  },
+  {
+   "model": "dm_B",
+   "dev_pool_complete": 15471,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 84,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 102,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 12,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 2
+   },
+   "n_mismatch_persons_decision_checked": 102,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {
+    "eksik: sbp_1_mmhg": 6,
+    "eksik: dbp_1_mmhg": 6,
+    "eksik: sbp_3_mmhg": 5,
+    "eksik: dbp_3_mmhg": 5,
+    "eksik: sbp_2_mmhg": 4,
+    "eksik: dbp_2_mmhg": 4,
+    "422: dbp_2_mmhg": 1,
+    "422: dbp_1_mmhg": 1
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex_male",
+     "transform": "sex_male01",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_mexam",
+     "transform": "race_mexam",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_othhisp",
+     "transform": "race_othhisp",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_black",
+     "transform": "race_black",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_other",
+     "transform": "race_other",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 186,
+     "n_mismatch": 102,
+     "n_explained_bmi_2dec_source_cycle": 102,
+     "max_abs_delta": 0.05000000000000426
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sbp",
+     "transform": "sbp_mean_all",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dbp",
+     "transform": "dbp_mean_all",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_dx_med",
+     "transform": "htn_dx_med",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fam_dm",
+     "transform": "bool01",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "gdm",
+     "transform": "gdm_rule",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "pa_rec",
+     "transform": "bool01",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_current",
+     "transform": "smoke_current01",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_former",
+     "transform": "smoke_former01",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tc",
+     "transform": "identity",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hdl",
+     "transform": "identity",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tg_log",
+     "transform": "ln_clip1",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alt_log",
+     "transform": "ln_clip1",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "uric_acid",
+     "transform": "identity",
+     "n_compared": 186,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xlii/data/processed/dm_dev.pkl",
+    "raw": "phase_xlii/data/nhanes/<E,F,I,J>/*.xpt",
+    "adapter_notes": [
+     "J döngüsü BIOPRO (TG/ALT/ürik asit) CDC geri denklemi fazın kendi sabitleriyle uygulandı",
+     "pregnant=False (popülasyon gebe değil); told_diabetes DIQ010 (3=sınırda -> hayır)"
+    ]
+   }
+  },
+  {
+   "model": "anemia_LR16",
+   "dev_pool_complete": 3554,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 200,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 0,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 0,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 0
+   },
+   "n_mismatch_persons_decision_checked": 0,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {},
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex",
+     "transform": "sex_str",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r2",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 3.552713678800501e-15
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoker",
+     "transform": "smoker_yesno",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hba1c",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alt",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "ast",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tc",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hdl",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "creatinine",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "wbc",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "rbc",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "mcv",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "rdw",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "albumin",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "Clinical_Optimization_Phase25/data/processed/anemia_development.pkl",
+    "raw": "Phase24 raw/nhanes/D + Phase25 raw/nhanes/A",
+    "adapter_notes": [
+     "kreatinin: D için -0,016+0,978×LBXSCR, A için 1,013×LBXSCR+0,147 (fazların CDC düzeltmeleri)",
+     "smoking: SMQ040 1/2 -> current, 3 -> former, SMQ020=2 -> never"
+    ]
+   }
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "dev_pool_complete": 143,
+   "n_sampled": 143,
+   "outcome": {
+    "MATCH": 143,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 0,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 0,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 0
+   },
+   "n_mismatch_persons_decision_checked": 0,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {},
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex",
+     "transform": "sex_str",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoker",
+     "transform": "smoker_yesno",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fev1_pre",
+     "transform": "identity",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fvc_pre",
+     "transform": "identity",
+     "n_compared": 143,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "All_Disease_Improvement_Phase21/data/processed/copd_development.pkl",
+    "raw": "All_Disease_Improvement_Phase21/data/raw/nhanes/G (DEMO, BMX, SMQ, SPX)",
+    "adapter_notes": [
+     "geliştirme kümesi 145 kişi (<200): tamamı kullanıldı (eksiksiz olanlar)"
+    ]
+   }
+  },
+  {
+   "model": "htn_M1",
+   "dev_pool_complete": 11533,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 193,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 0,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 0,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 7
+   },
+   "n_mismatch_persons_decision_checked": 0,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {
+    "422: urine_albumin_mgl": 7
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex",
+     "transform": "sex_str",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race",
+     "transform": "race_str",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoking",
+     "transform": "smoking_str",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alcohol_dpd",
+     "transform": "alcohol_dpd",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "diabetes",
+     "transform": "diabetes_yesno",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hba1c",
+     "transform": "identity",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tc",
+     "transform": "identity",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hdl",
+     "transform": "identity",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "egfr",
+     "transform": "egfr_ckdepi2021_cap80",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "uacr_log",
+     "transform": "uacr_log1p",
+     "n_compared": 193,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 4.440892098500626e-16
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xxxvii/data/processed/htn3_dev.pkl",
+    "raw": "phase_xxxvii download_manifest37 yolları (P, L)",
+    "adapter_notes": [
+     "L döngüsü idrar albümini CDC geri denklemiyle FIA ölçeğine çevrildi (fazın uyumlaştırması; <0 -> 0)",
+     "alcohol_drinks_per_day: fazın P/L tanımı (ALQ130 1–15)"
+    ]
+   }
+  },
+  {
+   "model": "fibrosis_final",
+   "dev_pool_complete": 6384,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 200,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 0,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 0,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 0
+   },
+   "n_mismatch_persons_decision_checked": 0,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {},
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex",
+     "transform": "sex_str",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "weight",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alt",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "ast",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "ggt",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alp",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "albumin",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "platelets",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "glucose",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hba1c",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "diabetes",
+     "transform": "diabetes_yesno",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tg",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hdl",
+     "transform": "identity",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alcohol_dpd",
+     "transform": "alcohol_dpd",
+     "n_compared": 200,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xxxi/data/processed/fib_dev.pkl",
+    "raw": "phase_xxx/data/raw/P + phase_xxxi/data/raw/P (CBC)",
+    "adapter_notes": [
+     "alcohol_drinks_per_day: fazın tanımı ALQ121 frekansı × ALQ130 (1–15) / 365; ALQ111=2 -> 0"
+    ]
+   }
+  },
+  {
+   "model": "osteo_final",
+   "dev_pool_complete": 7688,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 64,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 129,
+    "MISMATCH_OTHER": 5,
+    "ABSTAIN": 2,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 0
+   },
+   "n_mismatch_persons_decision_checked": 134,
+   "decision_flips": 1,
+   "decision_flip_detail": [
+    {
+     "person": "D_37304",
+     "differing_features": [
+      "age",
+      "bmi"
+     ]
+    }
+   ],
+   "abstain_or_reject_reasons": {
+    "eksik: age_last_period_years": 2
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 198,
+     "n_mismatch": 5,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 5.0
+    },
+    {
+     "feature": "sex",
+     "transform": "sex_str",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "weight",
+     "transform": "identity",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "height",
+     "transform": "identity",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 198,
+     "n_mismatch": 132,
+     "n_explained_bmi_2dec_source_cycle": 132,
+     "max_abs_delta": 0.05000000000000426
+    },
+    {
+     "feature": "smoker_current",
+     "transform": "smoker_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "alcohol_3plus",
+     "transform": "alcohol_ge3_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "glucocorticoid",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fx_hip",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fx_wrist",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fx_spine",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "fx_after20",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "parent_hip_fx",
+     "transform": "bool_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "no_period_12m",
+     "transform": "osteo_period_yesno",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "age_last_period",
+     "transform": "osteo_age_last_period",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hrt_ever",
+     "transform": "osteo_hrt",
+     "n_compared": 198,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xxx/data/processed/osteo_dev.pkl",
+    "raw": "phase_xxx/data/raw/<D,E,F,H>/*.xpt",
+    "adapter_notes": [
+     "alcohol_drinks_per_day: fazın alcohol_dpd() tanımı (döngüye göre ALQ120Q/U veya ALQ121)",
+     "age_last_period_years: RHQ060 (10–70 dışı yanıtsız)"
+    ]
+   }
+  },
+  {
+   "model": "ckd_A",
+   "dev_pool_complete": 18411,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 106,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 81,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 11,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 2
+   },
+   "n_mismatch_persons_decision_checked": 81,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {
+    "eksik: sbp_3_mmhg": 6,
+    "eksik: dbp_3_mmhg": 6,
+    "eksik: sbp_2_mmhg": 5,
+    "eksik: dbp_2_mmhg": 5,
+    "422: dbp_2_mmhg": 1,
+    "422: dbp_3_mmhg": 1,
+    "422: dbp_1_mmhg": 1
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex_female",
+     "transform": "sex_female01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_mexam",
+     "transform": "race_mexam",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_othhisp",
+     "transform": "race_othhisp",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_black",
+     "transform": "race_black",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_other",
+     "transform": "race_other",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 187,
+     "n_mismatch": 81,
+     "n_explained_bmi_2dec_source_cycle": 81,
+     "max_abs_delta": 0.05000000000000071
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sbp",
+     "transform": "sbp_mean_23",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dbp",
+     "transform": "dbp_mean_23",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_told",
+     "transform": "bool01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_told",
+     "transform": "bool01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "chd_hist",
+     "transform": "bool01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "chf",
+     "transform": "bool01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "stroke",
+     "transform": "bool01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_med",
+     "transform": "htn_med_rule",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_insulin",
+     "transform": "dm_insulin_train",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_pills",
+     "transform": "dm_pills_train",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_current",
+     "transform": "smoke_current01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_former",
+     "transform": "smoke_former01",
+     "n_compared": 187,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xxxv/data/processed/ckd_dev.pkl",
+    "raw": "phase_xxxiv ckd_inventory_meta yolları (E–H)",
+    "adapter_notes": [
+     "on_bp_medication: BPQ050A; yanıtsız ve BPQ040A=2 (ilaç önerilmemiş) ise hayır",
+     "hx_coronary_disease: MCQ160C/D/E herhangi biri evet -> evet; en az biri hayır ve hiçbiri evet değil -> hayır",
+     "pregnant=False, told_weak_failing_kidneys=False (popülasyon tanımı)"
+    ]
+   }
+  },
+  {
+   "model": "ckd_B",
+   "dev_pool_complete": 18343,
+   "n_sampled": 200,
+   "outcome": {
+    "MATCH": 93,
+    "MATCH_EXCEPT_BMI_2DEC_SOURCE_CYCLE": 97,
+    "MISMATCH_OTHER": 0,
+    "ABSTAIN": 5,
+    "NOT_APPLICABLE": 0,
+    "HTTP_422": 5
+   },
+   "n_mismatch_persons_decision_checked": 97,
+   "decision_flips": 0,
+   "decision_flip_detail": [],
+   "abstain_or_reject_reasons": {
+    "422: dbp_3_mmhg": 4,
+    "eksik: sbp_2_mmhg": 3,
+    "eksik: dbp_2_mmhg": 3,
+    "422: dbp_2_mmhg": 2,
+    "eksik: sbp_3_mmhg": 2,
+    "eksik: dbp_3_mmhg": 2,
+    "422: dbp_1_mmhg": 2
+   },
+   "features": [
+    {
+     "feature": "age",
+     "transform": "age_cap80",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sex_female",
+     "transform": "sex_female01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_mexam",
+     "transform": "race_mexam",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_othhisp",
+     "transform": "race_othhisp",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_black",
+     "transform": "race_black",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "race_other",
+     "transform": "race_other",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "bmi",
+     "transform": "bmi_kgm2_r1",
+     "n_compared": 190,
+     "n_mismatch": 97,
+     "n_explained_bmi_2dec_source_cycle": 97,
+     "max_abs_delta": 0.05000000000000426
+    },
+    {
+     "feature": "waist",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "sbp",
+     "transform": "sbp_mean_23",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dbp",
+     "transform": "dbp_mean_23",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_told",
+     "transform": "bool01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_told",
+     "transform": "bool01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "chd_hist",
+     "transform": "bool01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "chf",
+     "transform": "bool01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "stroke",
+     "transform": "bool01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "htn_med",
+     "transform": "htn_med_rule",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_insulin",
+     "transform": "dm_insulin_train",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "dm_pills",
+     "transform": "dm_pills_train",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_current",
+     "transform": "smoke_current01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "smoke_former",
+     "transform": "smoke_former01",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "glucose",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hba1c",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "tc",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hdl",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    },
+    {
+     "feature": "hemoglobin",
+     "transform": "identity",
+     "n_compared": 190,
+     "n_mismatch": 0,
+     "n_explained_bmi_2dec_source_cycle": 0,
+     "max_abs_delta": 0.0
+    }
+   ],
+   "meta": {
+    "dev_file": "phase_xxxv/data/processed/ckd_dev.pkl",
+    "raw": "phase_xxxiv ckd_inventory_meta yolları (E–H)",
+    "adapter_notes": [
+     "on_bp_medication: BPQ050A; yanıtsız ve BPQ040A=2 (ilaç önerilmemiş) ise hayır",
+     "hx_coronary_disease: MCQ160C/D/E herhangi biri evet -> evet; en az biri hayır ve hiçbiri evet değil -> hayır",
+     "pregnant=False, told_weak_failing_kidneys=False (popülasyon tanımı)"
+    ]
+   }
+  }
+ ]
+}

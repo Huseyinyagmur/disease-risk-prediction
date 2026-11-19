@@ -1,0 +1,124 @@
+{
+ "files_before_total": 158243,
+ "files_after_total": 158323,
+ "outside_phase_and_app": {
+  "before": 158241,
+  "after": 158241,
+  "changed": 0,
+  "deleted": 0,
+  "new": 0,
+  "changed_list": [],
+  "deleted_list": [],
+  "new_list": []
+ },
+ "V1_pass": true,
+ "V2_models": [
+  {
+   "model": "af_S4_DEVICE",
+   "path": "All_Disease_Improvement_Phase21/models/af_S4_DEVICE.joblib",
+   "registry": true
+  },
+  {
+   "model": "mi_model",
+   "path": "phase_xxxviii/models/mi_model.joblib",
+   "registry": true
+  },
+  {
+   "model": "cad_DEVICE",
+   "path": "models/cad/DEVICE.joblib",
+   "registry": true
+  },
+  {
+   "model": "dm_A",
+   "path": "phase_xlii/models/dm_A_final.joblib",
+   "registry": true
+  },
+  {
+   "model": "dm_B",
+   "path": "phase_xlii/models/dm_B_final.joblib",
+   "registry": true
+  },
+  {
+   "model": "anemia_LR16",
+   "path": "Clinical_Optimization_Phase25/models/anemia_CBC_MATCHED16.joblib",
+   "registry": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "path": "All_Disease_Improvement_Phase21/models/copd_S4_DEVICE.joblib",
+   "registry": true
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "path": "All_Disease_Improvement_Phase21/models/heart_failure_S2_BASIC_LAB.joblib",
+   "registry": true
+  },
+  {
+   "model": "htn_M1",
+   "path": "phase_xxxvii/models/htn3_M1.joblib",
+   "registry": true
+  },
+  {
+   "model": "fibrosis_final",
+   "path": "phase_xxxi/models/fibrosis_final.joblib",
+   "registry": true
+  },
+  {
+   "model": "osteo_final",
+   "path": "phase_xxx/models/osteo_final.joblib",
+   "registry": true
+  },
+  {
+   "model": "ckd_A",
+   "path": "phase_xxxv/models/ckd_A_final.joblib",
+   "registry": true
+  },
+  {
+   "model": "ckd_B",
+   "path": "phase_xxxv/models/ckd_B_final.joblib",
+   "registry": true
+  }
+ ],
+ "V2_pass": true,
+ "V3_locks": {
+  "phase_xliii/registry/models.json": true,
+  "phase_xliii/registry/input_schema.json": true,
+  "phase_xxviii/config/af_pipeline_lock.json": true,
+  "phase_xxviii/pipeline/af_pipeline_v1.py": true
+ },
+ "V4_app_files": [
+  "app/backend/README.md",
+  "app/backend/config/app_config.json",
+  "app/backend/healthrisk_api/__init__.py",
+  "app/backend/healthrisk_api/ecg_af.py",
+  "app/backend/healthrisk_api/ecg_window.py",
+  "app/backend/healthrisk_api/eligibility.py",
+  "app/backend/healthrisk_api/features.py",
+  "app/backend/healthrisk_api/main.py",
+  "app/backend/healthrisk_api/model_loader.py",
+  "app/backend/healthrisk_api/paths.py",
+  "app/backend/healthrisk_api/service.py",
+  "app/backend/healthrisk_api/transforms.py",
+  "app/backend/healthrisk_api/validation.py",
+  "app/backend/requirements.in",
+  "app/backend/requirements.lock",
+  "app/backend/run_server.py",
+  "app/backend/tests/conftest.py",
+  "app/backend/tests/parity_lib.py",
+  "app/backend/tests/test_af_e2e.py",
+  "app/backend/tests/test_af_mat.py",
+  "app/backend/tests/test_api.py",
+  "app/backend/tests/test_integrity.py",
+  "app/backend/tests/test_parity.py",
+  "app/backend/tests/test_privacy.py",
+  "app/backend/tests/test_scenarios.py",
+  "app/backend/tests/test_transforms.py",
+  "app/backend/tests/test_validation_units.py"
+ ],
+ "V4_phase_files": 55,
+ "V5_new_pyc_after_phase_start": [],
+ "V5_pass": true,
+ "note": "phase_xliv/ ve app/ karşılaştırma dışı (CLAUDE.md: faz klasörü + app/ istisnası). .venv ve __pycache__ taranmaz (XXXIX–XLIII ile aynı kapsam); V5 bytecode için ayrıca bakar.",
+ "V3_pass": true,
+ "all_pass": true
+}

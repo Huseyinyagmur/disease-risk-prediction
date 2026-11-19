@@ -1,0 +1,41 @@
+{
+ "note": "Son karar: ilk 10 sn ön adımı (phase_xxxiii/scripts/t3_extract.py read_first10s birebir kopya; app/backend/healthrisk_api/ecg_window.py) kilitli pipeline önünde. cpsc_2018, 10 sn den uzun ilk 3 kayıt (rel sırası). Yalnız kimlik + 10 feature okundu; model metriği raporlanmaz.",
+ "records": [
+  {
+   "rel": "training/cpsc_2018/g1/A0005",
+   "record_samples": 12500,
+   "window": "ilk 10 sn (5000 örnek) — kayıt daha uzun, kırpıldı",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "wall_seconds": 7.061268699995708,
+   "http_roundtrip_seconds": 7.0729191999998875
+  },
+  {
+   "rel": "training/cpsc_2018/g1/A0036",
+   "record_samples": 15687,
+   "window": "ilk 10 sn (5000 örnek) — kayıt daha uzun, kırpıldı",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "wall_seconds": 6.55121710000094,
+   "http_roundtrip_seconds": 6.564678099995945
+  },
+  {
+   "rel": "training/cpsc_2018/g1/A0048",
+   "record_samples": 5807,
+   "window": "ilk 10 sn (5000 örnek) — kayıt daha uzun, kırpıldı",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "wall_seconds": 6.720658699981868,
+   "http_roundtrip_seconds": 6.730261300050188
+  }
+ ]
+}

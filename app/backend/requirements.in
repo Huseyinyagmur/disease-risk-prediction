@@ -1,0 +1,33 @@
+# Phase XLIV app venv — doğrudan bağımlılıklar (sürümler Focused_Current_Disease_Improvement_2026/.venv ile aynı)
+numpy==2.2.6
+pandas==2.3.1
+scipy==1.16.3
+scikit-learn==1.8.0
+imbalanced-learn==0.14.2
+sklearn-compat==0.1.6
+joblib==1.5.3
+threadpoolctl==3.6.0
+lightgbm==4.7.0
+xgboost==3.4.1
+catboost==1.2.10
+graphviz==0.21
+matplotlib==3.10.3
+plotly==7.1.0
+six==1.17.0
+# sunucu
+fastapi==0.128.0
+starlette==0.50.0
+uvicorn==0.40.0
+pydantic==2.12.5
+python-multipart==0.0.21
+# kilitli AF pipeline'ının vendored wfdb 4.3.1 bağımlılıkları
+fsspec==2025.12.0
+python-dateutil==2.9.0.post0
+requests==2.32.4
+# test / parity (yalnız geliştirme verisi)
+pytest==8.4.1
+httpx==0.28.1
+pyreadstat==1.3.8
+# pandas zaman dilimi verisi Focused venv ile aynı
+pytz==2025.2
+tzdata==2025.2

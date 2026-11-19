@@ -1,0 +1,1385 @@
+{
+ "phase": "XLIII",
+ "record_checks": [
+  {
+   "check": "R1 clinical_probability_eligibility=false (kayıt ve tüm modeller)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R2 zorunlu anahtarlar her modelde var",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R3 11 hastalık kapsandı",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "R4 her model feature'ının input_field'i input_schema.fields içinde",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "R5 her feature'ın dönüşümü input_schema.transforms içinde",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "R6 input_schema.model_usage == models.json feature eşlemesi",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R7 her modelde eşik (0–1 arası sayı) var",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R8 kanıt düzeyi alanı ve en az bir test sonucu her modelde var",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R9 model_missing_rule her modelde var",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R10 sayısal aralıklar geçerli (alt < üst)",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "R11 app_visible/app_mode kullanıcı kararıyla uyumlu",
+   "passed": true,
+   "detail": "{'af_S4_DEVICE': (True, 'ecg_upload_demo'), 'mi_model': (False, 'registry_only'), 'cad_DEVICE': (True, 'clinical_mode'), 'dm_A': (True, 'standard'), 'dm_B': (True, 'standard'), 'anemia_LR16': (True, 'standard'), 'copd_S4_DEVICE': (True, 'clinical_mode'), 'hf_S2_BASIC_LAB': (False, 'registry_only'), 'htn_M1': (True, 'standard'), 'fibrosis_final': (True, 'standard'), 'osteo_final': (True, 'standard'), 'ckd_A': (True, 'standard'), 'ckd_B': (True, 'standard')}"
+  },
+  {
+   "check": "R12 policy: yapısal boşluk imputer maddesi ve isteğe bağlı ırk maddesi var",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "R13 ırk kullanan modellerin eksik-girdi kuralı ırk yanıtsızsa ABSTAIN der",
+   "passed": true,
+   "detail": "['ckd_A', 'ckd_B', 'dm_A', 'dm_B', 'htn_M1']"
+  }
+ ],
+ "models": {
+  "af_S4_DEVICE": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=12"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.2360882763700418"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "CalibratedResearchModel"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=12"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=12 reg=12"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['sex']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=12"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 13)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=1 K=2 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'female' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "mi_model": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxxviii/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=168"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.04425664273332783"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "threshold_recall075_reporting_only"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=168"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=168 reg=168"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['HA__Global']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=168"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 173)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=1 K=6 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "HA__Global: '2.0' → '2'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "cad_DEVICE": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=11"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.5401802969539393"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "CalibratedClassifierCV"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=11"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=11 reg=11"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['cp', 'exang', 'fbs', 'restecg', 'sex', 'slope']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=11"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 21)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=6 K=16 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: '0.0' → '0'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "dm_A": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xlii/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.4958988256379918"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "referral_matched"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=[]"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 16)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "onehot_yok"
+   },
+   {
+    "check": "C6 negatif kontrol: string-kategorik sütun yok (model yalnız sayısal/ikili girdi alır)",
+    "passed": true,
+    "detail": "uygulanamaz"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "dm_B": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xlii/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=21"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.5314872247498732"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "referral_matched"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=21"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=[]"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=21"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 21)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "onehot_yok"
+   },
+   {
+    "check": "C6 negatif kontrol: string-kategorik sütun yok (model yalnız sayısal/ikili girdi alır)",
+    "passed": true,
+    "detail": "uygulanamaz"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "anemia_LR16": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.27030089895763654"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "CalibratedResearchModel"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=16 reg=16"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['sex', 'smoker']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 18)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=2 K=4 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'female' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "copd_S4_DEVICE": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=6"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.5707211331015863"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "CalibratedResearchModel"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=6"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=6 reg=6"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['sex', 'smoker']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=6"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 9)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=2 K=4 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'male' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "hf_S2_BASIC_LAB": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "Strong_Model_External_Validation_Phase26/frozen_model_manifest.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=5"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.4476970841762816"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "CalibratedResearchModel"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=5"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=5 reg=5"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['sex', 'smoker']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=5"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 8)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=2 K=4 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'male' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "htn_M1": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxxvii/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=13"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.5397445646616527"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "secondary_fpr015"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=13"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=13 reg=13"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['diabetes', 'race', 'sex', 'smoking']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=13"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 21)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=4 K=12 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'female' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "fibrosis_final": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxxi/config/fibrosis_model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=17"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.06149696006866034"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "female_secondary,male_secondary,fib4_matched_secondary"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=17"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=17 reg=17"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['diabetes', 'sex']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=17"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 20)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=2 K=5 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'female' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "osteo_final": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxx/config/osteo_model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.0602885709255003"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C3b adlandırılmış sütun kümesi == registry feature kümesi",
+    "passed": true,
+    "detail": "ct=16 reg=16"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=['alcohol_3plus', 'fx_after20', 'fx_hip', 'fx_spine', 'fx_wrist', 'glucocorticoid', 'hrt_ever', 'no_period_12m', 'parent_hip_fx', 'sex', 'smoker_current']"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=16"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 34)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "dilim_sayisi=11 K=29 bozuk_dilim_idx=[]"
+   },
+   {
+    "check": "C6 negatif kontrol: bilinmeyen kategori dedektörce yakalanır (string kontrolü ve one-hot dilim kontrolü)",
+    "passed": true,
+    "detail": "sex: 'female' → '__BILINMEYEN__'"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "ckd_A": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxxv/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=20"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.12660209600798616"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "referral_matched"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=20"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=[]"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=20"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 20)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "onehot_yok"
+   },
+   {
+    "check": "C6 negatif kontrol: string-kategorik sütun yok (model yalnız sayısal/ikili girdi alır)",
+    "passed": true,
+    "detail": "uygulanamaz"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ],
+  "ckd_B": [
+   {
+    "check": "C1a dosya SHA == registry",
+    "passed": true,
+    "detail": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988"
+   },
+   {
+    "check": "C1b dosya SHA == kilit dosyasındaki SHA",
+    "passed": true,
+    "detail": "phase_xxxv/config/model_lock.json"
+   },
+   {
+    "check": "C1c registry feature sırası == kilit sırası",
+    "passed": true,
+    "detail": "n=25"
+   },
+   {
+    "check": "C1d registry birincil eşik == kilit eşiği",
+    "passed": true,
+    "detail": "0.13832509192715003"
+   },
+   {
+    "check": "C1e registry ikincil eşikler == kilit",
+    "passed": true,
+    "detail": "referral_matched"
+   },
+   {
+    "check": "C2 paket sürümleri == registry",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C2b python sürümü == registry",
+    "passed": true,
+    "detail": "3.13.3"
+   },
+   {
+    "check": "C2c model yüklendi (kayıtlı venv)",
+    "passed": true,
+    "detail": "Pipeline"
+   },
+   {
+    "check": "C3a registry sırası == model feature_names_in_",
+    "passed": true,
+    "detail": "n=25"
+   },
+   {
+    "check": "C4a string-kategorik sütun kümesi == encoder sütun kümesi",
+    "passed": true,
+    "detail": "enc=[]"
+   },
+   {
+    "check": "C4b kategoriler encoder ile birebir (string, None dahil, sıra dahil)",
+    "passed": true,
+    "detail": "{}"
+   },
+   {
+    "check": "C4c tüm kategori değerleri str (veya None)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "check": "C5a sentetik girdi sınırlar/izinli kategoriler içinde ve eksiksiz",
+    "passed": true,
+    "detail": "n=25"
+   },
+   {
+    "check": "C5b ön-işleme çıktısı sonlu (NaN/inf yok)",
+    "passed": true,
+    "detail": "shape=(1, 25)"
+   },
+   {
+    "check": "C5c bilinmeyen kategori yok (değerler encoder kategorilerinde)",
+    "passed": true,
+    "detail": "[]"
+   },
+   {
+    "check": "C5d one-hot blokları dolu (her özellik diliminin toplamı 1)",
+    "passed": true,
+    "detail": "onehot_yok"
+   },
+   {
+    "check": "C6 negatif kontrol: string-kategorik sütun yok (model yalnız sayısal/ikili girdi alır)",
+    "passed": true,
+    "detail": "uygulanamaz"
+   },
+   {
+    "check": "C7 predict_proba çalıştı (yalnız sentetik girdi; sonuç raporlanmaz/saklanmaz)",
+    "passed": true,
+    "detail": "çıktı biçimi ve sonluluk kontrol edildi"
+   },
+   {
+    "check": "C8 model dosyası SHA tahmin sonrası aynı",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ "summary": {
+  "passed": 269,
+  "failed": 0,
+  "total": 269,
+  "models": 13,
+  "failed_checks": []
+ }
+}

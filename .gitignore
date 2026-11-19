@@ -1,0 +1,10 @@
+# Ortamlar ve bağımlılıklar
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+
+# Üretilen derleme / test çıktıları
+app/frontend/dist/
+phase_xlv/results/playwright_artifacts/
+phase_xlv/logs/pw_*_run/

@@ -1,0 +1,1242 @@
+{
+ "models": [
+  {
+   "model_id": "af_S4_DEVICE",
+   "disease": "Atriyal fibrilasyon (AF)",
+   "disease_key": "af",
+   "role": "primary",
+   "app_mode": "ecg_upload_demo",
+   "module_label": "ana modül",
+   "enabled": true,
+   "schema_v2_changes": [],
+   "endpoint": "/ecg/af",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "ecg_af_RR_Mean_Global",
+     "ecg_af_RR_Mean_Global_iqr",
+     "ecg_af_QRS_Dur_Global",
+     "ecg_af_QRS_Dur_Global_iqr",
+     "ecg_af_PR_Int_Global",
+     "ecg_af_PR_Int_Global_iqr",
+     "ecg_af_P_Dur_Global",
+     "ecg_af_P_Dur_Global_iqr",
+     "ecg_af_QT_Int_Global",
+     "ecg_af_QT_Int_Global_iqr"
+    ],
+    "conditional": [],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "PTB-XL kayıtlarında insan-doğrulamalı 12 derivasyonlu EKG ritminin atriyal fibrilasyon mu sinüs ritmi mi olduğu (AF vs SR; mevcut ritim).",
+   "population": "≥18 yaş, hasta başına ilk EKG, yalnız insan-doğrulamalı AFIB xor SR; 10 s, 500 Hz EKG. Diğer ritimler (AFL, taşikardi, bradikardi, PAC, PVC vb.) eğitimde negatif DEĞİLDİ.",
+   "missing_input_rule": "ZORUNLU: 12 feature'ın tamamı. Pipeline herhangi birini üretemezse (NaN) tahmin üretilmez. Yaş ≥ 90 → tahmin yok. Dondurulmuş imputer uygulama tarafında KULLANILMAZ.",
+   "evidence": {
+    "highest_tier": "dış doğrulama (bağımsız, farklı kaynaklar; donmuş model + kilitli pipeline bileşimi)",
+    "research_target_note": "Üç hedef AF vs SR iç testte GA ile birlikte sağlandı; dış doğrulamada P prevalansa bağlı olduğu için değerlendirilemez. Diğer ritimlerde FPR 0,072 (sinüs taşikardisinde 0,181; PVC 0,306).",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXVII (PTB-XL, hasta düzeyinde ayrık)",
+      "n": 1572,
+      "n_pos": 114,
+      "precision": {
+       "value": 0.873,
+       "ci95": [
+        0.801,
+        0.921
+       ]
+      },
+      "recall": {
+       "value": 0.904,
+       "ci95": [
+        0.835,
+        0.945
+       ]
+      },
+      "fpr": {
+       "value": 0.01,
+       "ci95": [
+        0.006,
+        0.017
+       ]
+      },
+      "auc": {
+       "value": 0.98,
+       "ci95": [
+        0.959,
+        0.995
+       ]
+      },
+      "tier_label": "iç test"
+     },
+     "external": {
+      "source": "Phase XXXIII A2 (Challenge 2021: CPSC2018, CPSC-Extra, Chapman-Shaoxing, Georgia; AF vs SR, tam örneklem, havuz)",
+      "n": 7817,
+      "n_pos": 3497,
+      "precision": null,
+      "recall": {
+       "value": 0.929,
+       "ci95": [
+        0.919,
+        0.937
+       ]
+      },
+      "fpr": {
+       "value": 0.003,
+       "ci95": [
+        0.001,
+        0.005
+       ]
+      },
+      "auc": {
+       "value": 0.99,
+       "ci95": [
+        0.987,
+        0.992
+       ]
+      },
+      "tier_label": "dış doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Model yalnız AF vs sinüs ritmi ayırır; diğer ritimlere karşı FPR 0,072, sinüs taşikardisinde 0,181, PVC 0,306.",
+    "Feature'lar yalnız AF-ECGDELI-OCTAVE-v1 ile üretilebilir (Octave 10.3.0 + ECGDeli v1.1 + vendor WFDB). Pipeline-golden uyumu: karar uyumu 0,99 (Wilson alt sınır 0,946); QT ve P/PR sapması sürüyor.",
+    "Georgia kaynağında Recall 0,764; RR düzensizliği göstermeyen ilk 10 s'lik AF kayıtları kaçıyor.",
+    "Pipeline başarısızlığı (zero_beats, ecgdeli_error, feature_error) → tahmin üretilmez.",
+    "Olasılıklar kalibre değil; yalnız sabit eşikte karar. Pipeline sapması AF kayıtlarında olasılığı kaydırabilir (p95 |Δp| 0,24).",
+    "Tek ritim kaydı; semptom/klinik bağlam yok. Klinik tanı DEĞİL."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "cad_DEVICE",
+   "disease": "Koroner arter hastalığı (CAD)",
+   "disease_key": "cad",
+   "role": "primary",
+   "app_mode": "clinical_mode",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "cad_chest_pain_type",
+     "sbp_1_mmhg",
+     "total_chol_mgdl",
+     "glucose_fasting_mgdl",
+     "cad_resting_ecg",
+     "cad_max_hr_bpm",
+     "cad_exercise_angina",
+     "cad_st_depression_mm",
+     "cad_st_slope"
+    ],
+    "conditional": [],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "UCI kohortlarında anjiyografik >%50 koroner daralma (num>0) bulunup bulunmaması (mevcut durum).",
+   "population": "UCI Cleveland eğitim (n=303 türevi; eğitim 181); hastane kohortu, semptomatik/anjiyografiye yönlendirilmiş kişiler (genel popülasyon DEĞİL).",
+   "missing_input_rule": "ZORUNLU: 11 feature. Herhangi biri eksikse tahmin üretilmez (model manifesti: \"inference abstains on any missing required input\"). Kategori string-float biçimine dönüştürülemiyorsa tahmin yok.",
+   "evidence": {
+    "highest_tier": "iç test + düzeltilmiş teknik tekrar (bağımsız dış doğrulama DEĞİL)",
+    "research_target_note": "İç testte 3 hedef nokta tahminiyle sağlandı (GA ile değil; n=61). Düzeltilmiş dış tekrarlarda FPR 0,37–0,70 (hedef yok).",
+    "tiers": {
+     "internal_test": {
+      "source": "Cleveland UCI test (phase_xxvii; önceden görülmüş)",
+      "n": 61,
+      "n_pos": 28,
+      "precision": {
+       "value": 0.885,
+       "ci95": [
+        0.71,
+        0.96
+       ]
+      },
+      "recall": {
+       "value": 0.821,
+       "ci95": [
+        0.644,
+        0.921
+       ]
+      },
+      "fpr": {
+       "value": 0.091,
+       "ci95": [
+        0.031,
+        0.236
+       ]
+      },
+      "auc": {
+       "value": 0.948,
+       "ci95": [
+        0.888,
+        0.99
+       ]
+      },
+      "tier_label": "iç test"
+     },
+     "external": {
+      "source": "Phase XLI düzeltilmiş teknik tekrar (UCI Hungarian n=95, VA n=64; eksiksiz-vaka, seçilmiş, PREVIOUSLY_EXPOSED; bağımsız dış doğrulama DEĞİL)",
+      "tier_label": "dış doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Kategorik girdiler string-float biçiminde olmalı ('1.0'); '1' biçimi sessizce bilinmeyen sayılır ve one-hot sıfırlanır (V2 kodlama hatası, ERRATA_CAD_V2.md). Uygulama dönüşüm tablosunu birebir uygulamalı.",
+    "İç test n=61 (28 pozitif): geniş GA. Düzeltilmiş dış tekrar seçilmiş eksiksiz-vaka alt kümesi (Hungarian 95, VA 64; negatif 27 ve 10).",
+    "Girdiler efor testi ve EKG gerektirir; genel popülasyon taraması için uygun değil. Hedef anjiyografik darlık (klinik semptom/risk değil).",
+    "BASIC/LAB panelleri yeniden skorlanmadı ve bu kayda alınmadı. Doğrulanmış tek düzeltilmiş kanıt: phase_xli DEVICE teknik tekrarı.",
+    "Eğitim verisinde kişi kimliği yok (satır = kişi varsayımı)."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "dm_A",
+   "disease": "Diyabet (teşhis edilmemiş)",
+   "disease_key": "diabetes",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "sbp_1_mmhg",
+     "sbp_2_mmhg",
+     "sbp_3_mmhg",
+     "dbp_1_mmhg",
+     "dbp_2_mmhg",
+     "dbp_3_mmhg",
+     "told_hypertension",
+     "family_hx_diabetes",
+     "recreational_activity",
+     "smoking_status",
+     "told_diabetes"
+    ],
+    "conditional": [
+     "on_bp_medication",
+     "gestational_diabetes_hx",
+     "pregnant",
+     "on_insulin",
+     "on_diabetes_pills"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Farkında olmayan erişkinde tek ziyaret ölçümüyle HbA1c ≥ 6,5% veya (açlık alt örnekleminde) FPG ≥ 126 mg/dL olması (teşhis edilmemiş diyabet; mevcut durum).",
+   "population": "NHANES ≥20 yaş, gebe değil, diyabet tanısı/ilacı yok (DIQ010≠1, insülin/hap yok), HbA1c ölçülmüş. Prevalans ≈ %4,4.",
+   "missing_input_rule": "ZORUNLU: 16 feature (gdm: erkek için otomatik 0). Kadında GDM yanıtı yoksa tahmin yok. Diyabet tanısı/ilacı varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN (varsayım yok).",
+   "evidence": {
+    "highest_tier": "iç test (NHANES içi; zamansal değil; PREVIOUSLY_EXPOSED_PERSONS başka hedef; diyabet hedefinde yeni kişiler)",
+    "research_target_note": "Hiçbir eşikte sağlanmadı (P 0,09–0,12; %4,4 prevalansta yapısal olarak zor). Birincil eşikte Recall ≥ 0,75 testte korunmadı (0,733).",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XLII (NHANES G 2011–12 + H 2013–14, kilitli tek sefer)",
+      "n": 8895,
+      "n_pos": 389,
+      "precision": {
+       "value": 0.103,
+       "ci95": [
+        0.092,
+        0.115
+       ]
+      },
+      "recall": {
+       "value": 0.733,
+       "ci95": [
+        0.687,
+        0.774
+       ]
+      },
+      "fpr": {
+       "value": 0.292,
+       "ci95": [
+        0.282,
+        0.302
+       ]
+      },
+      "auc": {
+       "value": 0.8,
+       "ci95": [
+        0.781,
+        0.819
+       ]
+      },
+      "npv": 0.983,
+      "delta_auc_vs_ADA": {
+       "value": 0.042,
+       "ci95": [
+        0.028,
+        0.055
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Tarama sıralayıcısı; P ≈ 0,10: pozitif yönlendirilenlerin ~%10'u gerçekten pozitif. Kişilerin ≈ %1/3'ü yönlendiriliyor. NPV 0,983.",
+    "Etiket tek ziyaret ölçümüdür; ADA doğrulama testi yok. FPG yalnız açlık alt örnekleminde (%45) ölçülmüş.",
+    "Bağımsız (NHANES dışı) dış doğrulama ve zamansal olmayan iç test. ADA skoruna göre ΔAUC +0,042 (küçük).",
+    "Survey ağırlığı/PSU/strata kullanılmadı. ADA fiziksel aktivite maddesi operasyonel; ADA GDM'li güncel formu BULUNAMADI.",
+    "\"Diğer/çok ırklı\" grupta tüm kurallarda Recall düşük; <45 yaşta Recall 0,47–0,58.",
+    "Model yalnız diyabet TANISI almamış kişi için geçerli; tanılı/ilaç kullananlara uygulanmaz."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "dm_B",
+   "disease": "Diyabet (teşhis edilmemiş) — laboratuvarlı",
+   "disease_key": "diabetes",
+   "role": "secondary (laboratuvar varsa)",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "sbp_1_mmhg",
+     "sbp_2_mmhg",
+     "sbp_3_mmhg",
+     "dbp_1_mmhg",
+     "dbp_2_mmhg",
+     "dbp_3_mmhg",
+     "told_hypertension",
+     "family_hx_diabetes",
+     "recreational_activity",
+     "smoking_status",
+     "total_chol_mgdl",
+     "hdl_mgdl",
+     "tg_mgdl",
+     "alt_ul",
+     "uric_acid_mgdl",
+     "told_diabetes"
+    ],
+    "conditional": [
+     "on_bp_medication",
+     "gestational_diabetes_hx",
+     "pregnant",
+     "on_insulin",
+     "on_diabetes_pills"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Model A ile aynı (teşhis edilmemiş diyabet: HbA1c ≥ 6,5% veya açlıkta FPG ≥ 126 mg/dL; HbA1c/glukoz girdi DEĞİL).",
+   "population": "Model A ile aynı.",
+   "missing_input_rule": "ZORUNLU: 21 feature. Lab alanlarından biri eksikse B üretilmez; A'ya geri dönülebilir (A kendi kuralını sağlıyorsa). Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "evidence": {
+    "highest_tier": "iç test (NHANES içi; zamansal değil)",
+    "research_target_note": "Hiçbir eşikte sağlanmadı (P 0,10–0,12).",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XLII (G+H, kilitli tek sefer)",
+      "n": 8895,
+      "n_pos": 389,
+      "precision": {
+       "value": 0.122,
+       "ci95": [
+        0.109,
+        0.136
+       ]
+      },
+      "recall": {
+       "value": 0.715,
+       "ci95": [
+        0.668,
+        0.757
+       ]
+      },
+      "fpr": {
+       "value": 0.236,
+       "ci95": [
+        0.227,
+        0.245
+       ]
+      },
+      "auc": {
+       "value": 0.826,
+       "ci95": [
+        0.808,
+        0.843
+       ]
+      },
+      "npv": 0.983,
+      "delta_auc_vs_A": {
+       "value": 0.025,
+       "ci95": [
+        0.014,
+        0.036
+       ]
+      },
+      "delta_auc_vs_ADA": {
+       "value": 0.067,
+       "ci95": [
+        0.05,
+        0.083
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Model A'nın tüm sınırlılıkları geçerli. Rutin lab katkısı küçük ama anlamlı (ΔAUC B−A +0,025).",
+    "TG biyokimya değeri (LBXSTR; CDC LBXTR önerir); E-2007 LX20 analitleri düzeltmesiz; J laboratuvarlarına CDC geri denklemi uygulanmıştı (eğitim).",
+    "Kullanıcı HbA1c/glukoz bilse bile modele girilmez (hedefi tanımlar); bu değerler varsa doğrudan tanı eşikleri kullanılmalıdır."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "anemia_LR16",
+   "disease": "Anemi",
+   "disease_key": "anemia",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r2",
+     "reason": "Eğitim kodu kazanır: anemi eğitim verisi (NHANES D 2005–06 + A 1999–2000) BMXBMI'si tümüyle 2 ondalıklıdır; 0,1 yuvarlaması eğitim tanımından |Δ| ≤ 0,05 uzaklaştırırdı. Kullanıcının \"0,1\" talimatından bu model için sapma — onay gerektirir."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "smoking_status",
+     "hba1c_pct",
+     "alt_ul",
+     "ast_ul",
+     "total_chol_mgdl",
+     "hdl_mgdl",
+     "creatinine_mgdl",
+     "wbc_k_ul",
+     "rbc_m_ul",
+     "mcv_fl",
+     "rdw_pct",
+     "albumin_gdl"
+    ],
+    "conditional": [
+     "pregnant"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Uygun yetişkinlerde düşük hemoglobin: erkek 20–65 yaş Hb < 13 g/dL; kadın 20–44 yaş, gebe olmadığı doğrulanmış, Hb < 12 g/dL (demir eksikliği anemisi DEĞİL).",
+   "population": "NHANES erkek 20–65, kadın 20–44 (gebe değil, RIDEXPRG=2). Hb, MCH, MCHC, hematokrit girdi değil.",
+   "missing_input_rule": "ZORUNLU: 16 feature. Hb ölçülmüşse model yerine Hb eşiği kullanılmalı. Kadın için gebelik dışlanamıyorsa (ve yaş 20–44 dışındaysa) uygulanmaz. Dondurulmuş imputer kullanılmaz.",
+   "evidence": {
+    "highest_tier": "dış doğrulama (NHANES farklı döngüler; aynı anket programı, PREVIOUSLY_EXPOSED başka hedef) — bağımsız kurum doğrulaması DEĞİL",
+    "research_target_note": "İç testte 3 hedef nokta tahminiyle sağlandı (GA ile değil). Dış: P hedefte C/I'da (0,77/0,87), E/F'de altında (0,64/0,62); Recall ≥ 0,75 ve FPR ≤ 0,15 tüm döngülerde sağlandı.",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXVII (NHANES 1999–2000 A, önceden görülmüş)",
+      "n": 410,
+      "n_pos": 21,
+      "precision": {
+       "value": 0.81,
+       "ci95": [
+        0.6,
+        0.923
+       ]
+      },
+      "recall": {
+       "value": 0.81,
+       "ci95": [
+        0.6,
+        0.923
+       ]
+      },
+      "fpr": {
+       "value": 0.01,
+       "ci95": [
+        0.004,
+        0.026
+       ]
+      },
+      "auc": {
+       "value": 0.991,
+       "ci95": [
+        0.98,
+        0.999
+       ]
+      },
+      "tier_label": "iç test"
+     },
+     "external": {
+      "source": "Phase XL (NHANES C, E, F, I birleşik)",
+      "n": 11171,
+      "n_pos": 669,
+      "precision": {
+       "value": 0.709,
+       "ci95": [
+        0.678,
+        0.739
+       ]
+      },
+      "recall": {
+       "value": 0.883,
+       "ci95": [
+        0.857,
+        0.906
+       ]
+      },
+      "fpr": {
+       "value": 0.023,
+       "ci95": [
+        0.02,
+        0.026
+       ]
+      },
+      "auc": {
+       "value": 0.991,
+       "ci95": [
+        0.989,
+        0.993
+       ]
+      },
+      "delta_auc_vs_hct_rule": {
+       "value": 0.0037,
+       "ci95": [
+        0.0021,
+        0.0054
+       ]
+      },
+      "tier_label": "dış doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "ML katkısı pratikte YOK: Hct_proxy = RBC×MCV/10 kuralına göre ΔAUC +0,002…+0,004 (eşdeğer). Model Hb'yi aynı hemogramdan yeniden hesaplıyor (Hb varyansının R²=0,943'ü RBC ve MCV ile açıklanıyor).",
+    "İç test küçük (21 pozitif). Dış test aynı anket programı; E/F döngülerinde Precision hedefin altında.",
+    "Etiyoloji yok (demir eksikliği vb.); yükseklik/sigara Hb düzeltmesi yok. Gebelik durumu bilinmeyen kadın uygun değil.",
+    "Kreatinin standardize ölçek (E-2007 CDC düzeltmesi yayımlanmış dosyada uygulanmış); I döngüsü CBC yöntemi (DxH 800) Phase XL'de belgelenmiş, diğer yöntem farkları sınırlılık.",
+    "Anemi için doğrudan Hb ölçümü varken bu modelin klinik katkısı yoktur; uygulama değeri \"Hb yokken CBC ile tarama\" ile sınırlı."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "copd_S4_DEVICE",
+   "disease": "KOAH (post-bronkodilatör hava akımı obstrüksiyonunun sürmesi)",
+   "disease_key": "copd",
+   "role": "primary",
+   "app_mode": "clinical_mode",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "height_cm",
+     "weight_kg",
+     "smoking_status",
+     "fev1_pre_ml",
+     "fvc_pre_ml"
+    ],
+    "conditional": [],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Post-bronkodilatör FEV1/FVC < 0,70 (sabit oran) olması; popülasyon: bronkodilatör testine seçilmiş kişiler.",
+   "population": "NHANES 40–79 yaş, pre-BD FEV1/FVC < LLN ve/veya < 0,70 nedeniyle bronkodilatör testi yapılmış ve ATS A/B kalitesinde tamamlamış kişiler. Negatif = bronkodilatörle düzelen kişiler (sağlıklı popülasyon DEĞİL).",
+   "missing_input_rule": "ZORUNLU: 6 feature. Yaş 40–79 dışı veya pre-BD FEV1/FVC ≥ 0,70 ise model uygulanmaz (eğitim popülasyonu dışı). fev1_pre ≤ fvc_pre. Dondurulmuş imputer kullanılmaz.",
+   "evidence": {
+    "highest_tier": "zamansal tekrar (aynı anket, farklı döngü; PREVIOUSLY_EXPOSED) — bağımsız klinik kohort DEĞİL",
+    "research_target_note": "F 2009–10'da 3 hedef nokta tahminiyle sağlandı (GA ile değil; E 2007–08'de Recall 0,718 < 0,75). Seçilmiş popülasyonda P/FPR genel popülasyona taşınamaz.",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXVII (NHANES G 2011–12)",
+      "n": 37,
+      "n_pos": 20,
+      "precision": {
+       "value": 1.0,
+       "ci95": [
+        0.772,
+        1.0
+       ]
+      },
+      "recall": {
+       "value": 0.65,
+       "ci95": [
+        0.433,
+        0.819
+       ]
+      },
+      "fpr": {
+       "value": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "auc": {
+       "value": 0.921,
+       "ci95": [
+        0.824,
+        0.988
+       ]
+      },
+      "tier_label": "iç test"
+     },
+     "temporal": {
+      "source": "Phase XXVII (NHANES F 2009–10)",
+      "n": 250,
+      "n_pos": 156,
+      "precision": {
+       "value": 0.929,
+       "ci95": [
+        0.871,
+        0.962
+       ]
+      },
+      "recall": {
+       "value": 0.756,
+       "ci95": [
+        0.683,
+        0.817
+       ]
+      },
+      "fpr": {
+       "value": 0.096,
+       "ci95": [
+        0.051,
+        0.172
+       ]
+      },
+      "auc": {
+       "value": 0.898,
+       "ci95": [
+        0.857,
+        0.934
+       ]
+      },
+      "tier_label": "zamansal doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Hedef popülasyon dar: yalnız pre-BD spirometride obstrüksiyon saptanıp BD testine alınmış kişiler. Genel popülasyon KOAH taramasında KULLANILAMAZ; FPR/Precision genel popülasyona taşınamaz.",
+    "Model pre-BD FEV1/FVC < 0,70 kuralına eşdeğer: ΔAUC +0,009 (−0,059…+0,076).",
+    "İç test n=37 (20 pozitif). Zamansal tekrar aynı anket programı; kişi takibi yok.",
+    "Astımı ayırt etmez; klinik KOAH tanısı DEĞİL (post-BD sabit oran).",
+    "Sigara = şu an içen (never/former → no); paket-yıl yok."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "htn_M1",
+   "disease": "Hipertansiyon",
+   "disease_key": "hypertension",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    },
+    {
+     "feature": "egfr",
+     "old_transform": "egfr_ckdepi2021",
+     "new_transform": "egfr_ckdepi2021_cap80",
+     "reason": "Kullanıcı kararı 5: eğitim kodundaki yaş tanımı (80'de kırpılmış)."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "smoking_status",
+     "alcohol_drinks_per_day",
+     "told_diabetes",
+     "hba1c_pct",
+     "total_chol_mgdl",
+     "hdl_mgdl",
+     "creatinine_mgdl",
+     "urine_albumin_mgl",
+     "urine_creatinine_mgdl"
+    ],
+    "conditional": [
+     "on_insulin",
+     "on_diabetes_pills",
+     "pregnant"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Tek ziyarette ölçülen kan basıncı ≥ 140/90 mmHg VEYA antihipertansif ilaç kullanımı (mevcut durum; ölçülen tansiyon girdi DEĞİL).",
+   "population": "NHANES ≥ 18 yaş, gebe değil, ≥2 geçerli BP okuması. Geliştirme P+L (2017–2023), test C (2003–04).",
+   "missing_input_rule": "ZORUNLU: 13 feature. Sigara/alkol eksikse (C testinde medyan/mod ile doldurulmuştu) uygulamada TAHMİN ÜRETİLMEZ. race_ethnicity yanıtsızsa ABSTAIN. Dondurulmuş imputer kullanılmaz.",
+   "evidence": {
+    "highest_tier": "zamansal test (C 2003–04; ölçüm yöntemi kaymalı: auskültatuvar vs oskilometrik) — bağımsız kurum doğrulaması DEĞİL",
+    "research_target_note": "Hiçbir eşikte üçlü hedef sağlanmadı (birincil: FPR 0,181; ikincil: Recall 0,665).",
+    "tiers": {
+     "temporal": {
+      "source": "Phase XXXVII (NHANES C 2003–04, kilitli tek sefer; hiçbir hedefte önceden kullanılmamış kişiler)",
+      "n": 2798,
+      "n_pos": 1001,
+      "precision": {
+       "value": 0.702,
+       "ci95": [
+        0.675,
+        0.729
+       ]
+      },
+      "recall": {
+       "value": 0.766,
+       "ci95": [
+        0.739,
+        0.791
+       ]
+      },
+      "fpr": {
+       "value": 0.181,
+       "ci95": [
+        0.164,
+        0.199
+       ]
+      },
+      "auc": {
+       "value": 0.875,
+       "ci95": [
+        0.862,
+        0.887
+       ]
+      },
+      "delta_auc_vs_age_sex_bmi": {
+       "value": 0.012,
+       "ci95": [
+        0.007,
+        0.018
+       ]
+      },
+      "tier_label": "zamansal doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Yaş+cinsiyet+BMI baseline'ına katkı yalnız +0,012 AUC (GA +0,007…+0,018): ML katkısı çok küçük; tek eşik pratikte yaş kuralı gibi çalışıyor (≥60 yaşta FPR 0,85, <60 yaşta Recall 0,31).",
+    "Test etiketi auskültatuvar (hekim, cıvalı) — geliştirme oskilometrik (Omron): etiket ölçeği kayması ölçülmedi. Test 14–20 yıl önce.",
+    "Tek ziyaret fenotipi; beyaz önlük/maskeli HTN ayırt edilemez. Test kümesi seçilmiş C alt kümesi.",
+    "Kalibrasyon: ROS nedeniyle olasılıklar yüksek (O/E 0,88). Klinik olasılık değildir.",
+    "Ölçülen tansiyon girdi DEĞİL: kullanıcının tansiyonu biliniyorsa doğrudan ≥140/90 kuralı kullanılmalı.",
+    "Bu kayıtta laboratuvarsız HTN modeli YOK: M1 (kullanıcı ön seçimi) beş laboratuvar girdisi ister; phase_xxxii modelleri kayda alınmadı (L testi CONTAMINATED etiketli, phase_xxxvi §2)."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "fibrosis_final",
+   "disease": "Karaciğer fibrozisi (LSM ≥ 8 kPa)",
+   "disease_key": "liver_fibrosis",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "ana modül",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "alt_ul",
+     "ast_ul",
+     "ggt_ul",
+     "alp_ul",
+     "albumin_gdl",
+     "platelets_k_ul",
+     "glucose_serum_mgdl",
+     "hba1c_pct",
+     "told_diabetes",
+     "tg_mgdl",
+     "hdl_mgdl",
+     "alcohol_drinks_per_day"
+    ],
+    "conditional": [
+     "on_insulin",
+     "on_diabetes_pills",
+     "pregnant"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "FibroScan karaciğer sertliği (LSM) ≥ 8,0 kPa (AASLD 2023 VCTE bandı) olması; histolojik ≥F2 ile birebir değil (mevcut durum).",
+   "population": "NHANES ≥ 20 yaş, gebe değil, FibroScan kalitesi tam (LUAXSTAT=1), ALT/AST/trombosit/albümin/BMI mevcut. Açlık şartı aranmadı.",
+   "missing_input_rule": "ZORUNLU: 17 feature. Dondurulmuş imputer kullanılmaz. Diyabet durumu (told/insulin/pills) yanıtlanmamışsa tahmin yok.",
+   "evidence": {
+    "highest_tier": "iç test (NHANES L 2021–23; PREVIOUSLY_EXPOSED: kişiler CAP hedefi için görülmüş)",
+    "research_target_note": "Üçlü hedef sağlanmadı; eşik Recall ≥ 0,85 hedefiyle seçilmişti, testte 0,768 (tarama hedefi 0,85 altında). Yönlendirme oranı 0,399.",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXXI (NHANES L, kilitli tek sefer)",
+      "n": 4714,
+      "n_pos": null,
+      "precision": {
+       "value": 0.24,
+       "ci95": [
+        0.221,
+        0.26
+       ]
+      },
+      "recall": {
+       "value": 0.768,
+       "ci95": [
+        0.733,
+        0.801
+       ]
+      },
+      "fpr": {
+       "value": 0.346,
+       "ci95": [
+        0.332,
+        0.361
+       ]
+      },
+      "auc": {
+       "value": 0.794,
+       "ci95": [
+        0.773,
+        0.813
+       ]
+      },
+      "npv": {
+       "value": 0.952,
+       "ci95": [
+        0.943,
+        0.959
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "CV AUC 0,835 → test AUC 0,794: kayma işareti. Test PREVIOUSLY_EXPOSED; bağımsız dış doğrulama ve zamansal doğrulama yok.",
+    "Açlıksız serum glukoz/TG kullanıldı (protokolde gerekçeli sapma). LSM ≥ 8 kPa histolojik fibrozisle birebir değildir; hedef ölçüm (LSM) girdi DEĞİL.",
+    "FIB-4'e göre ΔAUC +0,197, NFS'ye göre +0,096 (ikisi de anlamlı), ancak FIB-4/NFS bu hedef için kalibre edilmemiş basit baseline'lardır.",
+    "Düşük P (0,24) ve FPR 0,35: yalnız ön tarama sıralayıcısı. Cinsiyete özgü eşikler yalnız ikincil.",
+    "Hepatit B/C ve alkol dışı etiyoloji ayrımı yok. Klinik tanı DEĞİL."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "osteo_final",
+   "disease": "Osteoporoz (DXA femur T-skoru ≤ −2,5)",
+   "disease_key": "osteoporosis",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "araştırma modülü",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "weight_kg",
+     "height_cm",
+     "smoking_status",
+     "alcohol_drinks_per_day",
+     "glucocorticoid_ge1month",
+     "fracture_hip",
+     "fracture_wrist",
+     "fracture_spine",
+     "fracture_after_age20",
+     "parent_hip_fracture"
+    ],
+    "conditional": [
+     "menses_absent_12m",
+     "age_last_period_years",
+     "hrt_ever"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "DXA ile min(femur boynu, total femur) T-skoru ≤ −2,5 (NHANES III 20–29 yaş beyaz kadın referansı) olması (mevcut durum; DXA girdi DEĞİL).",
+   "population": "NHANES ≥ 50 yaş, geçerli femur DXA; erkek ve kadın (kadın referansla). Osteoporoz prevalansı %7 civarı.",
+   "missing_input_rule": "ZORUNLU: 16 feature. Kadında no_period_12m/hrt_ever yanıtı zorunlu; erkekte 'na_male' otomatik. age_last_period: yalnız adeti kesilmiş kadında zorunlu, diğerlerinde yapısal boş. Yaş < 50 → model uygulanmaz.",
+   "evidence": {
+    "highest_tier": "zamansal test (NHANES J 2017–18; DXA etiketi ilk kez) — bağımsız kurum doğrulaması DEĞİL",
+    "research_target_note": "Üçlü hedef (ve tarama hedefi Recall ≥ 0,85) sağlanmadı; eşik Recall ≥ 0,85 için seçilmişti, testte 0,780.",
+    "tiers": {
+     "temporal": {
+      "source": "Phase XXX (NHANES J, kilitli tek sefer)",
+      "n": 2275,
+      "n_pos": 164,
+      "precision": {
+       "value": 0.208,
+       "ci95": [
+        0.178,
+        0.242
+       ]
+      },
+      "recall": {
+       "value": 0.78,
+       "ci95": [
+        0.711,
+        0.837
+       ]
+      },
+      "fpr": {
+       "value": 0.23,
+       "ci95": [
+        0.213,
+        0.249
+       ]
+      },
+      "auc": {
+       "value": 0.849,
+       "ci95": [
+        0.818,
+        0.88
+       ]
+      },
+      "delta_auc_vs_OST": {
+       "value": 0.025,
+       "ci95": [
+        0.012,
+        0.038
+       ]
+      },
+      "tier_label": "zamansal doğrulama"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Cinsiyetler arası Recall çok farklı: erkeklerde 0,48 (tek eşik). Cinsiyete özgü eşik yok.",
+    "Düşük P (0,21; prevalans düşük). CV havuzlu OOF OST'yi geçemedi; testte OST'ye göre ΔAUC +0,025 (küçük ama anlamlı). Phase XXXI: eşit Recall'da yönlendirme farkları GA 0'ı içeriyor.",
+    "DXA cihaz/yazılım çapraz kalibrasyonu BULUNAMADI (yalnız-H duyarlılık modeli benzer sonuç). Romatoid artrit/ikincil osteoporoz girdisi BULUNAMADI. Kadın OST eşiği ikincil kaynaktan.",
+    "Alkol harmonizasyonu (D–H: ALQ120Q/U×ALQ130; J: ALQ121×ALQ130) sabit tabloyla; uygulamada alkol ≥3 içki/gün sorusu doğrudan sorulmalı.",
+    "Hedef osteoporoz DXA tanımıdır, kırık riski değil. KNHANES doğrulaması yapılamadı (steroid ve ebeveyn kalça kırığı girdisi yok)."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "ckd_A",
+   "disease": "Böbrek (farkında olunmayan tek ziyaret renal anormalliği)",
+   "disease_key": "kidney",
+   "role": "primary",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    },
+    {
+     "feature": "dm_insulin",
+     "old_transform": "dm_insulin_rule",
+     "new_transform": "dm_insulin_train",
+     "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım (yanıt varsa tanıdan bağımsız)."
+    },
+    {
+     "feature": "dm_pills",
+     "old_transform": "dm_pills_rule",
+     "new_transform": "dm_pills_train",
+     "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "sbp_2_mmhg",
+     "sbp_3_mmhg",
+     "dbp_2_mmhg",
+     "dbp_3_mmhg",
+     "told_hypertension",
+     "told_diabetes",
+     "hx_coronary_disease",
+     "hx_heart_failure",
+     "hx_stroke",
+     "on_insulin",
+     "on_diabetes_pills",
+     "smoking_status",
+     "told_weak_failing_kidneys"
+    ],
+    "conditional": [
+     "on_bp_medication",
+     "pregnant",
+     "on_dialysis"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Farkında olmayan erişkinde tek ziyaret eGFR < 60 (CKD-EPI 2021) VEYA UACR ≥ 30 mg/g (böbrek hastalığı tanısı DEĞİL; KDIGO 3 ay şartı karşılanmaz).",
+   "population": "NHANES ≥ 20 yaş, gebe/diyaliz değil, \"doktor zayıf/başarısız böbrek dedi mi\" = Hayır. Prevalans ≈ %15.",
+   "missing_input_rule": "ZORUNLU: 20 feature (htn_med, dm_insulin, dm_pills: yapısal atlama kurallarıyla 0). Tanılı böbrek hastalığı/diyaliz varsa model uygulanmaz. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "evidence": {
+    "highest_tier": "iç test (NHANES I 2015–16; PREVIOUSLY_EXPOSED başka hedef; zamansal değil)",
+    "research_target_note": "Hiçbir model ve eşikte sağlanmadı (P 0,29–0,31, FPR 0,29–0,32; %15 prevalansta P ≥ 0,70 yapısal olarak zor).",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXXV (NHANES I, kilitli tek sefer)",
+      "n": 4812,
+      "n_pos": 716,
+      "precision": {
+       "value": 0.293,
+       "ci95": [
+        0.273,
+        0.314
+       ]
+      },
+      "recall": {
+       "value": 0.767,
+       "ci95": [
+        0.734,
+        0.796
+       ]
+      },
+      "fpr": {
+       "value": 0.323,
+       "ci95": [
+        0.309,
+        0.337
+       ]
+      },
+      "auc": {
+       "value": 0.791,
+       "ci95": [
+        0.773,
+        0.809
+       ]
+      },
+      "npv": {
+       "value": 0.943,
+       "ci95": [
+        0.934,
+        0.951
+       ]
+      },
+      "delta_auc_vs_modified_SCORED": {
+       "value": 0.032,
+       "ci95": [
+        0.02,
+        0.043
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Kazanç esas olarak yalnız-UACR pozitiflerinde ve < 60 yaşta; ≥ 60 yaşta tarama kuralı fiilen \"yaşa göre herkese test\" (FPR 0,74–0,90).",
+    "Etiket tek ziyaret; geçici albüminüri dışlanamaz; KIQ022 öz-bildirim. Yaş ve cinsiyet eGFR denkleminin girdisidir (hedef bileşeniyle mekanik bağ).",
+    "Modifiye SCORED karşılaştırması orijinal yayınla karşılaştırılamaz (PVD/proteinüri yok; SCORED puanları birincil metinle doğrulanamadı).",
+    "Test tek dönem (2015–16), PREVIOUSLY_EXPOSED; bağımsız dış doğrulama yok. Survey tasarımı kullanılmadı.",
+    "Kullanıcı biliyorsa eGFR/UACR doğrudan kullanılmalı (hedefi tanımlar)."
+   ],
+   "clinical_probability_eligibility": false
+  },
+  {
+   "model_id": "ckd_B",
+   "disease": "Böbrek — laboratuvarlı",
+   "disease_key": "kidney",
+   "role": "secondary (laboratuvar varsa)",
+   "app_mode": "standard",
+   "module_label": "deneysel",
+   "enabled": true,
+   "schema_v2_changes": [
+    {
+     "feature": "bmi",
+     "old_transform": "bmi_kgm2",
+     "new_transform": "bmi_kgm2_r1",
+     "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi."
+    },
+    {
+     "feature": "dm_insulin",
+     "old_transform": "dm_insulin_rule",
+     "new_transform": "dm_insulin_train",
+     "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım (yanıt varsa tanıdan bağımsız)."
+    },
+    {
+     "feature": "dm_pills",
+     "old_transform": "dm_pills_rule",
+     "new_transform": "dm_pills_train",
+     "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım."
+    }
+   ],
+   "endpoint": "/predict",
+   "fields": {
+    "required": [
+     "age_years",
+     "sex",
+     "race_ethnicity",
+     "height_cm",
+     "weight_kg",
+     "waist_cm",
+     "sbp_2_mmhg",
+     "sbp_3_mmhg",
+     "dbp_2_mmhg",
+     "dbp_3_mmhg",
+     "told_hypertension",
+     "told_diabetes",
+     "hx_coronary_disease",
+     "hx_heart_failure",
+     "hx_stroke",
+     "on_insulin",
+     "on_diabetes_pills",
+     "smoking_status",
+     "glucose_serum_mgdl",
+     "hba1c_pct",
+     "total_chol_mgdl",
+     "hdl_mgdl",
+     "hemoglobin_gdl",
+     "told_weak_failing_kidneys"
+    ],
+    "conditional": [
+     "on_bp_medication",
+     "pregnant",
+     "on_dialysis"
+    ],
+    "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+   },
+   "target_definition": "Model A ile aynı.",
+   "population": "Model A ile aynı.",
+   "missing_input_rule": "ZORUNLU: 25 feature. Lab eksikse B üretilmez; A'ya düşülür. Dondurulmuş imputer kullanılmaz. race_ethnicity yanıtsızsa ABSTAIN.",
+   "evidence": {
+    "highest_tier": "iç test (NHANES I; PREVIOUSLY_EXPOSED)",
+    "research_target_note": "Hiçbir eşikte sağlanmadı.",
+    "tiers": {
+     "internal_test": {
+      "source": "Phase XXXV (NHANES I, kilitli tek sefer)",
+      "n": 4812,
+      "n_pos": 716,
+      "precision": {
+       "value": 0.313,
+       "ci95": [
+        0.291,
+        0.335
+       ]
+      },
+      "recall": {
+       "value": 0.754,
+       "ci95": [
+        0.721,
+        0.784
+       ]
+      },
+      "fpr": {
+       "value": 0.29,
+       "ci95": [
+        0.276,
+        0.304
+       ]
+      },
+      "auc": {
+       "value": 0.805,
+       "ci95": [
+        0.788,
+        0.823
+       ]
+      },
+      "npv": {
+       "value": 0.943,
+       "ci95": [
+        0.934,
+        0.951
+       ]
+      },
+      "delta_auc_B_minus_A": {
+       "value": 0.015,
+       "ci95": [
+        0.009,
+        0.021
+       ]
+      },
+      "tier_label": "iç test"
+     }
+    },
+    "note": "Kanıt düzeyleri ayrı tutulur (iç test / zamansal / dış doğrulama); metrikler registry'den aynen alınmıştır, uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez."
+   },
+   "limitations": [
+    "Model A'nın tüm sınırlılıkları geçerli. Rutin lab katkısı küçük: B−A ΔAUC +0,015.",
+    "Hemoglobin yalnız B'de (SCORED anemi bileşeni lab olduğu için)."
+   ],
+   "clinical_probability_eligibility": false
+  }
+ ],
+ "note": "Yalnız app_visible=true modeller. Kararlar \"araştırma sınıflaması\"dır.",
+ "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun."
+}

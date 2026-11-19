@@ -1,0 +1,1659 @@
+{
+ "schema_version": "2.0",
+ "policy": {
+  "units": "Her alan tek birimde tanımlıdır (fields.*.unit). Kullanıcı farklı birim girerse arayüz unit_conversions ile çevirir; birim belirsiz ve değer aralık dışıysa tahmin üretilmez.",
+  "missing": "Hiçbir model için eksik girdi tahminle doldurulmaz. Eksik zorunlu alan → o model ABSTAIN (tahmin üretmez). Dondurulmuş imputer uygulama tarafında kullanılmaz. Yapısal atlama kuralları (ör. erkekte gdm=0, hipertansiyon yoksa htn_med=0) eğitimdeki tanımın aynısıdır ve eksik sayılmaz.",
+  "categorical_strings": "Kategorik modeller string biçimini birebir ister (ör. CAD '1.0'; MI HA__Global '2.0'). Dönüşüm tablosu (transforms) tek kaynaktır; sessiz tür dönüşümü ('1' → '1.0') YAPILMAZ, dönüşüm tablosuyla üretilir.",
+  "range_basis": "plausible_range fiziksel olarak makul giriş sınırıdır (uygulama doğrulaması); modelin eğitim kapsamı değildir. Model popülasyon sınırları models.json içinde (population, allowed_range).",
+  "applicability": "Her model yalnız kendi hedef popülasyonunda geçerlidir (models.json: population). Hedefi tanımlayan değer (ör. HbA1c/glukoz diyabet için, ölçülen tansiyon HTN için) biliniyorsa doğrudan klinik eşik kullanılmalıdır.",
+  "structural_blanks": "Yapısal boşluklarda (ör. osteo age_last_period: erkek veya adeti süren kadın) modelin kendi pipeline imputer'ı eğitimdeki gibi çalışır; kullanıcının yanıtlamadığı alanlar için ÇALIŞMAZ (o durumda model ABSTAIN eder).",
+  "optional_race": "race_ethnicity isteğe bağlı sorulur; yanıt yoksa race_ethnicity kullanan modeller (dm_A, dm_B, ckd_A, ckd_B, htn_M1) ABSTAIN eder; varsayılan sınıf atanmaz.",
+  "clinical_probability_eligibility": false,
+  "v2_principle": "Şema metni ile eğitim kodu ayrışırsa eğitim kodu kazanır (kullanıcı kararı, Phase XLIV). Değişiklikler changes_from_v1 içinde; models.json değişmedi.",
+  "pregnancy": "Gebelik sorusu kadında, yaşı gebelik dışlaması gerektiren en az bir modelin yaş aralığındaysa (≥ 18) ZORUNLUDUR. Yanıt \"unknown\" (bilmiyorum) veya yanıtsız -> o modeller ABSTAIN; true -> NOT_APPLICABLE (katı yorum, kullanıcı onayı). İlgili modeller: dm_A, dm_B, ckd_A, ckd_B, htn_M1, fibrosis_final, anemia_LR16. Not: eğitimde yalnız anemi \"gebe olmadığı doğrulanmış\" (RIDEXPRG=2) şartı koymuştu; diğerleri yalnız RIDEXPRG=1 dışlamıştı — katı yorum bilinçli olarak daha muhafazakârdır.",
+  "diabetes_meds": "on_insulin ve on_diabetes_pills HERKESE sorulur (v1: yalnız tanı varsa). Eğitim kodlarında bu sorular tanısız/sınırda kişilerde de yanıtlanmıştı (ckd: phase_xxxv t1_data; dm dışlaması: phase_xlii t1_data on_med = DIQ050==1 | hap==1)."
+ },
+ "fields": {
+  "age_years": {
+   "label_tr": "Yaş",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "yıl",
+   "plausible_range": [
+    18,
+    120
+   ],
+   "note": "Model popülasyon aralıkları modele göre daralır (models.json). NHANES tabanlı modellerde 80 üstü 80 olarak kırpılır (age_cap80).",
+   "form_input": true,
+   "form_section": "temel"
+  },
+  "sex": {
+   "label_tr": "Biyolojik cinsiyet",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "female",
+    "male"
+   ],
+   "note": "Modeller cinsiyeti kendi kodlamasıyla alır (dönüşüm tablosu).",
+   "form_input": true,
+   "form_section": "temel"
+  },
+  "race_ethnicity": {
+   "label_tr": "Irk/etnik köken (NHANES RIDRETH1 sınıfları)",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "mexican_american",
+    "other_hispanic",
+    "nh_white",
+    "nh_black",
+    "other_incl_multi"
+   ],
+   "note": "Yalnız NHANES tabanlı DM ve KBH modelleri (ve HTN) kullanır. Referans: nh_white. İSTEĞE BAĞLI sorulur (kullanıcı kararı, Phase XLIII sonrası): yanıt yoksa dm_A/dm_B/ckd_A/ckd_B ve htn_M1 ABSTAIN eder; varsayılan/referans sınıf ATANMAZ.",
+   "form_input": true,
+   "form_section": "temel"
+  },
+  "height_cm": {
+   "label_tr": "Boy",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "cm",
+   "plausible_range": [
+    100,
+    230
+   ],
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "weight_kg": {
+   "label_tr": "Kilo",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "kg",
+   "plausible_range": [
+    25,
+    300
+   ],
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "waist_cm": {
+   "label_tr": "Bel çevresi",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "cm",
+   "plausible_range": [
+    40,
+    200
+   ],
+   "note": "NHANES protokolü: iliak krest üstü, ölçülü (kendi beyanı değil).",
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "sbp_1_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 1",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır.",
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "dbp_1_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 1",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ],
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "sbp_2_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 2",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır.",
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "dbp_2_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 2",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ],
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "sbp_3_mmhg": {
+   "label_tr": "Sistolik kan basıncı, okuma 3",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    70,
+    260
+   ],
+   "note": "Oturarak, ≥5 dk dinlenme sonrası ardışık okuma; sbp_>dbp_ tutarlılığı doğrulanır.",
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "dbp_3_mmhg": {
+   "label_tr": "Diyastolik kan basıncı, okuma 3",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "mmHg",
+   "plausible_range": [
+    30,
+    150
+   ],
+   "form_input": true,
+   "form_section": "olcumler"
+  },
+  "smoking_status": {
+   "label_tr": "Sigara durumu",
+   "type": "categorical",
+   "input_source": "kullanici",
+   "categories": [
+    "never",
+    "former",
+    "current"
+   ],
+   "note": "never: yaşamında ≥100 sigara içmemiş; current: şu an içiyor; former: bıraktı.",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "alcohol_drinks_per_day": {
+   "label_tr": "Ortalama alkol (içki/gün, son 12 ay)",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "içki/gün",
+   "plausible_range": [
+    0,
+    30
+   ],
+   "note": "NHANES ALQ121×ALQ130/365 tanımı: içme sıklığı (gün/yıl) × içilen gün başına içki sayısı / 365; hiç içmeyen 0.",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "told_hypertension": {
+   "label_tr": "Doktor \"yüksek tansiyon\" dedi mi",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "on_bp_medication": {
+   "label_tr": "Tansiyon ilacı kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "told_hypertension = true",
+   "form_input": true,
+   "form_section": "oyku",
+   "ask_when_rule": [
+    {
+     "field": "told_hypertension",
+     "op": "eq",
+     "value": true
+    }
+   ]
+  },
+  "told_diabetes": {
+   "label_tr": "Doktor \"diyabet\" dedi mi (sınırda = hayır)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "note": "Sınırda (borderline) = hayır (NHANES DIQ010=3). İlaç soruları buna bakılmaksızın sorulur (v2).",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "on_insulin": {
+   "label_tr": "İnsülin kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "note": "v2: herkese sorulur (sınırda/tanısız kişiler dahil; eğitim kodlarıyla aynı).",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "on_diabetes_pills": {
+   "label_tr": "Diyabet hapı kullanıyor mu",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "note": "v2: herkese sorulur (sınırda/tanısız kişiler dahil; eğitim kodlarıyla aynı).",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "hx_coronary_disease": {
+   "label_tr": "Koroner kalp hastalığı / anjina / MI öyküsü (herhangi biri)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "hx_heart_failure": {
+   "label_tr": "Kalp yetmezliği öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "hx_stroke": {
+   "label_tr": "İnme öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "family_hx_diabetes": {
+   "label_tr": "Yakın akrabada diyabet (NHANES MCQ300C)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "gestational_diabetes_hx": {
+   "label_tr": "Gebelikte diyabet söylendi mi (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female",
+   "form_input": true,
+   "form_section": "oyku",
+   "ask_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    }
+   ]
+  },
+  "recreational_activity": {
+   "label_tr": "Haftalık orta/şiddetli rekreasyonel fiziksel aktivite var mı (NHANES PAQ650/PAQ665)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "glucocorticoid_ge1month": {
+   "label_tr": "≥1 ay neredeyse her gün prednizon/kortizon kullandı mı (OSQ130)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "fracture_hip": {
+   "label_tr": "Kalça kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "fracture_wrist": {
+   "label_tr": "El bileği kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "fracture_spine": {
+   "label_tr": "Omurga kırığı öyküsü",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "fracture_after_age20": {
+   "label_tr": "20 yaş sonrası herhangi kırık (OSQ080)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "parent_hip_fracture": {
+   "label_tr": "Ebeveyn kalça kırığı",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "menses_absent_12m": {
+   "label_tr": "Son 12 ayda adet yok (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female",
+   "form_input": true,
+   "form_section": "oyku",
+   "ask_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    }
+   ]
+  },
+  "hrt_ever": {
+   "label_tr": "Hiç hormon tedavisi (yalnız kadın)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "ask_when": "sex = female",
+   "form_input": true,
+   "form_section": "oyku",
+   "ask_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    }
+   ]
+  },
+  "age_last_period_years": {
+   "label_tr": "Son adet yaşı",
+   "type": "numeric",
+   "input_source": "kullanici",
+   "unit": "yıl",
+   "plausible_range": [
+    10,
+    70
+   ],
+   "ask_when": "sex = female ve menses_absent_12m = true",
+   "note": "Eğitimde yalnız kadınlarda ve adeti kesilmişlerde doluydu; diğerlerinde yapısal olarak boş.",
+   "form_input": true,
+   "form_section": "oyku",
+   "ask_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    },
+    {
+     "field": "menses_absent_12m",
+     "op": "eq",
+     "value": true
+    }
+   ]
+  },
+  "hba1c_pct": {
+   "label_tr": "HbA1c",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "%",
+   "plausible_range": [
+    3.0,
+    18.0
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "glucose_serum_mgdl": {
+   "label_tr": "Serum glukoz (açlık şartı yok)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    30,
+    800
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "glucose_fasting_mgdl": {
+   "label_tr": "Açlık plazma glukozu (≥8 saat)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    30,
+    800
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "total_chol_mgdl": {
+   "label_tr": "Total kolesterol",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    50,
+    600
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "hdl_mgdl": {
+   "label_tr": "HDL kolesterol",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    5,
+    200
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "tg_mgdl": {
+   "label_tr": "Trigliserit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    10,
+    5000
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "alt_ul": {
+   "label_tr": "ALT",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    3,
+    1000
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "ast_ul": {
+   "label_tr": "AST",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    3,
+    1000
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "ggt_ul": {
+   "label_tr": "GGT",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    1,
+    2000
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "alp_ul": {
+   "label_tr": "ALP",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "U/L",
+   "plausible_range": [
+    10,
+    1500
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "albumin_gdl": {
+   "label_tr": "Serum albümin",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "g/dL",
+   "plausible_range": [
+    1.0,
+    6.5
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "platelets_k_ul": {
+   "label_tr": "Trombosit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^3/µL",
+   "plausible_range": [
+    10,
+    1500
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "uric_acid_mgdl": {
+   "label_tr": "Ürik asit",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    0.5,
+    20
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "creatinine_mgdl": {
+   "label_tr": "Serum kreatinin (standardize/enzimatik ölçek)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    0.2,
+    15
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "urine_albumin_mgl": {
+   "label_tr": "İdrar albümini",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/L",
+   "plausible_range": [
+    0.1,
+    10000
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "urine_creatinine_mgdl": {
+   "label_tr": "İdrar kreatinini",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "mg/dL",
+   "plausible_range": [
+    5,
+    600
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "wbc_k_ul": {
+   "label_tr": "Lökosit (WBC)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^3/µL",
+   "plausible_range": [
+    0.5,
+    100
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "rbc_m_ul": {
+   "label_tr": "Eritrosit (RBC)",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "10^6/µL",
+   "plausible_range": [
+    1.0,
+    9.0
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "mcv_fl": {
+   "label_tr": "MCV",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "fL",
+   "plausible_range": [
+    50,
+    140
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "rdw_pct": {
+   "label_tr": "RDW",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "%",
+   "plausible_range": [
+    8,
+    35
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "hemoglobin_gdl": {
+   "label_tr": "Hemoglobin",
+   "type": "numeric",
+   "input_source": "laboratuvar",
+   "unit": "g/dL",
+   "plausible_range": [
+    3,
+    22
+   ],
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "rip3_pgml": {
+   "label_tr": "RIP3 (özel ELISA)",
+   "type": "numeric",
+   "input_source": "arastirma_assay",
+   "unit": "pg/mL",
+   "plausible_range": [
+    0,
+    5000
+   ],
+   "note": "Rutin klinik test DEĞİL; özel ELISA. Aralık geçici (eğitim ort. 394, SD 235 pg/mL — scaler istatistiği); assay uyumu BULUNAMADI.",
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "fev1_pre_ml": {
+   "label_tr": "Bronkodilatör ÖNCESİ FEV1",
+   "type": "numeric",
+   "input_source": "spirometri",
+   "unit": "mL",
+   "plausible_range": [
+    200,
+    7000
+   ],
+   "note": "ATS A/B kalite; birim mL (L değil).",
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "fvc_pre_ml": {
+   "label_tr": "Bronkodilatör ÖNCESİ FVC",
+   "type": "numeric",
+   "input_source": "spirometri",
+   "unit": "mL",
+   "plausible_range": [
+    300,
+    9000
+   ],
+   "note": "fev1_pre_ml ≤ fvc_pre_ml doğrulanır.",
+   "form_input": true,
+   "form_section": "laboratuvar"
+  },
+  "ecg_af_RR_Mean_Global": {
+   "label_tr": "EKG-ECGDeli: RR aralığı ortalaması",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    300,
+    2000
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_RR_Mean_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: RR IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    1500
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_QRS_Dur_Global": {
+   "label_tr": "EKG-ECGDeli: QRS süresi (lead’ler arası maksimum)",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    40,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_QRS_Dur_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: QRS IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    300
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_PR_Int_Global": {
+   "label_tr": "EKG-ECGDeli: PR aralığı",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    50,
+    600
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_PR_Int_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: PR IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_P_Dur_Global": {
+   "label_tr": "EKG-ECGDeli: P süresi",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    20,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_P_Dur_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: P IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    300
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_QT_Int_Global": {
+   "label_tr": "EKG-ECGDeli: QT aralığı",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    200,
+    900
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_af_QT_Int_Global_iqr": {
+   "label_tr": "EKG-ECGDeli: QT IQR",
+   "type": "numeric",
+   "input_source": "ecg_pipeline_AF-ECGDELI-OCTAVE-v1",
+   "unit": "ms",
+   "plausible_range": [
+    0,
+    400
+   ],
+   "note": "YALNIZ kilitli AF-ECGDELI-OCTAVE-v1 pipeline çıktısı (phase_xxviii/config/af_pipeline_lock.json); elle girilemez, başka delineasyon aracından alınamaz.",
+   "form_input": false,
+   "form_section": null
+  },
+  "ecg_ptbxl_ecgdeli_168": {
+   "label_tr": "PTB-XL+ ECGDeli 168 feature grubu (MI modeli)",
+   "type": "device",
+   "input_source": "ecg_pipeline_YOK",
+   "note": "Lead bazlı Q/R/S/T/P/ST genlikleri (mV) ve süreler (ms). Uygulama için üretecek pipeline YOK (MI-ECGDELI-OCTAVE-v1 yazılmadı; phase_xxxviii/PHASE_XXXVIII_REPORT.md §5).",
+   "form_input": false,
+   "form_section": null
+  },
+  "cad_chest_pain_type": {
+   "label_tr": "Göğüs ağrısı tipi (UCI cp)",
+   "type": "categorical",
+   "input_source": "klinik_degerlendirme",
+   "categories": [
+    "typical_angina",
+    "atypical_angina",
+    "non_anginal",
+    "asymptomatic"
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "cad_resting_ecg": {
+   "label_tr": "İstirahat EKG (UCI restecg)",
+   "type": "categorical",
+   "input_source": "klinik_degerlendirme",
+   "categories": [
+    "normal",
+    "st_t_abnormality",
+    "lv_hypertrophy"
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "cad_max_hr_bpm": {
+   "label_tr": "Efor testinde ulaşılan maksimum kalp hızı",
+   "type": "numeric",
+   "input_source": "efor_testi",
+   "unit": "atım/dk",
+   "plausible_range": [
+    20,
+    260
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "cad_exercise_angina": {
+   "label_tr": "Efor anjinası var mı",
+   "type": "boolean",
+   "input_source": "efor_testi",
+   "categories": [
+    true,
+    false
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "cad_st_depression_mm": {
+   "label_tr": "Efor ST depresyonu (oldpeak)",
+   "type": "numeric",
+   "input_source": "efor_testi",
+   "unit": "mm",
+   "plausible_range": [
+    -10,
+    20
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "cad_st_slope": {
+   "label_tr": "Efor ST eğimi",
+   "type": "categorical",
+   "input_source": "efor_testi",
+   "categories": [
+    "upsloping",
+    "flat",
+    "downsloping"
+   ],
+   "form_input": true,
+   "form_section": "klinik"
+  },
+  "pregnant": {
+   "label_tr": "Şu an gebe mi",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false,
+    "unknown"
+   ],
+   "ask_when": "sex = female",
+   "required_when": "sex = female ve age_years ≥ 18",
+   "note": "\"unknown\" = bilmiyorum -> ilgili modeller ABSTAIN. Uygunluk sorusudur, model feature'ı DEĞİL. v2 ile eklendi (Phase XLIV uygulama uygunluk sorusundan resmileştirildi).",
+   "form_input": true,
+   "form_section": "temel",
+   "ask_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    }
+   ],
+   "required_when_rule": [
+    {
+     "field": "sex",
+     "op": "eq",
+     "value": "female"
+    },
+    {
+     "field": "age_years",
+     "op": "gte",
+     "value": 18.0
+    }
+   ]
+  },
+  "told_weak_failing_kidneys": {
+   "label_tr": "Doktor \"zayıf/başarısız böbrek\" (böbrek hastalığı) dedi mi (NHANES KIQ022)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "note": "ckd_A/ckd_B popülasyonu KIQ022 = Hayır. Yanıtsız -> ABSTAIN; true -> NOT_APPLICABLE. Uygunluk sorusu, feature değil (v2).",
+   "form_input": true,
+   "form_section": "oyku"
+  },
+  "on_dialysis": {
+   "label_tr": "Son 12 ayda diyaliz aldı mı (NHANES KIQ025)",
+   "type": "boolean",
+   "input_source": "kullanici",
+   "categories": [
+    true,
+    false
+   ],
+   "note": "true -> ckd_A/ckd_B NOT_APPLICABLE. KIQ025 eğitimde KIQ022 = 1'e koşulluydu (phase_xxxiv/02_ckd_readiness.md); yanıtsızlık tek başına ABSTAIN nedeni değildir (v2).",
+   "form_input": true,
+   "form_section": "oyku"
+  }
+ },
+ "changes_from_v1": [
+  {
+   "model": "dm_A",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "dm_B",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "htn_M1",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "fibrosis_final",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "osteo_final",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "ckd_A",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "ckd_B",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r1",
+   "reason": "Kullanıcı kararı 1: 0,1'e yuvarla (NHANES BMXBMI). Eğitim BMI'si BMXBMI idi.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması)"
+  },
+  {
+   "model": "anemia_LR16",
+   "feature": "bmi",
+   "old_transform": "bmi_kgm2",
+   "new_transform": "bmi_kgm2_r2",
+   "reason": "Eğitim kodu kazanır: anemi eğitim verisi (NHANES D 2005–06 + A 1999–2000) BMXBMI'si tümüyle 2 ondalıklıdır; 0,1 yuvarlaması eğitim tanımından |Δ| ≤ 0,05 uzaklaştırırdı. Kullanıcının \"0,1\" talimatından bu model için sapma — onay gerektirir.",
+   "evidence": "phase_xliv/03_tests.md (parity v1: BMI farkının tamamı BMXBMI kaynak yuvarlaması); döngü hassasiyet analizi 03_tests.md"
+  },
+  {
+   "model": "ckd_A",
+   "feature": "dm_insulin",
+   "old_transform": "dm_insulin_rule",
+   "new_transform": "dm_insulin_train",
+   "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım (yanıt varsa tanıdan bağımsız).",
+   "evidence": "parity v1: ckd geliştirme havuzunda 145/20.059 kişi tanısız/sınırda + hap/insülin=1"
+  },
+  {
+   "model": "ckd_A",
+   "feature": "dm_pills",
+   "old_transform": "dm_pills_rule",
+   "new_transform": "dm_pills_train",
+   "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım.",
+   "evidence": "aynı"
+  },
+  {
+   "model": "ckd_B",
+   "feature": "dm_insulin",
+   "old_transform": "dm_insulin_rule",
+   "new_transform": "dm_insulin_train",
+   "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım (yanıt varsa tanıdan bağımsız).",
+   "evidence": "parity v1: ckd geliştirme havuzunda 145/20.059 kişi tanısız/sınırda + hap/insülin=1"
+  },
+  {
+   "model": "ckd_B",
+   "feature": "dm_pills",
+   "old_transform": "dm_pills_rule",
+   "new_transform": "dm_pills_train",
+   "reason": "Kullanıcı kararı 3: eğitim kodundaki tanım.",
+   "evidence": "aynı"
+  },
+  {
+   "model": "htn_M1",
+   "feature": "egfr",
+   "old_transform": "egfr_ckdepi2021",
+   "new_transform": "egfr_ckdepi2021_cap80",
+   "reason": "Kullanıcı kararı 5: eğitim kodundaki yaş tanımı (80'de kırpılmış).",
+   "evidence": "phase_xxxvii/scripts/t1_data.py build(): age = d.RIDAGEYR.clip(upper=80); egfr_ckdepi2021(d.LBXSCR, age, female)"
+  }
+ ],
+ "known_limitations_v2": [
+  {
+   "model": "osteo_final",
+   "feature": "age",
+   "transform": "age_cap80",
+   "note": "Kullanıcı kararı 2: age_cap80 korunur. Eğitimde NHANES D (2005–06) yaşı 85'te kodlu ve kırpılmamış (geliştirme havuzunda 201/8.635 kişi 81–85), E/F/H 80'de kodlu. 80 üstü kullanıcıda model 80 görür; eğitimdeki D kişilerinden farklıdır. Hiçbir tek dönüşüm iki kodlamayı birden yeniden üretemez."
+  },
+  {
+   "models": [
+    "dm_A",
+    "dm_B",
+    "ckd_A",
+    "ckd_B",
+    "osteo_final"
+   ],
+   "feature": "bmi",
+   "transform": "bmi_kgm2_r1",
+   "note": "Eğitim BMI'si döngüye göre karışık hassasiyetlidir (≤ 2009–10 döngüleri 2 ondalık, sonrası 1 ondalık). 0,1 yuvarlaması 1 ondalıklı döngülerle birebir, 2 ondalıklılarla |Δ| ≤ 0,05 uyumludur."
+  }
+ ],
+ "unit_conversions": {
+  "glucose_serum_mgdl": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 18.016"
+   }
+  ],
+  "glucose_fasting_mgdl": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 18.016"
+   }
+  ],
+  "total_chol_mgdl": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 38.67"
+   }
+  ],
+  "hdl_mgdl": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 38.67"
+   }
+  ],
+  "tg_mgdl": [
+   {
+    "from_unit": "mmol/L",
+    "to_unit": "mg/dL",
+    "op": "x * 88.57"
+   }
+  ],
+  "creatinine_mgdl": [
+   {
+    "from_unit": "µmol/L",
+    "to_unit": "mg/dL",
+    "op": "x / 88.4"
+   }
+  ],
+  "uric_acid_mgdl": [
+   {
+    "from_unit": "µmol/L",
+    "to_unit": "mg/dL",
+    "op": "x / 59.48"
+   }
+  ],
+  "hba1c_pct": [
+   {
+    "from_unit": "mmol/mol (IFCC)",
+    "to_unit": "% (NGSP)",
+    "op": "x * 0.09148 + 2.152"
+   }
+  ],
+  "hemoglobin_gdl": [
+   {
+    "from_unit": "g/L",
+    "to_unit": "g/dL",
+    "op": "x / 10"
+   }
+  ],
+  "albumin_gdl": [
+   {
+    "from_unit": "g/L",
+    "to_unit": "g/dL",
+    "op": "x / 10"
+   }
+  ],
+  "height_cm": [
+   {
+    "from_unit": "inç",
+    "to_unit": "cm",
+    "op": "x * 2.54"
+   }
+  ],
+  "weight_kg": [
+   {
+    "from_unit": "lb",
+    "to_unit": "kg",
+    "op": "x * 0.45359237"
+   }
+  ],
+  "waist_cm": [
+   {
+    "from_unit": "inç",
+    "to_unit": "cm",
+    "op": "x * 2.54"
+   }
+  ],
+  "fev1_pre_ml": [
+   {
+    "from_unit": "L",
+    "to_unit": "mL",
+    "op": "x * 1000"
+   }
+  ],
+  "fvc_pre_ml": [
+   {
+    "from_unit": "L",
+    "to_unit": "mL",
+    "op": "x * 1000"
+   }
+  ],
+  "urine_albumin_mgl": [
+   {
+    "from_unit": "mg/dL",
+    "to_unit": "mg/L",
+    "op": "x * 10"
+   }
+  ],
+  "wbc_k_ul": [
+   {
+    "from_unit": "10^9/L",
+    "to_unit": "10^3/µL",
+    "op": "x * 1 (sayısal aynı)"
+   }
+  ],
+  "platelets_k_ul": [
+   {
+    "from_unit": "10^9/L",
+    "to_unit": "10^3/µL",
+    "op": "x * 1 (sayısal aynı)"
+   }
+  ],
+  "rbc_m_ul": [
+   {
+    "from_unit": "10^12/L",
+    "to_unit": "10^6/µL",
+    "op": "x * 1 (sayısal aynı)"
+   }
+  ]
+ },
+ "unit_conversion_note": "Dönüşümler yalnız arayüz katmanında yapılır; model her zaman kayıtlı model birimini görür. Birim belirsizse (ör. mg/dL mi mmol/L mi) değer aralık kontrolünden geçmiyorsa tahmin üretilmez (örn. glukoz 5.4 → mmol/L olasılığı: mg/dL aralığı 30–800 içinde kalmadığı için reddedilir).",
+ "request_format": {
+  "fields": {
+   "<alan>": "<değer> veya {\"value\": <sayı>, \"unit\": \"<birim>\"}"
+  }
+ },
+ "models": {
+  "af_S4_DEVICE": {
+   "required": [
+    "age_years",
+    "sex",
+    "ecg_af_RR_Mean_Global",
+    "ecg_af_RR_Mean_Global_iqr",
+    "ecg_af_QRS_Dur_Global",
+    "ecg_af_QRS_Dur_Global_iqr",
+    "ecg_af_PR_Int_Global",
+    "ecg_af_PR_Int_Global_iqr",
+    "ecg_af_P_Dur_Global",
+    "ecg_af_P_Dur_Global_iqr",
+    "ecg_af_QT_Int_Global",
+    "ecg_af_QT_Int_Global_iqr"
+   ],
+   "conditional": [],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "cad_DEVICE": {
+   "required": [
+    "age_years",
+    "sex",
+    "cad_chest_pain_type",
+    "sbp_1_mmhg",
+    "total_chol_mgdl",
+    "glucose_fasting_mgdl",
+    "cad_resting_ecg",
+    "cad_max_hr_bpm",
+    "cad_exercise_angina",
+    "cad_st_depression_mm",
+    "cad_st_slope"
+   ],
+   "conditional": [],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "dm_A": {
+   "required": [
+    "age_years",
+    "sex",
+    "race_ethnicity",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "sbp_1_mmhg",
+    "sbp_2_mmhg",
+    "sbp_3_mmhg",
+    "dbp_1_mmhg",
+    "dbp_2_mmhg",
+    "dbp_3_mmhg",
+    "told_hypertension",
+    "family_hx_diabetes",
+    "recreational_activity",
+    "smoking_status",
+    "told_diabetes"
+   ],
+   "conditional": [
+    "on_bp_medication",
+    "gestational_diabetes_hx",
+    "pregnant",
+    "on_insulin",
+    "on_diabetes_pills"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "dm_B": {
+   "required": [
+    "age_years",
+    "sex",
+    "race_ethnicity",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "sbp_1_mmhg",
+    "sbp_2_mmhg",
+    "sbp_3_mmhg",
+    "dbp_1_mmhg",
+    "dbp_2_mmhg",
+    "dbp_3_mmhg",
+    "told_hypertension",
+    "family_hx_diabetes",
+    "recreational_activity",
+    "smoking_status",
+    "total_chol_mgdl",
+    "hdl_mgdl",
+    "tg_mgdl",
+    "alt_ul",
+    "uric_acid_mgdl",
+    "told_diabetes"
+   ],
+   "conditional": [
+    "on_bp_medication",
+    "gestational_diabetes_hx",
+    "pregnant",
+    "on_insulin",
+    "on_diabetes_pills"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "anemia_LR16": {
+   "required": [
+    "age_years",
+    "sex",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "smoking_status",
+    "hba1c_pct",
+    "alt_ul",
+    "ast_ul",
+    "total_chol_mgdl",
+    "hdl_mgdl",
+    "creatinine_mgdl",
+    "wbc_k_ul",
+    "rbc_m_ul",
+    "mcv_fl",
+    "rdw_pct",
+    "albumin_gdl"
+   ],
+   "conditional": [
+    "pregnant"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "copd_S4_DEVICE": {
+   "required": [
+    "age_years",
+    "sex",
+    "height_cm",
+    "weight_kg",
+    "smoking_status",
+    "fev1_pre_ml",
+    "fvc_pre_ml"
+   ],
+   "conditional": [],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "htn_M1": {
+   "required": [
+    "age_years",
+    "sex",
+    "race_ethnicity",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "smoking_status",
+    "alcohol_drinks_per_day",
+    "told_diabetes",
+    "hba1c_pct",
+    "total_chol_mgdl",
+    "hdl_mgdl",
+    "creatinine_mgdl",
+    "urine_albumin_mgl",
+    "urine_creatinine_mgdl"
+   ],
+   "conditional": [
+    "on_insulin",
+    "on_diabetes_pills",
+    "pregnant"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "fibrosis_final": {
+   "required": [
+    "age_years",
+    "sex",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "alt_ul",
+    "ast_ul",
+    "ggt_ul",
+    "alp_ul",
+    "albumin_gdl",
+    "platelets_k_ul",
+    "glucose_serum_mgdl",
+    "hba1c_pct",
+    "told_diabetes",
+    "tg_mgdl",
+    "hdl_mgdl",
+    "alcohol_drinks_per_day"
+   ],
+   "conditional": [
+    "on_insulin",
+    "on_diabetes_pills",
+    "pregnant"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "osteo_final": {
+   "required": [
+    "age_years",
+    "sex",
+    "weight_kg",
+    "height_cm",
+    "smoking_status",
+    "alcohol_drinks_per_day",
+    "glucocorticoid_ge1month",
+    "fracture_hip",
+    "fracture_wrist",
+    "fracture_spine",
+    "fracture_after_age20",
+    "parent_hip_fracture"
+   ],
+   "conditional": [
+    "menses_absent_12m",
+    "age_last_period_years",
+    "hrt_ever"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "ckd_A": {
+   "required": [
+    "age_years",
+    "sex",
+    "race_ethnicity",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "sbp_2_mmhg",
+    "sbp_3_mmhg",
+    "dbp_2_mmhg",
+    "dbp_3_mmhg",
+    "told_hypertension",
+    "told_diabetes",
+    "hx_coronary_disease",
+    "hx_heart_failure",
+    "hx_stroke",
+    "on_insulin",
+    "on_diabetes_pills",
+    "smoking_status",
+    "told_weak_failing_kidneys"
+   ],
+   "conditional": [
+    "on_bp_medication",
+    "pregnant",
+    "on_dialysis"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  },
+  "ckd_B": {
+   "required": [
+    "age_years",
+    "sex",
+    "race_ethnicity",
+    "height_cm",
+    "weight_kg",
+    "waist_cm",
+    "sbp_2_mmhg",
+    "sbp_3_mmhg",
+    "dbp_2_mmhg",
+    "dbp_3_mmhg",
+    "told_hypertension",
+    "told_diabetes",
+    "hx_coronary_disease",
+    "hx_heart_failure",
+    "hx_stroke",
+    "on_insulin",
+    "on_diabetes_pills",
+    "smoking_status",
+    "glucose_serum_mgdl",
+    "hba1c_pct",
+    "total_chol_mgdl",
+    "hdl_mgdl",
+    "hemoglobin_gdl",
+    "told_weak_failing_kidneys"
+   ],
+   "conditional": [
+    "on_bp_medication",
+    "pregnant",
+    "on_dialysis"
+   ],
+   "note": "conditional: yalnız ilgili soru geçerliyse sorulur (ask_when; ör. kadında GDM, tansiyon tanısı varsa ilaç)"
+  }
+ },
+ "form": {
+  "sections": [
+   {
+    "id": "temel",
+    "title_tr": "Temel bilgiler",
+    "optional": false
+   },
+   {
+    "id": "olcumler",
+    "title_tr": "Ölçümler",
+    "optional": false,
+    "description_tr": "Boy, kilo, bel çevresi ve oturarak, ≥ 5 dk dinlenme sonrası ardışık 3 tansiyon okuması."
+   },
+   {
+    "id": "oyku",
+    "title_tr": "Öykü ve ilaçlar",
+    "optional": false
+   },
+   {
+    "id": "laboratuvar",
+    "title_tr": "Laboratuvar ve spirometri",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Girilen değerler laboratuvarlı modelleri çalıştırabilir."
+   },
+   {
+    "id": "klinik",
+    "title_tr": "Klinik değerlendirme ve efor testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı; yalnız CAD modeli (klinik mod) kullanır."
+   }
+  ],
+  "category_labels_tr": {
+   "_boolean": {
+    "true": "Evet",
+    "false": "Hayır",
+    "unknown": "Bilmiyorum"
+   },
+   "sex": {
+    "female": "Kadın",
+    "male": "Erkek"
+   },
+   "race_ethnicity": {
+    "mexican_american": "Meksika kökenli Amerikalı",
+    "other_hispanic": "Diğer Hispanik",
+    "nh_white": "Hispanik olmayan beyaz",
+    "nh_black": "Hispanik olmayan siyah",
+    "other_incl_multi": "Diğer / çok ırklı"
+   },
+   "smoking_status": {
+    "never": "Hiç içmedi (yaşamı boyunca < 100 sigara)",
+    "former": "Bıraktı",
+    "current": "Şu an içiyor"
+   },
+   "cad_chest_pain_type": {
+    "typical_angina": "Tipik anjina",
+    "atypical_angina": "Atipik anjina",
+    "non_anginal": "Anjinal olmayan ağrı",
+    "asymptomatic": "Asemptomatik"
+   },
+   "cad_resting_ecg": {
+    "normal": "Normal",
+    "st_t_abnormality": "ST-T anormalliği",
+    "lv_hypertrophy": "Sol ventrikül hipertrofisi"
+   },
+   "cad_st_slope": {
+    "upsloping": "Yukarı eğimli",
+    "flat": "Düz",
+    "downsloping": "Aşağı eğimli"
+   }
+  },
+  "virtual_field_labels_tr": {
+   "ecg_record": "EKG kaydı (.hea + .dat/.mat)"
+  },
+  "rule_note": "ask_when_rule / required_when_rule: koşulların tümü (VE) sağlanınca soru gösterilir / zorunludur; şemadaki metinden sunucuda ayrıştırıldı."
+ },
+ "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun."
+}

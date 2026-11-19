@@ -1,0 +1,71 @@
+{
+ "passed": 13,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "V1 önceki dosyalarda değişen = 0",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "V2 önceki dosyalarda silinen = 0",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "V3 phase_xliii dışında yeni dosya = 0",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "V4 envanter boyutları",
+   "passed": true,
+   "detail": "faz başı (phase_xliii hariç) 158222 -> faz sonu 158222"
+  },
+  {
+   "check": "V5 registry model SHA'ları faz başı envanteriyle aynı",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "check": "V6 registry_check: hepsi geçti",
+   "passed": true,
+   "detail": "269/269"
+  },
+  {
+   "check": "V7 clinical_probability_eligibility=false",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "V8 test/sealed veri dosyası bu fazda okunmadı (betikler yalnız model, kilit ve manifest dosyalarına erişir)",
+   "passed": true,
+   "detail": "kod incelemesi: registry_lib.py, build_registry.py, registry_check.py, make_selection_doc.py"
+  },
+  {
+   "check": "V9 çıktı var: PHASE_XLIII_REPORT.md",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "V9 çıktı var: 01_model_selection.md",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "V9 çıktı var: registry/models.json",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "V9 çıktı var: registry/input_schema.json",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "V9 çıktı var: scripts/registry_check.py",
+   "passed": true,
+   "detail": ""
+  }
+ ]
+}

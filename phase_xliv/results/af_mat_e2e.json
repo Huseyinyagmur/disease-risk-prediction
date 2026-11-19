@@ -1,0 +1,44 @@
+{
+ "note": "Karar 6: PhysioNet Challenge .hea + .mat biçimi. phase_xxxiii kayıtları (kaynak başına 10 sn uzunluğundaki ilk kayıt). records33.csv dosyasından yalnız rel/source/origin/completed + 10 feature okundu; olasılık/etiket okunmadı. Model metriği raporlanmaz. Yaş/cinsiyet sentetik (60, female).",
+ "records": [
+  {
+   "rel": "training/chapman_shaoxing/g1/JS00005",
+   "source": "chapman_shaoxing",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.425774097442627,
+   "wall_seconds": 7.123724900011439,
+   "http_roundtrip_seconds": 7.132972499995958,
+   "module_label": "ana modül"
+  },
+  {
+   "rel": "training/cpsc_2018/g1/A0034",
+   "source": "cpsc_2018",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 3.8451478481292725,
+   "wall_seconds": 6.451110099966172,
+   "http_roundtrip_seconds": 6.459722400002647,
+   "module_label": "ana modül"
+  },
+  {
+   "rel": "training/georgia/g1/E00011",
+   "source": "georgia",
+   "http_status": 200,
+   "status": "OK",
+   "n_features": 10,
+   "max_abs_delta_vs_phase_xxxiii": 0.0,
+   "all_10_within_1e6": true,
+   "octave_seconds": 4.365970134735107,
+   "wall_seconds": 6.976323399983812,
+   "http_roundtrip_seconds": 6.9860797000001185,
+   "module_label": "ana modül"
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+OK   V1 önceki dosyalarda deðiþen = 0 []
+OK   V2 önceki dosyalarda silinen = 0 []
+OK   V3 phase_xliii dýþýnda yeni dosya = 0 []
+OK   V4 envanter boyutlarý faz baþý (phase_xliii hariç) 158222 -> faz sonu 158222
+OK   V5 registry model SHA'larý faz baþý envanteriyle ayný []
+OK   V6 registry_check: hepsi geçti 269/269
+OK   V7 clinical_probability_eligibility=false 
+OK   V8 test/sealed veri dosyasý bu fazda okunmadý (betikler yalnýz model, kilit ve manifest dosyalarýna eriþir) kod incelemesi: registry_lib.py, build_registry.py, registry_check.py, make_selection_doc.py
+OK   V9 çýktý var: PHASE_XLIII_REPORT.md 
+OK   V9 çýktý var: 01_model_selection.md 
+OK   V9 çýktý var: registry/models.json 
+OK   V9 çýktý var: registry/input_schema.json 
+OK   V9 çýktý var: scripts/registry_check.py 
+verify43: 13 geçti / 0 kaldý
+exit 0

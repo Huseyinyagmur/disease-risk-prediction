@@ -1,0 +1,3 @@
+﻿files 158434
+{"before_files": 158326, "after_files": 158434, "scan_scope": "V2 tümü; .venv, __pycache__, node_modules hariç", "V1_outside_phase_and_app": true, "V2_models": true, "V3_registry_schema_af_lock": true, "V5_pyc_after_phase_start": true}
+V1 0 0 0 | app changed ['app/backend/README.md', 'app/backend/config/app_config.json', 'app/backend/healthrisk_api/ecg_af.py', 'app/backend/healthrisk_api/main.py', 'app/backend/healthrisk_api/service.py', 'app/backend/tests/test_privacy.py', 'app/backend/tests/test_scenarios.py'] | app new 59 | app deleted []

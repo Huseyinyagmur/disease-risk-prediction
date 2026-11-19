@@ -1,0 +1,13 @@
+﻿......................................................................xx [ 22%]
+....xxx................................................................. [ 45%]
+........................................................................ [ 68%]
+........................................................................ [ 91%]
+............................                                             [100%]
+============================== warnings summary ===============================
+tests/test_af_e2e.py::test_af_end_to_end_feature_parity[165]
+  C:\Bitirme\HealthRisk_AI_Research_V2\app\backend\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Bitirme\HealthRisk_AI_Research_V2\phase_xlv\results\pytest_backend_full.xml -
+311 passed, 5 xfailed, 1 warning in 381.31s (0:06:21)

@@ -1,5 +1,8 @@
-"""README görselleri ve metrik tablosu — YALNIZ phase_xliii/registry/models.json'dan (yeniden hesaplama yok).
-Çıktılar: docs/assets/model_metrics.png, docs/assets/metrics_table.md. Kullanım: python -B build_readme_assets.py"""
+"""README görselleri ve metrik tablosu — phase_xliii/registry/models.json ve AF için phase_xxxiii/results
+(b_results.csv, b_rhythm_fpr.csv, a2_results.csv) dosyalarından; yeniden hesaplama YOK, değerler aynen okunur.
+Çıktılar: docs/assets/model_metrics.png, docs/assets/metrics_table.md (tablo + dipnotlar).
+Kullanım: python -B build_readme_assets.py"""
+import csv
 import json
 from pathlib import Path
 
@@ -21,6 +24,25 @@ SHORT = {'af_S4_DEVICE': 'Atriyal fibrilasyon (EKG)', 'fibrosis_final': 'Karaci�
          'copd_S4_DEVICE': 'KOAH', 'htn_M1': 'Hipertansiyon', 'ckd_A': 'Böbrek A (form)', 'ckd_B': 'Böbrek B (+lab)'}
 TIER = {'internal_test': 'iç test', 'temporal': 'zamansal', 'external': 'dış doğrulama'}
 MARK = {'iç test': 'o', 'zamansal': 's', 'dış doğrulama': '^', 'teknik tekrar*': 'D'}
+# Etiket düzeltmesi (kullanıcı kararı): anemi dış katmanı farklı NHANES döngüleridir, bağımsız kurum doğrulaması değil.
+LABEL_OVERRIDE = {('anemia_LR16', 'dış doğrulama'): 'farklı döngüler (aynı program; bağımsız kurum değil)'}
+P33 = V2 / 'phase_xxxiii' / 'results'
+
+
+def _csv(name):
+    with open(P33 / name, encoding='utf8', newline='') as fh:
+        return list(csv.DictReader(fh))
+
+
+def _m(r, k):
+    return dict(value=float(r[k]), ci95=[float(r[k + '_lo']), float(r[k + '_hi'])])
+
+
+B_POOL = next(r for r in _csv('b_results.csv') if r['analiz'] == 'B — birincil' and r['skor'] == 'MODEL'
+              and r['kapsam'].startswith('Havuz'))
+RHY = {r['ritim']: r for r in _csv('b_rhythm_fpr.csv') if r['kapsam'].startswith('Havuz')}
+A2_EXTRA = next(r for r in _csv('a2_results.csv') if r['analiz'] == 'A2 — birincil' and r['skor'] == 'MODEL'
+                and r['kapsam'] == 'CPSC-Extra')
 METRICS = [('precision', 'Precision', 0.70, '≥'), ('recall', 'Recall', 0.75, '≥'), ('fpr', 'FPR', 0.15, '≤'), ('auc', 'AUC', None, None)]
 
 rows = []
@@ -36,7 +58,12 @@ for mid, e in sorted(((m, e) for m, e in reg['models'].items() if e.get('app_vis
                                  n=b[sub].get('n'), n_pos=b[sub].get('n_pos')))
             continue
         rows.append(dict(mid=mid, tier=t, sub=None, src=b.get('source'), **{m: b.get(m) for m, *_ in METRICS},
-                         n=b.get('n'), n_pos=b.get('n_pos')))
+                         n=b.get('n'), n_pos=b.get('n_pos'), label=LABEL_OVERRIDE.get((mid, t))))
+        if mid == 'af_S4_DEVICE' and k == 'external':             # Phase XXXIII B: diğer ritimler negatif sınıfta
+            rows.append(dict(mid=mid, tier='dış doğrulama', sub=None, label='diğer ritimler dahil (Phase XXXIII B)**',
+                             src='Phase XXXIII B (Challenge 2021, 4 kaynak havuz, ikincil analiz; AF vs SR + diğer ritimler)',
+                             precision=None, recall=_m(B_POOL, 'R'), fpr=_m(B_POOL, 'FPR'), auc=_m(B_POOL, 'AUC'),
+                             n=int(B_POOL['n']), n_pos=int(B_POOL['pos'])))
 
 val = lambda m: (m or {}).get('value') if isinstance(m, dict) else m
 ci = lambda m: (m or {}).get('ci95') if isinstance(m, dict) else None
@@ -46,7 +73,11 @@ INK, MUTED, GRID, TARGET = '#1e293b', '#64748b', '#e2e8f0', '#b45309'
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9})
 fig, axes = plt.subplots(1, 4, figsize=(13, 0.36 * len(rows) + 1.6), sharey=True)
 ys = list(range(len(rows)))[::-1]
-labels = [f"{SHORT[r['mid']]} — {r['tier']}{' ' + r['sub'] if r['sub'] else ''}" for r in rows]
+def tier_text(r):
+    return r.get('label') or (r['tier'] + (' ' + r['sub'] if r['sub'] else ''))
+
+
+labels = [f"{SHORT[r['mid']]} — {tier_text(r)}" for r in rows]
 for ax, (m, title, tgt, op) in zip(axes, METRICS):
     for y, r in zip(ys, rows):
         v, c = val(r[m]), ci(r[m])
@@ -79,10 +110,12 @@ axes[0].set_ylim(-0.7, len(rows) - 0.1)
 handles = [Line2D([], [], marker=mk, ls='', color=INK, mec='white', label=t) for t, mk in MARK.items()]
 fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(0.5, 0.035), ncol=4, frameon=False, fontsize=9,
            title='kanıt düzeyi (nokta = değer, çizgi = %95 GA; "—" = registry\'de değer yok)', title_fontsize=8)
-fig.suptitle('Kilitli test metrikleri — donmuş model ve donmuş eşik (registry: phase_xliii/registry/models.json)',
+fig.suptitle('Kilitli test metrikleri — donmuş model ve donmuş eşik (registry: phase_xliii/registry/models.json; '
+             'AF B: phase_xxxiii/results)',
              x=0.01, ha='left', fontsize=11, color=INK)
 fig.text(0.01, 0.005, '* CAD Hungarian/VA: düzeltilmiş teknik tekrar, bağımsız dış doğrulama DEĞİL (registry notu). '
-         'Ayırıcı çizgiler: ana modül / araştırma modülü / deneysel.', fontsize=7.5, color=MUTED)
+         '** AF B: negatif sınıfta diğer ritimler de var. Ayırıcı çizgiler: ana modül / araştırma modülü / deneysel.',
+         fontsize=7.5, color=MUTED)
 fig.tight_layout(rect=(0, 0.11, 1, 0.96))
 fig.savefig(OUT / 'model_metrics.png', dpi=150, facecolor='white')
 
@@ -98,8 +131,20 @@ def hedef(r):
     return 'evet' if (p >= 0.70 and rc >= 0.75 and fp <= 0.15) else 'hayır'
 lines = ['| model | modül | kanıt düzeyi | kaynak | n (pozitif) | Precision | Recall | FPR | AUC | üç hedef (nokta) |', '|---|---|---|---|---|---|---|---|---|---|']
 for r in rows:
-    lines.append(f"| {SHORT[r['mid']]} (`{r['mid']}`) | {LBL.get(r['mid'], LBL['_default'])} | {r['tier']}{' ' + r['sub'] if r['sub'] else ''} | "
+    lines.append(f"| {SHORT[r['mid']]} (`{r['mid']}`) | {LBL.get(r['mid'], LBL['_default'])} | {tier_text(r)} | "
                  f"{(r['src'] or 'BULUNAMADI').replace('|', '/')} | {r['n'] if r['n'] is not None else '—'} ({r['n_pos'] if r['n_pos'] is not None else '—'}) | "
                  f"{cell(r['precision'])} | {cell(r['recall'])} | {cell(r['fpr'])} | {cell(r['auc'])} | {hedef(r)} |")
+pct = lambda r: f3(float(r['FPR'])) + f' [{f3(float(r["FPR_lo"]))}–{f3(float(r["FPR_hi"]))}]'
+st, pvc = RHY['Sinüs taşikardisi'], RHY['PVC']
+neg_extra = int(A2_EXTRA['TN']) + int(A2_EXTRA['FP'])
+lines += ['', r'\* CAD Hungarian/VA satırları düzeltilmiş teknik tekrardır; kişiler önceden görülmüştür ve bu satırlar bağımsız '
+          'dış doğrulama **değildir** (registry notu).',
+          '', r'\*\* AF Phase XXXIII B: negatif sınıfta sinüs ritminin yanında diğer ritimler de vardır (havuz, ikincil analiz; '
+          'kaynak `phase_xxxiii/results/b_results.csv`). '
+          f'Ritim bazında FPR: sinüs taşikardisi {pct(st)} (n = {st["n"]}), PVC {pct(pvc)} (n = {pvc["n"]}) '
+          '(`b_rhythm_fpr.csv`). Precision örneklem bileşimine bağlı olduğu için, registry\'nin A2 satırındaki kuralla '
+          'aynı şekilde raporlanmaz.',
+          '', f'AF dış doğrulama (A2) havuzunda CPSC-Extra kaynağında yalnız {neg_extra} negatif (SR) kayıt vardır; bu kaynak tek '
+          f'başına yorumlanamaz (`a2_results.csv`: "{A2_EXTRA["yorum"]}").']
 (OUT / 'metrics_table.md').write_text('\n'.join(lines) + '\n', encoding='utf8')
 print('rows', len(rows), '->', OUT)

@@ -134,6 +134,27 @@ def test_disclaimer_single_source(client, service):
     assert [r.json()['disclaimer'] for r in rs] == [APPROVED_DISCLAIMER] * len(rs)
 
 
+def test_af_missing_environment_reason(monkeypatch, tmp_path):
+    """Yalnız depo klonlandığında (kilit/pipeline/Octave yok): AF açık gerekçeyle devre dışı, istisna yok."""
+    import healthrisk_api.ecg_af as A
+    monkeypatch.setattr(A, 'AF_LOCK', A.V2 / 'yok' / 'af_pipeline_lock.json')
+    af = A.AFPipeline()
+    assert not af.enabled and len(af.problems) == 1
+    assert 'Octave/ECGDeli AF çalışma ortamı yok' in af.problems[0] and 'beklenmeyen' not in af.problems[0]
+    feats, info = af.extract('x.hea', b'', 'x.dat', b'')
+    assert feats is None and 'devre dışı' in info['abstain_reason']
+
+
+def test_af_missing_octave_reason(monkeypatch):
+    import json as _json
+    import healthrisk_api.ecg_af as A
+    real = _json.loads(A.AF_LOCK.read_text(encoding='utf8'))
+    real['octave']['exe'] = 'yok/octave-cli.exe'
+    monkeypatch.setattr(A.json, 'loads', lambda s, *a, **k: real)
+    af = A.AFPipeline()
+    assert not af.enabled and any(p.startswith('Octave yok:') for p in af.problems)
+
+
 def test_parse_condition_rejects_unknown():
     fields = {'sex': {}, 'age_years': {}}
     assert parse_condition('sex = female ve age_years ≥ 18', fields)[1]['op'] == 'gte'

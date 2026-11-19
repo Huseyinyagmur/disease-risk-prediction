@@ -78,6 +78,14 @@ class AFPipeline:
         return self.module is not None and not self.problems
 
     def _verify_and_import(self):
+        # Ortam yoksa (ör. yalnız GitHub deposu klonlandı) açık gerekçe: Octave/ECGDeli ve kilitli pipeline dosyaları
+        # depoda değildir; AF devre dışı kalır, diğer modeller etkilenmez.
+        missing = [p for p in (AF_LOCK, AF_LOCK_SHA, AF_PIPELINE) if not p.exists()]
+        if missing:
+            self.problems.append('Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı ('
+                                 + ', '.join(p.relative_to(V2).as_posix() for p in missing)
+                                 + '). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır.')
+            return
         lock_sha = sha256_file(AF_LOCK)
         if AF_LOCK_SHA.read_text(encoding='utf8').strip() != lock_sha:
             self.problems.append('af_pipeline_lock.json SHA256, af_pipeline_lock.sha256 ile uyuşmuyor')
@@ -89,8 +97,10 @@ class AFPipeline:
         if sha256_file(AF_PIPELINE) != lock['pipeline_sha256']:
             self.problems.append('af_pipeline_v1.py SHA256 kilitle uyuşmuyor')
         exe = V2 / lock['octave']['exe']
-        if not exe.exists() or sha256_file(exe) != lock['octave']['exe_sha256']:
-            self.problems.append('Octave exe yok veya SHA256 kilitle uyuşmuyor')
+        if not exe.exists():
+            self.problems.append(f'Octave yok: {lock["octave"]["exe"]} bulunamadı (AF için Octave + ECGDeli ayrıca kurulmalıdır)')
+        elif sha256_file(exe) != lock['octave']['exe_sha256']:
+            self.problems.append('Octave exe SHA256 kilitle uyuşmuyor')
         for rel, h in lock['compat'].items():
             p = V2 / rel
             if not p.exists() or sha256_file(p) != h:

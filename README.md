@@ -81,10 +81,11 @@ yoktur. MI için öznitelik üretim pipeline'ı yoktur ve yalnız iç test vard�
   <img src="docs/assets/model_metrics.png" width="100%" alt="Model başına kilitli test metrikleri">
 </p>
 
-Aşağıdaki tablo ve grafik `phase_xliii/registry/models.json` dosyasından betikle üretilmiştir
-(`phase_xlv/scripts/build_readme_assets.py`). Metrikler yeniden hesaplanmamıştır; donmuş model ve donmuş eşikteki kilitli,
-tek seferlik test sonuçlarıdır. Oranlar için Wilson, AUC için bootstrap %95 GA kullanılmıştır. "—" registry'de değer
-olmadığını gösterir. AF dış doğrulamasında Precision prevalansa bağlı olduğu için değerlendirilemez.
+Aşağıdaki tablo ve grafik betikle üretilmiştir (`phase_xlv/scripts/build_readme_assets.py`). Kaynaklar
+`phase_xliii/registry/models.json` ve AF'nin "diğer ritimler dahil" satırı için `phase_xxxiii/results/` dosyalarıdır.
+Metrikler yeniden hesaplanmamıştır; donmuş model ve donmuş eşikteki kilitli, tek seferlik test sonuçlarıdır. Oranlar
+için Wilson, AUC için bootstrap %95 GA kullanılmıştır. "—" değer olmadığını gösterir. AF dış doğrulamasında Precision
+prevalansa (örneklem bileşimine) bağlı olduğu için değerlendirilemez.
 
 **Üç araştırma hedefi** P ≥ 0,70, R ≥ 0,75, FPR ≤ 0,15'tir ve aynı model ile aynı eşikte birlikte sağlanmalıdır. Son
 sütun yalnız nokta tahminine bakar; güven aralığını hesaba katmaz. Bu hedefler araştırma hedefidir, **klinik onay
@@ -94,6 +95,7 @@ kriteri değildir**.
 |---|---|---|---|---|---|---|---|---|---|
 | Atriyal fibrilasyon (EKG) (`af_S4_DEVICE`) | ana modül | iç test | Phase XXVII (PTB-XL, hasta düzeyinde ayrık) | 1572 (114) | 0,873 [0,801–0,921] | 0,904 [0,835–0,945] | 0,010 [0,006–0,017] | 0,980 [0,959–0,995] | evet |
 | Atriyal fibrilasyon (EKG) (`af_S4_DEVICE`) | ana modül | dış doğrulama | Phase XXXIII A2 (Challenge 2021: CPSC2018, CPSC-Extra, Chapman-Shaoxing, Georgia; AF vs SR, tam örneklem, havuz) | 7817 (3497) | — | 0,929 [0,919–0,937] | 0,003 [0,001–0,005] | 0,990 [0,987–0,992] | değerlendirilemez |
+| Atriyal fibrilasyon (EKG) (`af_S4_DEVICE`) | ana modül | diğer ritimler dahil (Phase XXXIII B)** | Phase XXXIII B (Challenge 2021, 4 kaynak havuz, ikincil analiz; AF vs SR + diğer ritimler) | 5477 (3497) | — | 0,929 [0,919–0,937] | 0,072 [0,062–0,084] | 0,965 [0,960–0,970] | değerlendirilemez |
 | Karaciğer fibrozisi (`fibrosis_final`) | ana modül | iç test | Phase XXXI (NHANES L, kilitli tek sefer) | 4714 (—) | 0,240 [0,221–0,260] | 0,768 [0,733–0,801] | 0,346 [0,332–0,361] | 0,794 [0,773–0,813] | hayır |
 | Osteoporoz (`osteo_final`) | araştırma modülü | zamansal | Phase XXX (NHANES J, kilitli tek sefer) | 2275 (164) | 0,208 [0,178–0,242] | 0,780 [0,711–0,837] | 0,230 [0,213–0,249] | 0,849 [0,818–0,880] | hayır |
 | Koroner arter hastalığı (`cad_DEVICE`) | deneysel | iç test | Cleveland UCI test (phase_xxvii; önceden görülmüş) | 61 (28) | 0,885 [0,710–0,960] | 0,821 [0,644–0,921] | 0,091 [0,031–0,236] | 0,948 [0,888–0,990] | evet |
@@ -102,15 +104,18 @@ kriteri değildir**.
 | Diyabet A (form) (`dm_A`) | deneysel | iç test | Phase XLII (NHANES G 2011–12 + H 2013–14, kilitli tek sefer) | 8895 (389) | 0,103 [0,092–0,115] | 0,733 [0,687–0,774] | 0,292 [0,282–0,302] | 0,800 [0,781–0,819] | hayır |
 | Diyabet B (+lab) (`dm_B`) | deneysel | iç test | Phase XLII (G+H, kilitli tek sefer) | 8895 (389) | 0,122 [0,109–0,136] | 0,715 [0,668–0,757] | 0,236 [0,227–0,245] | 0,826 [0,808–0,843] | hayır |
 | Anemi (`anemia_LR16`) | deneysel | iç test | Phase XXVII (NHANES 1999–2000 A, önceden görülmüş) | 410 (21) | 0,810 [0,600–0,923] | 0,810 [0,600–0,923] | 0,010 [0,004–0,026] | 0,991 [0,980–0,999] | evet |
-| Anemi (`anemia_LR16`) | deneysel | dış doğrulama | Phase XL (NHANES C, E, F, I birleşik) | 11171 (669) | 0,709 [0,678–0,739] | 0,883 [0,857–0,906] | 0,023 [0,020–0,026] | 0,991 [0,989–0,993] | evet |
+| Anemi (`anemia_LR16`) | deneysel | farklı döngüler (aynı program; bağımsız kurum değil) | Phase XL (NHANES C, E, F, I birleşik) | 11171 (669) | 0,709 [0,678–0,739] | 0,883 [0,857–0,906] | 0,023 [0,020–0,026] | 0,991 [0,989–0,993] | evet |
 | KOAH (`copd_S4_DEVICE`) | deneysel | iç test | Phase XXVII (NHANES G 2011–12) | 37 (20) | 1,000 [0,772–1,000] | 0,650 [0,433–0,819] | 0,000 [0,000–0,184] | 0,921 [0,824–0,988] | hayır |
 | KOAH (`copd_S4_DEVICE`) | deneysel | zamansal | Phase XXVII (NHANES F 2009–10) | 250 (156) | 0,929 [0,871–0,962] | 0,756 [0,683–0,817] | 0,096 [0,051–0,172] | 0,898 [0,857–0,934] | evet |
 | Hipertansiyon (`htn_M1`) | deneysel | zamansal | Phase XXXVII (NHANES C 2003–04, kilitli tek sefer; hiçbir hedefte önceden kullanılmamış kişiler) | 2798 (1001) | 0,702 [0,675–0,729] | 0,766 [0,739–0,791] | 0,181 [0,164–0,199] | 0,875 [0,862–0,887] | hayır |
 | Böbrek A (form) (`ckd_A`) | deneysel | iç test | Phase XXXV (NHANES I, kilitli tek sefer) | 4812 (716) | 0,293 [0,273–0,314] | 0,767 [0,734–0,796] | 0,323 [0,309–0,337] | 0,791 [0,773–0,809] | hayır |
 | Böbrek B (+lab) (`ckd_B`) | deneysel | iç test | Phase XXXV (NHANES I, kilitli tek sefer) | 4812 (716) | 0,313 [0,291–0,335] | 0,754 [0,721–0,784] | 0,290 [0,276–0,304] | 0,805 [0,788–0,823] | hayır |
 
-\* CAD Hungarian/VA satırları düzeltilmiş teknik tekrardır. Bu kişiler daha önce görülmüştür ve bu satırlar bağımsız
-dış doğrulama **değildir** (registry notu).
+\* CAD Hungarian/VA satırları düzeltilmiş teknik tekrardır; kişiler önceden görülmüştür ve bu satırlar bağımsız dış doğrulama **değildir** (registry notu).
+
+\*\* AF Phase XXXIII B: negatif sınıfta sinüs ritminin yanında diğer ritimler de vardır (havuz, ikincil analiz; kaynak `phase_xxxiii/results/b_results.csv`). Ritim bazında FPR: sinüs taşikardisi 0,181 [0,138–0,235] (n = 237), PVC 0,306 [0,206–0,430] (n = 62) (`b_rhythm_fpr.csv`). Precision örneklem bileşimine bağlı olduğu için, registry'nin A2 satırındaki kuralla aynı şekilde raporlanmaz.
+
+AF dış doğrulama (A2) havuzunda CPSC-Extra kaynağında yalnız 4 negatif (SR) kayıt vardır; bu kaynak tek başına yorumlanamaz (`a2_results.csv`: "YORUMLANAMAZ (SR n=4)").
 
 **Modeller ve aileleri** (registry): AF — LightGBM (12 öznitelik; 10 EKG aralık özniteliği + yaş, cinsiyet) · CAD —
 lojistik regresyon + sigmoid kalibrasyon · Diyabet A/B — lojistik regresyon · Anemi — kalibre lojistik regresyon ·
@@ -165,30 +170,46 @@ Faz raporları: [Phase XLIII — registry](phase_xliii/PHASE_XLIII_REPORT.md) ·
 
 ## Kurulum ve çalıştırma
 
-> **Önemli:** Bu depo yalnız registry (Phase XLIII), backend ve arayüz kodunu, Phase XLIV–XLV çıktılarını içerir.
-> Uygulamanın çalışması için gereken şu dosyalar depoda **yoktur**:
-> - registry'nin işaret ettiği **model dosyaları** (önceki faz klasörlerinde),
-> - **Octave/ECGDeli çalışma ortamı**,
-> - ham veriler ve önceki fazlar.
->
-> Bu nedenle depo tek başına klonlanıp çalıştırılamaz. Sunucu, eksik veya SHA256'sı uyuşmayan modelleri devre dışı
-> bırakır ve `/health`'te raporlar.
+Depo, registry'deki 13 donmuş model dosyasını registry'deki göreli yollarda ve SHA256'ları registry ile aynı olarak
+içerir. Ayrıca bazı pickle'ların yüklenmek için istediği 4 küçük yardımcı modül de depodadır
+(`All_Disease_Improvement_Phase21/src/` ve `Clinical_Optimization_Phase25/src/` altındaki `common.py` ve
+`pipeline_components.py`). Klonlanan depo **AF hariç** çalışır.
 
-Tam araştırma ağacı mevcutsa (Windows, Python 3.13.3, Node.js 22):
+Gereksinimler: Windows, **Python 3.13.3** ve Node.js 22. Sunucu, Python ve paket sürümleri kilitli sürümlerden farklıysa
+tüm modelleri devre dışı bırakır; eşdeğerlik yalnız bu sürümlerde gösterilmiştir.
 
 ```powershell
-# Backend
-cd app\backend
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements.lock
-.venv\Scripts\python.exe -B run_server.py --port 8000        # http://127.0.0.1:8000
+git clone https://github.com/Huseyinyagmur/disease-risk-prediction.git
+cd disease-risk-prediction
 
-# Arayüz (ayrı terminal)
+# 1) Backend (127.0.0.1:8000)
+cd app\backend
+py -3.13 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.lock
+.venv\Scripts\python.exe -B run_server.py --port 8000
+
+# 2) Arayüz (ayrı terminal; 127.0.0.1:4173)
 cd app\frontend
 npm ci
 npm run build
-npm run preview                                              # http://127.0.0.1:4173
+npm run preview
 ```
+
+Beklenen `/health` sonucu: uygulamada görünen 11 modelden 10'u yüklüdür. AF modeli, çalışma ortamı olmadığı için
+gerekçesiyle devre dışıdır ("Octave/ECGDeli AF çalışma ortamı yok …"). Bu nedenle `status` değeri `degraded` olur.
+Form tabanlı tüm modeller, canlı panel ve sonuç ekranı çalışır.
+
+**AF (EKG) için ek kurulum.** AF modeli yalnız kilitli `AF-ECGDELI-OCTAVE-v1` pipeline'ı ile çalışır. Aşağıdakiler bu
+depoda **yoktur**; sunucu başlangıçta hepsinin SHA256'sını kilit dosyasıyla doğrular:
+
+- GNU Octave 10.3.0 (signal, statistics, image paketleriyle),
+- ECGDeli v1.1 kaynak ağacı (GPL-3.0; [KIT-IBT/ECGdeli](https://github.com/KIT-IBT/ECGdeli)),
+- kilitli pipeline dosyaları: `phase_xxviii/config/af_pipeline_lock.json`, `phase_xxviii/pipeline/af_pipeline_v1.py`,
+  compat `.m` dosyaları ve vendored WFDB,
+- "ilk 10 sn" ön adımının kaynak doğrulaması için `phase_xxix/scripts/t3_extract.py` ve
+  `phase_xxxiii/scripts/t3_extract.py`.
+
+Bunlar tam araştırma ağacında bulunur. Sürüm veya SHA256 uyuşmazsa AF devre dışı kalır.
 
 Ayrıntılar: [app/backend/README.md](app/backend/README.md), [app/frontend/README.md](app/frontend/README.md).
 
@@ -196,7 +217,7 @@ Ayrıntılar: [app/backend/README.md](app/backend/README.md), [app/frontend/READ
 
 | paket | sonuç (Phase XLV sonu) |
 |---|---|
-| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 311 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
+| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 313 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
 | Vitest + React Testing Library | 33/33 |
 | Playwright uçtan uca (canlı backend): normal, eksik, birim hatası, kapsam dışı (AF ve fibrozis), gizlilik | 20/20 |
 
@@ -212,20 +233,43 @@ Raporlar: [phase_xliv/03_tests.md](phase_xliv/03_tests.md), [phase_xlv/02_tests.
 | `phase_xliv/` | backend fazı: şema v2, parity, ortam eşdeğerliği, testler |
 | `phase_xlv/` | arayüz fazı: raporlar, ekran görüntüleri, AF süre analizi, test sonuçları |
 | `docs/assets/` | README görselleri (registry'den üretilmiş) |
+| registry model yolları (13 `.joblib`) | donmuş modeller; registry'deki göreli yollarda, SHA256 registry ile aynı (ör. `phase_xlii/models/`, `phase_xxxv/models/`, `All_Disease_Improvement_Phase21/models/`) |
+| `All_Disease_Improvement_Phase21/src/`, `Clinical_Optimization_Phase25/src/` | yalnız pickle yüklemesinin istediği `common.py` ve `pipeline_components.py` |
+| `LICENSE` | MIT (kod) |
 
 ## Veri kaynakları ve lisanslar
 
-Modellerin geliştirildiği ve doğrulandığı kaynaklar (registry'deki `source` alanlarından):
+### Kod
 
-- **NHANES** (CDC/NCHS): diyabet, böbrek, hipertansiyon, karaciğer fibrozisi, osteoporoz, anemi, KOAH.
-- **PTB-XL** (PhysioNet): AF modeli geliştirme ve iç test.
-- **PhysioNet/Computing in Cardiology Challenge 2021** (CPSC2018, CPSC-Extra, Chapman-Shaoxing, Georgia): AF dış
-  doğrulama.
-- **UCI Heart Disease** (Cleveland; Hungarian ve VA teknik tekrar): CAD.
+Bu depodaki kod [MIT lisansı](LICENSE) ile yayımlanır. MIT lisansı aşağıdaki veri setlerini ve üçüncü taraf
+yazılımları kapsamaz; onlar kendi lisanslarına tabidir. Depodaki donmuş model dosyaları bu veri setlerinden
+eğitilmiştir; kullanımda ilgili veri setine atıf yapılmalıdır.
 
-Depodaki iki örnek EKG kaydı (`app/frontend/public/samples/`, PTB-XL 1.0.3) CC BY 4.0 lisanslıdır. Atıflar
-[app/frontend/README.md](app/frontend/README.md) içindedir. Depodaki ham veri yalnız bu iki örnek kayıttır. Parity
-raporlarında NHANES kamuya açık verisinden türetilmiş az sayıda kişi düzeyi değer bulunur.
+### Veri setleri
+
+| veri seti | kullanıldığı modeller | lisans | atıf |
+|---|---|---|---|
+| **NHANES** (CDC/NCHS) | diyabet A/B, böbrek A/B, hipertansiyon, karaciğer fibrozisi, osteoporoz, anemi, KOAH | Kamuya açık (public-use) ABD federal verisi; genel olarak kamu malı kabul edilir. Bu kontrolde NCHS sayfalarında açık bir "public domain" ifadesi bulunamadı. NCHS Veri Kullanıcı Sözleşmesi geçerlidir: veriler yalnız istatistiksel raporlama ve analiz için kullanılabilir, kişi kimliği tespit edilmeye çalışılamaz. | Centers for Disease Control and Prevention (CDC), National Center for Health Statistics (NCHS). National Health and Nutrition Examination Survey Data. Hyattsville, MD: U.S. Department of Health and Human Services, CDC (ilgili döngü yılları). *Yaygın atıf biçimidir; NCHS sayfasında bu kontrolde doğrulanamadı.* |
+| **PTB-XL** 1.0.3 (PhysioNet) | AF (geliştirme, iç test); depodaki 2 örnek EKG | CC BY 4.0 | Wagner P, Strodthoff N, Bousseljot R, Samek W, Schaeffter T. PTB-XL, a large publicly available electrocardiography dataset (version 1.0.3). PhysioNet, 2022. [doi:10.13026/kfzx-aw45](https://doi.org/10.13026/kfzx-aw45) · Wagner P, et al. PTB-XL: A Large Publicly Available ECG Dataset. *Scientific Data*, 2020. [doi:10.1038/s41597-020-0495-6](https://doi.org/10.1038/s41597-020-0495-6) |
+| **PhysioNet/CinC Challenge 2021** 1.0.3 (CPSC2018, CPSC-Extra, Chapman-Shaoxing, Georgia) | AF dış doğrulama | CC BY 4.0 | Reyna M, Sadr N, Gu A, Perez Alday EA, Liu C, Seyedi S, Shah A, Clifford G. Will Two Do? Varying Dimensions in Electrocardiography: The PhysioNet/Computing in Cardiology Challenge 2021 (version 1.0.3). PhysioNet, 2022. [doi:10.13026/34va-7q14](https://doi.org/10.13026/34va-7q14) · Reyna MA, et al. Will Two Do? … 2021 Computing in Cardiology (CinC), Brno, 2021. [doi:10.23919/CinC53138.2021.9662687](https://doi.org/10.23919/CinC53138.2021.9662687) |
+| **UCI Heart Disease** | CAD (Cleveland; Hungarian ve VA teknik tekrar) | CC BY 4.0 | Janosi A, Steinbrunn W, Pfisterer M, Detrano R. Heart Disease [Dataset]. UCI Machine Learning Repository, 1989. [doi:10.24432/C52P4X](https://doi.org/10.24432/C52P4X) |
+| **Mendeley Data** — RIP3 kalp yetmezliği verisi | kalp yetmezliği (`hf_S2_BASIC_LAB`; yalnız registry'de, uygulamada yok) | CC BY 4.0 | Zhang S. Data for: Plasma Level of Receptor-Interacting Protein Kinase-3 as a Potential Biomarker for Diagnosis and Prognosis in Heart Failure. Mendeley Data, V1, 2020. [doi:10.17632/7v4w66wxj8.1](https://doi.org/10.17632/7v4w66wxj8.1) |
+
+PhysioNet kaynaklarının istediği standart PhysioNet atfı: Pollard T, Moody BE, Lehman L, Gow B, Fernandes C, Xie C,
+Johnson A, Mark RG, Heldt T. PhysioNet as a global platform for biomedical research. *Nature Health*, 2026.
+[doi:10.1038/s44360-026-00096-z](https://doi.org/10.1038/s44360-026-00096-z).
+
+Depodaki veri: iki PTB-XL örnek EKG kaydı (`app/frontend/public/samples/`) ve parity raporlarında NHANES kamuya açık
+verisinden türetilmiş az sayıda kişi düzeyi değer. Bunların dışında ham veri yoktur.
+
+### Üçüncü taraf yazılım (depoda yok)
+
+- **ECGDeli v1.1** — GPL-3.0 (yerel kopyadaki `LICENSE.txt` ve [KIT-IBT/ECGdeli](https://github.com/KIT-IBT/ECGdeli)
+  deposu). AF pipeline'ı ECGDeli'yi Octave'da ayrı bir süreç olarak çalıştırır; ECGDeli bu depoya konmamıştır. Atıf:
+  Pilia N, Nagel C, Lenis G, Becker S, Dössel O, Loewe A. ECGdeli — An Open Source ECG Delineation Toolbox for MATLAB.
+  *SoftwareX*, 13:100639, 2021. [doi:10.1016/j.softx.2020.100639](https://doi.org/10.1016/j.softx.2020.100639)
+- **GNU Octave** — kendi lisansıyla ayrıca kurulur; depoda yoktur.
+- Python ve npm paketleri kendi lisanslarına tabidir (`app/backend/requirements.lock`, `app/frontend/package-lock.json`).
 
 ## Sınırlılıklar
 

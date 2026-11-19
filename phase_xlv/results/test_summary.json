@@ -193,11 +193,11 @@
   "passed": 33
  },
  "backend_pytest": {
-  "tests": 316,
+  "tests": 318,
   "failures": 0,
   "errors": 0,
   "skipped": 5,
-  "passed": 311
+  "passed": 313
  },
  "playwright_repeat": {
   "total": 20,

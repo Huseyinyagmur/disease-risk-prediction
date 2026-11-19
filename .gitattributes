@@ -1,0 +1,6 @@
+# Bayt düzeyinde korunması gereken dosyalar (SHA256 doğrulaması; satır sonu dönüşümü yok)
+*.joblib binary
+*.dat binary
+*.mat binary
+*.hea -text
+*.png binary

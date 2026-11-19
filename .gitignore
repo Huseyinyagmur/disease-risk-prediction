@@ -8,3 +8,24 @@ __pycache__/
 app/frontend/dist/
 phase_xlv/results/playwright_artifacts/
 phase_xlv/logs/pw_*_run/
+
+# SHA256 bütünlük envanterleri (çok büyük; yerelde kalır, depoda izlenmez)
+sha256_before.json
+sha256_after.json
+sha256_final_scan.json
+
+# Model dosyaları: yalnız registry'deki 13 donmuş model izlenir (phase_xliii/registry/models.json yolları)
+*.joblib
+!All_Disease_Improvement_Phase21/models/af_S4_DEVICE.joblib
+!phase_xxxviii/models/mi_model.joblib
+!models/cad/DEVICE.joblib
+!phase_xlii/models/dm_A_final.joblib
+!phase_xlii/models/dm_B_final.joblib
+!Clinical_Optimization_Phase25/models/anemia_CBC_MATCHED16.joblib
+!All_Disease_Improvement_Phase21/models/copd_S4_DEVICE.joblib
+!All_Disease_Improvement_Phase21/models/heart_failure_S2_BASIC_LAB.joblib
+!phase_xxxvii/models/htn3_M1.joblib
+!phase_xxxi/models/fibrosis_final.joblib
+!phase_xxx/models/osteo_final.joblib
+!phase_xxxv/models/ckd_A_final.joblib
+!phase_xxxv/models/ckd_B_final.joblib

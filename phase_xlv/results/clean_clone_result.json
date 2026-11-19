@@ -1,0 +1,177 @@
+{
+ "clone_root": "<temiz klasör; GitHub main 8bd52f7>",
+ "models": {
+  "af_S4_DEVICE": {
+   "path": "All_Disease_Improvement_Phase21/models/af_S4_DEVICE.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "CalibratedResearchModel"
+  },
+  "mi_model": {
+   "path": "phase_xxxviii/models/mi_model.joblib",
+   "app_visible": false,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "cad_DEVICE": {
+   "path": "models/cad/DEVICE.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "CalibratedClassifierCV"
+  },
+  "dm_A": {
+   "path": "phase_xlii/models/dm_A_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "dm_B": {
+   "path": "phase_xlii/models/dm_B_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "anemia_LR16": {
+   "path": "Clinical_Optimization_Phase25/models/anemia_CBC_MATCHED16.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "CalibratedResearchModel"
+  },
+  "copd_S4_DEVICE": {
+   "path": "All_Disease_Improvement_Phase21/models/copd_S4_DEVICE.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "CalibratedResearchModel"
+  },
+  "hf_S2_BASIC_LAB": {
+   "path": "All_Disease_Improvement_Phase21/models/heart_failure_S2_BASIC_LAB.joblib",
+   "app_visible": false,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "CalibratedResearchModel"
+  },
+  "htn_M1": {
+   "path": "phase_xxxvii/models/htn3_M1.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "fibrosis_final": {
+   "path": "phase_xxxi/models/fibrosis_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "osteo_final": {
+   "path": "phase_xxx/models/osteo_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "ckd_A": {
+   "path": "phase_xxxv/models/ckd_A_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  },
+  "ckd_B": {
+   "path": "phase_xxxv/models/ckd_B_final.joblib",
+   "app_visible": true,
+   "exists": true,
+   "sha256_matches_registry": true,
+   "loads": true,
+   "type": "Pipeline"
+  }
+ },
+ "health": {
+  "status": "degraded",
+  "schema_version": "2.0",
+  "packages_ok": true,
+  "registry_problems": [],
+  "models": {
+   "af_S4_DEVICE": {
+    "enabled": true,
+    "problems": []
+   },
+   "cad_DEVICE": {
+    "enabled": true,
+    "problems": []
+   },
+   "dm_A": {
+    "enabled": true,
+    "problems": []
+   },
+   "dm_B": {
+    "enabled": true,
+    "problems": []
+   },
+   "anemia_LR16": {
+    "enabled": true,
+    "problems": []
+   },
+   "copd_S4_DEVICE": {
+    "enabled": true,
+    "problems": []
+   },
+   "htn_M1": {
+    "enabled": true,
+    "problems": []
+   },
+   "fibrosis_final": {
+    "enabled": true,
+    "problems": []
+   },
+   "osteo_final": {
+    "enabled": true,
+    "problems": []
+   },
+   "ckd_A": {
+    "enabled": true,
+    "problems": []
+   },
+   "ckd_B": {
+    "enabled": true,
+    "problems": []
+   }
+  },
+  "disabled_models": [],
+  "af_pipeline": {
+   "enabled": false,
+   "problems": [
+    "Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı (phase_xxviii/config/af_pipeline_lock.json, phase_xxviii/config/af_pipeline_lock.sha256, phase_xxviii/pipeline/af_pipeline_v1.py). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır."
+   ]
+  }
+ },
+ "summary": {
+  "n_registry": 13,
+  "n_files_present": 13,
+  "n_sha_match": 13,
+  "n_loadable": 13,
+  "health_app_visible": 11,
+  "health_enabled": 11,
+  "health_disabled": []
+ }
+}

@@ -1,14 +1,21 @@
 {
  "before_files": 158326,
- "after_files": 158434,
+ "after_files": 158444,
  "scan_scope": "V2 tümü; .venv, __pycache__, node_modules hariç",
  "V1_outside_phase_and_app": {
   "before": 158297,
-  "after": 158297,
+  "after": 158303,
   "changed": [],
   "deleted": [],
-  "new": [],
-  "ok": true
+  "new": [
+   ".gitattributes",
+   ".gitignore",
+   "LICENSE",
+   "README.md",
+   "docs/assets/metrics_table.md",
+   "docs/assets/model_metrics.png"
+  ],
+  "ok": false
  },
  "V2_models": {
   "ok": true,

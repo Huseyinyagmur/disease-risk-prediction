@@ -195,9 +195,13 @@ npm run build
 npm run preview
 ```
 
-Beklenen `/health` sonucu: uygulamada görünen 11 modelden 10'u yüklüdür. AF modeli, çalışma ortamı olmadığı için
-gerekçesiyle devre dışıdır ("Octave/ECGDeli AF çalışma ortamı yok …"). Bu nedenle `status` değeri `degraded` olur.
-Form tabanlı tüm modeller, canlı panel ve sonuç ekranı çalışır.
+Beklenen `/health` sonucu (temiz klonda doğrulandı; `phase_xlv/03b_clean_clone.md`):
+
+- 13 model dosyasının tamamı mevcuttur, SHA256'ları registry ile aynıdır ve yüklenebilir.
+- Uygulamada görünen 11 modelin 11'i etkindir. Paket ve registry kontrolleri temizdir.
+- **AF pipeline'ı** gerekçesiyle devre dışıdır ("Octave/ECGDeli AF çalışma ortamı yok …"), bu yüzden `status` değeri
+  `degraded` olur. `POST /ecg/af` aynı gerekçeyle ABSTAIN döner; AF modeli EKG özniteliği olmadan çalışamaz.
+- Form tabanlı tüm modeller, canlı panel ve sonuç ekranı çalışır.
 
 **AF (EKG) için ek kurulum.** AF modeli yalnız kilitli `AF-ECGDELI-OCTAVE-v1` pipeline'ı ile çalışır. Aşağıdakiler bu
 depoda **yoktur**; sunucu başlangıçta hepsinin SHA256'sını kilit dosyasıyla doğrular:

@@ -4,7 +4,7 @@ import hashlib, json, os, sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 V2 = Path(__file__).resolve().parents[2]
-SKIP = {'.venv', '__pycache__', 'node_modules'}
+SKIP = {'.venv', '__pycache__', 'node_modules', '.git'}
 def sha256(p, bs=1 << 20):
     h = hashlib.sha256()
     with open(p, 'rb') as f:

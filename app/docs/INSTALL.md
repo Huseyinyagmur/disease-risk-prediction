@@ -88,7 +88,7 @@ SHA256'sını `phase_xxviii/config/af_pipeline_lock.json` ile karşılaştırır
 
 | paket | komut | gereksinim | durum |
 |---|---|---|---|
-| Backend (hızlı) | `cd app\backend; .venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -m "not slow"` | parity testleri geliştirme verisi ister (tam araştırma ağacı); klonda bu testler atlanır/başarısız olabilir | [bu makinede doğrulandı] |
+| Backend (hızlı) | `cd app\backend; .venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -m "not slow"` | tam araştırma ağacı (geliştirme verisi, AF kilidi, phase_xxviii örnekleri) | tam ağaçta [bu makinede doğrulandı]. **Yalnız GitHub klonunda** 2 dosya toplanamaz (`test_af_e2e.py`, `test_af_mat.py`), bunlar hariç 268 geçti / 22 başarısız: başarısızların tamamı klonda olmayan araştırma dosyalarına bağlı (parity, AF kilidi, örnek EKG kopyası); `phase_xlvi/results/clean_clone46.json` |
 | Backend (tam, AF uçtan uca) | `… -m pytest -p no:cacheprovider tests` | §4 AF ortamı | [bu makinede doğrulandı] |
 | Vitest | `cd app\frontend; npm test` | yok (backend gerekmez) | [temiz klonda doğrulandı] |
 | Tip denetimi | `npm run typecheck` | yok | [temiz klonda doğrulandı] |

@@ -1,0 +1,121 @@
+{
+ "clone_root": "C:\\Users\\husey\\AppData\\Local\\Temp\\claude\\66f50f31719e3019\\5a34b1b3-337a-4985-9c45-159dee2db0cb\\scratchpad\\clone46",
+ "python": "3.13.3",
+ "models": {
+  "af_S4_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "mi_model": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "cad_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "dm_A": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "dm_B": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "anemia_LR16": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "copd_S4_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "hf_S2_BASIC_LAB": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "htn_M1": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "fibrosis_final": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "osteo_final": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "ckd_A": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "ckd_B": {
+   "exists": true,
+   "sha_ok": true
+  }
+ },
+ "health": {
+  "status": "degraded",
+  "disabled_models": [],
+  "n_models": 11,
+  "af_enabled": false,
+  "af_problems": [
+   "Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı (phase_xxviii/config/af_pipeline_lock.json, phase_xxviii/config/af_pipeline_lock.sha256, phase_xxviii/pipeline/af_pipeline_v1.py). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır."
+  ],
+  "packages_ok": true,
+  "registry_problems": []
+ },
+ "eligibility_af": {
+  "state": "ABSTAIN",
+  "reasons": [
+   "Octave/ECGDeli AF çalışma ortamı yok"
+  ],
+  "missing_fields": [],
+  "af_pipeline_available": false
+ },
+ "predict_status": 200,
+ "predict_osteo": [
+  "OK"
+ ],
+ "ok": true,
+ "clone_commit": "6c5930c",
+ "frontend": {
+  "npm_ci": "ok",
+  "typecheck": "ok",
+  "vitest": "36 passed (36)",
+  "build": "ok"
+ },
+ "backend_pytest_not_slow": {
+  "collection_errors": [
+   "tests/test_af_e2e.py (phase_xxviii/results/tol100_pipeline_features.csv yok)",
+   "tests/test_af_mat.py (phase_xxxiii/results/records33.csv yok)"
+  ],
+  "summary_without_those_two": "22 failed, 268 passed, 3 skipped, 2 deselected, 5 xfailed, 1 warning in 7.19s",
+  "failed": [
+   "tests/test_api.py::test_health",
+   "tests/test_integrity.py::test_af_pipeline_lock_verified",
+   "tests/test_parity.py::test_ckd_meds_now_match_training",
+   "tests/test_parity.py::test_parity_explained[anemia_LR16]",
+   "tests/test_parity.py::test_parity_explained[cad_DEVICE]",
+   "tests/test_parity.py::test_parity_explained[ckd_A]",
+   "tests/test_parity.py::test_parity_explained[ckd_B]",
+   "tests/test_parity.py::test_parity_explained[copd_S4_DEVICE]",
+   "tests/test_parity.py::test_parity_explained[dm_A]",
+   "tests/test_parity.py::test_parity_explained[dm_B]",
+   "tests/test_parity.py::test_parity_explained[fibrosis_final]",
+   "tests/test_parity.py::test_parity_explained[htn_M1]",
+   "tests/test_parity.py::test_parity_explained[osteo_final]",
+   "tests/test_parity.py::test_parity_strict[anemia_LR16]",
+   "tests/test_parity.py::test_parity_strict[cad_DEVICE]",
+   "tests/test_parity.py::test_parity_strict[copd_S4_DEVICE]",
+   "tests/test_parity.py::test_parity_strict[fibrosis_final]",
+   "tests/test_parity.py::test_parity_strict[htn_M1]",
+   "tests/test_phase45_ui_support.py::test_af_missing_octave_reason",
+   "tests/test_phase45_ui_support.py::test_eligibility_lists_all_app_visible_models",
+   "tests/test_phase45_ui_support.py::test_eligibility_states_examples",
+   "tests/test_phase45_ui_support.py::test_frontend_samples_are_byte_copies"
+  ],
+  "cause": "Tümü klonda bulunmayan araştırma ağacı dosyaları (geliştirme verisi, AF kilidi/pipeline, phase_xxviii örnek kayıtları). Tam araştırma ağacında aynı paket 318 geçti / 5 xfail."
+ }
+}

@@ -1,0 +1,2296 @@
+{
+ "n_checks": 236,
+ "n_fail": 0,
+ "n_rounding": 2,
+ "failures": [],
+ "rounding": [
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.236,
+   "extracted": 0.235,
+   "raw": 0.2354808370561956,
+   "ok": true,
+   "status": "yuvarlama farkı (<0,001; ham değer registry'nin kaynak raporundaki çift yuvarlamadan)"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.826,
+   "extracted": 0.825,
+   "raw": 0.8254832366930466,
+   "ok": true,
+   "status": "yuvarlama farkı (<0,001; ham değer registry'nin kaynak raporundaki çift yuvarlamadan)"
+  }
+ ],
+ "checks": [
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.873,
+   "extracted": 0.873,
+   "raw": 0.8728813559322034,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.801,
+   "extracted": 0.801,
+   "raw": 0.8008209645091546,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.921,
+   "extracted": 0.921,
+   "raw": 0.9214290877452564,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.904,
+   "extracted": 0.904,
+   "raw": 0.9035087719298246,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.835,
+   "extracted": 0.835,
+   "raw": 0.8354461039345698,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.945,
+   "extracted": 0.945,
+   "raw": 0.9452638509547862,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.01,
+   "extracted": 0.01,
+   "raw": 0.0102880658436214,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.006,
+   "extracted": 0.006,
+   "raw": 0.0062445463701926,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.017,
+   "extracted": 0.017,
+   "raw": 0.016905336687574,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.98,
+   "extracted": 0.98,
+   "raw": 0.979646475585397,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.959,
+   "extracted": 0.959,
+   "raw": 0.9589155716795418,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.995,
+   "extracted": 0.995,
+   "raw": 0.9952896000288788,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 1572,
+   "extracted": 1572,
+   "ok": true
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 114,
+   "extracted": 114,
+   "ok": true
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.2360882763700418,
+   "extracted": 0.2360882763700418,
+   "ok": true
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "recall.value",
+   "registry": 0.929,
+   "extracted": 0.929,
+   "raw": 0.9285101515584788,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "recall.lo",
+   "registry": 0.919,
+   "extracted": 0.919,
+   "raw": 0.9194925198989208,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "recall.hi",
+   "registry": 0.937,
+   "extracted": 0.937,
+   "raw": 0.9365873783920404,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "fpr.value",
+   "registry": 0.003,
+   "extracted": 0.003,
+   "raw": 0.0025462962962962,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "fpr.lo",
+   "registry": 0.001,
+   "extracted": 0.001,
+   "raw": 0.0014224338500934,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "fpr.hi",
+   "registry": 0.005,
+   "extracted": 0.005,
+   "raw": 0.0045540708545314,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "auc.value",
+   "registry": 0.99,
+   "extracted": 0.99,
+   "raw": 0.9899253593026828,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "auc.lo",
+   "registry": 0.987,
+   "extracted": 0.987,
+   "raw": 0.9871522465684872,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "auc.hi",
+   "registry": 0.992,
+   "extracted": 0.992,
+   "raw": 0.9924126168991412,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "n",
+   "registry": 7817,
+   "extracted": 7817,
+   "ok": true
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "n_pos",
+   "registry": 3497,
+   "extracted": 3497,
+   "ok": true
+  },
+  {
+   "model": "af_S4_DEVICE",
+   "tier": "external",
+   "metric": "threshold",
+   "registry": 0.2360882763700418,
+   "extracted": 0.2360882763700418,
+   "ok": true
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.781,
+   "extracted": 0.781,
+   "raw": 0.78060413354531,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.747,
+   "extracted": 0.747,
+   "raw": 0.7466132408453667,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.811,
+   "extracted": 0.811,
+   "raw": 0.8111883934815289,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.942,
+   "extracted": 0.942,
+   "raw": 0.9424184261036468,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.919,
+   "extracted": 0.919,
+   "raw": 0.9189893273850775,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.959,
+   "extracted": 0.959,
+   "raw": 0.9593711608199808,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.145,
+   "extracted": 0.145,
+   "raw": 0.1448058761804826,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.124,
+   "extracted": 0.124,
+   "raw": 0.1238889660750186,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.169,
+   "extracted": 0.169,
+   "raw": 0.168574802338192,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.973,
+   "extracted": 0.973,
+   "raw": 0.9728909414255016,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.965,
+   "extracted": 0.965,
+   "raw": 0.9651304195459132,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.98,
+   "extracted": 0.98,
+   "raw": 0.9799968480180782,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 1474,
+   "extracted": 1474,
+   "ok": true
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 521,
+   "extracted": 521,
+   "ok": true
+  },
+  {
+   "model": "mi_model",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.04425664273332783,
+   "extracted": 0.0442566427333278,
+   "ok": true
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.885,
+   "extracted": 0.885,
+   "raw": 0.8846153846153846,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.71,
+   "extracted": 0.71,
+   "raw": 0.7102409678828635,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.96,
+   "extracted": 0.96,
+   "raw": 0.9599675537638938,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.821,
+   "extracted": 0.821,
+   "raw": 0.8214285714285714,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.644,
+   "extracted": 0.644,
+   "raw": 0.6440857521065705,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.921,
+   "extracted": 0.921,
+   "raw": 0.9212149805439572,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.091,
+   "extracted": 0.091,
+   "raw": 0.0909090909090909,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.031,
+   "extracted": 0.031,
+   "raw": 0.0314039415245816,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.236,
+   "extracted": 0.236,
+   "raw": 0.2357260564646973,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.948,
+   "extracted": 0.948,
+   "raw": 0.948051948051948,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.888,
+   "extracted": 0.888,
+   "raw": 0.8884740259740259,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.99,
+   "extracted": 0.99,
+   "raw": 0.9902597402597404,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 61,
+   "extracted": 61,
+   "ok": true
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 28,
+   "extracted": 28,
+   "ok": true
+  },
+  {
+   "model": "cad_DEVICE",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.5401802969539393,
+   "extracted": 0.5401802969539393,
+   "ok": true
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.103,
+   "extracted": 0.103,
+   "raw": 0.1029624277456647,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.092,
+   "extracted": 0.092,
+   "raw": 0.0921855013582087,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.115,
+   "extracted": 0.115,
+   "raw": 0.1148398524889915,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.733,
+   "extracted": 0.733,
+   "raw": 0.7326478149100257,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.687,
+   "extracted": 0.687,
+   "raw": 0.6865485434979504,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.774,
+   "extracted": 0.774,
+   "raw": 0.7741971235794505,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.292,
+   "extracted": 0.292,
+   "raw": 0.2919115918175405,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.282,
+   "extracted": 0.282,
+   "raw": 0.2823455218417031,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.302,
+   "extracted": 0.302,
+   "raw": 0.3016655297001927,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.8,
+   "extracted": 0.8,
+   "raw": 0.8004046138307331,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.781,
+   "extracted": 0.781,
+   "raw": 0.7809268783079635,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.819,
+   "extracted": 0.819,
+   "raw": 0.819161657891004,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 8895,
+   "extracted": 8895,
+   "ok": true
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 389,
+   "extracted": 389,
+   "ok": true
+  },
+  {
+   "model": "dm_A",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.4958988256379918,
+   "extracted": 0.4958988256379918,
+   "ok": true
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.122,
+   "extracted": 0.122,
+   "raw": 0.1218763700131521,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.109,
+   "extracted": 0.109,
+   "raw": 0.1090830659152826,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.136,
+   "extracted": 0.136,
+   "raw": 0.1359411376938608,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.715,
+   "extracted": 0.715,
+   "raw": 0.7146529562982005,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.668,
+   "extracted": 0.668,
+   "raw": 0.6678492628532113,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.757,
+   "extracted": 0.757,
+   "raw": 0.7572586178204126,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.236,
+   "extracted": 0.235,
+   "raw": 0.2354808370561956,
+   "ok": true,
+   "status": "yuvarlama farkı (<0,001; ham değer registry'nin kaynak raporundaki çift yuvarlamadan)"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.227,
+   "extracted": 0.227,
+   "raw": 0.2265845867210871,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.245,
+   "extracted": 0.245,
+   "raw": 0.2446159025270854,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.826,
+   "extracted": 0.825,
+   "raw": 0.8254832366930466,
+   "ok": true,
+   "status": "yuvarlama farkı (<0,001; ham değer registry'nin kaynak raporundaki çift yuvarlamadan)"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.808,
+   "extracted": 0.808,
+   "raw": 0.8077906913207015,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.843,
+   "extracted": 0.843,
+   "raw": 0.8427856021605966,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 8895,
+   "extracted": 8895,
+   "ok": true
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 389,
+   "extracted": 389,
+   "ok": true
+  },
+  {
+   "model": "dm_B",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.5314872247498732,
+   "extracted": 0.5314872247498732,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.81,
+   "extracted": 0.81,
+   "raw": 0.8095238095238095,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.6,
+   "extracted": 0.6,
+   "raw": 0.5999943530979508,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.923,
+   "extracted": 0.923,
+   "raw": 0.9233243494723822,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.81,
+   "extracted": 0.81,
+   "raw": 0.8095238095238095,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.6,
+   "extracted": 0.6,
+   "raw": 0.5999943530979508,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.923,
+   "extracted": 0.923,
+   "raw": 0.9233243494723822,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.01,
+   "extracted": 0.01,
+   "raw": 0.0102827763496143,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.004,
+   "extracted": 0.004,
+   "raw": 0.0040058338220866,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.026,
+   "extracted": 0.026,
+   "raw": 0.0261372647608431,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.991,
+   "extracted": 0.991,
+   "raw": 0.9911861917003304,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.98,
+   "extracted": 0.98,
+   "raw": 0.9801689313257436,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.999,
+   "extracted": 0.999,
+   "raw": 0.9986534459542172,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 410,
+   "extracted": 410,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 21,
+   "extracted": 21,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.27030089895763654,
+   "extracted": 0.2703008989576365,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "precision.value",
+   "registry": 0.709,
+   "extracted": 0.709,
+   "raw": 0.709483793517407,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "precision.lo",
+   "registry": 0.678,
+   "extracted": 0.678,
+   "raw": 0.6777473877831047,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "precision.hi",
+   "registry": 0.739,
+   "extracted": 0.739,
+   "raw": 0.7392969595318847,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "recall.value",
+   "registry": 0.883,
+   "extracted": 0.883,
+   "raw": 0.8834080717488789,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "recall.lo",
+   "registry": 0.857,
+   "extracted": 0.857,
+   "raw": 0.8568707633141912,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "recall.hi",
+   "registry": 0.906,
+   "extracted": 0.906,
+   "raw": 0.9055673909861512,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "fpr.value",
+   "registry": 0.023,
+   "extracted": 0.023,
+   "raw": 0.02304322986097886,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "fpr.lo",
+   "registry": 0.02,
+   "extracted": 0.02,
+   "raw": 0.020343257618302704,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "fpr.hi",
+   "registry": 0.026,
+   "extracted": 0.026,
+   "raw": 0.02609200039818895,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "auc.value",
+   "registry": 0.991,
+   "extracted": 0.991,
+   "raw": 0.9912582669853761,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "auc.lo",
+   "registry": 0.989,
+   "extracted": 0.989,
+   "raw": 0.9893939769177712,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "auc.hi",
+   "registry": 0.993,
+   "extracted": 0.993,
+   "raw": 0.9930198824681127,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "n",
+   "registry": 11171,
+   "extracted": 11171,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "n_pos",
+   "registry": 669,
+   "extracted": 669,
+   "ok": true
+  },
+  {
+   "model": "anemia_LR16",
+   "tier": "external",
+   "metric": "threshold",
+   "registry": 0.27030089895763654,
+   "extracted": 0.27030089895763654,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 1.0,
+   "extracted": 1.0,
+   "raw": 1.0,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.772,
+   "extracted": 0.772,
+   "raw": 0.7719046276458016,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 1.0,
+   "extracted": 1.0,
+   "raw": 1.0,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.65,
+   "extracted": 0.65,
+   "raw": 0.65,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.433,
+   "extracted": 0.433,
+   "raw": 0.4328542766852362,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.819,
+   "extracted": 0.819,
+   "raw": 0.818808175898918,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.0,
+   "extracted": 0.0,
+   "raw": 0.0,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.0,
+   "extracted": 0.0,
+   "raw": 0.0,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.184,
+   "extracted": 0.184,
+   "raw": 0.1843181350088518,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.921,
+   "extracted": 0.921,
+   "raw": 0.9205882352941176,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.824,
+   "extracted": 0.824,
+   "raw": 0.8235294117647058,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.988,
+   "extracted": 0.988,
+   "raw": 0.988235294117647,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 37,
+   "extracted": 37,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 20,
+   "extracted": 20,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.5707211331015863,
+   "extracted": 0.5707211331015863,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "precision.value",
+   "registry": 0.929,
+   "extracted": 0.929,
+   "raw": 0.9291338582677166,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "precision.lo",
+   "registry": 0.871,
+   "extracted": 0.871,
+   "raw": 0.8707973400720659,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "precision.hi",
+   "registry": 0.962,
+   "extracted": 0.962,
+   "raw": 0.9622719407387988,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "recall.value",
+   "registry": 0.756,
+   "extracted": 0.756,
+   "raw": 0.7564102564102564,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "recall.lo",
+   "registry": 0.683,
+   "extracted": 0.683,
+   "raw": 0.6834188387334851,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "recall.hi",
+   "registry": 0.817,
+   "extracted": 0.817,
+   "raw": 0.8170770938627122,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "fpr.value",
+   "registry": 0.096,
+   "extracted": 0.096,
+   "raw": 0.0957446808510638,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "fpr.lo",
+   "registry": 0.051,
+   "extracted": 0.051,
+   "raw": 0.0511919607630895,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "fpr.hi",
+   "registry": 0.172,
+   "extracted": 0.172,
+   "raw": 0.1720412073024147,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "auc.value",
+   "registry": 0.898,
+   "extracted": 0.898,
+   "raw": 0.8975722858701582,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "auc.lo",
+   "registry": 0.857,
+   "extracted": 0.857,
+   "raw": 0.8571996044735406,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "auc.hi",
+   "registry": 0.934,
+   "extracted": 0.934,
+   "raw": 0.9337851200218222,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "n",
+   "registry": 250,
+   "extracted": 250,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "n_pos",
+   "registry": 156,
+   "extracted": 156,
+   "ok": true
+  },
+  {
+   "model": "copd_S4_DEVICE",
+   "tier": "temporal",
+   "metric": "threshold",
+   "registry": 0.5707211331015863,
+   "extracted": 0.5707211331015863,
+   "ok": true
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.824,
+   "extracted": 0.824,
+   "raw": 0.8235294117647058,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.59,
+   "extracted": 0.59,
+   "raw": 0.5897054143116588,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.938,
+   "extracted": 0.938,
+   "raw": 0.93808873362379,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.778,
+   "extracted": 0.778,
+   "raw": 0.7777777777777778,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.548,
+   "extracted": 0.548,
+   "raw": 0.5478541568378739,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.91,
+   "extracted": 0.91,
+   "raw": 0.9099907189139832,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.158,
+   "extracted": 0.158,
+   "raw": 0.1578947368421052,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.055,
+   "extracted": 0.055,
+   "raw": 0.0552047163853414,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.376,
+   "extracted": 0.376,
+   "raw": 0.3756547527032907,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.95,
+   "extracted": 0.95,
+   "raw": 0.9502923976608189,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.877,
+   "extracted": 0.877,
+   "raw": 0.8771929824561404,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.997,
+   "extracted": 0.997,
+   "raw": 0.9970760233918128,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 37,
+   "extracted": 37,
+   "ok": true
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 18,
+   "extracted": 18,
+   "ok": true
+  },
+  {
+   "model": "hf_S2_BASIC_LAB",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.4476970841762816,
+   "extracted": 0.4476970841762816,
+   "ok": true
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "precision.value",
+   "registry": 0.702,
+   "extracted": 0.702,
+   "raw": 0.7023809523809523,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "precision.lo",
+   "registry": 0.675,
+   "extracted": 0.675,
+   "raw": 0.6745920455812946,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "precision.hi",
+   "registry": 0.729,
+   "extracted": 0.729,
+   "raw": 0.7287509712777906,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "recall.value",
+   "registry": 0.766,
+   "extracted": 0.766,
+   "raw": 0.7662337662337663,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "recall.lo",
+   "registry": 0.739,
+   "extracted": 0.739,
+   "raw": 0.7390281624816357,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "recall.hi",
+   "registry": 0.791,
+   "extracted": 0.791,
+   "raw": 0.7914037731448476,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "fpr.value",
+   "registry": 0.181,
+   "extracted": 0.181,
+   "raw": 0.1808569838619922,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "fpr.lo",
+   "registry": 0.164,
+   "extracted": 0.164,
+   "raw": 0.1637477571794708,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "fpr.hi",
+   "registry": 0.199,
+   "extracted": 0.199,
+   "raw": 0.1993277682190122,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "auc.value",
+   "registry": 0.875,
+   "extracted": 0.875,
+   "raw": 0.8749564292135243,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "auc.lo",
+   "registry": 0.862,
+   "extracted": 0.862,
+   "raw": 0.862241973385546,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "auc.hi",
+   "registry": 0.887,
+   "extracted": 0.887,
+   "raw": 0.887488930101618,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "n",
+   "registry": 2798,
+   "extracted": 2798,
+   "ok": true
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "n_pos",
+   "registry": 1001,
+   "extracted": 1001,
+   "ok": true
+  },
+  {
+   "model": "htn_M1",
+   "tier": "temporal",
+   "metric": "threshold",
+   "registry": 0.5397445646616527,
+   "extracted": 0.5397445646616527,
+   "ok": true
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.24,
+   "extracted": 0.24,
+   "raw": 0.239766081871345,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.221,
+   "extracted": 0.221,
+   "raw": 0.2210148832767159,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.26,
+   "extracted": 0.26,
+   "raw": 0.2595780358685686,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.768,
+   "extracted": 0.768,
+   "raw": 0.768313458262351,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.733,
+   "extracted": 0.733,
+   "raw": 0.7325044360859626,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.801,
+   "extracted": 0.801,
+   "raw": 0.8006335069228655,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.346,
+   "extracted": 0.346,
+   "raw": 0.346498667312818,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.332,
+   "extracted": 0.332,
+   "raw": 0.3321295290893328,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.361,
+   "extracted": 0.361,
+   "raw": 0.361153301387121,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.794,
+   "extracted": 0.794,
+   "raw": 0.7936268781353856,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.773,
+   "extracted": 0.773,
+   "raw": 0.7728327476554654,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.813,
+   "extracted": 0.813,
+   "raw": 0.8134836075555127,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 4714,
+   "extracted": 4714,
+   "ok": true
+  },
+  {
+   "model": "fibrosis_final",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.06149696006866034,
+   "extracted": 0.06149696006866034,
+   "ok": true
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "precision.value",
+   "registry": 0.208,
+   "extracted": 0.208,
+   "raw": 0.2084690553745928,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "precision.lo",
+   "registry": 0.178,
+   "extracted": 0.178,
+   "raw": 0.1781998721812485,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "precision.hi",
+   "registry": 0.242,
+   "extracted": 0.242,
+   "raw": 0.2423634537513732,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "recall.value",
+   "registry": 0.78,
+   "extracted": 0.78,
+   "raw": 0.7804878048780488,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "recall.lo",
+   "registry": 0.711,
+   "extracted": 0.711,
+   "raw": 0.711120275229812,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "recall.hi",
+   "registry": 0.837,
+   "extracted": 0.837,
+   "raw": 0.8370160472641677,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "fpr.value",
+   "registry": 0.23,
+   "extracted": 0.23,
+   "raw": 0.2302226432970156,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "fpr.lo",
+   "registry": 0.213,
+   "extracted": 0.213,
+   "raw": 0.2127641940330324,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "fpr.hi",
+   "registry": 0.249,
+   "extracted": 0.249,
+   "raw": 0.2486611552528927,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "auc.value",
+   "registry": 0.849,
+   "extracted": 0.849,
+   "raw": 0.8493171656017839,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "auc.lo",
+   "registry": 0.818,
+   "extracted": 0.818,
+   "raw": 0.8181441433374543,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "auc.hi",
+   "registry": 0.88,
+   "extracted": 0.88,
+   "raw": 0.8799760401381843,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "n",
+   "registry": 2275,
+   "extracted": 2275,
+   "ok": true
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "n_pos",
+   "registry": 164,
+   "extracted": 164,
+   "ok": true
+  },
+  {
+   "model": "osteo_final",
+   "tier": "temporal",
+   "metric": "threshold",
+   "registry": 0.0602885709255003,
+   "extracted": 0.0602885709255003,
+   "ok": true
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.293,
+   "extracted": 0.293,
+   "raw": 0.293425975414217,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.273,
+   "extracted": 0.273,
+   "raw": 0.2732341336398002,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.314,
+   "extracted": 0.314,
+   "raw": 0.3144643374158645,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.767,
+   "extracted": 0.767,
+   "raw": 0.7667597765363129,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.734,
+   "extracted": 0.734,
+   "raw": 0.7344103530013312,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.796,
+   "extracted": 0.796,
+   "raw": 0.7962620545393865,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.323,
+   "extracted": 0.323,
+   "raw": 0.32275390625,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.309,
+   "extracted": 0.309,
+   "raw": 0.3086079000803043,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.337,
+   "extracted": 0.337,
+   "raw": 0.3372320635904706,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.791,
+   "extracted": 0.791,
+   "raw": 0.7906183850165851,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.773,
+   "extracted": 0.773,
+   "raw": 0.7726001254825704,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.809,
+   "extracted": 0.809,
+   "raw": 0.8086426374385753,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 4812,
+   "extracted": 4812,
+   "ok": true
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 716,
+   "extracted": 716,
+   "ok": true
+  },
+  {
+   "model": "ckd_A",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.12660209600798616,
+   "extracted": 0.1266020960079861,
+   "ok": true
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "precision.value",
+   "registry": 0.313,
+   "extracted": 0.313,
+   "raw": 0.3126809496236248,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "precision.lo",
+   "registry": 0.291,
+   "extracted": 0.291,
+   "raw": 0.2912528973251144,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "precision.hi",
+   "registry": 0.335,
+   "extracted": 0.335,
+   "raw": 0.3349404800620714,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "recall.value",
+   "registry": 0.754,
+   "extracted": 0.754,
+   "raw": 0.7541899441340782,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "recall.lo",
+   "registry": 0.721,
+   "extracted": 0.721,
+   "raw": 0.7213506502213249,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "recall.hi",
+   "registry": 0.784,
+   "extracted": 0.784,
+   "raw": 0.7843162512049084,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "fpr.value",
+   "registry": 0.29,
+   "extracted": 0.29,
+   "raw": 0.289794921875,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "fpr.lo",
+   "registry": 0.276,
+   "extracted": 0.276,
+   "raw": 0.2761036937837836,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "fpr.hi",
+   "registry": 0.304,
+   "extracted": 0.304,
+   "raw": 0.3038800647844495,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "auc.value",
+   "registry": 0.805,
+   "extracted": 0.805,
+   "raw": 0.805362637482542,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "auc.lo",
+   "registry": 0.788,
+   "extracted": 0.788,
+   "raw": 0.7877865003272373,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "auc.hi",
+   "registry": 0.823,
+   "extracted": 0.823,
+   "raw": 0.8228235905933831,
+   "ok": true,
+   "status": "birebir"
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "n",
+   "registry": 4812,
+   "extracted": 4812,
+   "ok": true
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "n_pos",
+   "registry": 716,
+   "extracted": 716,
+   "ok": true
+  },
+  {
+   "model": "ckd_B",
+   "tier": "internal_test",
+   "metric": "threshold",
+   "registry": 0.13832509192715003,
+   "extracted": 0.13832509192715,
+   "ok": true
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+
+Running 20 tests using 1 worker
+
+  ok 1 [chromium] › e2e\privacy.spec.ts:14:3 › @gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok (23.7s)
+  ok 2 [chromium] › e2e\privacy.spec.ts:68:3 › @gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür (720ms)
+  ok 3 [chromium] › e2e\scenarios.spec.ts:7:3 › @normal normal girdi › fibrozis: çalışabilir profil -> panel Çalışabilir -> sonuç OK, karar ve kanıt gösterilir (1.1s)
+  ok 4 [chromium] › e2e\scenarios.spec.ts:20:3 › @normal normal girdi › AF: PTB-XL AF örneği -> OK, 10 öznitelik, lead II grafiği ve RR takogramı (22.9s)
+  ok 5 [chromium] › e2e\scenarios.spec.ts:33:3 › @normal normal girdi › AF: PTB-XL sinüs ritmi örneği -> OK (21.8s)
+  ok 6 [chromium] › e2e\scenarios.spec.ts:40:3 › @normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir (21.7s)
+  ok 7 [chromium] › e2e\scenarios.spec.ts:52:3 › @eksik eksik girdi › fibrozis: eksik alanlı profil -> panel "Eksik: …" (laboratuvarlar) -> sonuç ABSTAIN ve neden (985ms)
+  ok 8 [chromium] › e2e\scenarios.spec.ts:62:3 › @eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -> Çalışabilir olur (1.7s)
+  ok 9 [chromium] › e2e\scenarios.spec.ts:72:3 › @eksik eksik girdi › AF: formda panel "Eksik: EKG kaydı" gösterir (825ms)
+  ok 10 [chromium] › e2e\scenarios.spec.ts:78:3 › @eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz (455ms)
+  ok 11 [chromium] › e2e\scenarios.spec.ts:85:3 › @eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -> ABSTAIN (eksik alan) (22.9s)
+  ok 12 [chromium] › e2e\scenarios.spec.ts:98:3 › @birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -> alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür (1.5s)
+  ok 13 [chromium] › e2e\scenarios.spec.ts:112:3 › @birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir (1.3s)
+  ok 14 [chromium] › e2e\scenarios.spec.ts:125:3 › @birim birim hatası › AF: 250 Hz başlıklı kayıt -> ABSTAIN ("500 Hz değil") (548ms)
+  ok 15 [chromium] › e2e\scenarios.spec.ts:140:3 › @birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -> sunucu 422 hatası gösterilir (687ms)
+  ok 16 [chromium] › e2e\scenarios.spec.ts:151:3 › @kapsam kapsam dışı veri › fibrozis: gebe kadın profili -> panel Kapsam dışı (gebe) -> sonuç NOT_APPLICABLE (995ms)
+  ok 17 [chromium] › e2e\scenarios.spec.ts:160:3 › @kapsam kapsam dışı veri › fibrozis: 19 yaş -> Kapsam dışı (yaş ≥ 20) (940ms)
+  ok 18 [chromium] › e2e\scenarios.spec.ts:167:3 › @kapsam kapsam dışı veri › fibrozis: gebelik "bilmiyorum" -> Karar verilemez (ABSTAIN) (902ms)
+  ok 19 [chromium] › e2e\scenarios.spec.ts:175:3 › @kapsam kapsam dışı veri › AF: formda yaş 95 -> panel Kapsam dışı (860ms)
+  ok 20 [chromium] › e2e\scenarios.spec.ts:181:3 › @kapsam kapsam dışı veri › AF: EKG ile yaş 95 -> NOT_APPLICABLE (21.9s)
+
+  20 passed (2.6m)

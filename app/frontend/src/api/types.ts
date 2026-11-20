@@ -101,6 +101,10 @@ export interface EligModel {
   missing_fields: string[];
   unknown_categories: { field: string; value: string }[];
   reasons: string[];
+  /** Teknik ayrıntı (Phase XLVI): ör. AF çalışma ortamı sorunlarının tam metni. */
+  details?: string[];
+  /** Yalnız AF satırında (Phase XLVI): kilitli Octave/ECGDeli pipeline'ı kullanılabilir mi. */
+  af_pipeline_available?: boolean;
 }
 
 export interface FieldError {

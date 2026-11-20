@@ -1,0 +1,34 @@
+{
+ "split_sizes": {
+  "fit": 8839,
+  "validation": 1614,
+  "test": 1572
+ },
+ "intersections": {
+  "fit∩validation": 0,
+  "fit∩test": 0,
+  "validation∩test": 0
+ },
+ "patients_multi_fold": 0,
+ "rebuilt_counts": [
+  {
+   "role": "fit",
+   "n": 8839,
+   "pos": 560
+  },
+  {
+   "role": "validation",
+   "n": 1614,
+   "pos": 117
+  },
+  {
+   "role": "test",
+   "n": 1572,
+   "pos": 114
+  }
+ ],
+ "unmatched_role": 0,
+ "fold_role_consistent": true,
+ "n_patients_db": 18869,
+ "n_ecg_db": 21799
+}

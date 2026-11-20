@@ -350,6 +350,12 @@ class Service:
                     raw.pop(b, None)
         return {}, [], errors
 
+    def af_unavailable_reason(self):
+        """AF pipeline devre dışıyken panelde gösterilecek kısa gerekçe (ayrıntı: af.problems)."""
+        env_missing = any(p.startswith(('Octave/ECGDeli AF çalışma ortamı yok', 'Octave yok')) for p in self.af.problems)
+        return ('Octave/ECGDeli AF çalışma ortamı yok' if env_missing
+                else 'AF pipeline devre dışı: kilit/SHA256 doğrulaması başarısız')
+
     def eligibility(self, raw_fields):
         """app_visible her model için durum: READY (çalışabilir) / MISSING (eksik alan veya yanıtsız uygunluk sorusu) /
         OUT_OF_SCOPE (popülasyon dışı) / ABSTAIN (diğer: bilinmeyen kategori, gebelik 'bilmiyorum', model devre dışı).
@@ -374,11 +380,22 @@ class Service:
             else:
                 state = 'ABSTAIN'
             reasons = [x for x in r['reasons'] if not (ecg and x.startswith('eksik zorunlu alan'))]
-            if ecg and state == 'MISSING' and 'ecg_record' in miss:
+            details = []
+            if ecg and not self.af.enabled:
+                # Phase XLVI: AF çalışma ortamı (kilit, pipeline, Octave, ECGDeli) yoksa veya doğrulanamıyorsa EKG
+                # yüklense de karar üretilemez. Panel "Eksik: EKG kaydı" yerine "Karar verilemez" göstermelidir.
+                state, miss = 'ABSTAIN', []
+                reasons = [self.af_unavailable_reason()] + [x for x in r['reasons'] if x.startswith('model devre dışı')]
+                details = list(self.af.problems)
+            elif ecg and state == 'MISSING' and 'ecg_record' in miss:
                 reasons.append('AF modeli yalnız EKG kaydı (.hea + .dat/.mat) yüklenerek çalışır: POST /ecg/af')
-            out.append(dict(model_id=mid, disease=r['disease'], disease_key=r['disease_key'], role=r['role'],
-                            app_mode=r['app_mode'], module_label=r['module_label'], endpoint='/ecg/af' if ecg else '/predict',
-                            state=state, missing_fields=miss, unknown_categories=r['unknown_categories'], reasons=reasons))
+            item = dict(model_id=mid, disease=r['disease'], disease_key=r['disease_key'], role=r['role'],
+                        app_mode=r['app_mode'], module_label=r['module_label'], endpoint='/ecg/af' if ecg else '/predict',
+                        state=state, missing_fields=miss, unknown_categories=r['unknown_categories'], reasons=reasons,
+                        details=details)
+            if ecg:
+                item['af_pipeline_available'] = bool(self.af.enabled)
+            out.append(item)
         warnings = []
         for dkey in self.groups:
             for w in self.target_warnings(dkey, F):

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="36" failures="0" errors="0" time="14.6529937">
+    <testsuite name="src/components/disclaimer.test.tsx" timestamp="2026-11-20T08:07:47.340Z" hostname="LAPTOP-V013QBHO" tests="4" failures="0" errors="0" skipped="0" time="1.1604418">
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; backend fixture onaylı metni taşır" time="0.0029334">
+        </testcase>
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; arayüz backend ne gönderirse onu gösterir (her ekranda; Giriş ve Hakkında dahil)" time="1.1127044">
+        </testcase>
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; sunucuya ulaşılamazsa metin uydurulmaz; durum bildirilir" time="0.0276828">
+        </testcase>
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; kaynak kodda uyarı metni yok (src/, testler hariç)" time="0.014115">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/RoutingPanel.test.tsx" timestamp="2026-11-20T08:07:47.346Z" hostname="LAPTOP-V013QBHO" tests="3" failures="0" errors="0" skipped="0" time="1.3292627">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken: Karar verilemez + gerekçe; EKG yükleme bağlantısı yok; teknik ayrıntı açılabilir" time="0.7340843">
+        </testcase>
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam varken (önceki davranış): Eksik … EKG kaydı ve yükleme bağlantısı" time="0.5900527">
+        </testcase>
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; stateLine: backend gerekçesini aynen kullanır, metin uydurmaz" time="0.0028282">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/demo/profiles.test.ts" timestamp="2026-11-20T08:07:47.349Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="0.0250406">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; dört profil: çalışabilir, eksik, kapsam dışı, birim hatalı" time="0.0032888">
+        </testcase>
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; fibrosis_ready: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0086423">
+        </testcase>
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; missing: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0015775">
+        </testcase>
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; out_of_scope: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0048407">
+        </testcase>
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; unit_error: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0038779">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/form.test.ts" timestamp="2026-11-20T08:07:47.353Z" hostname="LAPTOP-V013QBHO" tests="12" failures="0" errors="0" skipped="0" time="0.0190136">
+        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; yalnız form_input alanları; EKG pipeline alanları formda yok" time="0.0043985">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; her form alanının bir bölümü var ve bölüm şemada tanımlı" time="0.0035787">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik sorusu yalnız kadında" time="0.0007343">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik zorunluluğu: kadın ve yaş ≥ 18 (required_when_rule)" time="0.0007943">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; son adet yaşı: kadın VE son 12 ayda adet yok" time="0.0004201">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; tansiyon ilacı yalnız tansiyon tanısı varsa; GDM yalnız kadında; diyabet ilaçları herkese (v2)" time="0.0004758">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; şema biriminde sayı düz, başka birimde {value, unit} olarak gider" time="0.0016779">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; gizli (ask_when sağlanmayan) alanlar gönderilmez" time="0.000459">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; sayı olmayan girdi biçim hatası olur ve gönderilmez" time="0.0009645">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; aralık denetimi frontend&apos;de yapılmaz (sunucu yetkili): aralık dışı değer de gönderilir" time="0.000497">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; parseNumber" time="0.0008164">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="birim seçici seçenekleri &gt; ilk seçenek şema birimi, ardından unit_conversions kaynak birimleri" time="0.0008273">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/DataEntry.test.tsx" timestamp="2026-11-20T08:07:47.358Z" hostname="LAPTOP-V013QBHO" tests="9" failures="0" errors="0" skipped="0" time="9.766085">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; bölümler ve alanlar şemadan üretilir; sabit uyarı görünür" time="1.0256823">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; koşullu soru: kadın seçilince gebelik (zorunlu) ve GDM soruları açılır, erkekte kapanır" time="1.9059458">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; ırk sorusu isteğe bağlı, açıklamalı ve &quot;Belirtmek istemiyorum&quot; seçeneği var" time="0.138171">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; birim seçici: mmol/L seçilince değer ve birim olduğu gibi sunucuya gider (frontend dönüştürmez)" time="2.7819292">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; aralık hatası: sunucunun field_errors mesajı alanın altında gösterilir" time="1.6268559">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu &gt; biçim hatası: sayı olmayan girdi alan altında gösterilir ve hesaplama engellenir" time="0.9334241">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; durum rozetleri: Çalışabilir / Eksik: … / Kapsam dışı: … ve modül etiketleri" time="0.4352651">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; Karar verilemez durumu (ör. gebelik &quot;bilmiyorum&quot;) gerekçesiyle gösterilir" time="0.4216737">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; sunucuya ulaşılamazsa panel hata gösterir" time="0.493381">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/Results.test.tsx" timestamp="2026-11-20T08:07:47.362Z" hostname="LAPTOP-V013QBHO" tests="3" failures="0" errors="0" skipped="0" time="2.35315">
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; ana modüller üstte, deneyseller ayrı bölümde; olasılık gösterilmez" time="1.1526303">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; karar metinleri: eşik üstü -&gt; &quot;İleri değerlendirme önerilir&quot;; ABSTAIN -&gt; neden; kanıt ve metrik tablosu" time="0.6348149">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; hedefi tanımlayan girdi uyarısı (HbA1c) kartta gösterilir" time="0.5628515">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,28 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-8.4.1, pluggy-1.7.0
+rootdir: C:\Bitirme\HealthRisk_AI_Research_V2\app\backend
+plugins: anyio-4.16.0
+collected 323 items
+
+tests\test_af_e2e.py ..........                                          [  3%]
+tests\test_af_mat.py .............                                       [  7%]
+tests\test_api.py ..............................                         [ 16%]
+tests\test_integrity.py .....                                            [ 17%]
+tests\test_parity.py ............xx....xxx                               [ 24%]
+tests\test_phase45_ui_support.py .....................                   [ 30%]
+tests\test_phase46_af_panel.py .....                                     [ 32%]
+tests\test_privacy.py .....                                              [ 34%]
+tests\test_scenarios.py .............................................    [ 47%]
+tests\test_transforms.py ............................................... [ 62%]
+........................................................................ [ 84%]
+............                                                             [ 88%]
+tests\test_validation_units.py .....................................     [100%]
+
+============================== warnings summary ===============================
+tests/test_af_e2e.py::test_af_end_to_end_feature_parity[165]
+  C:\Bitirme\HealthRisk_AI_Research_V2\app\backend\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Bitirme\HealthRisk_AI_Research_V2\phase_xlvi\results\pytest_backend_full.xml -
+============ 318 passed, 5 xfailed, 1 warning in 368.30s (0:06:08) ============

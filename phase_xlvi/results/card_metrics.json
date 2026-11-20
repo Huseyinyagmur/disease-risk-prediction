@@ -1,0 +1,1890 @@
+{
+ "af_S4_DEVICE": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — PTB-XL fold 10 (hasta düzeyinde ayrık)",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=af, kume=test",
+   "n": 1572,
+   "n_pos": 114,
+   "TP": 103,
+   "FP": 15,
+   "TN": 1443,
+   "FN": 11,
+   "precision": [
+    0.8728813559322034,
+    0.8008209645091546,
+    0.9214290877452564
+   ],
+   "recall": [
+    0.9035087719298246,
+    0.8354461039345698,
+    0.9452638509547862
+   ],
+   "fpr": [
+    0.0102880658436214,
+    0.0062445463701926,
+    0.016905336687574
+   ],
+   "npv": [
+    0.9924346629986245,
+    0.9865037454349782,
+    0.9957704184225936
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.979646475585397,
+    0.9589155716795418,
+    0.9952896000288788
+   ],
+   "threshold": 0.2360882763700418,
+   "evidence_type": "İÇ TEST (held-out, daha önce açılmış)",
+   "dataset": "PTB-XL / PTB-XL+",
+   "delta": [
+    {
+     "label": "model − RR_iqr / RR_mean",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=af, kume=test, baseline=RR_iqr / RR_mean",
+     "dAUC": [
+      0.021111592424133,
+      0.005864423146343,
+      0.0370333519842131
+     ],
+     "baseline_auc": 0.958534883161264,
+     "note": "karar: KATKI_VAR"
+    }
+   ]
+  },
+  {
+   "tier": "external",
+   "label": "Dış doğrulama — Challenge 2021, 4 kaynak havuzu, AF vs SR (A2)",
+   "source": "phase_xxxiii/results/a2_results.csv",
+   "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+   "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Havuz (4 kaynak, ikincil)",
+   "n": 7817,
+   "n_pos": 3497,
+   "TP": 3247,
+   "FP": 11,
+   "TN": 4309,
+   "FN": 250,
+   "precision": [
+    0.9966236955187232,
+    0.9939639955100772,
+    0.9981136516880068
+   ],
+   "recall": [
+    0.9285101515584788,
+    0.9194925198989208,
+    0.9365873783920404
+   ],
+   "fpr": [
+    0.0025462962962962,
+    0.0014224338500934,
+    0.0045540708545314
+   ],
+   "npv": [
+    0.9451634130291731,
+    0.9381723030631239,
+    0.9514049563337177
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9899253593026828,
+    0.9871522465684872,
+    0.9924126168991412
+   ],
+   "threshold": 0.2360882763700418,
+   "note": null,
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/a2_results.csv",
+     "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+     "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Havuz (4 kaynak, ikincil) (dAUC)",
+     "dAUC": [
+      0.0214677064467957,
+      0.0178225789102299,
+      0.0254864230517692
+     ],
+     "baseline_auc": 0.968457652855887,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Dış doğrulama — CPSC 2018, AF vs SR (A2)",
+   "source": "phase_xxxiii/results/a2_results.csv",
+   "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+   "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=CPSC 2018",
+   "n": 1905,
+   "n_pos": 1087,
+   "TP": 1007,
+   "FP": 3,
+   "TN": 815,
+   "FN": 80,
+   "precision": [
+    0.997029702970297,
+    0.9913035736566036,
+    0.9989893279257188
+   ],
+   "recall": [
+    0.9264029438822448,
+    0.9093335443281548,
+    0.9404691401079296
+   ],
+   "fpr": [
+    0.0036674816625916,
+    0.0012480418144421,
+    0.0107268454525206
+   ],
+   "npv": [
+    0.9106145251396648,
+    0.8901260468823088,
+    0.9275932436412294
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9950144292516808,
+    0.9920717278888308,
+    0.9974026222325189
+   ],
+   "threshold": 0.2360882763700418,
+   "note": null,
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/a2_results.csv",
+     "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+     "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=CPSC 2018 (dAUC)",
+     "dAUC": [
+      0.0166914839298848,
+      0.010885017533284,
+      0.0230586442801458
+     ],
+     "baseline_auc": 0.978322945321796,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Dış doğrulama — CPSC-Extra, AF vs SR (A2)",
+   "source": "phase_xxxiii/results/a2_results.csv",
+   "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+   "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=CPSC-Extra",
+   "n": 82,
+   "n_pos": 78,
+   "TP": 74,
+   "FP": 0,
+   "TN": 4,
+   "FN": 4,
+   "precision": [
+    1.0,
+    0.950650220603614,
+    1.0
+   ],
+   "recall": [
+    0.9487179487179488,
+    0.8754332345270551,
+    0.979878987526104
+   ],
+   "fpr": [
+    0.0,
+    0.0,
+    0.4898908364545973
+   ],
+   "npv": [
+    0.5,
+    0.21521606221387757,
+    0.7847839377861224
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9903846153846154,
+    0.9615384615384616,
+    1.0
+   ],
+   "threshold": 0.2360882763700418,
+   "note": "YORUMLANAMAZ (SR n=4)",
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/a2_results.csv",
+     "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+     "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=CPSC-Extra (dAUC)",
+     "dAUC": [
+      0.0128205128205128,
+      -0.0128205128205127,
+      0.0512820512820512
+     ],
+     "baseline_auc": 0.9775641025641024,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Dış doğrulama — Chapman-Shaoxing, AF vs SR (A2)",
+   "source": "phase_xxxiii/results/a2_results.csv",
+   "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+   "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Chapman-Shaoxing",
+   "n": 3580,
+   "n_pos": 1777,
+   "TP": 1742,
+   "FP": 5,
+   "TN": 1798,
+   "FN": 35,
+   "precision": [
+    0.9971379507727532,
+    0.993317493150269,
+    0.998776903089344
+   ],
+   "recall": [
+    0.98030388294879,
+    0.9727315217179612,
+    0.9858041140878262
+   ],
+   "fpr": [
+    0.0027731558513588,
+    0.0011850902285204,
+    0.0064754926926442
+   ],
+   "npv": [
+    0.9809056192034915,
+    0.973560967322042,
+    0.9862387973957565
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9995340099396648,
+    0.999082307015975,
+    0.9998792186847968
+   ],
+   "threshold": 0.2360882763700418,
+   "note": null,
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/a2_results.csv",
+     "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+     "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Chapman-Shaoxing (dAUC)",
+     "dAUC": [
+      0.0078139947458294,
+      0.0049332991253558,
+      0.0110957172610771
+     ],
+     "baseline_auc": 0.9917200151938352,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Dış doğrulama — Georgia, AF vs SR (A2)",
+   "source": "phase_xxxiii/results/a2_results.csv",
+   "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+   "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Georgia",
+   "n": 2250,
+   "n_pos": 555,
+   "TP": 424,
+   "FP": 3,
+   "TN": 1692,
+   "FN": 131,
+   "precision": [
+    0.9929742388758782,
+    0.9795497976453138,
+    0.9976077887029632
+   ],
+   "recall": [
+    0.7639639639639639,
+    0.7268957292860235,
+    0.7974032384718605
+   ],
+   "fpr": [
+    0.0017699115044247,
+    0.000602108165383,
+    0.0051909331861777
+   ],
+   "npv": [
+    0.9281404278661547,
+    0.9153633750224242,
+    0.9391169042940382
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9538940710622128,
+    0.9405705439953228,
+    0.9670681920858912
+   ],
+   "threshold": 0.2360882763700418,
+   "note": null,
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/a2_results.csv",
+     "source_sha256": "72726837a07b711b8a91cf126a7280fdcbd81ce4309e91cc613bb60b3db3412f",
+     "selector": "analiz=A2 — birincil, skor=MODEL, kapsam=Georgia (dAUC)",
+     "dAUC": [
+      0.0827213053761727,
+      0.0620722580988067,
+      0.1033639613064391
+     ],
+     "baseline_auc": 0.87117276568604,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "external_secondary",
+   "label": "Dış — ikincil analiz: AF vs SR + diğer ritimler (B), havuz",
+   "source": "phase_xxxiii/results/b_results.csv",
+   "source_sha256": "a1ae4debce97a9f40bec4925725fafe5ce98e4bf94fddd31858aef18b6182d65",
+   "selector": "analiz=B — birincil, skor=MODEL, kapsam=Havuz (4 kaynak, ikincil)",
+   "n": 5477,
+   "n_pos": 3497,
+   "TP": 3247,
+   "FP": 143,
+   "TN": 1837,
+   "FN": 250,
+   "precision": [
+    0.9578171091445428,
+    0.9505165148403528,
+    0.964081305258937
+   ],
+   "recall": [
+    0.9285101515584788,
+    0.9194925198989208,
+    0.9365873783920404
+   ],
+   "fpr": [
+    0.0722222222222222,
+    0.0616297391544819,
+    0.084471380736919
+   ],
+   "npv": [
+    0.8802108289410637,
+    0.8655763452268971,
+    0.89344820601532
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9648558793540208,
+    0.959664203516434,
+    0.9699538601629678
+   ],
+   "threshold": 0.2360882763700418,
+   "note": null,
+   "precision_reportable": false,
+   "delta": [
+    {
+     "label": "model − RR_iqr/RR_mean ≥ 0,138235",
+     "source": "phase_xxxiii/results/b_results.csv",
+     "source_sha256": "a1ae4debce97a9f40bec4925725fafe5ce98e4bf94fddd31858aef18b6182d65",
+     "selector": "analiz=B — birincil, skor=MODEL, kapsam=Havuz (4 kaynak, ikincil) (dAUC)",
+     "dAUC": [
+      0.0353942629035566,
+      0.0279867682400209,
+      0.043609430377553
+     ],
+     "baseline_auc": 0.929461616450464,
+     "note": null
+    }
+   ]
+  }
+ ],
+ "mi_model": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — tümü (fold 9 + fold 10 AF-test dışı)",
+   "source": "phase_xxxviii/results/test_operating_points.csv",
+   "source_sha256": "8843170fae762bc9c72b01a6168445e969c064e08bfa0d4fc2c970c2a23bc4fa",
+   "selector": "kume=birincil_tum_test, model=MODEL(LightGBM), esik_turu=KILITLI…",
+   "n": 1474,
+   "n_pos": 521,
+   "TP": 491,
+   "FP": 138,
+   "TN": 815,
+   "FN": 30,
+   "precision": [
+    0.78060413354531,
+    0.7466132408453667,
+    0.8111883934815289
+   ],
+   "recall": [
+    0.9424184261036468,
+    0.9189893273850775,
+    0.9593711608199808
+   ],
+   "fpr": [
+    0.1448058761804826,
+    0.1238889660750186,
+    0.168574802338192
+   ],
+   "npv": [
+    0.9644970414201184,
+    0.9497701952667866,
+    0.9750196955222546
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9728909414255016,
+    0.9651304195459132,
+    0.9799968480180782
+   ],
+   "threshold": 0.0442566427333278,
+   "auc_source": "phase_xxxviii/results/test_auc.csv",
+   "delta": [
+    {
+     "label": "model − B1 yaş+cinsiyet LR",
+     "source": "phase_xxxviii/results/test_delta_auc.csv",
+     "source_sha256": "568b0c7015314593e538d0e59128dd8ddfed0650e93c443da5818de5450a527d",
+     "selector": "kume=birincil_tum_test, karsilastirma=MODEL-B1_yas_cinsiyet",
+     "dAUC": [
+      0.1547512351136827,
+      0.134264233766286,
+      0.1752654512570667
+     ],
+     "baseline_auc": 0.8181397063118188,
+     "note": null
+    },
+    {
+     "label": "model − B2 Q kuralı (ters yönde çalışıyor; yorumlanmaz)",
+     "source": "phase_xxxviii/results/test_delta_auc.csv",
+     "source_sha256": "568b0c7015314593e538d0e59128dd8ddfed0650e93c443da5818de5450a527d",
+     "selector": "kume=birincil_tum_test, karsilastirma=MODEL-B2_Q_kurali",
+     "dAUC": [
+      0.6671497020219008,
+      0.6375002517557447,
+      0.6945555302680896
+     ],
+     "baseline_auc": null,
+     "note": "B2 AUC < 0,5; geçerli kural baseline'ı kurulamadı (Phase XXXVIII 02 §4)"
+    }
+   ]
+  },
+  {
+   "tier": "internal_test_subset",
+   "label": "İç test — temiz alt küme (PREVIOUSLY_EXPOSED hariç)",
+   "source": "phase_xxxviii/results/test_operating_points.csv",
+   "source_sha256": "8843170fae762bc9c72b01a6168445e969c064e08bfa0d4fc2c970c2a23bc4fa",
+   "selector": "kume=birincil_temiz, model=MODEL(LightGBM), esik_turu=KILITLI…",
+   "n": 368,
+   "n_pos": 160,
+   "TP": 156,
+   "FP": 36,
+   "TN": 172,
+   "FN": 4,
+   "precision": [
+    0.8125,
+    0.7513628261115768,
+    0.861377707596702
+   ],
+   "recall": [
+    0.975,
+    0.9374901071333326,
+    0.9902360074537376
+   ],
+   "fpr": [
+    0.173076923076923,
+    0.1277172564231111,
+    0.2302932068870359
+   ],
+   "npv": [
+    0.9772727272727272,
+    0.943028980985934,
+    0.9911271424221824
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9719951923076924,
+    0.9580213341346152,
+    0.9837447415865384
+   ],
+   "threshold": 0.0442566427333278,
+   "auc_source": "phase_xxxviii/results/test_auc.csv",
+   "delta": [
+    {
+     "label": "model − B1 yaş+cinsiyet LR",
+     "source": "phase_xxxviii/results/test_delta_auc.csv",
+     "source_sha256": "568b0c7015314593e538d0e59128dd8ddfed0650e93c443da5818de5450a527d",
+     "selector": "kume=birincil_temiz, karsilastirma=MODEL-B1_yas_cinsiyet",
+     "dAUC": [
+      0.1492788461538461,
+      0.1126352163461537,
+      0.1898324819711539
+     ],
+     "baseline_auc": 0.8227163461538461,
+     "note": null
+    },
+    {
+     "label": "model − B2 Q kuralı (ters yönde çalışıyor; yorumlanmaz)",
+     "source": "phase_xxxviii/results/test_delta_auc.csv",
+     "source_sha256": "568b0c7015314593e538d0e59128dd8ddfed0650e93c443da5818de5450a527d",
+     "selector": "kume=birincil_temiz, karsilastirma=MODEL-B2_Q_kurali",
+     "dAUC": [
+      0.6459284855769231,
+      0.5885362830528845,
+      0.7006573016826924
+     ],
+     "baseline_auc": null,
+     "note": "B2 AUC < 0,5; geçerli kural baseline'ı kurulamadı (Phase XXXVIII 02 §4)"
+    }
+   ]
+  }
+ ],
+ "cad_DEVICE": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — UCI Cleveland (önceden açılmış)",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=cad, kume=test",
+   "n": 61,
+   "n_pos": 28,
+   "TP": 23,
+   "FP": 3,
+   "TN": 30,
+   "FN": 5,
+   "precision": [
+    0.8846153846153846,
+    0.7102409678828635,
+    0.9599675537638938
+   ],
+   "recall": [
+    0.8214285714285714,
+    0.6440857521065705,
+    0.9212149805439572
+   ],
+   "fpr": [
+    0.0909090909090909,
+    0.0314039415245816,
+    0.2357260564646973
+   ],
+   "npv": [
+    0.8571428571428571,
+    0.7062444591340484,
+    0.9373976892056628
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.948051948051948,
+    0.8884740259740259,
+    0.9902597402597404
+   ],
+   "threshold": 0.5401802969539393,
+   "evidence_type": "İÇ TEST (held-out, daha önce açılmış)",
+   "dataset": "UCI Cleveland",
+   "delta": [
+    {
+     "label": "model − LR(age, sex)",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=cad, kume=test, baseline=LR(age, sex)",
+     "dAUC": [
+      0.2532467532467533,
+      0.1471861471861472,
+      0.3815070346320346
+     ],
+     "baseline_auc": 0.6948051948051948,
+     "note": "karar: KATKI_VAR"
+    },
+    {
+     "label": "model − Tek değişken: thalach (− yön; fit AUC=0.282)",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=cad, kume=test, baseline=Tek değişken: thalach (− yön; fit AUC=0.282)",
+     "dAUC": [
+      0.1726190476190475,
+      0.0724972943722944,
+      0.290056818181818
+     ],
+     "baseline_auc": 0.7754329004329005,
+     "note": "karar: KATKI_VAR"
+    }
+   ]
+  },
+  {
+   "tier": "technical_replication",
+   "label": "Teknik tekrar — UCI Hungarian (eksiksiz vaka, seçilmiş)",
+   "source": "phase_xli/results/cad_v2_rescore.json",
+   "source_sha256": "42d892124edc154ffd42212d55ae24e4755b5635c650a37cdbc73e35fe90bd98",
+   "selector": "sets.hungarian.model",
+   "n": 95,
+   "n_pos": 68,
+   "TP": 60,
+   "FP": 10,
+   "TN": 17,
+   "FN": 8,
+   "precision": [
+    0.8571428571428571,
+    0.7566158011633325,
+    0.920510582829334
+   ],
+   "recall": [
+    0.8823529411764706,
+    0.784650962802083,
+    0.9391650739766866
+   ],
+   "fpr": [
+    0.37037037037037035,
+    0.21532512960965597,
+    0.5577076558789761
+   ],
+   "npv": [
+    0.68,
+    0.48410269273102247,
+    0.8279480969309202
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.8523965141612201,
+    0.7657952069716776,
+    0.9281181917211329
+   ],
+   "threshold": 0.5401802969539393,
+   "note": "önceden hatalı skorlanmış merkezlerde düzeltilmiş teknik tekrar; eksiksiz-vaka alt kümesi (seçilmiş)",
+   "delta": [
+    {
+     "label": "model − LR(yaş, cinsiyet)",
+     "source": "phase_xli/results/cad_v2_rescore.json",
+     "source_sha256": "42d892124edc154ffd42212d55ae24e4755b5635c650a37cdbc73e35fe90bd98",
+     "selector": "sets.hungarian.baselines.LR(age, sex).delta_vs_model",
+     "dAUC": [
+      0.1903594771241831,
+      0.07161628540305001,
+      0.314569716775599
+     ],
+     "baseline_auc": 0.662037037037037,
+     "note": "KATKI_VAR"
+    }
+   ]
+  },
+  {
+   "tier": "technical_replication",
+   "label": "Teknik tekrar — UCI VA Long Beach (eksiksiz vaka, seçilmiş)",
+   "source": "phase_xli/results/cad_v2_rescore.json",
+   "source_sha256": "42d892124edc154ffd42212d55ae24e4755b5635c650a37cdbc73e35fe90bd98",
+   "selector": "sets.va.model",
+   "n": 64,
+   "n_pos": 54,
+   "TP": 54,
+   "FP": 7,
+   "TN": 3,
+   "FN": 0,
+   "precision": [
+    0.8852459016393442,
+    0.7815569152759893,
+    0.9432879733926779
+   ],
+   "recall": [
+    1.0,
+    0.9335864119091037,
+    1.0
+   ],
+   "fpr": [
+    0.7,
+    0.39677814746114537,
+    0.8922087325936989
+   ],
+   "npv": [
+    1.0,
+    0.4385029682449546,
+    1.0
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.6666666666666666,
+    0.43703703703703706,
+    0.8593055555555553
+   ],
+   "threshold": 0.5401802969539393,
+   "note": "önceden hatalı skorlanmış merkezlerde düzeltilmiş teknik tekrar; eksiksiz-vaka alt kümesi (seçilmiş)",
+   "delta": [
+    {
+     "label": "model − LR(yaş, cinsiyet)",
+     "source": "phase_xli/results/cad_v2_rescore.json",
+     "source_sha256": "42d892124edc154ffd42212d55ae24e4755b5635c650a37cdbc73e35fe90bd98",
+     "selector": "sets.va.baselines.LR(age, sex).delta_vs_model",
+     "dAUC": [
+      0.054629629629629584,
+      -0.16388888888888886,
+      0.28798611111111105
+     ],
+     "baseline_auc": 0.612037037037037,
+     "note": "KANIT_YETERSIZ"
+    }
+   ]
+  }
+ ],
+ "dm_A": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES G 2011–12 + H 2013–14 (kilitli tek sefer)",
+   "source": "phase_xlii/results/test_operating_points.csv",
+   "source_sha256": "5af8d3f2b8f3c020735954a1d507be77860f927cf0f16e9be7e001abc1109ca0",
+   "selector": "model=Model A (LR), nokta=birincil Recall>=0.75 (kilitli)",
+   "n": 8895,
+   "n_pos": 389,
+   "TP": 285,
+   "FP": 2483,
+   "TN": 6023,
+   "FN": 104,
+   "precision": [
+    0.1029624277456647,
+    0.0921855013582087,
+    0.1148398524889915
+   ],
+   "recall": [
+    0.7326478149100257,
+    0.6865485434979504,
+    0.7741971235794505
+   ],
+   "fpr": [
+    0.2919115918175405,
+    0.2823455218417031,
+    0.3016655297001927
+   ],
+   "npv": [
+    0.9830259507099722,
+    0.9794757344921524,
+    0.9859708587294176
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.8004046138307331,
+    0.7809268783079635,
+    0.819161657891004
+   ],
+   "threshold": 0.4958988256379918,
+   "auc_source": "phase_xlii/results/test_discrimination.csv",
+   "delta": [
+    {
+     "label": "A − ADA",
+     "source": "phase_xlii/results/test_delta_auc.csv",
+     "source_sha256": "ef1dd7ec33ffc0ed3b8ee9df02925a0c8cb976f2ee6e6628bbeae838b0500a85",
+     "selector": "karsilastirma=A − ADA",
+     "dAUC": [
+      0.0419102318218442,
+      0.0277818279278262,
+      0.0550623514617378
+     ],
+     "baseline_auc": 0.7584943820088889,
+     "note": "tür: birincil"
+    },
+    {
+     "label": "A − yaş+BMI",
+     "source": "phase_xlii/results/test_delta_auc.csv",
+     "source_sha256": "ef1dd7ec33ffc0ed3b8ee9df02925a0c8cb976f2ee6e6628bbeae838b0500a85",
+     "selector": "karsilastirma=A − yaş+BMI",
+     "dAUC": [
+      0.0535980348364408,
+      0.0398964224078194,
+      0.0675701493693659
+     ],
+     "baseline_auc": 0.7468065789942923,
+     "note": "tür: ikincil"
+    }
+   ]
+  }
+ ],
+ "dm_B": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES G 2011–12 + H 2013–14 (kilitli tek sefer)",
+   "source": "phase_xlii/results/test_operating_points.csv",
+   "source_sha256": "5af8d3f2b8f3c020735954a1d507be77860f927cf0f16e9be7e001abc1109ca0",
+   "selector": "model=Model B (LR), nokta=birincil Recall>=0.75 (kilitli)",
+   "n": 8895,
+   "n_pos": 389,
+   "TP": 278,
+   "FP": 2003,
+   "TN": 6503,
+   "FN": 111,
+   "precision": [
+    0.1218763700131521,
+    0.1090830659152826,
+    0.1359411376938608
+   ],
+   "recall": [
+    0.7146529562982005,
+    0.6678492628532113,
+    0.7572586178204126
+   ],
+   "fpr": [
+    0.2354808370561956,
+    0.2265845867210871,
+    0.2446159025270854
+   ],
+   "npv": [
+    0.9832174175990324,
+    0.979829357668924,
+    0.9860444910435322
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.8254832366930466,
+    0.8077906913207015,
+    0.8427856021605966
+   ],
+   "threshold": 0.5314872247498732,
+   "auc_source": "phase_xlii/results/test_discrimination.csv",
+   "delta": [
+    {
+     "label": "B − ADA",
+     "source": "phase_xlii/results/test_delta_auc.csv",
+     "source_sha256": "ef1dd7ec33ffc0ed3b8ee9df02925a0c8cb976f2ee6e6628bbeae838b0500a85",
+     "selector": "karsilastirma=B − ADA",
+     "dAUC": [
+      0.0669888546841577,
+      0.0501316534557862,
+      0.0825825490344415
+     ],
+     "baseline_auc": 0.7584943820088889,
+     "note": "tür: birincil"
+    },
+    {
+     "label": "B − A",
+     "source": "phase_xlii/results/test_delta_auc.csv",
+     "source_sha256": "ef1dd7ec33ffc0ed3b8ee9df02925a0c8cb976f2ee6e6628bbeae838b0500a85",
+     "selector": "karsilastirma=B − A",
+     "dAUC": [
+      0.0250786228623134,
+      0.0143143174026545,
+      0.0361010868338797
+     ],
+     "baseline_auc": 0.8004046138307331,
+     "note": "tür: birincil"
+    },
+    {
+     "label": "B − yaş+BMI",
+     "source": "phase_xlii/results/test_delta_auc.csv",
+     "source_sha256": "ef1dd7ec33ffc0ed3b8ee9df02925a0c8cb976f2ee6e6628bbeae838b0500a85",
+     "selector": "karsilastirma=B − yaş+BMI",
+     "dAUC": [
+      0.0786766576987543,
+      0.0613331175972783,
+      0.0973212150650749
+     ],
+     "baseline_auc": 0.7468065789942923,
+     "note": "tür: ikincil"
+    }
+   ]
+  }
+ ],
+ "anemia_LR16": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES A 1999–2000 (Phase25 holdout; önceden açılmış)",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=anemia, kume=test",
+   "n": 410,
+   "n_pos": 21,
+   "TP": 17,
+   "FP": 4,
+   "TN": 385,
+   "FN": 4,
+   "precision": [
+    0.8095238095238095,
+    0.5999943530979508,
+    0.9233243494723822
+   ],
+   "recall": [
+    0.8095238095238095,
+    0.5999943530979508,
+    0.9233243494723822
+   ],
+   "fpr": [
+    0.0102827763496143,
+    0.0040058338220866,
+    0.0261372647608431
+   ],
+   "npv": [
+    0.9897172236503856,
+    0.973862735239157,
+    0.9959941661779134
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9911861917003304,
+    0.9801689313257436,
+    0.9986534459542172
+   ],
+   "threshold": 0.2703008989576365,
+   "evidence_type": "İÇ TEST (held-out, daha önce açılmış)",
+   "dataset": "NHANES 1999–2000 A",
+   "delta": [
+    {
+     "label": "model − Hct_proxy=RBC×MCV/10 sabit (E<39, K<36)",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=anemia, kume=test, baseline=Hct_proxy=RBC×MCV/10 sabit (E<39, K<36)",
+     "dAUC": [
+      0.001591382054107,
+      -0.0031858244583181,
+      0.008201738278859
+     ],
+     "baseline_auc": 0.9895948096462236,
+     "note": "karar: KANIT_YETERSIZ"
+    }
+   ]
+  },
+  {
+   "tier": "external",
+   "label": "Farklı döngüler (aynı program; bağımsız kurum değil) — NHANES C, E, F, I birleşik",
+   "source": "phase_xl/results/anemia_external.json",
+   "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+   "selector": "sets.pooled.model",
+   "n": 11171,
+   "n_pos": 669,
+   "TP": 591,
+   "FP": 242,
+   "TN": 10260,
+   "FN": 78,
+   "precision": [
+    0.709483793517407,
+    0.6777473877831047,
+    0.7392969595318847
+   ],
+   "recall": [
+    0.8834080717488789,
+    0.8568707633141912,
+    0.9055673909861512
+   ],
+   "fpr": [
+    0.02304322986097886,
+    0.020343257618302704,
+    0.02609200039818895
+   ],
+   "npv": [
+    0.9924550203134068,
+    0.990594337039307,
+    0.9939498604851712
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9912582669853761,
+    0.9893939769177712,
+    0.9930198824681127
+   ],
+   "threshold": 0.27030089895763654,
+   "note": "PREVIOUSLY_EXPOSED_PERSONS (başka hedef)",
+   "delta": [
+    {
+     "label": "model − Hct_proxy kuralı",
+     "source": "phase_xl/results/anemia_external.json",
+     "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+     "selector": "sets.pooled.delta_auc",
+     "dAUC": [
+      0.0036851120108377655,
+      0.0020659083656640737,
+      0.005359926460018025
+     ],
+     "baseline_auc": 0.9875731549745383,
+     "note": "KATKI_VAR"
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Farklı döngüler (aynı program; bağımsız kurum değil) — NHANES C 2003–04",
+   "source": "phase_xl/results/anemia_external.json",
+   "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+   "selector": "sets.C.model",
+   "n": 2265,
+   "n_pos": 89,
+   "TP": 82,
+   "FP": 25,
+   "TN": 2151,
+   "FN": 7,
+   "precision": [
+    0.7663551401869159,
+    0.6778096733434972,
+    0.8364383400483845
+   ],
+   "recall": [
+    0.9213483146067416,
+    0.846448576179568,
+    0.961380177834826
+   ],
+   "fpr": [
+    0.011488970588235295,
+    0.007794077249614018,
+    0.01690563593495063
+   ],
+   "npv": [
+    0.9967562557924003,
+    0.9933192591105294,
+    0.9984278420712441
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9947641275611367,
+    0.9906381671348314,
+    0.9979973046100462
+   ],
+   "threshold": 0.27030089895763654,
+   "note": "PREVIOUSLY_EXPOSED_PERSONS (başka hedef)",
+   "delta": [
+    {
+     "label": "model − Hct_proxy kuralı",
+     "source": "phase_xl/results/anemia_external.json",
+     "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+     "selector": "sets.C.delta_auc",
+     "dAUC": [
+      0.0010017349636483042,
+      -0.0009500991407799281,
+      0.0030933730584931573
+     ],
+     "baseline_auc": 0.9937623925974884,
+     "note": "KANIT_YETERSIZ"
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Farklı döngüler (aynı program; bağımsız kurum değil) — NHANES E 2007–08",
+   "source": "phase_xl/results/anemia_external.json",
+   "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+   "selector": "sets.E.model",
+   "n": 2881,
+   "n_pos": 156,
+   "TP": 149,
+   "FP": 85,
+   "TN": 2640,
+   "FN": 7,
+   "precision": [
+    0.6367521367521367,
+    0.5733824264058701,
+    0.695704385949451
+   ],
+   "recall": [
+    0.9551282051282052,
+    0.9102836178517977,
+    0.9780966625064529
+   ],
+   "fpr": [
+    0.031192660550458717,
+    0.025296963072978976,
+    0.03840826181605583
+   ],
+   "npv": [
+    0.9973554967888175,
+    0.9945511032189422,
+    0.9987184079540754
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9941284403669725,
+    0.9915708656786638,
+    0.996257586450247
+   ],
+   "threshold": 0.27030089895763654,
+   "note": "PREVIOUSLY_EXPOSED_PERSONS (başka hedef)",
+   "delta": [
+    {
+     "label": "model − Hct_proxy kuralı",
+     "source": "phase_xl/results/anemia_external.json",
+     "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+     "selector": "sets.E.delta_auc",
+     "dAUC": [
+      0.001737238296871224,
+      -0.0001744295459891104,
+      0.0037498529757703726
+     ],
+     "baseline_auc": 0.9923912020701012,
+     "note": "KANIT_YETERSIZ"
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Farklı döngüler (aynı program; bağımsız kurum değil) — NHANES F 2009–10",
+   "source": "phase_xl/results/anemia_external.json",
+   "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+   "selector": "sets.F.model",
+   "n": 3188,
+   "n_pos": 183,
+   "TP": 165,
+   "FP": 102,
+   "TN": 2903,
+   "FN": 18,
+   "precision": [
+    0.6179775280898876,
+    0.558414300034313,
+    0.6741941059103177
+   ],
+   "recall": [
+    0.9016393442622951,
+    0.8498894629701953,
+    0.9368738224795897
+   ],
+   "fpr": [
+    0.03394342762063228,
+    0.02804080389054805,
+    0.04103610217619997
+   ],
+   "npv": [
+    0.9938377268058884,
+    0.9902797813527723,
+    0.9960984687569764
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9925261176727312,
+    0.9894746006200958,
+    0.9951432039497012
+   ],
+   "threshold": 0.27030089895763654,
+   "note": "PREVIOUSLY_EXPOSED_PERSONS (başka hedef)",
+   "delta": [
+    {
+     "label": "model − Hct_proxy kuralı",
+     "source": "phase_xl/results/anemia_external.json",
+     "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+     "selector": "sets.F.delta_auc",
+     "dAUC": [
+      0.002926815962466911,
+      0.0004324531973123547,
+      0.005681105261722404
+     ],
+     "baseline_auc": 0.9895993017102643,
+     "note": "KATKI_VAR"
+    }
+   ]
+  },
+  {
+   "tier": "external_source",
+   "label": "Farklı döngüler (aynı program; bağımsız kurum değil) — NHANES I 2015–16",
+   "source": "phase_xl/results/anemia_external.json",
+   "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+   "selector": "sets.I.model",
+   "n": 2837,
+   "n_pos": 241,
+   "TP": 195,
+   "FP": 30,
+   "TN": 2566,
+   "FN": 46,
+   "precision": [
+    0.8666666666666667,
+    0.8160406625343364,
+    0.9049825333948756
+   ],
+   "recall": [
+    0.8091286307053942,
+    0.754815277864158,
+    0.8537417888911004
+   ],
+   "fpr": [
+    0.011556240369799691,
+    0.00810677185597028,
+    0.01644913273740175
+   ],
+   "npv": [
+    0.9823889739663093,
+    0.9765904983353455,
+    0.9867706379072527
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.9907342288487235,
+    0.9868325591877705,
+    0.9939822436688426
+   ],
+   "threshold": 0.27030089895763654,
+   "note": "PREVIOUSLY_EXPOSED_PERSONS (başka hedef)",
+   "delta": [
+    {
+     "label": "model − Hct_proxy kuralı",
+     "source": "phase_xl/results/anemia_external.json",
+     "source_sha256": "3b7944c1880e3b9690ba724b627f5ac20db22c8cdfee077de15ded08d0384e1d",
+     "selector": "sets.I.delta_auc",
+     "dAUC": [
+      0.0008878964765455244,
+      -0.0020417623026807883,
+      0.0037050497413831846
+     ],
+     "baseline_auc": 0.989846332372178,
+     "note": "KANIT_YETERSIZ"
+    }
+   ]
+  }
+ ],
+ "copd_S4_DEVICE": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES G 2011–12",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=copd, kume=test",
+   "n": 37,
+   "n_pos": 20,
+   "TP": 13,
+   "FP": 0,
+   "TN": 17,
+   "FN": 7,
+   "precision": [
+    1.0,
+    0.7719046276458016,
+    1.0
+   ],
+   "recall": [
+    0.65,
+    0.4328542766852362,
+    0.818808175898918
+   ],
+   "fpr": [
+    0.0,
+    0.0,
+    0.1843181350088518
+   ],
+   "npv": [
+    0.7083333333333334,
+    0.5083230633550337,
+    0.8508535180303913
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9205882352941176,
+    0.8235294117647058,
+    0.988235294117647
+   ],
+   "threshold": 0.5707211331015863,
+   "evidence_type": "İÇ TEST (held-out, daha önce açılmış)",
+   "dataset": "NHANES 2011–2012 G",
+   "delta": [
+    {
+     "label": "model − pre-BD FEV1/FVC < 0.70",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=copd, kume=test, baseline=pre-BD FEV1/FVC < 0.70",
+     "dAUC": [
+      0.0088235294117647,
+      -0.0588235294117646,
+      0.076470588235294
+     ],
+     "baseline_auc": 0.9117647058823528,
+     "note": "karar: KANIT_YETERSIZ"
+    }
+   ]
+  },
+  {
+   "tier": "temporal",
+   "label": "Zamansal tekrar — NHANES F 2009–10",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=copd, kume=F_2009_2010",
+   "n": 250,
+   "n_pos": 156,
+   "TP": 118,
+   "FP": 9,
+   "TN": 85,
+   "FN": 38,
+   "precision": [
+    0.9291338582677166,
+    0.8707973400720659,
+    0.9622719407387988
+   ],
+   "recall": [
+    0.7564102564102564,
+    0.6834188387334851,
+    0.8170770938627122
+   ],
+   "fpr": [
+    0.0957446808510638,
+    0.0511919607630895,
+    0.1720412073024147
+   ],
+   "npv": [
+    0.6910569105691057,
+    0.6046520764682787,
+    0.7658892310583104
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.8975722858701582,
+    0.8571996044735406,
+    0.9337851200218222
+   ],
+   "threshold": 0.5707211331015863,
+   "evidence_type": "ZAMANSAL TEKRAR — NHANES F, aynı anket farklı döngü, daha önce raporlanmış",
+   "dataset": "NHANES 2009–2010 F",
+   "delta": [
+    {
+     "label": "model − pre-BD FEV1/FVC < 0.70",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=copd, kume=F_2009_2010, baseline=pre-BD FEV1/FVC < 0.70",
+     "dAUC": [
+      0.0227768685215494,
+      -0.0053208537915985,
+      0.051832719585379
+     ],
+     "baseline_auc": 0.8747954173486088,
+     "note": "karar: KANIT_YETERSIZ"
+    }
+   ]
+  },
+  {
+   "tier": "temporal_secondary",
+   "label": "Zamansal tekrar — NHANES E 2007–08",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=copd, kume=E_2007_2008",
+   "n": 274,
+   "n_pos": 163,
+   "TP": 117,
+   "FP": 9,
+   "TN": 102,
+   "FN": 46,
+   "precision": [
+    0.9285714285714286,
+    0.869814774211143,
+    0.961968856232687
+   ],
+   "recall": [
+    0.7177914110429447,
+    0.6442993433045967,
+    0.7812543560088592
+   ],
+   "fpr": [
+    0.081081081081081,
+    0.0432420025845655,
+    0.1469459229693578
+   ],
+   "npv": [
+    0.6891891891891891,
+    0.6106317736646087,
+    0.7581739559097429
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9013430608522632,
+    0.8645304814016471,
+    0.9331329796053722
+   ],
+   "threshold": 0.5707211331015863,
+   "evidence_type": "ZAMANSAL TEKRAR — NHANES E, aynı anket farklı döngü, daha önce raporlanmış",
+   "dataset": "NHANES 2007–2008 E",
+   "delta": [
+    {
+     "label": "model − pre-BD FEV1/FVC < 0.70",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=copd, kume=E_2007_2008, baseline=pre-BD FEV1/FVC < 0.70",
+     "dAUC": [
+      0.0021002597689714,
+      -0.0190142596584315,
+      0.0247070690322223
+     ],
+     "baseline_auc": 0.8992428010832919,
+     "note": "karar: KANIT_YETERSIZ"
+    }
+   ]
+  }
+ ],
+ "hf_S2_BASIC_LAB": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — Mendeley 7v4w66wxj8.1 (n=37)",
+   "source": "phase_xxvii/results/ci_metrics.csv",
+   "source_sha256": "87e6cc9bcee12b734701ca4dd65b4ebf236f8f9749127bd594b36ee440f0c408",
+   "selector": "model=heart_failure, kume=test",
+   "n": 37,
+   "n_pos": 18,
+   "TP": 14,
+   "FP": 3,
+   "TN": 16,
+   "FN": 4,
+   "precision": [
+    0.8235294117647058,
+    0.5897054143116588,
+    0.93808873362379
+   ],
+   "recall": [
+    0.7777777777777778,
+    0.5478541568378739,
+    0.9099907189139832
+   ],
+   "fpr": [
+    0.1578947368421052,
+    0.0552047163853414,
+    0.3756547527032907
+   ],
+   "npv": [
+    0.8,
+    0.5839825677481064,
+    0.919342337420202
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.9502923976608189,
+    0.8771929824561404,
+    0.9970760233918128
+   ],
+   "threshold": 0.4476970841762816,
+   "evidence_type": "İÇ TEST (held-out, daha önce açılmış)",
+   "dataset": "Mendeley 7v4w66wxj8.1",
+   "delta": [
+    {
+     "label": "model − LR(age, sex, bmi)",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=heart_failure, kume=test, baseline=LR(age, sex, bmi)",
+     "dAUC": [
+      0.3713450292397661,
+      0.1578947368421053,
+      0.5877192982456141
+     ],
+     "baseline_auc": 0.5789473684210527,
+     "note": "karar: KATKI_VAR"
+    },
+    {
+     "label": "model − Tek değişken: rip3 (+ yön; fit AUC=0.927)",
+     "source": "phase_xxvii/results/baselines.csv",
+     "source_sha256": "488ed4ea46053ecbc9b42d7ca5474761b88c06c6ea8cbe2e16a1769e279bcd5d",
+     "selector": "model=heart_failure, kume=test, baseline=Tek değişken: rip3 (+ yön; fit AUC=0.927)",
+     "dAUC": [
+      -0.0058479532163742,
+      -0.043859649122807,
+      0.023391812865497
+     ],
+     "baseline_auc": 0.956140350877193,
+     "note": "karar: KANIT_YETERSIZ"
+    }
+   ]
+  }
+ ],
+ "htn_M1": [
+  {
+   "tier": "temporal",
+   "label": "Zamansal test — NHANES C 2003–04 (ölçüm yöntemi kaymalı)",
+   "source": "phase_xxxvii/results/test_operating_points.csv",
+   "source_sha256": "35ef0ffdc761dfff40be1cb4b3381fc9b1b76f89150e735bd45e9a5b27fff0c8",
+   "selector": "model=M1, esik_turu=birincil_Recall>=0.75",
+   "n": 2798,
+   "n_pos": 1001,
+   "TP": 767,
+   "FP": 325,
+   "TN": 1472,
+   "FN": 234,
+   "precision": [
+    0.7023809523809523,
+    0.6745920455812946,
+    0.7287509712777906
+   ],
+   "recall": [
+    0.7662337662337663,
+    0.7390281624816357,
+    0.7914037731448476
+   ],
+   "fpr": [
+    0.1808569838619922,
+    0.1637477571794708,
+    0.1993277682190122
+   ],
+   "npv": [
+    0.8628370457209847,
+    0.8456952973193902,
+    0.8783484399601288
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.8749564292135243,
+    0.862241973385546,
+    0.887488930101618
+   ],
+   "threshold": 0.5397445646616527,
+   "auc_source": "phase_xxxvii/results/test_auc.csv",
+   "delta": [
+    {
+     "label": "M1 − LR(yaş, cinsiyet, BMI)",
+     "source": "phase_xxxvii/results/test_delta_auc.csv",
+     "source_sha256": "703326243bee2749cde6a5e5aab82a2761c1fe6234dc6ef4ab8bfd9770f33d59",
+     "selector": "karsilastirma=M1-BASELINE",
+     "dAUC": [
+      0.0123493646031208,
+      0.0067391359336267,
+      0.0178941537038367
+     ],
+     "baseline_auc": 0.8626070646104035,
+     "note": null
+    }
+   ]
+  }
+ ],
+ "fibrosis_final": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES L 2021–23 (PREVIOUSLY_EXPOSED)",
+   "source": "phase_xxxi/results/fibrosis_test_results.csv",
+   "source_sha256": "646a2383886cb6901d7a35eb3cc26b01a8551ab96ac399c494fe4414afb5cf09",
+   "selector": "analiz=BİRİNCİL: LSM≥8, kilitli eşik",
+   "n": 4714,
+   "n_pos": 587,
+   "TP": 451,
+   "FP": 1430,
+   "TN": 2697,
+   "FN": 136,
+   "precision": [
+    0.239766081871345,
+    0.2210148832767159,
+    0.2595780358685686
+   ],
+   "recall": [
+    0.768313458262351,
+    0.7325044360859626,
+    0.8006335069228655
+   ],
+   "fpr": [
+    0.346498667312818,
+    0.3321295290893328,
+    0.361153301387121
+   ],
+   "npv": [
+    0.9519943522767385,
+    0.9434917937901716,
+    0.9592727904050398
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.7936268781353856,
+    0.7728327476554654,
+    0.8134836075555127
+   ],
+   "threshold": 0.06149696006866034,
+   "delta": [
+    {
+     "label": "model − FIB-4",
+     "source": "phase_xxxi/results/fibrosis_test_results.csv",
+     "source_sha256": "646a2383886cb6901d7a35eb3cc26b01a8551ab96ac399c494fe4414afb5cf09",
+     "selector": "analiz=FIB-4≥1.3 (dAUC)",
+     "dAUC": [
+      0.1966938542832365,
+      0.1691507117090304,
+      0.2250773204174609
+     ],
+     "baseline_auc": 0.5969330238521491,
+     "note": null
+    },
+    {
+     "label": "model − NFS",
+     "source": "phase_xxxi/results/fibrosis_test_results.csv",
+     "source_sha256": "646a2383886cb6901d7a35eb3cc26b01a8551ab96ac399c494fe4414afb5cf09",
+     "selector": "analiz=NFS≥−1.455 (dAUC)",
+     "dAUC": [
+      0.0957524491764666,
+      0.0745955293370742,
+      0.1165011007001304
+     ],
+     "baseline_auc": 0.6978744289589189,
+     "note": null
+    }
+   ]
+  }
+ ],
+ "osteo_final": [
+  {
+   "tier": "temporal",
+   "label": "Zamansal test — NHANES J 2017–18",
+   "source": "phase_xxx/results/osteo_test_results.csv",
+   "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+   "selector": "analiz=BİRİNCİL MODEL (D+E+F+H) — tümü",
+   "n": 2275,
+   "n_pos": 164,
+   "TP": 128,
+   "FP": 486,
+   "TN": 1625,
+   "FN": 36,
+   "precision": [
+    0.2084690553745928,
+    0.1781998721812485,
+    0.2423634537513732
+   ],
+   "recall": [
+    0.7804878048780488,
+    0.711120275229812,
+    0.8370160472641677
+   ],
+   "fpr": [
+    0.2302226432970156,
+    0.2127641940330324,
+    0.2486611552528927
+   ],
+   "npv": [
+    0.9783263094521373,
+    0.9701413644653755,
+    0.9843038720952174
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.8493171656017839,
+    0.8181441433374543,
+    0.8799760401381843
+   ],
+   "threshold": 0.0602885709255003,
+   "delta": [
+    {
+     "label": "model − (−OST)",
+     "source": "phase_xxx/results/osteo_test_results.csv",
+     "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+     "selector": "analiz=OST birincil (K<2, E<=3) — tümü (dAUC)",
+     "dAUC": [
+      0.0249997111529618,
+      0.011551173585516,
+      0.0383927900890804
+     ],
+     "baseline_auc": 0.8243174544488221,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "temporal_subgroup",
+   "label": "Zamansal test — kadın",
+   "source": "phase_xxx/results/osteo_test_results.csv",
+   "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+   "selector": "analiz=BİRİNCİL MODEL (D+E+F+H) — kadın",
+   "n": 1082,
+   "n_pos": 133,
+   "TP": 113,
+   "FP": 368,
+   "TN": 581,
+   "FN": 20,
+   "precision": [
+    0.2349272349272349,
+    0.1992321378140556,
+    0.2748227406192983
+   ],
+   "recall": [
+    0.849624060150376,
+    0.7791221049896448,
+    0.9004964901457637
+   ],
+   "fpr": [
+    0.3877766069546891,
+    0.3572883567085598,
+    0.4191697329051895
+   ],
+   "npv": [
+    0.9667221297836939,
+    0.9491597023392194,
+    0.9783560818694638
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.8159677381018405,
+    0.7759412361250861,
+    0.8542997377532344
+   ],
+   "threshold": 0.0602885709255003,
+   "delta": [
+    {
+     "label": "model − (−OST)",
+     "source": "phase_xxx/results/osteo_test_results.csv",
+     "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+     "selector": "analiz=OST birincil (K<2, E<=3) — kadın (dAUC)",
+     "dAUC": [
+      0.0151762440875636,
+      0.0021665068889293,
+      0.0288552651386105
+     ],
+     "baseline_auc": 0.8007914940142769,
+     "note": null
+    }
+   ]
+  },
+  {
+   "tier": "temporal_subgroup",
+   "label": "Zamansal test — erkek",
+   "source": "phase_xxx/results/osteo_test_results.csv",
+   "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+   "selector": "analiz=BİRİNCİL MODEL (D+E+F+H) — erkek",
+   "n": 1193,
+   "n_pos": 31,
+   "TP": 15,
+   "FP": 118,
+   "TN": 1044,
+   "FN": 16,
+   "precision": [
+    0.112781954887218,
+    0.0695490348474388,
+    0.1777551017230226
+   ],
+   "recall": [
+    0.4838709677419355,
+    0.319702515624173,
+    0.651596045519712
+   ],
+   "fpr": [
+    0.1015490533562822,
+    0.085473739196849,
+    0.1202501669192582
+   ],
+   "npv": [
+    0.9849056603773585,
+    0.975621586742769,
+    0.9906878115951884
+   ],
+   "npv_source": "kayıtlı TN/FN sayılarından hesaplandı (Wilson)",
+   "auc": [
+    0.816501027150075,
+    0.7337828271611793,
+    0.8826036866359445
+   ],
+   "threshold": 0.0602885709255003,
+   "delta": [
+    {
+     "label": "model − (−OST)",
+     "source": "phase_xxx/results/osteo_test_results.csv",
+     "source_sha256": "186c84e49e83b0ceb963b1804e6ab0534f192d8501e1d5941fef748ce266353f",
+     "selector": "analiz=OST birincil (K<2, E<=3) — erkek (dAUC)",
+     "dAUC": [
+      0.0148797956804176,
+      -0.0077945422241962,
+      0.0441452445727609
+     ],
+     "baseline_auc": 0.8016212314696574,
+     "note": null
+    }
+   ]
+  }
+ ],
+ "ckd_A": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES I 2015–16 (kilitli tek sefer)",
+   "source": "phase_xxxv/results/test_operating_points.csv",
+   "source_sha256": "51aafe9a16ec7ad851220e430af6da7b5d74e8d6f9feed3ee36822b94a8092d7",
+   "selector": "model=A, nokta=birincil Recall≥0.75 (kilitli)",
+   "n": 4812,
+   "n_pos": 716,
+   "TP": 549,
+   "FP": 1322,
+   "TN": 2774,
+   "FN": 167,
+   "precision": [
+    0.293425975414217,
+    0.2732341336398002,
+    0.3144643374158645
+   ],
+   "recall": [
+    0.7667597765363129,
+    0.7344103530013312,
+    0.7962620545393865
+   ],
+   "fpr": [
+    0.32275390625,
+    0.3086079000803043,
+    0.3372320635904706
+   ],
+   "npv": [
+    0.9432165929955796,
+    0.9342598576177696,
+    0.951017002428887
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.7906183850165851,
+    0.7726001254825704,
+    0.8086426374385753
+   ],
+   "threshold": 0.1266020960079861,
+   "auc_source": "phase_xxxv/results/test_discrimination.csv",
+   "delta": [
+    {
+     "label": "A − SCORED",
+     "source": "phase_xxxv/results/test_delta_auc.csv",
+     "source_sha256": "f2c847fab80d8d8c503478a4ca4814e99c48865391492479f4d6777d4a1ed7a7",
+     "selector": "karsilastirma=A − SCORED",
+     "dAUC": [
+      0.0318903576728349,
+      0.0203590371306236,
+      0.0430860610233414
+     ],
+     "baseline_auc": 0.7587280273437501,
+     "note": null
+    }
+   ]
+  }
+ ],
+ "ckd_B": [
+  {
+   "tier": "internal_test",
+   "label": "İç test — NHANES I 2015–16 (kilitli tek sefer)",
+   "source": "phase_xxxv/results/test_operating_points.csv",
+   "source_sha256": "51aafe9a16ec7ad851220e430af6da7b5d74e8d6f9feed3ee36822b94a8092d7",
+   "selector": "model=B, nokta=birincil Recall≥0.75 (kilitli)",
+   "n": 4812,
+   "n_pos": 716,
+   "TP": 540,
+   "FP": 1187,
+   "TN": 2909,
+   "FN": 176,
+   "precision": [
+    0.3126809496236248,
+    0.2912528973251144,
+    0.3349404800620714
+   ],
+   "recall": [
+    0.7541899441340782,
+    0.7213506502213249,
+    0.7843162512049084
+   ],
+   "fpr": [
+    0.289794921875,
+    0.2761036937837836,
+    0.3038800647844495
+   ],
+   "npv": [
+    0.9429497568881684,
+    0.9342009147791374,
+    0.9505968440036804
+   ],
+   "npv_source": "kaynak dosyada kayıtlı",
+   "auc": [
+    0.805362637482542,
+    0.7877865003272373,
+    0.8228235905933831
+   ],
+   "threshold": 0.13832509192715,
+   "auc_source": "phase_xxxv/results/test_discrimination.csv",
+   "delta": [
+    {
+     "label": "B − SCORED",
+     "source": "phase_xxxv/results/test_delta_auc.csv",
+     "source_sha256": "f2c847fab80d8d8c503478a4ca4814e99c48865391492479f4d6777d4a1ed7a7",
+     "selector": "karsilastirma=B − SCORED",
+     "dAUC": [
+      0.0466346101387918,
+      0.0347861101617335,
+      0.0582613895650643
+     ],
+     "baseline_auc": 0.7587280273437501,
+     "note": null
+    },
+    {
+     "label": "B − A",
+     "source": "phase_xxxv/results/test_delta_auc.csv",
+     "source_sha256": "f2c847fab80d8d8c503478a4ca4814e99c48865391492479f4d6777d4a1ed7a7",
+     "selector": "karsilastirma=B − A",
+     "dAUC": [
+      0.0147442524659568,
+      0.0089010463699488,
+      0.0205333817358444
+     ],
+     "baseline_auc": 0.7906183850165851,
+     "note": null
+    }
+   ]
+  }
+ ]
+}

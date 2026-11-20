@@ -18,6 +18,7 @@
 ## İçindekiler
 
 - [Proje ne yapar?](#proje-ne-yapar)
+- [Belgeler](#belgeler)
 - [Arayüz](#arayüz)
 - [Modeller ve doğrulanmış metrikler](#modeller-ve-doğrulanmış-metrikler)
 - [Mimari](#mimari)
@@ -45,6 +46,19 @@ Uygulama **kanıta duyarlı yönlendirme** yapar:
 - **Hedefi tanımlayan girdi uyarısı:** hastalığı tanımlayan değer (ör. HbA1c, ölçülen yüksek tansiyon) girildiyse,
   model yerine doğrudan klinik eşiğin kullanılması gerektiği belirtilir.
 - **Modül etiketi:** AF ve karaciğer fibrozisi *ana modül*, osteoporoz *araştırma modülü*, diğerleri *deneysel*.
+
+## Belgeler
+
+| belge | içerik |
+|---|---|
+| [Kurulum kılavuzu](app/docs/INSTALL.md) | Windows adım adım kurulum (Python 3.13.3, backend, arayüz, AF için Octave + ECGDeli), testler, sık hatalar |
+| [Mimari](app/docs/architecture.md) | bileşenler, başlangıç bütünlük denetimi, kanıta duyarlı yönlendirme, AF yolu (Mermaid + [SVG/PNG](app/docs/img/)) |
+| [API](app/docs/api.md) · [OpenAPI](app/docs/openapi.json) | uç noktalar, durumlar, gerçek backend örnekleri |
+| [Model kartları](app/docs/model_cards/README.md) | 13 model, TRIPOD+AI eşlemeli: veri, hedef, öznitelikler, örnek sayıları, bölme, eşik, TP/FP/TN/FN ve %95 GA, baseline ΔAUC, alt gruplar, sınırlılıklar |
+| [Deney tabloları](app/docs/experiment_tables.md) | tüm hastalıklar tek tabloda; başarısız/sınırlı modellerin gerekçesi |
+| [TRIPOD+AI kontrol listesi](phase_xlvi/tripod_ai_checklist.md) | madde × model durum tablosu |
+| [AF doğrulama belgesi](phase_xlvi/af_validation_dossier.md) | hasta bazlı ayrım, öznitelik çıkarımı, Challenge 2021, tekilleştirme, diğer ritimler |
+| [Fibrozis/osteoporoz referans skor analizi](phase_xlvi/01_reference_score_analysis.md) | FIB-4, NFS, OST ile eşit duyarlılık/yönlendirme, McNemar, ΔAUC (post-hoc) |
 
 ## Arayüz
 
@@ -166,7 +180,8 @@ flowchart LR
   tüm ağacın SHA256 envanteri alınır.
 
 Faz raporları: [Phase XLIII — registry](phase_xliii/PHASE_XLIII_REPORT.md) · [Phase XLIV — backend](phase_xliv/PHASE_XLIV_REPORT.md) ·
-[Phase XLV — arayüz](phase_xlv/PHASE_XLV_REPORT.md).
+[Phase XLV — arayüz](phase_xlv/PHASE_XLV_REPORT.md) ·
+[Phase XLVI — belgeler, model kartları, referans skor analizi](phase_xlvi/PHASE_XLVI_REPORT.md).
 
 ## Kurulum ve çalıştırma
 
@@ -201,6 +216,7 @@ Beklenen `/health` sonucu (temiz klonda doğrulandı; `phase_xlv/03b_clean_clone
 - Uygulamada görünen 11 modelin 11'i etkindir. Paket ve registry kontrolleri temizdir.
 - **AF pipeline'ı** gerekçesiyle devre dışıdır ("Octave/ECGDeli AF çalışma ortamı yok …"), bu yüzden `status` değeri
   `degraded` olur. `POST /ecg/af` aynı gerekçeyle ABSTAIN döner; AF modeli EKG özniteliği olmadan çalışamaz.
+  Canlı panelde AF satırı "Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok" gösterir (Phase XLVI).
 - Form tabanlı tüm modeller, canlı panel ve sonuç ekranı çalışır.
 
 **AF (EKG) için ek kurulum.** AF modeli yalnız kilitli `AF-ECGDELI-OCTAVE-v1` pipeline'ı ile çalışır. Aşağıdakiler bu
@@ -215,17 +231,17 @@ depoda **yoktur**; sunucu başlangıçta hepsinin SHA256'sını kilit dosyasıyl
 
 Bunlar tam araştırma ağacında bulunur. Sürüm veya SHA256 uyuşmazsa AF devre dışı kalır.
 
-Ayrıntılar: [app/backend/README.md](app/backend/README.md), [app/frontend/README.md](app/frontend/README.md).
+Adım adım kılavuz ve sık hatalar: [app/docs/INSTALL.md](app/docs/INSTALL.md). Ayrıntılar: [app/backend/README.md](app/backend/README.md), [app/frontend/README.md](app/frontend/README.md).
 
 ## Testler
 
-| paket | sonuç (Phase XLV sonu) |
+| paket | sonuç (Phase XLVI sonu) |
 |---|---|
-| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 313 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
-| Vitest + React Testing Library | 33/33 |
+| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 318 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
+| Vitest + React Testing Library | 36/36 |
 | Playwright uçtan uca (canlı backend): normal, eksik, birim hatası, kapsam dışı (AF ve fibrozis), gizlilik | 20/20 |
 
-Raporlar: [phase_xliv/03_tests.md](phase_xliv/03_tests.md), [phase_xlv/02_tests.md](phase_xlv/02_tests.md).
+Raporlar: [phase_xliv/03_tests.md](phase_xliv/03_tests.md), [phase_xlv/02_tests.md](phase_xlv/02_tests.md), [phase_xlvi/PHASE_XLVI_REPORT.md](phase_xlvi/PHASE_XLVI_REPORT.md).
 
 ## Depo içeriği
 

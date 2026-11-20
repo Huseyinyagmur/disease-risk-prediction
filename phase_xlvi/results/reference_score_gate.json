@@ -1,0 +1,330 @@
+{
+ "all_ok": true,
+ "gates": [
+  {
+   "analiz": "BİRİNCİL: LSM≥8, kilitli eşik",
+   "kayitli": {
+    "TP": 451,
+    "FP": 1430,
+    "TN": 2697,
+    "FN": 136
+   },
+   "yeniden": {
+    "TP": 451,
+    "FP": 1430,
+    "TN": 2697,
+    "FN": 136
+   },
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL: LSM≥8, kilitli eşik",
+   "metrik": "AUC",
+   "kayitli": 0.7936268781353856,
+   "yeniden": 0.7936268781353856,
+   "ok": true
+  },
+  {
+   "analiz": "FIB-4≥1.3",
+   "kayitli": {
+    "TP": 262,
+    "FP": 1288,
+    "TN": 2839,
+    "FN": 325
+   },
+   "yeniden": {
+    "TP": 262,
+    "FP": 1288,
+    "TN": 2839,
+    "FN": 325
+   },
+   "ok": true
+  },
+  {
+   "analiz": "FIB-4≥2.67",
+   "kayitli": {
+    "TP": 50,
+    "FP": 109,
+    "TN": 4018,
+    "FN": 537
+   },
+   "yeniden": {
+    "TP": 50,
+    "FP": 109,
+    "TN": 4018,
+    "FN": 537
+   },
+   "ok": true
+  },
+  {
+   "analiz": "NFS≥−1.455",
+   "kayitli": {
+    "TP": 414,
+    "FP": 1784,
+    "TN": 2343,
+    "FN": 173
+   },
+   "yeniden": {
+    "TP": 414,
+    "FP": 1784,
+    "TN": 2343,
+    "FN": 173
+   },
+   "ok": true
+  },
+  {
+   "analiz": "NFS>0.676",
+   "kayitli": {
+    "TP": 132,
+    "FP": 251,
+    "TN": 3876,
+    "FN": 455
+   },
+   "yeniden": {
+    "TP": 132,
+    "FP": 251,
+    "TN": 3876,
+    "FN": 455
+   },
+   "ok": true
+  },
+  {
+   "analiz": "FIB-4≥1.3",
+   "metrik": "AUC",
+   "kayitli": 0.5969330238521491,
+   "yeniden": 0.5969330238521491,
+   "ok": true
+  },
+  {
+   "analiz": "NFS≥−1.455",
+   "metrik": "AUC",
+   "kayitli": 0.6978744289589189,
+   "yeniden": 0.6978744289589189,
+   "ok": true
+  },
+  {
+   "analiz": "FIB-4≥1.3",
+   "metrik": "dAUC (özgün tohum)",
+   "kayitli": [
+    0.1966938542832365,
+    0.1691507117090304,
+    0.2250773204174609
+   ],
+   "yeniden": [
+    0.1966938542832365,
+    0.16915071170903043,
+    0.22507732041746095
+   ],
+   "ok": true
+  },
+  {
+   "analiz": "NFS≥−1.455",
+   "metrik": "dAUC (özgün tohum)",
+   "kayitli": [
+    0.0957524491764666,
+    0.0745955293370742,
+    0.1165011007001304
+   ],
+   "yeniden": [
+    0.09575244917646664,
+    0.07459552933707424,
+    0.1165011007001304
+   ],
+   "ok": true
+  },
+  {
+   "analiz": "female: birincil tek eşik",
+   "kayitli": {
+    "TP": 216,
+    "FP": 657,
+    "TN": 1625,
+    "FN": 66
+   },
+   "yeniden": {
+    "TP": 216,
+    "FP": 657,
+    "TN": 1625,
+    "FN": 66
+   },
+   "ok": true
+  },
+  {
+   "analiz": "male: birincil tek eşik",
+   "kayitli": {
+    "TP": 235,
+    "FP": 773,
+    "TN": 1072,
+    "FN": 70
+   },
+   "yeniden": {
+    "TP": 235,
+    "FP": 773,
+    "TN": 1072,
+    "FN": 70
+   },
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — tümü",
+   "kayitli": {
+    "TP": 128,
+    "FP": 486,
+    "TN": 1625,
+    "FN": 36
+   },
+   "yeniden": {
+    "TP": 128,
+    "FP": 486,
+    "TN": 1625,
+    "FN": 36
+   },
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — tümü",
+   "metrik": "AUC",
+   "kayitli": 0.8493171656017839,
+   "yeniden": 0.8493171656017839,
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — tümü",
+   "kayitli": {
+    "TP": 142,
+    "FP": 951,
+    "TN": 1160,
+    "FN": 22
+   },
+   "yeniden": {
+    "TP": 142,
+    "FP": 951,
+    "TN": 1160,
+    "FN": 22
+   },
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — tümü",
+   "metrik": "dAUC (özgün tohum)",
+   "kayitli": [
+    0.0249997111529618,
+    0.011551173585516,
+    0.0383927900890804
+   ],
+   "yeniden": [
+    0.024999711152961845,
+    0.011551173585516022,
+    0.038392790089080454
+   ],
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — kadın",
+   "kayitli": {
+    "TP": 113,
+    "FP": 368,
+    "TN": 581,
+    "FN": 20
+   },
+   "yeniden": {
+    "TP": 113,
+    "FP": 368,
+    "TN": 581,
+    "FN": 20
+   },
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — kadın",
+   "metrik": "AUC",
+   "kayitli": 0.8159677381018405,
+   "yeniden": 0.8159677381018405,
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — kadın",
+   "kayitli": {
+    "TP": 115,
+    "FP": 471,
+    "TN": 478,
+    "FN": 18
+   },
+   "yeniden": {
+    "TP": 115,
+    "FP": 471,
+    "TN": 478,
+    "FN": 18
+   },
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — kadın",
+   "metrik": "dAUC (özgün tohum)",
+   "kayitli": [
+    0.0151762440875636,
+    0.0021665068889293,
+    0.0288552651386105
+   ],
+   "yeniden": [
+    0.015176244087563684,
+    0.0021665068889293844,
+    0.028855265138610586
+   ],
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — erkek",
+   "kayitli": {
+    "TP": 15,
+    "FP": 118,
+    "TN": 1044,
+    "FN": 16
+   },
+   "yeniden": {
+    "TP": 15,
+    "FP": 118,
+    "TN": 1044,
+    "FN": 16
+   },
+   "ok": true
+  },
+  {
+   "analiz": "BİRİNCİL MODEL (D+E+F+H) — erkek",
+   "metrik": "AUC",
+   "kayitli": 0.816501027150075,
+   "yeniden": 0.816501027150075,
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — erkek",
+   "kayitli": {
+    "TP": 27,
+    "FP": 480,
+    "TN": 682,
+    "FN": 4
+   },
+   "yeniden": {
+    "TP": 27,
+    "FP": 480,
+    "TN": 682,
+    "FN": 4
+   },
+   "ok": true
+  },
+  {
+   "analiz": "OST birincil (K<2, E<=3) — erkek",
+   "metrik": "dAUC (özgün tohum)",
+   "kayitli": [
+    0.0148797956804176,
+    -0.0077945422241962,
+    0.0441452445727609
+   ],
+   "yeniden": [
+    0.01487979568041764,
+    -0.007794542224196238,
+    0.04414524457276096
+   ],
+   "ok": true
+  }
+ ]
+}

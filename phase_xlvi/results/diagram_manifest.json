@@ -1,0 +1,27 @@
+{
+ "mermaid_version": "11.4.1",
+ "mermaid_js_sha256": "a43bc1afd446f9c4cc66ac5dd45d02e8d65e26fc5344ec0ef787f88d6ddb6f9e",
+ "source": "app/docs/architecture.md",
+ "files": {
+  "01_components": {
+   "block_sha256": "83d5b60e702ad407e970b8655101c3ff14c7b21db9a094d034ac41691c9d5835",
+   "svg_sha256": "9d0a8e98f3239b6214864f7201eb8a6fb71ee55476e92c7bccefc455987250e7",
+   "png_sha256": "ab89ff64c7de98e7b31f82635144c9efa6028e18be0993ba2be84247fa80a32c"
+  },
+  "02_startup": {
+   "block_sha256": "464852c41f8574d12dde0ab2143fe4ea8ad81ec9f967147b641ac7d9e60a1206",
+   "svg_sha256": "265f618dafe8bd8476a6883780f687a9fde9fa1caa0d7cd9c4a5eb6de5ea50c6",
+   "png_sha256": "11b8df19235065cd9f9361c3689e1a24e5530684eeb6e6399f23933dafcf3f70"
+  },
+  "03_routing": {
+   "block_sha256": "6ee3b195bad7ce421fa55a15575227a029e6ef0604c55b95574fb1b531b82d8c",
+   "svg_sha256": "ec8992cff0e7c01e02dae71f6fb9466cbe2a4ed668902a4ab45e0f21fb79abbb",
+   "png_sha256": "db32b706073ef32f443b096edcd30a9d27a694ee30a85487655702f3b580e254"
+  },
+  "04_af_path": {
+   "block_sha256": "c535f53e82557f25bc1073616889b8ca7a6dd4eec8eb7ed6d08d8b1da508ceda",
+   "svg_sha256": "72166b492b91fa6c24b8b284ad94b329ccd2369f0bef1a505bfe463c32679ca4",
+   "png_sha256": "fdee76863677d298640ab88c3c65108602550a324c01b6bcf963fb3d73699bde"
+  }
+ }
+}

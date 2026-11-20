@@ -61,7 +61,13 @@ export function RoutingPanel({ elig, loading, error }: Props) {
                   {m.reasons.filter((r) => !r.startsWith('eksik zorunlu alan')).map((r) => <li key={r}>{r}</li>)}
                 </ul>
               )}
-              {m.endpoint === '/ecg/af' && m.state !== 'OUT_OF_SCOPE' && (
+              {m.details && m.details.length > 0 && (
+                <details className="mt-1 text-[11px] text-slate-500" data-testid={`panel-details-${m.model_id}`}>
+                  <summary className="cursor-pointer">Teknik ayrıntı</summary>
+                  <ul className="list-disc pl-4">{m.details.map((d) => <li key={d}>{d}</li>)}</ul>
+                </details>
+              )}
+              {m.endpoint === '/ecg/af' && m.state !== 'OUT_OF_SCOPE' && m.af_pipeline_available !== false && (
                 <button type="button" onClick={() => go('ecg')} className="mt-1 text-xs text-indigo-700 underline">EKG kaydı yükle →</button>
               )}
             </li>

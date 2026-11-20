@@ -1,0 +1,138 @@
+{
+ "utc": "2026-11-20T08:21:45.455026+00:00",
+ "n_before": 158434,
+ "n_after": 158519,
+ "V1": {
+  "changed": [],
+  "deleted": [],
+  "new": [],
+  "ok": true
+ },
+ "V2": {
+  "models": {
+   "af_S4_DEVICE": {
+    "registry": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "before": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009",
+    "after": "f4a61af71d7fa1dca6510d9cedeb46f99f60d2fb7c40a09c5aacb8299ae42009"
+   },
+   "mi_model": {
+    "registry": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "before": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef",
+    "after": "8ae84fd58d9bafdf2f2bbe3b2d8f02e4b924d896c3ac696c03d399e77b9b5eef"
+   },
+   "cad_DEVICE": {
+    "registry": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "before": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033",
+    "after": "ef3a3b73a7ba7ca5e9518edbd973bd23f058942c79be253454164911f16f6033"
+   },
+   "dm_A": {
+    "registry": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "before": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5",
+    "after": "669e780c484f558e6e1ac71f463b11c6415f2208a7eb609b55269764dac9a3b5"
+   },
+   "dm_B": {
+    "registry": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "before": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6",
+    "after": "ccaf1dccd008f4df6558efc49fd25133e641fe6720346e419c95ecb45aea0ea6"
+   },
+   "anemia_LR16": {
+    "registry": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "before": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087",
+    "after": "369bb07c766df54d20529b45f9c149aa120c13da38c99c0a4961e14f76387087"
+   },
+   "copd_S4_DEVICE": {
+    "registry": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "before": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7",
+    "after": "9584633d095d5a9e1d5d762dcddf2281f69b2dcc95365531a8cee6fb62a3f2e7"
+   },
+   "hf_S2_BASIC_LAB": {
+    "registry": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "before": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870",
+    "after": "57db837eb7fb99f032acaa54e4c85d7a25267e8c616b7c7cf80be50bc4e0a870"
+   },
+   "htn_M1": {
+    "registry": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "before": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73",
+    "after": "4beed373224186794784b5a5f96a321fcb05f6e1bdfe3aa666aec17e60e19f73"
+   },
+   "fibrosis_final": {
+    "registry": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "before": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+    "after": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7"
+   },
+   "osteo_final": {
+    "registry": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "before": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+    "after": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d"
+   },
+   "ckd_A": {
+    "registry": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "before": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433",
+    "after": "b107cbb4ed99e13bfde3f00f06622a9d9fc4a8d4937e48adb25e61ba5602f433"
+   },
+   "ckd_B": {
+    "registry": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "before": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988",
+    "after": "6b45bd673c7f00a45c03332f4a40c8c60adc11e38f954f9892de2070e4367988"
+   }
+  },
+  "ok": true
+ },
+ "V3": {
+  "files": {
+   "phase_xliii/registry/models.json": true,
+   "phase_xliii/registry/input_schema.json": true,
+   "phase_xliv/registry/input_schema_v2.json": true,
+   "phase_xxviii/config/af_pipeline_lock.json": true,
+   "phase_xxviii/pipeline/af_pipeline_v1.py": true
+  },
+  "ok": true
+ },
+ "V4": {
+  "changed_allowed": [
+   "README.md",
+   "app/backend/healthrisk_api/service.py",
+   "app/frontend/src/api/types.ts",
+   "app/frontend/src/components/RoutingPanel.tsx",
+   "phase_xlvi/logs/sha_before.log"
+  ],
+  "new_app": [
+   "app/backend/tests/test_phase46_af_panel.py",
+   "app/docs/INSTALL.md",
+   "app/docs/api.md",
+   "app/docs/architecture.md",
+   "app/docs/experiment_tables.md",
+   "app/docs/img/01_components.png",
+   "app/docs/img/01_components.svg",
+   "app/docs/img/02_startup.png",
+   "app/docs/img/02_startup.svg",
+   "app/docs/img/03_routing.png",
+   "app/docs/img/03_routing.svg",
+   "app/docs/img/04_af_path.png",
+   "app/docs/img/04_af_path.svg",
+   "app/docs/model_cards/README.md",
+   "app/docs/model_cards/af_S4_DEVICE.md",
+   "app/docs/model_cards/anemia_LR16.md",
+   "app/docs/model_cards/cad_DEVICE.md",
+   "app/docs/model_cards/ckd_A.md",
+   "app/docs/model_cards/ckd_B.md",
+   "app/docs/model_cards/copd_S4_DEVICE.md",
+   "app/docs/model_cards/dm_A.md",
+   "app/docs/model_cards/dm_B.md",
+   "app/docs/model_cards/fibrosis_final.md",
+   "app/docs/model_cards/hf_S2_BASIC_LAB.md",
+   "app/docs/model_cards/htn_M1.md",
+   "app/docs/model_cards/mi_model.md",
+   "app/docs/model_cards/osteo_final.md",
+   "app/docs/openapi.json",
+   "app/frontend/src/components/RoutingPanel.test.tsx",
+   "app/frontend/src/test/fixtures/eligibility_af_env_missing.json"
+  ],
+  "deleted_app": []
+ },
+ "V5": {
+  "new_pyc": [],
+  "ok": true
+ },
+ "all_ok": true
+}

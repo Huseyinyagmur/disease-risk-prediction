@@ -1,0 +1,20 @@
+{
+ "seed": 20261120,
+ "n_boot": 2000,
+ "label": "POST-HOC TANIMLAYICI (teknik yeniden skorlama; kilitli sonuç değil)",
+ "p30_engine_seed": 20261114,
+ "python": "3.13.3",
+ "executable": "C:\\Bitirme\\HealthRisk_AI_Research_V2\\Focused_Current_Disease_Improvement_2026\\.venv\\Scripts\\python.exe",
+ "fibrosis": {
+  "model_sha256": "7f349c4a29663e00a0a6da2ae70b4ed7fa5715b9cc2e01c4b86bbc00386d06e7",
+  "test_file_sha256": "534498bd1247f4566dbb2a369fd9e30af3108788d46999ab1961cbdd8f42befc",
+  "threshold": 0.06149696006866034,
+  "n": 4714
+ },
+ "osteo": {
+  "model_sha256": "2c31bd8770b599754518d24b09409e09e28dba66e0eee9355777eb162f6adb5d",
+  "test_file_sha256": "df9c8d05037a50dea8ffa2a6d7289bb369cd3740b290ed48232d3f6b56625c5a",
+  "threshold": 0.0602885709255003,
+  "n": 2275
+ }
+}

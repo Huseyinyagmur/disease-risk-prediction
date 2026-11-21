@@ -2,6 +2,7 @@
 // değer ve seçilen birim olduğu gibi backend'e gönderilir. Yalnız sunucunun ayrıştırdığı ask_when_rule /
 // required_when_rule koşulları (eşitlik / ≥) sorunun gösterilip gösterilmeyeceği için değerlendirilir.
 import type { FieldSpec, Rule, Schema } from '../api/types';
+import { t } from './ui';
 
 export type Answer = string | boolean | null;
 
@@ -69,18 +70,21 @@ export interface BuiltPayload {
   formatErrors: Record<string, string>; // sayı olarak okunamayan değerler (gönderilmez)
 }
 
-/** Görünür ve yanıtlanmış alanlardan istek gövdesi. Gizli (ask_when sağlanmayan) alanlar gönderilmez. */
-export function buildPayload(schema: Schema, values: FormValues): BuiltPayload {
+/** Görünür ve yanıtlanmış alanlardan istek gövdesi. Gizli (ask_when sağlanmayan) alanlar gönderilmez.
+ * Phase XLVII: `allowed` verilirse yalnız seçilen analizlerin alanları (form bunları gösterir) gönderilir. */
+export function buildPayload(schema: Schema, values: FormValues, allowed?: Set<string>): BuiltPayload {
+  const formatMsg = t(schema, 'format_error');
   const fields: Record<string, unknown> = {};
   const formatErrors: Record<string, string> = {};
   for (const [name, spec] of formFields(schema)) {
     const v = values[name];
     if (!v || v.value === null || v.value === '') continue;
     if (!isVisible(schema, values, name)) continue;
+    if (allowed && !allowed.has(name)) continue;
     if (spec.type === 'numeric') {
       const n = parseNumber(String(v.value));
       if (n === null) {
-        formatErrors[name] = 'Sayı girin (ondalık ayırıcı nokta veya virgül).';
+        formatErrors[name] = formatMsg;
         continue;
       }
       fields[name] = v.unit && v.unit !== spec.unit ? { value: n, unit: v.unit } : n;
@@ -91,9 +95,10 @@ export function buildPayload(schema: Schema, values: FormValues): BuiltPayload {
   return { fields, formatErrors };
 }
 
+/** Arayüz etiketi: önce sade etiket (app_config > form.field_ui_tr), yoksa şema label_tr. Ham alan adı yalnız son çare. */
 export function fieldLabel(schema: Schema | null, name: string): string {
   if (!schema) return name;
-  return schema.fields[name]?.label_tr ?? schema.form.virtual_field_labels_tr[name] ?? name;
+  return schema.form.field_ui_tr?.[name]?.label ?? schema.fields[name]?.label_tr ?? schema.form.virtual_field_labels_tr[name] ?? name;
 }
 
 export function categoryLabel(schema: Schema, field: string, cat: string | boolean): string {

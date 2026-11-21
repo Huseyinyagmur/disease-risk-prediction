@@ -38,7 +38,7 @@ describe('sabit uyarı — tek kaynak backend', () => {
     expect(await within(screen.getByTestId('disclaimer')).findByText(custom)).toBeInTheDocument();
     expect(screen.getAllByText(custom).length).toBe(2); // bant + Giriş kutusu
     for (const name of ['Veri girişi', 'Sonuçlar', 'EKG ile AF', 'Model kartları', 'Hakkında']) {
-      await u.click(within(screen.getByRole('navigation')).getByRole('button', { name }));
+      await u.click(within(screen.getByRole('navigation', { name: 'Ana gezinme' })).getByRole('button', { name }));
       expect(screen.getByTestId('disclaimer')).toHaveTextContent(custom);
     }
     expect(screen.getAllByText(custom).length).toBe(2); // Hakkında: bant + sayfa sonu kutusu

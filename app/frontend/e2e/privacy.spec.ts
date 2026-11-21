@@ -1,6 +1,6 @@
 // @gizlilik: sağlık verisi tarayıcıda kalıcı saklanmaz; yenilenince silinir; istekler yalnız localhost'a gider.
 import { expect, test, type Page } from '@playwright/test';
-import { loadEcgSample, loadProfile, openEcg, openForm, runEcg, submit } from './helpers';
+import { gotoStep, loadEcgSample, loadProfile, mainNav, openEcg, openForm, runEcg, submit } from './helpers';
 
 async function storageSnapshot(page: Page) {
   return page.evaluate(async () => {
@@ -48,16 +48,20 @@ test.describe('@gizlilik tarayıcı depolaması ve yenileme', () => {
     expect(await context.cookies()).toEqual([]);
 
     // Formu doldur, sonra yenile: hiçbir değer kalmamalı
-    await page.getByRole('navigation').getByRole('button', { name: 'Veri girişi', exact: true }).click();
-    await loadProfile(page, 'fibrosis_ready');
+    await mainNav(page).getByRole('button', { name: 'Veri girişi', exact: true }).click();
+    await loadProfile(page, 'fibrosis_ready'); // seçim yokken "Tümü" seçilir
+    await gotoStep(page, 'temel');
     await expect(page.locator('#f-age_years')).toHaveValue('58');
     await page.reload();
-    await page.getByRole('navigation').getByRole('button', { name: 'Veri girişi', exact: true }).click();
-    await expect(page.locator('#f-age_years')).toHaveValue('');
+    await mainNav(page).getByRole('button', { name: 'Veri girişi', exact: true }).click();
+    await expect(page.getByTestId('selected-count')).toContainText('0 analiz'); // analiz seçimi de silinir
     await expect(page.getByTestId('profile-loaded')).toHaveCount(0);
-    await page.getByRole('navigation').getByRole('button', { name: 'Sonuçlar', exact: true }).click();
+    await page.getByTestId('select-all').click();
+    await gotoStep(page, 'temel');
+    await expect(page.locator('#f-age_years')).toHaveValue('');
+    await mainNav(page).getByRole('button', { name: 'Sonuçlar', exact: true }).click();
     await expect(page.getByText('Henüz sonuç yok')).toBeVisible();
-    await page.getByRole('navigation').getByRole('button', { name: 'EKG ile AF', exact: true }).click();
+    await mainNav(page).getByRole('button', { name: 'EKG ile AF', exact: true }).click();
     await expect(page.getByText('Sonuç burada görünecek.')).toBeVisible();
 
     const snap2 = await storageSnapshot(page);
@@ -69,7 +73,7 @@ test.describe('@gizlilik tarayıcı depolaması ve yenileme', () => {
     await page.goto('/');
     const text = 'Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.';
     for (const name of ['Giriş', 'Veri girişi', 'Sonuçlar', 'EKG ile AF', 'Model kartları', 'Hakkında']) {
-      await page.getByRole('navigation').getByRole('button', { name, exact: true }).click();
+      await mainNav(page).getByRole('button', { name, exact: true }).click();
       await expect(page.getByTestId('disclaimer')).toContainText(text);
     }
   });

@@ -24,6 +24,11 @@ interface Session {
   setPrediction: (p: PredictResponse | null) => void;
   ecg: EcgResponse | null;
   setEcg: (p: EcgResponse | null) => void;
+  /** Phase XLVII: seçilen analizler (disease_key) ve sihirbaz adımı — yalnız bellekte. */
+  selected: string[];
+  setSelected: (keys: string[]) => void;
+  step: string;
+  setStep: (s: string) => void;
 }
 
 const Ctx = createContext<Session | null>(null);
@@ -38,6 +43,8 @@ export function SessionProvider({ children, initialPage = 'home' }: { children: 
   const [profileLabel, setProfileLabel] = useState<string | null>(null);
   const [prediction, setPrediction] = useState<PredictResponse | null>(null);
   const [ecg, setEcg] = useState<EcgResponse | null>(null);
+  const [selected, setSelectedState] = useState<string[]>([]);
+  const [step, setStep] = useState<string>('select');
 
   useEffect(() => {
     let alive = true;
@@ -74,13 +81,17 @@ export function SessionProvider({ children, initialPage = 'home' }: { children: 
     setValuesState(v);
     setPrediction(null);
   }, []);
+  const setSelected = useCallback((keys: string[]) => {
+    setSelectedState(keys);
+    setPrediction(null); // seçim değişince gönderilen alanlar değişir; eski sonuç geçersiz
+  }, []);
 
   const value = useMemo<Session>(
     () => ({
       page, go, schema, models, loadError, disclaimer, values, setValues, resetValues, profileLabel, setProfileLabel,
-      prediction, setPrediction, ecg, setEcg,
+      prediction, setPrediction, ecg, setEcg, selected, setSelected, step, setStep,
     }),
-    [page, go, schema, models, loadError, disclaimer, values, setValues, resetValues, profileLabel, prediction, ecg],
+    [page, go, schema, models, loadError, disclaimer, values, setValues, resetValues, profileLabel, prediction, ecg, selected, setSelected, step],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

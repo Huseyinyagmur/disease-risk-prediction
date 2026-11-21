@@ -11,8 +11,8 @@
 > olasılık değildir ve arayüzde gösterilmez.
 
 <p align="center">
-  <img src="phase_xlv/screenshots/03_panel_eksik.png" width="900" alt="Veri girişi formu ve canlı model yönlendirme paneli">
-  <br><sub>Veri girişi (şemadan dinamik üretilen form) ve canlı model yönlendirme paneli — sentetik profil</sub>
+  <img src="phase_xlvii/screenshots/desktop_03_temel_bilgiler.png" width="900" alt="Adım adım veri girişi ve seçilen analizlerin canlı durum paneli">
+  <br><sub>Adım adım veri girişi (yalnız seçilen analizlerin soruları) ve seçilen analizlerin canlı durum paneli — sentetik profil</sub>
 </p>
 
 ## İçindekiler
@@ -64,25 +64,32 @@ Uygulama **kanıta duyarlı yönlendirme** yapar:
 
 Ekran görüntüleri sentetik profillerle ve açık PTB-XL örnek kayıtlarıyla alınmıştır (gerçek kişi verisi değildir).
 
-| Giriş | Sonuç ekranı |
+| Analiz seçimi | Adım adım veri girişi |
 |---|---|
-| <img src="phase_xlv/screenshots/01_giris.png" width="440" alt="Giriş ekranı"> | <img src="phase_xlv/screenshots/06_sonuclar.png" width="440" alt="Sonuç kartları"> |
-| Amaç, uyarı, "Başla" ve "EKG ile AF analizi" | Model kartları: karar, ABSTAIN nedeni, kanıt düzeyi, P/R/FPR/AUC ve %95 GA, sınırlılıklar; deneyseller ayrı ve gri |
+| <img src="phase_xlvii/screenshots/desktop_02_analiz_secimi.png" width="440" alt="Analiz seçimi"> | <img src="phase_xlvii/screenshots/desktop_04_oyku_teknik_ayrinti.png" width="440" alt="Öykü adımı ve teknik ayrıntı"> |
+| "Hangi analizleri yapmak istiyorsunuz?": ana modüller, araştırma modülü, açılır deneysel bölüm, "Tümü" | Sade dilde sorular; kaynak değişken (NHANES/UCI kodu) yalnız "?" ile açılan teknik ayrıntıda |
 
-| EKG ile AF analizi | Model kartları |
+| Sonuç ekranı | Sonuç kartı ayrıntıları |
 |---|---|
-| <img src="phase_xlv/screenshots/07_ekg_af_ornegi.png" width="440" alt="EKG AF analizi"> | <img src="phase_xlv/screenshots/09_model_kartlari.png" width="440" alt="Model kartları"> |
-| `.hea` + `.dat`/`.mat` yükleme → kilitli Octave/ECGDeli pipeline'ı → 10 öznitelik, lead II grafiği ve R tepeleri, RR takogramı | Her model için hedef, popülasyon, girdiler, kanıt ve sınırlılıklar |
+| <img src="phase_xlvii/screenshots/desktop_07_sonuclar.png" width="440" alt="Sonuç kartları"> | <img src="phase_xlvii/screenshots/desktop_08_sonuc_karti_ayrintilar.png" width="440" alt="Sonuç kartı ayrıntıları"> |
+| Karar, "Ne yapmalıyım?" yönlendirmesi, sade kanıt açıklaması; deneyseller ayrı | "Ayrıntılı test sonuçları" (P/R/FPR/AUC, %95 GA) ve teknik ayrıntı varsayılan kapalı |
+
+| EKG ile AF analizi | Mobil (375 px) |
+|---|---|
+| <img src="phase_xlvii/screenshots/desktop_10_ekg_af_ornegi.png" width="440" alt="EKG AF analizi"> | <img src="phase_xlvii/screenshots/mobile375_03_temel_bilgiler.png" width="220" alt="Mobil görünüm"> |
+| `.hea` + `.dat`/`.mat` yükleme → kilitli Octave/ECGDeli pipeline'ı → 10 öznitelik, lead II grafiği, RR takogramı | Tek sütun; hesapla düğmesi form sonunda, panel altta |
 
 <details>
-<summary>Diğer ekranlar (birim hatası, kapsam dışı, sinüs ritmi örneği, hakkında)</summary>
+<summary>Diğer ekranlar (birim hatası, uygun olmayan profil, kontrol adımı, model kartları, terimler)</summary>
 
 | | |
 |---|---|
-| <img src="phase_xlv/screenshots/05_birim_hatasi.png" width="440" alt="Birim hatası"> | <img src="phase_xlv/screenshots/04_panel_kapsam_disi.png" width="440" alt="Kapsam dışı profil"> |
-| Yanlış birimde girilen değer: sunucunun aralık hatası alanın altında | Gebe profil: gebelik dışlaması olan modeller kapsam dışı |
-| <img src="phase_xlv/screenshots/08_ekg_sr_ornegi.png" width="440" alt="SR örneği"> | <img src="phase_xlv/screenshots/10_hakkinda.png" width="440" alt="Hakkında"> |
-| Sinüs ritmi örneği: düzenli RR takogramı | Yöntem özeti ve model başına veri kaynakları |
+| <img src="phase_xlvii/screenshots/desktop_05_tahlil_birim_hatasi.png" width="440" alt="Birim hatası"> | <img src="phase_xlvii/screenshots/desktop_09_panel_uygun_degil.png" width="440" alt="Uygun olmayan profil"> |
+| Yanlış birimde girilen değer: sunucunun aralık hatası alanın altında | Gebe profil: "Bu analiz size uygun değil" |
+| <img src="phase_xlvii/screenshots/desktop_06_kontrol_ve_hesaplama.png" width="440" alt="Kontrol ve hesaplama"> | <img src="phase_xlvii/screenshots/desktop_11_model_kartlari.png" width="440" alt="Model kartları"> |
+| Son adım: seçilen analizler ve adım başına yanıt sayısı | Model başına hedef, popülasyon, girdiler, kanıt ve sınırlılıklar |
+| <img src="phase_xlvii/screenshots/desktop_12_hakkinda_terimler.png" width="440" alt="Hakkında ve terimler"> | <img src="phase_xlvii/screenshots/tablet768_06_sonuclar.png" width="300" alt="Tablet sonuç ekranı"> |
+| Terim sözlüğü (tek kaynak: `app_config.json`) ve yöntem özeti | Tablet (768 px) sonuç ekranı |
 
 </details>
 
@@ -181,7 +188,8 @@ flowchart LR
 
 Faz raporları: [Phase XLIII — registry](phase_xliii/PHASE_XLIII_REPORT.md) · [Phase XLIV — backend](phase_xliv/PHASE_XLIV_REPORT.md) ·
 [Phase XLV — arayüz](phase_xlv/PHASE_XLV_REPORT.md) ·
-[Phase XLVI — belgeler, model kartları, referans skor analizi](phase_xlvi/PHASE_XLVI_REPORT.md).
+[Phase XLVI — belgeler, model kartları, referans skor analizi](phase_xlvi/PHASE_XLVI_REPORT.md) ·
+[Phase XLVII — arayüz kullanılabilirliği](phase_xlvii/PHASE_XLVII_REPORT.md).
 
 ## Kurulum ve çalıştırma
 
@@ -235,13 +243,13 @@ Adım adım kılavuz ve sık hatalar: [app/docs/INSTALL.md](app/docs/INSTALL.md)
 
 ## Testler
 
-| paket | sonuç (Phase XLVI sonu) |
+| paket | sonuç (Phase XLVII sonu) |
 |---|---|
-| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 318 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
-| Vitest + React Testing Library | 36/36 |
-| Playwright uçtan uca (canlı backend): normal, eksik, birim hatası, kapsam dışı (AF ve fibrozis), gizlilik | 20/20 |
+| Backend pytest (birim dönüşümleri, 46 dönüşüm, parity, gizlilik, AF uçtan uca, senaryolar) | 327 geçti, 5 strict-xfail (onaylı BMI dönem hassasiyeti sınırlılığı), 0 hata |
+| Vitest + React Testing Library (sihirbaz, analiz seçimine göre alan filtreleme, terim sözlüğü, sade dil) | 54/54 |
+| Playwright uçtan uca (canlı backend): normal, eksik, birim hatası, kapsam dışı (AF ve fibrozis), gizlilik, mobil yerleşim (375/768/1440 px), axe erişilebilirlik + klavye | 27/27 (axe: 24 taramada ihlal 0) |
 
-Raporlar: [phase_xliv/03_tests.md](phase_xliv/03_tests.md), [phase_xlv/02_tests.md](phase_xlv/02_tests.md), [phase_xlvi/PHASE_XLVI_REPORT.md](phase_xlvi/PHASE_XLVI_REPORT.md).
+Raporlar: [phase_xliv/03_tests.md](phase_xliv/03_tests.md), [phase_xlv/02_tests.md](phase_xlv/02_tests.md), [phase_xlvi/PHASE_XLVI_REPORT.md](phase_xlvi/PHASE_XLVI_REPORT.md), [phase_xlvii/PHASE_XLVII_REPORT.md](phase_xlvii/PHASE_XLVII_REPORT.md).
 
 ## Depo içeriği
 

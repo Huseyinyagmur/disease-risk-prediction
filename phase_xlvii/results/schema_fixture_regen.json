@@ -1,0 +1,40 @@
+{
+ "fixture": "app\\frontend\\src\\test\\fixtures\\schema.json",
+ "identical_except": [
+  "ui",
+  "form.field_ui_tr",
+  "form.sections (metin)"
+ ],
+ "section_text_changes": [
+  {
+   "id": "laboratuvar",
+   "old": {
+    "id": "laboratuvar",
+    "title_tr": "Laboratuvar ve spirometri",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Girilen değerler laboratuvarlı modelleri çalıştırabilir."
+   },
+   "new": {
+    "id": "laboratuvar",
+    "title_tr": "Tahlil ve solunum testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Kan/idrar tahlili veya solunum testi sonuçlarınız varsa girin; bazı analizler yalnız bu değerlerle çalışır."
+   }
+  },
+  {
+   "id": "klinik",
+   "old": {
+    "id": "klinik",
+    "title_tr": "Klinik değerlendirme ve efor testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı; yalnız CAD modeli (klinik mod) kullanır."
+   },
+   "new": {
+    "id": "klinik",
+    "title_tr": "Hekim değerlendirmesi ve efor testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Yalnız koroner arter hastalığı analizi kullanır; hekim muayenesi ve efor testi sonucu gerekir."
+   }
+  }
+ ]
+}

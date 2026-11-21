@@ -39,9 +39,41 @@ export interface Schema {
     sections: FormSection[];
     category_labels_tr: Record<string, Record<string, string>>;
     virtual_field_labels_tr: Record<string, string>;
+    /** Phase XLVII: sade etiket / yardım / kaynak değişken (yalnız sunum; app_config.json > form.field_ui_tr). */
+    field_ui_tr?: Record<string, FieldUi>;
   };
   policy: Record<string, unknown>;
+  /** Backend'in model başına gerekli alan listesi (tek kaynak; arayüzde elle liste tutulmaz). */
+  models?: Record<string, { required: string[]; conditional: string[] }>;
+  /** Phase XLVII: arayüz metinleri (app_config.json > ui; tek kaynak). */
+  ui?: UiText;
   disclaimer?: string;
+}
+
+export interface FieldUi {
+  label: string;
+  help?: string;
+  source?: string;
+}
+
+export type Outcome = 'ESIK_USTU' | 'ESIK_ALTI' | 'ABSTAIN' | 'NOT_APPLICABLE';
+
+export interface UiText {
+  terms_tr: {
+    eligibility: Record<string, string>;
+    result: Record<string, string>;
+    decision: Record<string, string>;
+    tiers: Record<string, string>;
+  };
+  glossary_tr: { term: string; code: string; text: string }[];
+  disease_names_tr: Record<string, string>;
+  disease_hints_tr: Record<string, string>;
+  model_names_tr: Record<string, string>;
+  evidence_plain_tr: Record<string, string>;
+  next_steps_tr: Record<string, Partial<Record<Outcome, string>>>;
+  analysis_groups_tr: { module_label: string; title: string; description: string; collapsed?: boolean }[];
+  reason_replacements_tr?: [string, string][];
+  text_tr: Record<string, string>;
 }
 
 export interface Metric {

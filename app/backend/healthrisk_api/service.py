@@ -201,9 +201,11 @@ class Service:
                     unit_conversions=units, unit_conversion_note=self.schema['unit_conversion_note'],
                     request_format={'fields': {'<alan>': '<değer> veya {"value": <sayı>, "unit": "<birim>"}'}},
                     models={m: required_fields(m, s['entry'], s['usage']) for m, s in self.models.items()},
+                    ui=self.config['ui'],                                     # Phase XLVII: arayüz metinleri (tek kaynak)
                     form=dict(sections=self.config['form']['sections'],
                               category_labels_tr=self.config['form']['category_labels_tr'],
                               virtual_field_labels_tr=self.config['form']['virtual_field_labels_tr'],
+                              field_ui_tr=self.config['form']['field_ui_tr'],   # Phase XLVII: sade etiket (sunum)
                               rule_note='ask_when_rule / required_when_rule: koşulların tümü (VE) sağlanınca soru '
                                         'gösterilir / zorunludur; şemadaki metinden sunucuda ayrıştırıldı.'))
 

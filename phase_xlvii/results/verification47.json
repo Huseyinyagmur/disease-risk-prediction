@@ -1,0 +1,65 @@
+{
+ "files_before": 158545,
+ "files_after": 158600,
+ "changed": [
+  "README.md",
+  "app/backend/config/app_config.json",
+  "app/backend/healthrisk_api/service.py",
+  "app/frontend/e2e/helpers.ts",
+  "app/frontend/e2e/privacy.spec.ts",
+  "app/frontend/e2e/scenarios.spec.ts",
+  "app/frontend/e2e/screenshots.spec.ts",
+  "app/frontend/package-lock.json",
+  "app/frontend/package.json",
+  "app/frontend/playwright.config.ts",
+  "app/frontend/src/App.tsx",
+  "app/frontend/src/api/types.ts",
+  "app/frontend/src/components/FieldInput.tsx",
+  "app/frontend/src/components/ResultCard.tsx",
+  "app/frontend/src/components/RoutingPanel.test.tsx",
+  "app/frontend/src/components/RoutingPanel.tsx",
+  "app/frontend/src/components/disclaimer.test.tsx",
+  "app/frontend/src/components/ui.tsx",
+  "app/frontend/src/lib/form.ts",
+  "app/frontend/src/pages/About.tsx",
+  "app/frontend/src/pages/DataEntry.test.tsx",
+  "app/frontend/src/pages/DataEntry.tsx",
+  "app/frontend/src/pages/EcgPage.tsx",
+  "app/frontend/src/pages/ModelCards.tsx",
+  "app/frontend/src/pages/Results.test.tsx",
+  "app/frontend/src/pages/Results.tsx",
+  "app/frontend/src/state/session.tsx",
+  "app/frontend/src/test/fixtures/schema.json",
+  "app/frontend/src/test/helpers.tsx"
+ ],
+ "deleted": [],
+ "added_outside_phase": [
+  "app/backend/tests/test_phase47_ui_text.py",
+  "app/frontend/e2e/a11y.spec.ts",
+  "app/frontend/e2e/mobile.spec.ts",
+  "app/frontend/src/components/AnalysisSelect.tsx",
+  "app/frontend/src/lib/selection.ts",
+  "app/frontend/src/lib/ui.test.tsx",
+  "app/frontend/src/lib/ui.ts"
+ ],
+ "added_in_phase_count": 48,
+ "violations": {
+  "changed": [],
+  "deleted": [],
+  "added": []
+ },
+ "model_logic_files_changed": [],
+ "service_py_diff": {
+  "added": [
+   "+                    ui=self.config['ui'],                                     # Phase XLVII: arayüz metinleri (tek kaynak)",
+   "+                              field_ui_tr=self.config['form']['field_ui_tr'],   # Phase XLVII: sade etiket (sunum)"
+  ],
+  "removed": []
+ },
+ "registry_sha_ok": {
+  "phase_xliii/registry/models.json": true,
+  "phase_xliii/registry/input_schema.json": true,
+  "phase_xliv/registry/input_schema_v2.json": true
+ },
+ "ok": true
+}

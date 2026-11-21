@@ -7,11 +7,30 @@ export const SAMPLES = path.resolve(path.dirname(fileURLToPath(import.meta.url))
 export const sample = (n: string) => path.join(SAMPLES, n);
 export const sampleBytes = (n: string) => readFileSync(sample(n));
 
-export async function openForm(page: Page) {
+/** Phase XLVII: veri girişi sihirbazla başlar. Varsayılan: "Tümü" seçilir ve Temel bilgiler adımına geçilir.
+ * keys verilirse yalnız o analizler (disease_key) seçilir. */
+export async function openForm(page: Page, keys?: string[]) {
   await page.goto('/');
   await page.getByTestId('start').click();
+  await expect(page.getByTestId('analysis-select')).toBeVisible();
+  if (keys) {
+    for (const k of keys) {
+      const box = page.getByTestId(`select-${k}`);
+      if (!(await box.isVisible())) await page.getByTestId('group-deneysel').locator('summary').click();
+      await box.check();
+    }
+  } else await page.getByTestId('select-all').click();
+  await page.getByTestId('wizard-next').click();
   await expect(page.getByTestId('section-temel')).toBeVisible();
 }
+
+/** Sihirbazda adıma gider (adım düğmesi). */
+export async function gotoStep(page: Page, id: string) {
+  await page.getByTestId(`step-${id}`).click();
+  await expect(page.getByTestId(id === 'select' ? 'analysis-select' : id === 'review' ? 'review-panel' : `section-${id}`)).toBeVisible();
+}
+
+export const mainNav = (page: Page) => page.getByRole('navigation', { name: 'Ana gezinme' });
 
 export async function loadProfile(page: Page, id: string) {
   await page.getByTestId(`profile-${id}`).click();
@@ -27,7 +46,7 @@ export async function expectPanel(page: Page, modelId: string, state: string, te
 
 export async function submit(page: Page) {
   await page.getByTestId('submit').click();
-  await expect(page.getByText('Ana modüller ve araştırma modülü')).toBeVisible();
+  await expect(page.getByTestId('results-filtered')).toBeVisible();
 }
 
 export async function openEcg(page: Page) {

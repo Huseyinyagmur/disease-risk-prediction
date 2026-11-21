@@ -17,6 +17,7 @@
     "recharts": "2.15.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.11.3",
     "@playwright/test": "1.52.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",

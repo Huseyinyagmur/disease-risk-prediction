@@ -136,7 +136,7 @@ export function EcgPage() {
             onDrop={onDrop}
             className={`flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center text-sm ${drag ? 'border-indigo-500 bg-indigo-50' : 'border-slate-300'}`}>
             <p className="font-medium text-slate-700">.hea + .dat veya .mat dosyalarını buraya sürükleyin</p>
-            <p className="my-1 text-xs text-slate-500">veya</p>
+            <p className="my-1 text-xs text-slate-600">veya</p>
             <button type="button" onClick={() => input.current?.click()} className="rounded border border-slate-300 px-3 py-1 text-xs hover:bg-slate-100">Dosya seç</button>
             <input ref={input} type="file" multiple accept=".hea,.dat,.mat" className="hidden" data-testid="file-input"
               onChange={(e) => e.target.files && addFiles(e.target.files)} />
@@ -174,7 +174,7 @@ export function EcgPage() {
               </select>
             </label>
           </div>
-          <p className="text-[11px] text-slate-500">AF modeli yaş ve cinsiyeti de kullanır; yanıtsızsa karar üretilmez (ABSTAIN). Yaş 18–89 dışında kapsam dışıdır.</p>
+          <p className="text-[11px] text-slate-600">AF modeli yaş ve cinsiyeti de kullanır; yanıtsızsa sonuç üretilmez. Analiz yalnız 18–89 yaş için uygundur.</p>
 
           <button type="button" data-testid="ecg-run" onClick={() => void run()} disabled={!picked.header || !picked.signal || busy}
             className="rounded bg-slate-800 px-4 py-2 text-sm font-medium text-white disabled:opacity-40">
@@ -218,7 +218,7 @@ export function EcgPage() {
               )}
             </>
           ) : (
-            <p className="rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-500">Sonuç burada görünecek.</p>
+            <p className="rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-600">Sonuç burada görünecek.</p>
           )}
         </section>
       </div>
@@ -227,20 +227,20 @@ export function EcgPage() {
         <section className="mt-4 rounded-lg border border-slate-200 bg-white p-4" aria-label="EKG öznitelikleri">
           <h2 className="mb-2 text-base font-semibold text-slate-800">Çıkarılan 10 EKG özniteliği</h2>
           <table className="w-full text-left text-sm" data-testid="ecg-features">
-            <thead className="text-xs text-slate-500">
+            <thead className="text-xs text-slate-600">
               <tr><th className="py-1 font-medium">Öznitelik</th><th className="py-1 font-medium">Kod</th><th className="py-1 text-right font-medium">Değer (ms)</th></tr>
             </thead>
             <tbody>
               {Object.entries(feats).map(([k, v]) => (
                 <tr key={k} className="border-t border-slate-100">
                   <td className="py-1">{schema.fields[`ecg_af_${k}`]?.label_tr ?? k}</td>
-                  <td className="py-1 font-mono text-xs text-slate-500">{k}</td>
+                  <td className="py-1 font-mono text-xs text-slate-600">{k}</td>
                   <td className="py-1 text-right tabular-nums">{v === null || Number.isNaN(v) ? 'üretilemedi' : v.toFixed(1)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="mt-1 text-[11px] text-slate-500">Öznitelikler (ms) şeffaflık içindir; olasılık değildir. Kaynak: kilitli pipeline (değiştirilmeden).</p>
+          <p className="mt-1 text-[11px] text-slate-600">Öznitelikler (ms) şeffaflık içindir; olasılık değildir. Kaynak: kilitli pipeline (değiştirilmeden).</p>
         </section>
       )}
       {result?.display && <EcgRrPanel d={result.display} />}

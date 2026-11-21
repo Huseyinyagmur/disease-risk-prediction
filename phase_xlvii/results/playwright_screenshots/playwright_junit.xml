@@ -1,0 +1,10 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="128.20882">
+<testsuite name="screenshots.spec.ts" timestamp="2026-11-21T11:15:49.804Z" hostname="chromium" tests="3" failures="0" skipped="0" time="117.242" errors="0">
+<testcase name="@screenshots › masaüstü (1440 px)" classname="screenshots.spec.ts" time="45.752">
+</testcase>
+<testcase name="@screenshots › tablet768 (768 px)" classname="screenshots.spec.ts" time="42.408">
+</testcase>
+<testcase name="@screenshots › mobile375 (375 px)" classname="screenshots.spec.ts" time="29.082">
+</testcase>
+</testsuite>
+</testsuites>

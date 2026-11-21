@@ -34,3 +34,7 @@ sha256_final_scan.json
 phase_xlvi/data/refs/collins2024_full.xml
 phase_xlvi/results/playwright_closure/playwright_artifacts/
 phase_xlvi/results/playwright/playwright_artifacts/
+# Phase XLVII: geliştirme logları ve Playwright artefaktları yerelde kalır
+phase_xlvii/logs/
+phase_xlvii/results/playwright/playwright_artifacts/
+phase_xlvii/results/playwright_screenshots/playwright_artifacts/

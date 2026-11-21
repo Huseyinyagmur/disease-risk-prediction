@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import type { UserEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 import type { Schema } from '../api/types';
 import { App } from '../App';
@@ -38,4 +39,27 @@ export function renderApp(page: Page = 'form') {
       <App />
     </SessionProvider>,
   );
+}
+
+/** Phase XLVII sihirbazı: "Tümü" seçilir ve ilk veri adımına (Temel bilgiler) geçilir. */
+export async function startAll(u: UserEvent) {
+  await u.click(await screen.findByTestId('select-all'));
+  await u.click(screen.getByTestId('wizard-next'));
+  await screen.findByTestId('section-temel');
+}
+
+/** Yalnız verilen hastalıkları (disease_key) seçer; adım değiştirmez. Deneysel grup kapalıysa önce açılır. */
+export async function selectOnly(u: UserEvent, keys: string[]) {
+  await screen.findByTestId('analysis-select');
+  for (const k of keys) {
+    const box = screen.getByTestId(`select-${k}`);
+    const det = box.closest('details');
+    if (det && !det.open) await u.click(det.querySelector('summary')!);
+    await u.click(box);
+  }
+}
+
+export async function goStep(u: UserEvent, id: string) {
+  await u.click(screen.getByTestId(`step-${id}`));
+  await screen.findByTestId(id === 'select' ? 'analysis-select' : id === 'review' ? 'review-panel' : `section-${id}`);
 }

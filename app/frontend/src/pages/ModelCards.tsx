@@ -1,6 +1,7 @@
 import { sortByModule } from '../components/RoutingPanel';
-import { Collapsible, EvidenceBadges, EvidenceTable, ModulePill, PageTitle } from '../components/ui';
+import { Collapsible, EvidenceBadges, EvidenceTable, ModulePill, PageTitle, TechDetails } from '../components/ui';
 import { fieldLabel } from '../lib/form';
+import { modelName, t } from '../lib/ui';
 import { useSession } from '../state/session';
 
 const MODE_TR: Record<string, string> = {
@@ -20,22 +21,21 @@ export function ModelCards() {
       <div className="grid gap-4 xl:grid-cols-2">
         {sortByModule(models).map((m) => (
           <article key={m.model_id} data-testid={`card-${m.model_id}`}
-            className={`rounded-lg border p-4 ${m.module_label === 'deneysel' ? 'border-slate-200 bg-slate-50 text-slate-600' : 'border-slate-200 bg-white'}`}>
+            className={`rounded-lg border p-4 ${m.module_label === 'deneysel' ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-slate-200 bg-white'}`}>
             <header className="mb-2 flex flex-wrap items-center gap-2">
-              <h2 className="text-base font-semibold">{m.disease}</h2>
+              <h2 className="text-base font-semibold">{modelName(schema, m.model_id, m.disease)}</h2>
               <ModulePill label={m.module_label} />
-              <span className="text-xs text-slate-500">{m.model_id}</span>
               {!m.enabled && <span className="rounded bg-rose-100 px-2 text-xs text-rose-800">devre dışı</span>}
             </header>
             <dl className="space-y-1 text-xs">
-              <div><dt className="inline font-medium">Rol / mod: </dt><dd className="inline">{m.role} · {MODE_TR[m.app_mode] ?? m.app_mode} · {m.endpoint}</dd></div>
               <div><dt className="inline font-medium">Hedef: </dt><dd className="inline">{m.target_definition}</dd></div>
               <div><dt className="inline font-medium">Veri / popülasyon: </dt><dd className="inline">{m.population}</dd></div>
               <div><dt className="inline font-medium">Eksik girdi kuralı: </dt><dd className="inline">{m.missing_input_rule}</dd></div>
             </dl>
-            <div className="my-2 flex items-center gap-2"><span className="text-xs">Kanıt:</span><EvidenceBadges evidence={m.evidence} /></div>
+            <div className="my-2 flex flex-wrap items-center gap-2"><span className="text-xs">{t(schema, 'evidence')}:</span><EvidenceBadges evidence={m.evidence} /></div>
+            {schema?.ui?.evidence_plain_tr[m.model_id] && <p className="mb-2 text-xs" data-testid="evidence-plain">{schema.ui.evidence_plain_tr[m.model_id]}</p>}
             <div className="space-y-2">
-              <Collapsible title="Kanıt ve test metrikleri" defaultOpen={m.module_label !== 'deneysel'}>
+              <Collapsible title={t(schema, 'metrics')} testId="metrics">
                 <EvidenceTable evidence={m.evidence} />
               </Collapsible>
               <Collapsible title={`Öznitelik girdileri (${m.fields.required.length} zorunlu, ${m.fields.conditional.length} koşullu)`}>
@@ -54,6 +54,11 @@ export function ModelCards() {
                   </ul>
                 </Collapsible>
               )}
+              <TechDetails testId="tech-details" items={[
+                [t(schema, 'tech_model'), <span className="font-mono">{m.model_id}</span>],
+                [t(schema, 'tech_definition'), m.disease],
+                ['Rol / mod', `${m.role} · ${MODE_TR[m.app_mode] ?? m.app_mode} · ${m.endpoint}`],
+              ]} />
             </div>
           </article>
         ))}

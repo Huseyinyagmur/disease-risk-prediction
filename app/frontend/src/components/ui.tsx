@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { EligState, Evidence, Metric, Tier } from '../api/types';
+import { term, t } from '../lib/ui';
 import { useSession, type Page } from '../state/session';
 
 /** Uyarı metni frontend'de TUTULMAZ: tek kaynak backend'dir (/schema yanıtındaki `disclaimer`). Metin gelmeden önce veya
@@ -14,10 +15,11 @@ export function DisclaimerText() {
   );
 }
 
+/** Phase XLVII: dar ekranda (< 640 px) bant sabit değildir; 4 satırlık sabit bant içeriğin üstüne biniyordu. */
 export function DisclaimerBar() {
   return (
     <div role="note" aria-label="Sabit uyarı" data-testid="disclaimer"
-      className="sticky top-0 z-30 border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900">
+      className="z-30 border-b sm:sticky sm:top-0 border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900">
       <span className="font-semibold">Uyarı: </span>
       <DisclaimerText />
     </div>
@@ -59,16 +61,21 @@ export function PageTitle({ children, sub }: { children: ReactNode; sub?: ReactN
   );
 }
 
-const STATE_STYLE: Record<EligState, [string, string]> = {
-  READY: ['Çalışabilir', 'bg-emerald-100 text-emerald-800 border-emerald-300'],
-  MISSING: ['Eksik', 'bg-amber-100 text-amber-900 border-amber-300'],
-  OUT_OF_SCOPE: ['Kapsam dışı', 'bg-slate-200 text-slate-700 border-slate-300'],
-  ABSTAIN: ['Karar verilemez', 'bg-rose-100 text-rose-800 border-rose-300'],
+const STATE_STYLE: Record<EligState, string> = {
+  READY: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+  MISSING: 'bg-amber-100 text-amber-900 border-amber-300',
+  OUT_OF_SCOPE: 'bg-slate-200 text-slate-800 border-slate-300',
+  ABSTAIN: 'bg-rose-100 text-rose-900 border-rose-300',
 };
 
+/** Durum rozeti; metin terim sözlüğünden (app_config > ui.terms_tr.eligibility). */
 export function StateBadge({ state }: { state: EligState }) {
-  const [label, cls] = STATE_STYLE[state];
-  return <span data-testid="state-badge" data-state={state} className={`inline-block rounded border px-2 py-0.5 text-xs font-medium ${cls}`}>{label}</span>;
+  const { schema } = useSession();
+  return (
+    <span data-testid="state-badge" data-state={state} className={`inline-block rounded border px-2 py-0.5 text-xs font-medium ${STATE_STYLE[state]}`}>
+      {term(schema, 'eligibility', state)}
+    </span>
+  );
 }
 
 export function ModulePill({ label }: { label: string }) {
@@ -76,21 +83,20 @@ export function ModulePill({ label }: { label: string }) {
   return <span data-testid="module-label" className={`inline-block rounded-full px-2 py-0.5 text-xs ${cls}`}>{label}</span>;
 }
 
-const TIER_ORDER: ['internal_test' | 'temporal' | 'external', string][] = [
-  ['internal_test', 'İç test'],
-  ['temporal', 'Zamansal doğrulama'],
-  ['external', 'Dış doğrulama'],
-];
+const TIER_KEYS = ['internal_test', 'temporal', 'external'] as const;
 
 export function EvidenceBadges({ evidence }: { evidence: Evidence }) {
+  const { schema } = useSession();
   return (
     <div className="flex flex-wrap gap-1" data-testid="evidence-badges">
-      {TIER_ORDER.map(([k, label]) => {
+      {TIER_KEYS.map((k) => {
         const has = !!evidence.tiers[k];
+        const label = term(schema, 'tiers', k);
         return (
-          <span key={k} title={has ? 'Bu kanıt düzeyi mevcut' : 'Bu kanıt düzeyi yok'}
-            className={`rounded border px-2 py-0.5 text-xs ${has ? 'border-teal-400 bg-teal-50 text-teal-800' : 'border-dashed border-slate-300 text-slate-400 line-through'}`}>
+          <span key={k} title={has ? t(schema, 'evidence_has') : t(schema, 'evidence_none')}
+            className={`rounded border px-2 py-0.5 text-xs ${has ? 'border-teal-500 bg-teal-50 text-teal-900' : 'border-dashed border-slate-400 text-slate-600 line-through'}`}>
             {label}
+            <span className="sr-only"> ({has ? t(schema, 'evidence_has') : t(schema, 'evidence_none')})</span>
           </span>
         );
       })}
@@ -101,7 +107,7 @@ export function EvidenceBadges({ evidence }: { evidence: Evidence }) {
 const fmt = (x: number | undefined | null, d = 3) => (x === undefined || x === null ? '—' : x.toFixed(d).replace('.', ','));
 
 export function MetricCell({ m }: { m: Metric | number | null | undefined }) {
-  if (m === null || m === undefined) return <span className="text-slate-400" title="registry'de değer yok">—</span>;
+  if (m === null || m === undefined) return <span className="text-slate-500" title="registry'de değer yok">—</span>;
   if (typeof m === 'number') return <span>{fmt(m)}</span>;
   return (
     <span>
@@ -112,7 +118,8 @@ export function MetricCell({ m }: { m: Metric | number | null | undefined }) {
 }
 
 export function EvidenceTable({ evidence }: { evidence: Evidence }) {
-  const rows = TIER_ORDER.filter(([k]) => evidence.tiers[k]).map(([k, label]) => [label, evidence.tiers[k] as Tier] as const);
+  const { schema } = useSession();
+  const rows = TIER_KEYS.filter((k) => evidence.tiers[k]).map((k) => [term(schema, 'tiers', k), evidence.tiers[k] as Tier] as const);
   return (
     <div className="space-y-2">
       {evidence.highest_tier && (
@@ -121,7 +128,7 @@ export function EvidenceTable({ evidence }: { evidence: Evidence }) {
       {rows.length === 0 ? (
         <p className="text-xs text-slate-500">Kanıt metriği BULUNAMADI.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={t(schema, 'metrics')}>
           <table className="w-full text-left text-xs" data-testid="metrics-table">
             <thead className="text-slate-500">
               <tr>
@@ -154,16 +161,33 @@ export function EvidenceTable({ evidence }: { evidence: Evidence }) {
       {evidence.research_target_note && (
         <p className="text-xs text-slate-600"><span className="font-medium">Araştırma hedefleri (P ≥ 0,70, R ≥ 0,75, FPR ≤ 0,15):</span> {evidence.research_target_note}</p>
       )}
-      <p className="text-[11px] text-slate-400">Metrikler registry'den aynen alınmıştır; uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez. "—" = registry'de değer yok.</p>
+      <p className="text-[11px] text-slate-600">Metrikler registry'den aynen alınmıştır; uygulamada yeniden hesaplanmamıştır. CV sonuçları kanıt olarak gösterilmez. "—" = registry'de değer yok.</p>
     </div>
   );
 }
 
-export function Collapsible({ title, children, defaultOpen = false }: { title: string; children: ReactNode; defaultOpen?: boolean }) {
+export function Collapsible({ title, children, defaultOpen = false, testId }: { title: string; children: ReactNode; defaultOpen?: boolean; testId?: string }) {
   return (
-    <details className="group rounded border border-slate-200 bg-white" open={defaultOpen}>
+    <details className="group rounded border border-slate-200 bg-white" open={defaultOpen} data-testid={testId}>
       <summary className="cursor-pointer select-none px-3 py-2 text-sm font-medium text-slate-700">{title}</summary>
       <div className="border-t border-slate-100 px-3 py-2">{children}</div>
+    </details>
+  );
+}
+
+/** Teknik ayrıntı (model kimliği, ham gerekçe vb.); varsayılan kapalı. */
+export function TechDetails({ items, testId }: { items: [string, ReactNode][]; testId?: string }) {
+  const { schema } = useSession();
+  const xs = items.filter(([, v]) => v !== null && v !== undefined && v !== '');
+  if (xs.length === 0) return null;
+  return (
+    <details className="text-[11px] text-slate-600" data-testid={testId}>
+      <summary className="cursor-pointer">{t(schema, 'tech_toggle')}</summary>
+      <dl className="mt-1 space-y-0.5 pl-3">
+        {xs.map(([k, v], i) => (
+          <div key={k + i}><dt className="inline font-medium">{k}: </dt><dd className="inline break-words">{v}</dd></div>
+        ))}
+      </dl>
     </details>
   );
 }

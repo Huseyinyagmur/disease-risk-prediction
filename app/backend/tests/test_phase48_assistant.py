@@ -358,7 +358,7 @@ def test_real_ollama_answer(service):
         pytest.skip(str(ex))
     assert r['route'] in ('llm', 'no_source', 'postcheck_fail')
     assert r['answer'].endswith(service.disclaimer)
-    if r['route'] == 'llm':
+    if r['route'] == 'llm' and '[' in r['answer']:
         assert r['sources']
 
 
@@ -383,7 +383,7 @@ def test_citation_renumbering():
     assert [c['doc_id'] for c in used] == ['a', 'b', 'a', 'c']
     assert ans == 'X [1]. Y [1, 3]. Z [1, 2]. W.'
     ans, used = _renumber('Atıf yok.', good)
-    assert ans == 'Atıf yok.' and [c['doc_id'] for c in used] == ['a', 'b']
+    assert ans == 'Atıf yok.' and used == []          # atıf yoksa kaynak listesi boş
 
 
 def test_label_pins_ground_status_terms(client, fake):
@@ -467,3 +467,60 @@ def test_medical_roots_any_inflection(q):
 
 def test_medical_excludes_model_name():
     assert guard.classify('Teşhis edilmemiş diyabet modeli neyi sınıflar?', KW, PAT)[0] is None
+
+
+# ------------------------------------------------------------------ kaynak listesi: yalnız atıf yapılan parçalar
+def test_sources_empty_when_no_citation(client, fake):
+    fake.ollama.answer = 'Eşik üstü, modelin araştırma sınıflamasında üst grupta olmak demektir.'
+    r = client.post('/assistant/ask', json={'question': 'Eşik üstü ne demek?'}).json()
+    assert r['route'] == 'llm' and r['sources'] == []
+
+
+def test_sources_empty_when_model_says_no_info_in_own_words(client, fake):
+    fake.ollama.answer = 'Bu konuda elimdeki kaynaklarda bilgi yok [1]; hekiminize danışın.'
+    r = client.post('/assistant/ask', json={'question': 'Eşik üstü ne demek?'}).json()
+    assert r['sources'] == []
+
+
+def test_sources_only_cited_chunks(client, fake):
+    fake.ollama.answer = 'Eşik üstü bir araştırma sınıflamasıdır [2].'
+    r = client.post('/assistant/ask', json={'question': 'Eşik üstü ne demek?'}).json()
+    assert r['route'] == 'llm' and len(r['sources']) == 1
+
+
+# ------------------------------------------------------------------ v3 sonrası kaynak temelli kırmızı bayrak kuralları
+# Kaynaklar: assistant_config.json > red_flag_rules[].sources (MedlinePlus/NHLBI kalp krizi, MedlinePlus inme BE-FAST, baş ağrısı).
+# Bu cümleler v3 setinden DEĞİL, kaynak metinlerinden türetilmiş yeni örneklerdir.
+RF_POS = [
+    ('Sol kolumda ve omzumda sıkışma var', 'kalp krizi: kol/omuz'),
+    ('boynum ve çenem ağrıyor', 'kalp krizi: boyun/çene'),
+    ('Sol kolum ağrıyor', 'kalp krizi: sol kol'),
+    ('Soğuk soğuk terliyorum', 'kalp krizi: soğuk terleme'),
+    ('Göğsüme fil oturmuş gibi', 'kalp krizi: göğüste baskı'),
+    ('Kalbimde sıkışma hissediyorum', 'kalp krizi: kalpte sıkışma'),
+    ('Aniden nefesim daraldı', 'kalp krizi: ani nefes darlığı'),
+    ('Dengemi kaybettim, yürüyemiyorum', 'inme: denge'),
+    ('Birden sağ gözümde görme kaybı oldu', 'inme: görme'),
+    ('Koluma ve bacağıma güç gelmiyor, bacağım zayıfladı', 'inme: kol/bacak'),
+    ('Kelime bulamıyorum, ne diyeceğimi çıkaramıyorum', 'inme: konuşma'),
+    ('Birden çok şiddetli baş ağrısı başladı', 'baş ağrısı: ani'),
+    ('Hayatımın en kötü baş ağrısı bu', 'baş ağrısı: hayatımın en kötüsü'),
+]
+RF_NEG = ['Kolay bir egzersiz önerir misiniz', 'Boynum için fizyoterapist var mı', 'Hava soğuk, mont lazım',
+          'Denge tahtası satın almak istiyorum', 'Kalp sağlığı için hangi gıdalar iyidir', 'Baş harfleri nelerdir']
+
+
+@pytest.mark.parametrize('q,why', RF_POS)
+def test_red_flag_rules_positive(q, why):
+    assert guard.classify(q, KW, PAT)[0] == 'emergency', why
+
+
+@pytest.mark.parametrize('q', RF_NEG)
+def test_red_flag_rules_negative(q):
+    assert guard.classify(q, KW, PAT)[0] in (None, 'off_topic'), q
+
+
+def test_red_flag_rules_have_sources_and_personal_tier():
+    rr = CFG['red_flag_rules']
+    assert rr and all(r['sources'] and all(u.startswith('https://') for u in r['sources']) for r in rr)
+    assert guard.classify('Sol kolda ağrı belirtisi nedir?', KW, PAT)[0] == 'emergency_general'     # genel soru → uyarı kutusu

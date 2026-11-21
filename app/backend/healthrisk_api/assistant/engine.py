@@ -249,6 +249,8 @@ class Assistant:
             r['violations'] = viol                           # yalnız ihlal kodları (metin değil)
             return {**r, **dbg}
         ans, used = _renumber(ans, good)
+        if _says_no_info(ans):                               # model kendi sözcükleriyle 'bilgi yok' dediyse kaynak listelenmez
+            used = []
         self.stats.add('llm', _now() - t0)
         return dict(route='llm', answer=ans + '\n\n' + self.disclaimer, sources=self._sources(used), llm_used=True,
                     disclaimer=self.disclaimer, local_model=True, **dbg)
@@ -267,7 +269,7 @@ CITE_RE = re.compile(r'\[(\d{1,2}(?:\s*[,;–-]\s*\d{1,2})*)\]')
 
 def _renumber(ans: str, good: list):
     """LLM atıfları ([1], [1, 4], [2-3]) parça sırasından kaynak listesi (belge) sırasına eşlenir; aralık dışı atıf silinir.
-    Döner (yanıt, kullanılan parçalar). Atıf yoksa ilk iki parça kaynak gösterilir."""
+    Döner (yanıt, kullanılan parçalar). Atıf yoksa kaynak listesi boştur (alakasız kaynak gösterilmez)."""
     def nums(g):
         out = []
         for part in re.split(r'\s*[,;]\s*', g):
@@ -280,7 +282,7 @@ def _renumber(ans: str, good: list):
         for n in nums(m.group(1)):
             if n not in cited:
                 cited.append(n)
-    used = [good[i - 1] for i in sorted(cited)] or good[:2]
+    used = [good[i - 1] for i in sorted(cited)]
     order = list(dict.fromkeys(c['doc_id'] for c in used))
     num = {i: order.index(good[i - 1]['doc_id']) + 1 for i in range(1, len(good) + 1) if good[i - 1]['doc_id'] in order}
 
@@ -296,6 +298,12 @@ def _renumber(ans: str, good: list):
 def _clean(s: str) -> str:
     """Ayraç taklidini önler: '<<<' / '>>>' veri içinde geçemez."""
     return s.replace('<<<', '‹‹‹').replace('>>>', '›››')
+
+
+def _says_no_info(ans: str) -> bool:
+    n = guard.norm(ans)
+    return any(x in n for x in ('bilgi yok', 'bilgi bulunmuyor', 'bilgi bulunmamakta', 'bilgi icermiyor', 'bilgi bulamad',
+                                'bilgi verilmemis', 'bilgi mevcut degil', 'bilgim yok'))
 
 
 def _is_no_source(ans: str) -> bool:

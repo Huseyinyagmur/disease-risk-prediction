@@ -60,10 +60,10 @@ Diğer ölçümler:
 
 | paket | sonuç |
 |---|---|
-| Backend pytest, tam (AF uçtan uca + gerçek Ollama dahil) | **421 geçti, 5 xfail** (belgelenmiş BMI/osteo sınırlılığı), 0 başarısız (`results/pytest_backend_full.xml`); asistan testleri 94 |
+| Backend pytest, tam (AF uçtan uca + gerçek Ollama dahil) | **444 geçti, 5 xfail** (belgelenmiş BMI/osteo sınırlılığı), 0 başarısız (kırmızı bayrak + kaynak listesi düzeltmesi sonrası; XML bir önceki koşudan: `results/pytest_backend_full.xml`); asistan testleri 117 |
 | Vitest | **63/63** (`results/vitest_junit.xml`) |
 | Tip denetimi + üretim derlemesi | geçti |
-| Playwright (zamanlama hariç) | **34/34**, SKIP 0; asistan uçtan uca 4 test (gerçek Ollama; v3 uyarı kutusu dahil), axe a11y, gizlilik, senaryolar, ekran görüntüleri |
+| Playwright (zamanlama dahil) | **35/35**, SKIP 0; asistan uçtan uca 4 test (gerçek Ollama; v3 uyarı kutusu dahil), axe a11y, gizlilik, senaryolar, ekran görüntüleri |
 | Temiz klon (`git clone`, `core.autocrlf=true`, commit 093ad26) | asistan **etkin**: model digest'leri ve indeks manifest kilidi doğrulandı (469 parça); `/assistant/ask` 4/4 doğru rota (llm, genel acil → uyarı kutusu, kişisel acil → sabit 112, ret); klonda asistan testleri 94 geçti. Genel durum `degraded`: AF pipeline klonda yok (Phase XLVI'dan beri bilinen) → `results/clean_clone48.json` |
 | Sunucu logları | sohbet içeriği yok (soru metinleri aratıldı, 0 eşleşme) |
 
@@ -92,12 +92,13 @@ dolunca kullanıcı onayıyla silindi: pip önbelleği (20,4 GB) ve Ollama'nın 
 
 ## 6. Açık kalanlar ve sınırlılıklar
 
-- **Kaynak gösterme hatası (düzeltilmedi, karar bekliyor):** LLM atıf yapmadığında ilk iki erişim parçası kaynak olarak
-  listeleniyor. LLM "bilgi yok" yanıtını sabit metinden farklı sözcüklerle verdiğinde (ör. "Göğüs ağrısı hakkında bilgi
-  yok", "bilgiye sahip değilim") bu kaynaklar alakasız görünüyor (`screenshots/desktop_assistant_05…`: gestasyonel
-  diyabet, portal hipertansiyon). Filtre değil, kaynak gösterme mantığı; "son tur" talimatı nedeniyle değiştirilmedi.
-- v3 kalan açıklar: kişisel acilde kol/çene ağrısı (P-02); genel bilgi sorularında ad biçimli acil kelimeleri ("inme ile",
-  "kanama", "felç riski") uyarı kutusu çıkarmıyor (G 7/12). Ayrıntı: `03_eval.md` §6.
+- **Kaynak listesi (düzeltildi, v3 sonrası):** LLM yanıtında atıf yoksa veya yanıt "bilgi yok" diyorsa panelde kaynak
+  listesi boştur; atıf varsa yalnız atıf yapılan parçalar listelenir (testli). Önceki "ilk iki parça" davranışı kaldırıldı.
+- **Kırmızı bayrak kuralları (v3 sonrası, kaynak temelli, bağımsız setle doğrulanmadı):** 14 kural (kalp krizi, BE-FAST,
+  ani şiddetli baş ağrısı), kaynak URL'leri `assistant_config.json > red_flag_rules`; ayrıntı `03_eval.md` §6 sonu.
+  v3'te kaçan P-02 artık sabit 112 rotasında (yalnız rota kontrolü; doğrulama değildir). v3 oranları (P 23/24 …) olduğu gibi.
+- **Genel bilgi sorusunda uyarı kutusu 7/12 (değiştirilmedi):** kurallar eylem/belirti köklerine dayalı; konu-temelli
+  sorular kutu tetiklemeyebilir. Güvenlik yönünden esas olan kişisel acil kademesidir. Ayrıntı: `03_eval.md` §6.
 
 - Elle puanlar tek değerlendiricinindir (Claude) ve kör değildir. Kör doğrulama dosyası
   `eval/manual_review_blind.csv` kullanıcıda.

@@ -1,82 +1,95 @@
-<testsuites id="" name="" tests="34" failures="0" skipped="0" errors="0" time="146.80048499999998">
-<testsuite name="a11y.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="3" failures="0" skipped="0" time="31.772" errors="0">
-<testcase name="@a11y erişilebilirlik › axe: tüm ekranlar (1440px)" classname="a11y.spec.ts" time="16.174">
+<testsuites id="" name="" tests="35" failures="0" skipped="0" errors="0" time="188.88011600000002">
+<testsuite name="a11y.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="3" failures="0" skipped="0" time="30.2" errors="0">
+<testcase name="@a11y erişilebilirlik › axe: tüm ekranlar (1440px)" classname="a11y.spec.ts" time="15.397">
 </testcase>
-<testcase name="@a11y erişilebilirlik › axe: tüm ekranlar (375px)" classname="a11y.spec.ts" time="15.222">
+<testcase name="@a11y erişilebilirlik › axe: tüm ekranlar (375px)" classname="a11y.spec.ts" time="14.441">
 </testcase>
-<testcase name="@a11y erişilebilirlik › klavye: analiz seçimi → İleri → odak adım başlığında → alan doldurma → Geri; görünür odak" classname="a11y.spec.ts" time="0.376">
-</testcase>
-</testsuite>
-<testsuite name="assistant.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="4" failures="0" skipped="0" time="12.708" errors="0">
-<testcase name="açıklama asistanı › her sayfada açılır; örnek soru → yerel model yanıtı, kaynak listesi, uyarı; bekleme göstergesi" classname="assistant.spec.ts" time="3.853">
-</testcase>
-<testcase name="açıklama asistanı › sonuç ekranından: yalnız etiketler gönderilir (ölçüm değeri yok); acil durum → 112 (LLM yok)" classname="assistant.spec.ts" time="6.15">
-</testcase>
-<testcase name="açıklama asistanı › v3: genel bilgi sorusunda acil kelimesi → en üstte 112 uyarı kutusu + normal yanıt; kişisel ifade → sabit 112" classname="assistant.spec.ts" time="2.297">
-</testcase>
-<testcase name="açıklama asistanı › mobil (375 px): panel ekrana sığar, yatay kaydırma yok" classname="assistant.spec.ts" time="0.408">
+<testcase name="@a11y erişilebilirlik › klavye: analiz seçimi → İleri → odak adım başlığında → alan doldurma → Geri; görünür odak" classname="a11y.spec.ts" time="0.362">
 </testcase>
 </testsuite>
-<testsuite name="mobile.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.159" errors="0">
-<testcase name="@mobil yerleşim › 375px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.027">
+<testsuite name="assistant.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="4" failures="0" skipped="0" time="12.754" errors="0">
+<testcase name="açıklama asistanı › her sayfada açılır; örnek soru → yerel model yanıtı, kaynak listesi, uyarı; bekleme göstergesi" classname="assistant.spec.ts" time="4.873">
 </testcase>
-<testcase name="@mobil yerleşim › 768px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.09">
+<testcase name="açıklama asistanı › sonuç ekranından: yalnız etiketler gönderilir (ölçüm değeri yok); acil durum → 112 (LLM yok)" classname="assistant.spec.ts" time="5.15">
 </testcase>
-<testcase name="@mobil yerleşim › 1440px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.042">
+<testcase name="açıklama asistanı › v3: genel bilgi sorusunda acil kelimesi → en üstte 112 uyarı kutusu + normal yanıt; kişisel ifade → sabit 112" classname="assistant.spec.ts" time="2.313">
 </testcase>
-</testsuite>
-<testsuite name="privacy.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="2" failures="0" skipped="0" time="8.628" errors="0">
-<testcase name="@gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok" classname="privacy.spec.ts" time="8.155">
-</testcase>
-<testcase name="@gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür" classname="privacy.spec.ts" time="0.473">
+<testcase name="açıklama asistanı › mobil (375 px): panel ekrana sığar, yatay kaydırma yok" classname="assistant.spec.ts" time="0.418">
 </testcase>
 </testsuite>
-<testsuite name="scenarios.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="19" failures="0" skipped="0" time="54.639" errors="0">
-<testcase name="@normal normal girdi › fibrozis: çalışabilir profil -&gt; panel Çalışabilir -&gt; sonuç OK, karar ve kanıt gösterilir" classname="scenarios.spec.ts" time="0.883">
+<testsuite name="mobile.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.107" errors="0">
+<testcase name="@mobil yerleşim › 375px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.063">
 </testcase>
-<testcase name="@normal normal girdi › fibrozis: yalnız &quot;Karaciğer fibrozisi&quot; seçilir -&gt; yalnız gerekli alanlar gönderilir, panel ve sonuç yalnız fibrozis" classname="scenarios.spec.ts" time="0.878">
+<testcase name="@mobil yerleşim › 768px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.023">
 </testcase>
-<testcase name="@normal normal girdi › AF: PTB-XL AF örneği -&gt; OK, 10 öznitelik, lead II grafiği ve RR takogramı" classname="scenarios.spec.ts" time="9.464">
-</testcase>
-<testcase name="@normal normal girdi › AF: PTB-XL sinüs ritmi örneği -&gt; OK" classname="scenarios.spec.ts" time="8.392">
-</testcase>
-<testcase name="@normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir" classname="scenarios.spec.ts" time="8.218">
-</testcase>
-<testcase name="@eksik eksik girdi › fibrozis: eksik alanlı profil -&gt; panel &quot;Eksik: …&quot; (laboratuvarlar) -&gt; sonuç ABSTAIN ve neden" classname="scenarios.spec.ts" time="0.827">
-</testcase>
-<testcase name="@eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -&gt; Çalışabilir olur" classname="scenarios.spec.ts" time="1.559">
-</testcase>
-<testcase name="@eksik eksik girdi › AF: formda panel &quot;Eksik: EKG kaydı&quot; gösterir" classname="scenarios.spec.ts" time="0.745">
-</testcase>
-<testcase name="@eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz" classname="scenarios.spec.ts" time="0.285">
-</testcase>
-<testcase name="@eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -&gt; ABSTAIN (eksik alan)" classname="scenarios.spec.ts" time="8.505">
-</testcase>
-<testcase name="@birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -&gt; alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür" classname="scenarios.spec.ts" time="1.36">
-</testcase>
-<testcase name="@birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir" classname="scenarios.spec.ts" time="1.252">
-</testcase>
-<testcase name="@birim birim hatası › AF: 250 Hz başlıklı kayıt -&gt; ABSTAIN (&quot;500 Hz değil&quot;)" classname="scenarios.spec.ts" time="0.346">
-</testcase>
-<testcase name="@birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -&gt; sunucu 422 hatası gösterilir" classname="scenarios.spec.ts" time="0.503">
-</testcase>
-<testcase name="@kapsam kapsam dışı veri › fibrozis: gebe kadın profili -&gt; panel Kapsam dışı (gebe) -&gt; sonuç NOT_APPLICABLE" classname="scenarios.spec.ts" time="0.79">
-</testcase>
-<testcase name="@kapsam kapsam dışı veri › fibrozis: 19 yaş -&gt; Kapsam dışı (yaş ≥ 20)" classname="scenarios.spec.ts" time="0.753">
-</testcase>
-<testcase name="@kapsam kapsam dışı veri › fibrozis: gebelik &quot;bilmiyorum&quot; -&gt; Karar verilemez (ABSTAIN)" classname="scenarios.spec.ts" time="0.785">
-</testcase>
-<testcase name="@kapsam kapsam dışı veri › AF: formda yaş 95 -&gt; panel Kapsam dışı" classname="scenarios.spec.ts" time="0.704">
-</testcase>
-<testcase name="@kapsam kapsam dışı veri › AF: EKG ile yaş 95 -&gt; NOT_APPLICABLE" classname="scenarios.spec.ts" time="8.39">
+<testcase name="@mobil yerleşim › 1440px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında" classname="mobile.spec.ts" time="1.021">
 </testcase>
 </testsuite>
-<testsuite name="screenshots.spec.ts" timestamp="2026-11-21T13:57:38.142Z" hostname="chromium" tests="3" failures="0" skipped="0" time="31.653" errors="0">
-<testcase name="@screenshots › masaüstü (1440 px)" classname="screenshots.spec.ts" time="12.118">
+<testsuite name="privacy.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="2" failures="0" skipped="0" time="9.708" errors="0">
+<testcase name="@gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok" classname="privacy.spec.ts" time="9.16">
 </testcase>
-<testcase name="@screenshots › tablet768 (768 px)" classname="screenshots.spec.ts" time="9.849">
+<testcase name="@gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür" classname="privacy.spec.ts" time="0.548">
 </testcase>
-<testcase name="@screenshots › mobile375 (375 px)" classname="screenshots.spec.ts" time="9.686">
+</testsuite>
+<testsuite name="scenarios.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="19" failures="0" skipped="0" time="53.83" errors="0">
+<testcase name="@normal normal girdi › fibrozis: çalışabilir profil -&gt; panel Çalışabilir -&gt; sonuç OK, karar ve kanıt gösterilir" classname="scenarios.spec.ts" time="0.964">
+</testcase>
+<testcase name="@normal normal girdi › fibrozis: yalnız &quot;Karaciğer fibrozisi&quot; seçilir -&gt; yalnız gerekli alanlar gönderilir, panel ve sonuç yalnız fibrozis" classname="scenarios.spec.ts" time="0.909">
+</testcase>
+<testcase name="@normal normal girdi › AF: PTB-XL AF örneği -&gt; OK, 10 öznitelik, lead II grafiği ve RR takogramı" classname="scenarios.spec.ts" time="8.449">
+</testcase>
+<testcase name="@normal normal girdi › AF: PTB-XL sinüs ritmi örneği -&gt; OK" classname="scenarios.spec.ts" time="8.348">
+</testcase>
+<testcase name="@normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir" classname="scenarios.spec.ts" time="8.234">
+</testcase>
+<testcase name="@eksik eksik girdi › fibrozis: eksik alanlı profil -&gt; panel &quot;Eksik: …&quot; (laboratuvarlar) -&gt; sonuç ABSTAIN ve neden" classname="scenarios.spec.ts" time="0.859">
+</testcase>
+<testcase name="@eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -&gt; Çalışabilir olur" classname="scenarios.spec.ts" time="1.534">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: formda panel &quot;Eksik: EKG kaydı&quot; gösterir" classname="scenarios.spec.ts" time="0.811">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz" classname="scenarios.spec.ts" time="0.293">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -&gt; ABSTAIN (eksik alan)" classname="scenarios.spec.ts" time="8.405">
+</testcase>
+<testcase name="@birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -&gt; alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür" classname="scenarios.spec.ts" time="1.294">
+</testcase>
+<testcase name="@birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir" classname="scenarios.spec.ts" time="1.195">
+</testcase>
+<testcase name="@birim birim hatası › AF: 250 Hz başlıklı kayıt -&gt; ABSTAIN (&quot;500 Hz değil&quot;)" classname="scenarios.spec.ts" time="0.419">
+</testcase>
+<testcase name="@birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -&gt; sunucu 422 hatası gösterilir" classname="scenarios.spec.ts" time="0.494">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: gebe kadın profili -&gt; panel Kapsam dışı (gebe) -&gt; sonuç NOT_APPLICABLE" classname="scenarios.spec.ts" time="0.9">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: 19 yaş -&gt; Kapsam dışı (yaş ≥ 20)" classname="scenarios.spec.ts" time="0.768">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: gebelik &quot;bilmiyorum&quot; -&gt; Karar verilemez (ABSTAIN)" classname="scenarios.spec.ts" time="0.772">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › AF: formda yaş 95 -&gt; panel Kapsam dışı" classname="scenarios.spec.ts" time="0.767">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › AF: EKG ile yaş 95 -&gt; NOT_APPLICABLE" classname="scenarios.spec.ts" time="8.415">
+</testcase>
+</testsuite>
+<testsuite name="screenshots.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="3" failures="0" skipped="0" time="30.93" errors="0">
+<testcase name="@screenshots › masaüstü (1440 px)" classname="screenshots.spec.ts" time="12.207">
+</testcase>
+<testcase name="@screenshots › tablet768 (768 px)" classname="screenshots.spec.ts" time="9.95">
+</testcase>
+<testcase name="@screenshots › mobile375 (375 px)" classname="screenshots.spec.ts" time="8.773">
+</testcase>
+</testsuite>
+<testsuite name="timing.spec.ts" timestamp="2026-11-21T15:44:20.462Z" hostname="chromium" tests="1" failures="0" skipped="0" time="44.124" errors="0">
+<testcase name="@timing › AF arayüz süre ayrıştırması" classname="timing.spec.ts" time="44.124">
+<system-out>
+<![CDATA[{"run":0,"record":"00691","status":"OK","click_to_request_s":0.024,"request_to_first_byte_s":7.208,"server_wall_s":7.19,"octave_s":4.54,"upload_and_queue_minus_server_s":0.018,"download_s":0.0012,"response_bytes":19308,"render_after_response_s":0.061,"click_to_chart_s":7.294}
+{"run":0,"record":"00165","status":"OK","click_to_request_s":0.024,"request_to_first_byte_s":7.174,"server_wall_s":7.154,"octave_s":4.42,"upload_and_queue_minus_server_s":0.02,"download_s":0.0005,"response_bytes":19526,"render_after_response_s":0.026,"click_to_chart_s":7.224}
+{"run":1,"record":"00691","status":"OK","click_to_request_s":0.021,"request_to_first_byte_s":7.126,"server_wall_s":7.113,"octave_s":4.52,"upload_and_queue_minus_server_s":0.013,"download_s":0.0005,"response_bytes":19307,"render_after_response_s":0.014,"click_to_chart_s":7.161}
+{"run":1,"record":"00165","status":"OK","click_to_request_s":0.015,"request_to_first_byte_s":6.924,"server_wall_s":6.911,"octave_s":4.302,"upload_and_queue_minus_server_s":0.014,"download_s":0.0005,"response_bytes":19524,"render_after_response_s":0.014,"click_to_chart_s":6.954}
+{"run":2,"record":"00691","status":"OK","click_to_request_s":0.028,"request_to_first_byte_s":7.13,"server_wall_s":7.117,"octave_s":4.498,"upload_and_queue_minus_server_s":0.013,"download_s":0.0005,"response_bytes":19307,"render_after_response_s":0.019,"click_to_chart_s":7.178}
+{"run":2,"record":"00165","status":"OK","click_to_request_s":0.013,"request_to_first_byte_s":7.032,"server_wall_s":7.018,"octave_s":4.36,"upload_and_queue_minus_server_s":0.013,"download_s":0.0005,"response_bytes":19525,"render_after_response_s":0.017,"click_to_chart_s":7.063}
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>

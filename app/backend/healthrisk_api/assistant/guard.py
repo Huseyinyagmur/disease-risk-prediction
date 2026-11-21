@@ -58,7 +58,7 @@ def compile_rule(rule: str):
 class Rules:
     """assistant_config.json'daki v3 kural kümeleri (derlenmiş)."""
     def __init__(self, cfg: dict):
-        self.emergency = [compile_rule(r) for r in cfg.get('emergency_rules', [])]
+        self.emergency = [compile_rule(r) for r in cfg.get('emergency_rules', []) + [x['rule'] for x in cfg.get('red_flag_rules', [])]]
         self.self_harm = [compile_rule(r) for r in cfg.get('self_harm_rules', [])]
         self.medical = [compile_rule(r) for r in cfg.get('medical_rules', [])]
         self.medical_exclude = [key(x).strip() for x in cfg.get('medical_exclude', [])]

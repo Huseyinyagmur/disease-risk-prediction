@@ -655,5 +655,105 @@
    "önem",
    "izin"
   ]
- }
+ },
+ "red_flag_rules": [
+  {
+   "symptom": "kalp krizi: kol/omuz/çene/sırt/boyun ağrısı (iki bölge birlikte)",
+   "rule": "kol|omuz|omz|cene|sirt|boyn … cene|omuz|omz|sirt|boyn|kol … agri|sizi|sikis|bask|uyus",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "kalp krizi: sol kolda ağrı/sıkışma",
+   "rule": "sol kol … agri|agriy|sizl|sikis|uyus|bask",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "kalp krizi: soğuk terleme",
+   "rule": "soguk … ter|terl|terim|terle",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "kalp krizi: göğüste baskı/sıkışma/oturma hissi",
+   "rule": "gogs … otur|bind|cokt|ezil|ezic|sikis",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "kalp krizi: kalpte sıkışma/baskı/ağrı",
+   "rule": "kalp|kalb … sikis|bask|agri|agriy",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "kalp krizi: ani nefes darlığı",
+   "rule": "ani|aniden|birden … nefes|soluk … darl|daral|kesil|alam|zorlan",
+   "sources": [
+    "https://medlineplus.gov/heartattack.html",
+    "https://www.nhlbi.nih.gov/health/heart-attack/symptoms"
+   ]
+  },
+  {
+   "symptom": "inme (BE-FAST: Balance): ani denge kaybı",
+   "rule": "denge … kayb|kaybet|boz|saglayam|yitir",
+   "sources": [
+    "https://medlineplus.gov/stroke.html"
+   ]
+  },
+  {
+   "symptom": "inme (BE-FAST: Eyes): ani görme kaybı/bulanıklığı/çift görme",
+   "rule": "ani|aniden|birden … gor|goz … kayb|bulan|karar|cift|bozul|kapan",
+   "sources": [
+    "https://medlineplus.gov/stroke.html"
+   ]
+  },
+  {
+   "symptom": "inme (BE-FAST: Arm/leg): kol/bacakta güçsüzlük, his kaybı",
+   "rule": "kolum|koluma|kolun|bacak … zayif|zayifl|felc|hissiz|gucsuz",
+   "sources": [
+    "https://medlineplus.gov/stroke.html"
+   ]
+  },
+  {
+   "symptom": "inme (BE-FAST: Speech): söz/kelime bulamama, konuşma bozukluğu",
+   "rule": "sozcuk|kelime … bulam|cikaram|soyleyem|anlayam",
+   "sources": [
+    "https://medlineplus.gov/stroke.html"
+   ]
+  },
+  {
+   "symptom": "ani şiddetli baş ağrısı (ani başlangıç)",
+   "rule": "ani|aniden|birden … bas agri",
+   "sources": [
+    "https://medlineplus.gov/headache.html"
+   ]
+  },
+  {
+   "symptom": "ani şiddetli baş ağrısı (ağrı → ani)",
+   "rule": "bas agri … ani|aniden|birden",
+   "sources": [
+    "https://medlineplus.gov/headache.html"
+   ]
+  },
+  {
+   "symptom": "ani şiddetli baş ağrısı (hayatımın en kötü / yıldırım gibi)",
+   "rule": "hayat|yildirim … bas agri|agri",
+   "sources": [
+    "https://medlineplus.gov/headache.html"
+   ]
+  }
+ ],
+ "red_flag_note": "v3 sonrası kaynak temelli ekleme (MedlinePlus/NHLBI kalp krizi uyarı belirtileri; MedlinePlus inme BE-FAST; MedlinePlus/NHLBI ani şiddetli baş ağrısı). Test setinden türetilmedi; bağımsız setle doğrulanmadı."
 }

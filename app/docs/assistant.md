@@ -47,7 +47,7 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
 * **Son kontrol**: doz birimi (`500 mg` vb.; `mg/dL` gibi laboratuvar birimi değil), yasak ifadeler ("tanınız",
   "kesinlikle", "kesin olarak", "hastasınız", "almalısınız" …), kaynakta olmayan sayı veya yüzde, bilgi tabanında olmayan
   URL → yanıt atılır, yerine sabit güvenli metin gelir. Model "kaynaklarımda bilgi yok" derse sabit metin döner.
-* **Kaynaklar**: yalnız modelin atıf yaptığı ([n]) parçaların belgeleri listelenir (atıf yoksa ilk iki parça). Dış
+* **Kaynaklar**: yalnız modelin atıf yaptığı ([n]) parçaların belgeleri listelenir (atıf yoksa veya yanıt "bilgi yok" diyorsa liste boştur). Dış
   kaynaklar URL ile, iç belgeler ad ile gösterilir.
 * **Sabit uyarı** (`app_config.json > disclaimer_tr`) her yanıtın sonuna eklenir ve `disclaimer` alanında da döner.
 

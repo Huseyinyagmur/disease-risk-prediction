@@ -1,0 +1,89 @@
+{
+ "rows": [
+  {
+   "run": 0,
+   "record": "00691",
+   "status": "OK",
+   "click_to_request_s": 0.024,
+   "request_to_first_byte_s": 7.208,
+   "server_wall_s": 7.19,
+   "octave_s": 4.54,
+   "upload_and_queue_minus_server_s": 0.018,
+   "download_s": 0.0012,
+   "response_bytes": 19308,
+   "render_after_response_s": 0.061,
+   "click_to_chart_s": 7.294
+  },
+  {
+   "run": 0,
+   "record": "00165",
+   "status": "OK",
+   "click_to_request_s": 0.024,
+   "request_to_first_byte_s": 7.174,
+   "server_wall_s": 7.154,
+   "octave_s": 4.42,
+   "upload_and_queue_minus_server_s": 0.02,
+   "download_s": 0.0005,
+   "response_bytes": 19526,
+   "render_after_response_s": 0.026,
+   "click_to_chart_s": 7.224
+  },
+  {
+   "run": 1,
+   "record": "00691",
+   "status": "OK",
+   "click_to_request_s": 0.021,
+   "request_to_first_byte_s": 7.126,
+   "server_wall_s": 7.113,
+   "octave_s": 4.52,
+   "upload_and_queue_minus_server_s": 0.013,
+   "download_s": 0.0005,
+   "response_bytes": 19307,
+   "render_after_response_s": 0.014,
+   "click_to_chart_s": 7.161
+  },
+  {
+   "run": 1,
+   "record": "00165",
+   "status": "OK",
+   "click_to_request_s": 0.015,
+   "request_to_first_byte_s": 6.924,
+   "server_wall_s": 6.911,
+   "octave_s": 4.302,
+   "upload_and_queue_minus_server_s": 0.014,
+   "download_s": 0.0005,
+   "response_bytes": 19524,
+   "render_after_response_s": 0.014,
+   "click_to_chart_s": 6.954
+  },
+  {
+   "run": 2,
+   "record": "00691",
+   "status": "OK",
+   "click_to_request_s": 0.028,
+   "request_to_first_byte_s": 7.13,
+   "server_wall_s": 7.117,
+   "octave_s": 4.498,
+   "upload_and_queue_minus_server_s": 0.013,
+   "download_s": 0.0005,
+   "response_bytes": 19307,
+   "render_after_response_s": 0.019,
+   "click_to_chart_s": 7.178
+  },
+  {
+   "run": 2,
+   "record": "00165",
+   "status": "OK",
+   "click_to_request_s": 0.013,
+   "request_to_first_byte_s": 7.032,
+   "server_wall_s": 7.018,
+   "octave_s": 4.36,
+   "upload_and_queue_minus_server_s": 0.013,
+   "download_s": 0.0005,
+   "response_bytes": 19525,
+   "render_after_response_s": 0.017,
+   "click_to_chart_s": 7.063
+  }
+ ],
+ "note": "Teşhis ölçümü; aynı makine, canlı backend + vite preview + Chromium."
+}

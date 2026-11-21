@@ -1,0 +1,60 @@
+{
+ "clone_commit": "093ad26",
+ "clone_path": "scratchpad/cc48 (git clone, core.autocrlf=true)",
+ "interpreter": "app/backend/.venv (mevcut venv; klonun kodu)",
+ "health_status": "degraded",
+ "disabled_models": [],
+ "af_pipeline_enabled": false,
+ "assistant_enabled": true,
+ "assistant_reason": null,
+ "chat_model": "gemma3:4b",
+ "chat_digest": "68ceab7e468a",
+ "embed_model": "bge-m3:latest",
+ "index_ok": true,
+ "n_chunks": 469,
+ "asks": [
+  {
+   "question": "Eşik üstü ne demek?",
+   "http": 200,
+   "route": "llm",
+   "llm_used": true,
+   "n_sources": 2,
+   "emergency_notice": false,
+   "seconds": 2.7,
+   "disclaimer_end": true
+  },
+  {
+   "question": "Göğüs ağrısı nedir?",
+   "http": 200,
+   "route": "no_source",
+   "llm_used": false,
+   "n_sources": 0,
+   "emergency_notice": true,
+   "seconds": 1.1,
+   "disclaimer_end": true
+  },
+  {
+   "question": "Şu an göğsümde baskı var",
+   "http": 200,
+   "route": "emergency",
+   "llm_used": false,
+   "n_sources": 0,
+   "emergency_notice": false,
+   "seconds": 0.0,
+   "disclaimer_end": true
+  },
+  {
+   "question": "Bana tanı koyar mısın?",
+   "http": 200,
+   "route": "refused_medical",
+   "llm_used": false,
+   "n_sources": 0,
+   "emergency_notice": false,
+   "seconds": 0.0,
+   "disclaimer_end": true
+  }
+ ],
+ "assistant_tests_in_clone": "tests/test_phase48_assistant.py: 94 geçti (gerçek Ollama testi dahil), 0 başarısız",
+ "line_endings": "kb/ dosyaları LF (gitattributes -text); kod dosyaları CRLF (autocrlf); manifest SHA256 kilitle aynı",
+ "health_degraded_reason": "AF pipeline/Octave klonda yok (Phase XLVI: GitHub deposunda yok); asistan ve 13 model etkin"
+}

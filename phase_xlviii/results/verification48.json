@@ -1,6 +1,6 @@
 {
  "files_before": 158603,
- "files_after": 158747,
+ "files_after": 158758,
  "changed": [
   ".gitattributes",
   ".gitignore",
@@ -91,7 +91,7 @@
   "app/frontend/src/components/AssistantPanel.tsx",
   "app/frontend/src/lib/assistant.ts"
  ],
- "added_in_phase_count": 77,
+ "added_in_phase_count": 88,
  "violations": {
   "changed": [],
   "deleted": [],
@@ -117,6 +117,7 @@
    "asst_clear",
    "asst_close",
    "asst_disabled",
+   "asst_emergency_title",
    "asst_error",
    "asst_examples",
    "asst_examples_title",

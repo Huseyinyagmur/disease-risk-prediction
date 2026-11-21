@@ -37,23 +37,37 @@ Düzeltme sonrası ayrı doğrulama (acil filtresi v2, yeni kilitli set, bir kez
 | yanlış alarm (acil olmayan benzer kelimeli bilgi sorusu) | 12 | 4 (0,333; GA 0,138–0,609) |
 | ret (bilgi amaçlı, filtre değişmedi) | 10 | 8 (0,800) |
 
+v3 son tur ayrı doğrulama (ortak normalizasyonlu kural dili, iki kademeli acil, ret kökleri; set koddan önce kilitlendi,
+bir kez çalıştırıldı; sonrasında ayar yok):
+
+| ölçüt | n | sonuç | Wilson %95 GA |
+|---|---|---|---|
+| acil yakalama (kişisel + genel; sabit 112 veya uyarı kutusu) | 36 | 31 (0,861) | 0,713–0,939 |
+| kişisel acilde sabit 112 | 24 | 23 (0,958) | 0,798–0,993 |
+| genel bilgi sorusunda yanıt + 112 uyarı kutusu | 12 | 7 (0,583) | 0,320–0,807 |
+| ret (yeni değerlendirici) | 12 | 12 (1,000) | 0,758–1,000 |
+| kendine zarar → yalnız sabit 112 | 6 | 6 (1,000) | 0,610–1,000 |
+
+v2 R grubu yeni değerlendiriciyle ayrı sütunda 9/10 (raporlanan eski değerlendirici sonucu 8/10 kalır).
+
 Diğer ölçümler:
 - Tekrarlanabilirlik: karar 66/67 aynı; metin 50/67 aynı (LLM yanıtlarında 19/36).
 - Süre (LLM'e giden): ortalama 4,41 sn, medyan 4,25 sn, en uzun 7,59 sn.
 - Elle inceleme (18 yanıt, tek değerlendirici, kör değil): doğruluk ortalaması 1,61/2, sadakat 1,83/2, Türkçe 4,44/5;
   1 kritik güvenlik sorunu (G4-04, inme belirtisi; v2 ile filtrelenir) ve 1 sorun (G6-04).
 
-## 3. Testler (bu makine)
+## 3. Testler (bu makine; v3 sonrası son durum)
 
 | paket | sonuç |
 |---|---|
-| Backend pytest, tam (AF uçtan uca + gerçek Ollama dahil) | **402 geçti, 5 xfail** (belgelenmiş BMI/osteo sınırlılığı), 0 başarısız (`results/pytest_backend_full.xml`). Asistan: 75 test (`test_phase48_assistant.py`; 74 sahte Ollama + 1 gerçek Ollama) |
-| Vitest | **62/62** (8 yeni: panel + Görev 0) (`results/vitest_junit.xml`) |
+| Backend pytest, tam (AF uçtan uca + gerçek Ollama dahil) | **421 geçti, 5 xfail** (belgelenmiş BMI/osteo sınırlılığı), 0 başarısız (`results/pytest_backend_full.xml`); asistan testleri 94 |
+| Vitest | **63/63** (`results/vitest_junit.xml`) |
 | Tip denetimi + üretim derlemesi | geçti |
-| Playwright (zamanlama hariç) | **33/33**, SKIP 0. Asistan uçtan uca 3 test (gerçek Ollama), axe a11y 1440/375 px, gizlilik, senaryolar, ekran görüntüleri (`results/playwright/`) |
-| Sunucu logu | sohbet içeriği yok (soru metinleri aratıldı, 0 eşleşme) |
+| Playwright (zamanlama hariç) | **34/34**, SKIP 0; asistan uçtan uca 4 test (gerçek Ollama; v3 uyarı kutusu dahil), axe a11y, gizlilik, senaryolar, ekran görüntüleri |
+| Temiz klon (`git clone`, `core.autocrlf=true`, commit 093ad26) | asistan **etkin**: model digest'leri ve indeks manifest kilidi doğrulandı (469 parça); `/assistant/ask` 4/4 doğru rota (llm, genel acil → uyarı kutusu, kişisel acil → sabit 112, ret); klonda asistan testleri 94 geçti. Genel durum `degraded`: AF pipeline klonda yok (Phase XLVI'dan beri bilinen) → `results/clean_clone48.json` |
+| Sunucu logları | sohbet içeriği yok (soru metinleri aratıldı, 0 eşleşme) |
 
-Ekran görüntüleri: `screenshots/` (asistan `desktop_assistant_01–04`, `mobile375_assistant_kapsam_disi`; Görev 0
+Ekran görüntüleri: `screenshots/` (asistan `desktop_assistant_01–05` (05: v3 genel soruda 112 uyarı kutusu), `mobile375_assistant_kapsam_disi`; Görev 0
 `desktop_gorev0_af_ekg_gerekiyor`, `desktop_gorev0_karar_kutusu`; güncel sihirbaz akışı masaüstü, tablet ve mobil).
 
 ## 4. SHA256 bütünlüğü
@@ -78,20 +92,25 @@ dolunca kullanıcı onayıyla silindi: pip önbelleği (20,4 GB) ve Ollama'nın 
 
 ## 6. Açık kalanlar ve sınırlılıklar
 
+- **Kaynak gösterme hatası (düzeltilmedi, karar bekliyor):** LLM atıf yapmadığında ilk iki erişim parçası kaynak olarak
+  listeleniyor. LLM "bilgi yok" yanıtını sabit metinden farklı sözcüklerle verdiğinde (ör. "Göğüs ağrısı hakkında bilgi
+  yok", "bilgiye sahip değilim") bu kaynaklar alakasız görünüyor (`screenshots/desktop_assistant_05…`: gestasyonel
+  diyabet, portal hipertansiyon). Filtre değil, kaynak gösterme mantığı; "son tur" talimatı nedeniyle değiştirilmedi.
+- v3 kalan açıklar: kişisel acilde kol/çene ağrısı (P-02); genel bilgi sorularında ad biçimli acil kelimeleri ("inme ile",
+  "kanama", "felç riski") uyarı kutusu çıkarmıyor (G 7/12). Ayrıntı: `03_eval.md` §6.
+
 - Elle puanlar tek değerlendiricinindir (Claude) ve kör değildir. Kör doğrulama dosyası
   `eval/manual_review_blind.csv` kullanıcıda.
 - gemma3:4b seyrek ama anlamı değiştiren çeviri ve bağlam hataları yapıyor; son kontrol anlam hatalarını yakalamaz.
 - Model kartlarının eşik (§10) ve kalibrasyon (§11) bölümleri, gemma'nın bir yanıtta eşik değerini aktarması üzerine
   test öncesi bilgi tabanından çıkarıldı.
 - Ön filtrelerde açıklar ve takaslar:
-  - ret filtresinde çekim açığı (G3-05);
-  - acil v2'de "soluğum" açığı (E-06);
-  - yanlış alarm 1/3 (bilgi sorularında "göğüs ağrısı", "bayıldım" gibi ifadeler);
+  - ret filtresinde çekim açığı (G3-05) ve v2'deki "soluğum" açığı (E-06): v3'te kapatıldı (ortak normalizasyon, kökler);
+  - v2'deki yanlış alarm 1/3: v3'te iki kademeli acille genel bilgi sorusu artık normal yanıt + uyarı kutusu alıyor;
   - enjeksiyon kalıbı araya kelime girince kaçıyor (G6-01; sonuç güvenliydi).
   
   Bunlar için v3 ve yeni kilitli bir doğrulama seti önerilir.
-- LLM metinleri sıcaklık 0'da bile çalıştırmalar arasında tam belirlenimci değil.
+- GPU kaynaklı belirlenimsizlik: sıcaklık 0, seed 42, top_k 1 iken bile LLM metinlerinin 17/36'sı iki çalıştırmada farklı (karar 66/67 aynı); temiz klonda "Göğüs ağrısı nedir?" bu kez `no_source` döndü.
 - Dış kaynaklar İngilizce ve erişim tarihindeki sürüm. NHLBI'de yeniden kullanım beyanı bulunamadığı için metin alınmadı.
 - gemma lisansı (Gemma Terms of Use) OSI açık kaynak değildir.
-- AF ve temiz klon: Phase XLVI notları geçerli. Asistan, temiz klonda Ollama ve modeller kurulursa çalışır
-  (`app/docs/INSTALL.md §4b`); bu fazda temiz klonda ayrıca denenmedi.
+- Temiz klon denemesi aynı makinede ve mevcut venv yorumlayıcısıyla yapıldı (paketler yeniden kurulmadı); Ollama ve kilitli modeller zaten yüklüydü.

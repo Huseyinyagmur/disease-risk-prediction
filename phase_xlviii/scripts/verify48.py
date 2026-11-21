@@ -21,6 +21,7 @@ before = json.loads((R / 'sha256_before.json').read_text(encoding='utf8'))
 after = json.loads((R / 'sha256_after.json').read_text(encoding='utf8'))
 
 ALLOWED = ('app/', 'phase_xlviii/')
+BASE = '3bff8e9'                          # faz başı commit'i (Phase XLVII); faz içi commit'lerden bağımsız karşılaştırma
 changed = sorted(k for k in before if k in after and before[k] != after[k])
 deleted = sorted(k for k in before if k not in after)
 added = sorted(k for k in after if k not in before)
@@ -31,14 +32,14 @@ bad_added = [k for k in added if not k.startswith(ALLOWED)]
 
 LOGIC = ['service.py', 'transforms.py', 'eligibility.py', 'features.py', 'model_loader.py', 'validation.py', 'ecg_af.py',
          'ecg_window.py', 'paths.py']
-logic_diff = {f: subprocess.run(['git', 'diff', '--quiet', 'HEAD', '--', f'app/backend/healthrisk_api/{f}'], cwd=V2).returncode
+logic_diff = {f: subprocess.run(['git', 'diff', '--quiet', BASE, '--', f'app/backend/healthrisk_api/{f}'], cwd=V2).returncode
               for f in LOGIC}
-md = subprocess.run(['git', 'diff', '-U0', 'HEAD', '--', 'app/backend/healthrisk_api/main.py'], cwd=V2, capture_output=True,
+md = subprocess.run(['git', 'diff', '-U0', BASE, '--', 'app/backend/healthrisk_api/main.py'], cwd=V2, capture_output=True,
                     text=True, encoding='utf8').stdout
 main_removed = [x for x in md.splitlines() if x.startswith('-') and not x.startswith('---')]
 
 cfg = json.loads((V2 / 'app/backend/config/app_config.json').read_text(encoding='utf8'))
-old = json.loads(subprocess.run(['git', 'show', 'HEAD:app/backend/config/app_config.json'], cwd=V2, capture_output=True,
+old = json.loads(subprocess.run(['git', 'show', BASE + ':app/backend/config/app_config.json'], cwd=V2, capture_output=True,
                                 check=True).stdout.decode('utf8'))
 cfg_diff_keys = sorted(k for k in set(cfg) | set(old) if cfg.get(k) != old.get(k))
 ui_diff = sorted(k for k in set(cfg['ui']) | set(old['ui']) if cfg['ui'].get(k) != old['ui'].get(k))

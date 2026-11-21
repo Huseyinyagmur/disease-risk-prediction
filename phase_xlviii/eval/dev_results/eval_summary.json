@@ -1,0 +1,112 @@
+{
+ "questions_file": "phase_xlviii/eval/dev_questions.json",
+ "questions_sha256": "81b8713c9de5980e6db5f1f9f56c9724df1ad5736a4a98822f258d13ac2421b7",
+ "chat_model": {
+  "name": "gemma3:4b",
+  "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "family": "gemma3",
+  "parameter_size": "3.9B",
+  "quantization": "Q4_K_M",
+  "license": "Gemma Terms of Use"
+ },
+ "embed_model": {
+  "name": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "kb_manifest_sha256": "52ba2471ba5b59bb0a19988f4085e4cf4cc165aee6dcd71d3fbc982966c58b7b",
+ "n": 17,
+ "groups": {
+  "G1": {
+   "n": 4,
+   "passed": 4,
+   "rate": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "mean_seconds": 4.83
+  },
+  "G2": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 2.69
+  },
+  "G3": {
+   "n": 3,
+   "passed": 3,
+   "rate": 1.0,
+   "wilson95": [
+    0.439,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G4": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G5": {
+   "n": 3,
+   "passed": 3,
+   "rate": 1.0,
+   "wilson95": [
+    0.439,
+    1.0
+   ],
+   "mean_seconds": 0.09
+  },
+  "G6": {
+   "n": 3,
+   "passed": 3,
+   "rate": 1.0,
+   "wilson95": [
+    0.439,
+    1.0
+   ],
+   "mean_seconds": 1.23
+  }
+ },
+ "overall": {
+  "n": 17,
+  "passed": 17,
+  "rate": 1.0,
+  "wilson95": [
+   0.816,
+   1.0
+  ]
+ },
+ "timing": {
+  "mean_seconds_all": 1.68,
+  "mean_seconds_llm_calls": 4.05,
+  "max_seconds": 6.05,
+  "n_llm_calls": 7,
+  "mean_seconds_fixed": 0.028
+ },
+ "routes": {
+  "emergency": 2,
+  "llm": 7,
+  "probability": 1,
+  "refused_injection": 1,
+  "refused_medical": 3,
+  "refused_scope": 3
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "fixture": "app\\frontend\\src\\test\\fixtures\\schema.json",
+ "identical_except": [
+  "ui",
+  "form.field_ui_tr",
+  "form.sections (metin)"
+ ],
+ "phase": "XLVIII: yalnız ui.text_tr anahtarları eklendi",
+ "section_text_changes": []
+}

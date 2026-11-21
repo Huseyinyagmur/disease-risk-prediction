@@ -1,0 +1,9 @@
+85d41c3b4890494454ee9d5239a96c97788251fb7fc8368179a68c5685c386cb  phase_xlviii/eval/questions.json
+476b6dc45fa9cd0d440eb6e7a8969ff52eee8274bd2ced8efe1144e6562ae99c  app/backend/assistant/assistant_config.json
+31eb93dfed1a703bf1da5a2f9ce4626962b45955b9da8822e9d6700fef28e5ce  app/backend/assistant/assistant_lock.json
+24492191c140e28aeb2801b89336f3dbb546c7f59e95bb4fcf5fc06cf405e23a  app/backend/healthrisk_api/assistant/engine.py
+563f86ae5280de37e2e5c2b7b55d3e0a7f403e52a74f8e3f515e8ce451875bff  app/backend/healthrisk_api/assistant/guard.py
+384a0a1294b29f685576e3c3b03967a3d77a10bcaaf89667ad606e82019d124d  app/backend/healthrisk_api/assistant/kb.py
+52ba2471ba5b59bb0a19988f4085e4cf4cc165aee6dcd71d3fbc982966c58b7b  app/backend/assistant/kb/index/manifest.json
+35b3f4ee8ae8978f3993b88619c8d2a60238fc48d563b5f41f5fac9d1d42c195  phase_xlviii/scripts/run_eval.py
+# kilit zamanı: 2026-11-21T12:58:21Z — değerlendirme çalıştırılmadan önce; politika/istem/model/indeks/değerlendirici dahil

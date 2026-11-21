@@ -46,6 +46,7 @@ def pytest_runtest_setup(item):
 def pytest_configure(config):
     config.addinivalue_line('markers', 'slow: Octave/ECGDeli çalıştıran uçtan uca testler (≈ 15–30 sn/kayıt)')
     config.addinivalue_line('markers', 'requires_research_tree(*paths): V2 köküne göre bu yollar yoksa SKIP (temiz klon)')
+    config.addinivalue_line('markers', 'ollama: Phase XLVIII — 127.0.0.1:11434 Ollama gerektirir (yoksa SKIP)')
     for m, d in (('scenario_normal', 'Senaryo 1: normal (eksiksiz, kapsam içi) girdi'),
                  ('scenario_missing', 'Senaryo 2: eksik girdi'),
                  ('scenario_unit', 'Senaryo 3: birim hatası'),

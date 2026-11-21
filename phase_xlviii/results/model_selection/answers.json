@@ -1,0 +1,1953 @@
+{
+ "models": {
+  "bge-m3:latest": {
+   "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+   "size": 1157672605,
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "bert",
+    "families": [
+     "bert"
+    ],
+    "parameter_size": "566.70M",
+    "quantization_level": "F16",
+    "context_length": 8192,
+    "embedding_length": 1024,
+    "runner": "ggml"
+   }
+  },
+  "gemma3:4b": {
+   "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+   "size": 3350272403,
+   "details": {
+    "parent_model": "dhiltgen/gemma3:4b-it-q4_K_M-llamacpp",
+    "format": "gguf",
+    "family": "gemma3",
+    "families": [
+     "gemma3",
+     "clip"
+    ],
+    "parameter_size": "3.9B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 131072,
+    "embedding_length": 2560,
+    "runner": "llamacpp"
+   }
+  },
+  "qwen2.5:7b": {
+   "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+   "size": 4683087332,
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen2",
+    "families": [
+     "qwen2"
+    ],
+    "parameter_size": "7.6B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 32768,
+    "embedding_length": 3584,
+    "runner": "ggml"
+   }
+  },
+  "llama3:latest": {
+   "digest": "365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1",
+   "size": 4661224676,
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "llama",
+    "families": [
+     "llama"
+    ],
+    "parameter_size": "8.0B",
+    "quantization_level": "Q4_0",
+    "context_length": 8192,
+    "embedding_length": 4096,
+    "runner": "ggml"
+   }
+  }
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "rows": [
+  {
+   "model": "llama3:latest",
+   "qid": 1,
+   "question": "Atriyal fibrilasyon nedir?",
+   "route": "llm",
+   "seconds": 24.48,
+   "retries": 0,
+   "raw_answer": "Atriyal fibrilasyon, AFib veya AF olarak da bilinen, kalp ritminin en yaygın türlerinden biridir. Kalp ritmi problemi, kalp atış hızını veya ritmini değiştirir. Bu durum, kalp atış hızını yavaş, hızlı veya düzensiz yapabilir.\n\nAtriyal fibrilasyon, kalp üst ve alt odaklılarının birlikte çalışmamaya neden olur. Bu durum, kalp alt odaklılarının tam olarak doldurulmadığını veya yeterli kan akışını sağlayamadığını gösterir. Bu durum, baygınlık, yorgunluk ve kalp atış hızını artıran belirtilere neden olabilir.\n\nAtriyal fibrilasyon, kısa süreli epizodlarda veya sürekli olarak olabilir. Bu durum, stroke ve kalp koşullarına risk oluşturabilir.",
+   "final_answer": "Atriyal fibrilasyon, AFib veya AF olarak da bilinen, kalp ritminin en yaygın türlerinden biridir. Kalp ritmi problemi, kalp atış hızını veya ritmini değiştirir. Bu durum, kalp atış hızını yavaş, hızlı veya düzensiz yapabilir.\n\nAtriyal fibrilasyon, kalp üst ve alt odaklılarının birlikte çalışmamaya neden olur. Bu durum, kalp alt odaklılarının tam olarak doldurulmadığını veya yeterli kan akışını sağlayamadığını gösterir. Bu durum, baygınlık, yorgunluk ve kalp atış hızını artıran belirtilere neden olabilir.\n\nAtriyal fibrilasyon, kısa süreli epizodlarda veya sürekli olarak olabilir. Bu durum, stroke ve kalp koşullarına risk oluşturabilir.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_af"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_af",
+     "score": 0.809
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.807
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.797
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.796
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.75
+    }
+   ],
+   "words": 87,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.72
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 2,
+   "question": "Karaciğer fibrozisi ne demek ve FibroScan ne ölçer?",
+   "route": "postcheck_fail",
+   "seconds": 22.31,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusunu YALNIZ aşağıda verilen KAYNAKLAR'a dayanarak Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\nKaraciğer fibrozisi, karaciğerin sertleşmesi ve kalıcı olarak hasar görmesi anlamına gelir. FibroScan, karaciğer elastografisi olarak bilinen bir testtir ve karaciğerin sertliğini ölçer. FibroScan, karaciğer fibrozisi için hekiminize danışın.\n\nKaynak: [1], [2], [3]\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.79
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.679
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.677
+    },
+    {
+     "doc_id": "niddk_cirrhosis",
+     "score": 0.676
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.673
+    }
+   ],
+   "words": 48,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.57
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 3,
+   "question": "Osteoporoz kimlerde daha sık görülür?",
+   "route": "llm",
+   "seconds": 36.25,
+   "retries": 0,
+   "raw_answer": "Osteoporoz kimlerde daha sık görülür?\n\nOsteoporoz, risk faktörlerine sahip kişilerde daha sık görülür. Risk faktörleri:\n\n* Cinsiyet: Osteoporoz, özellikle menopozdan sonra kadınlarda daha sık görülür.\n* Yaş: Osteoporoz, 50 yaş ve üzerindedir.\n* Vücut boyutu: Osteoporoz, ince ve zayıf kemikli kişilerde daha sık görülür.\n* Irk: Beyaz ve Asya kadınları en yüksek riskli gruplardır. Afrikalı ve Meksikalı kadınların riski daha düşüktür. Beyaz erkekler, Afrikalı ve Meksikalı erkeklerden daha yüksek riskli gruplardır.\n* Aile tarihi: Osteoporoz riski, bir ebeveynin osteoporoz veya omurga kırığına sahip olması durumunda daha yüksek olabilir.\n* Hormon değişiklikleri: Certain hormones'un düşük seviyesi, osteoporoz gelişme riskini artırmaya yardımcı olabilir.\n* Diyet: Kalsiyum ve vitamin D'den yoksun diyet, protein eksikliği, riski artırmaya yardımcı olabilir.\n* Uzun süreli ilaç kullanımı: Certain medicines, such as corticosteroids, proton pump inhibitors, and medicines to treat epilepsy, riski artırmaya yardımcı olabilir.\n* Diğer sağlık koşulları: Certain medical conditions, such as endocrine diseases, certain digestive diseases, rheumatoid arthritis, certain types of cancer, and HIV, riski artırmaya yardımcı olabilir.\n\nKaynak: [1], [2], [4]\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Osteoporoz kimlerde daha sık görülür?\n\nOsteoporoz, risk faktörlerine sahip kişilerde daha sık görülür. Risk faktörleri:\n\n* Cinsiyet: Osteoporoz, özellikle menopozdan sonra kadınlarda daha sık görülür.\n* Yaş: Osteoporoz, 50 yaş ve üzerindedir.\n* Vücut boyutu: Osteoporoz, ince ve zayıf kemikli kişilerde daha sık görülür.\n* Irk: Beyaz ve Asya kadınları en yüksek riskli gruplardır. Afrikalı ve Meksikalı kadınların riski daha düşüktür. Beyaz erkekler, Afrikalı ve Meksikalı erkeklerden daha yüksek riskli gruplardır.\n* Aile tarihi: Osteoporoz riski, bir ebeveynin osteoporoz veya omurga kırığına sahip olması durumunda daha yüksek olabilir.\n* Hormon değişiklikleri: Certain hormones'un düşük seviyesi, osteoporoz gelişme riskini artırmaya yardımcı olabilir.\n* Diyet: Kalsiyum ve vitamin D'den yoksun diyet, protein eksikliği, riski artırmaya yardımcı olabilir.\n* Uzun süreli ilaç kullanımı: Certain medicines, such as corticosteroids, proton pump inhibitors, and medicines to treat epilepsy, riski artırmaya yardımcı olabilir.\n* Diğer sağlık koşulları: Certain medical conditions, such as endocrine diseases, certain digestive diseases, rheumatoid arthritis, certain types of cancer, and HIV, riski artırmaya yardımcı olabilir.\n\nKaynak: [1], [1], [1]\n\nHekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_osteoporosis"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.726
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.668
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.662
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.644
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.587
+    }
+   ],
+   "words": 158,
+   "en_stopword_pct": 2.5,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.18
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 4,
+   "question": "HbA1c testi neyi gösterir?",
+   "route": "llm",
+   "seconds": 25.09,
+   "retries": 0,
+   "raw_answer": "HbA1c testi, ortalama 2-3 aydır süresince kan şekerinizin seviyesini gösterir. Kan şekeriniz, kanınızdan gelen şeker türlerinden biri olup, yemek yiyeninizden gelir. Hücreleriniz, enerji için şeker kullanır. Insulin hormonu, şekerin hücrelere girmesine yardımcı olur. Diyabet varlığında, vücudunuz yeterince insulin üretmez veya hücreleriniz insulin'i iyi kullanmaz. Bu nedenle, şeker kanınızda artar.",
+   "final_answer": "HbA1c testi, ortalama 2-3 aydır süresince kan şekerinizin seviyesini gösterir. Kan şekeriniz, kanınızdan gelen şeker türlerinden biri olup, yemek yiyeninizden gelir. Hücreleriniz, enerji için şeker kullanır. Insulin hormonu, şekerin hücrelere girmesine yardımcı olur. Diyabet varlığında, vücudunuz yeterince insulin üretmez veya hücreleriniz insulin'i iyi kullanmaz. Bu nedenle, şeker kanınızda artar.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_test_a1c"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.792
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "niddk_a1c",
+     "score": 0.754
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.747
+    }
+   ],
+   "words": 50,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.48
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 5,
+   "question": "Kronik böbrek hastalığı nedir?",
+   "route": "llm",
+   "seconds": 31.37,
+   "retries": 0,
+   "raw_answer": "Kronik böbrek hastalığı, böbreklerin hasarlı ve kanı yeterince filtre etmemesi durumudur. Bu durum, kan dolaşımında fazla su ve atık birikmesine neden olur ve kalp hastalığı, anemi, yüksek kan basıncı, yüksek potasyum seviyesi, düşük kalsiyum seviyesi ve depresyon gibi sağlık sorunlarına yol açabilir. Kronik böbrek hastalığı, çeşitli seviyelerde ciddi olabilir ve genellikle zamanla kötüleşir. Tedavi, hastalığın ilerlemesini yavaşlatmaya yardımcı olur, ancak böbreklerin tamamen çalışmamasına neden olabilir. [1][2][3][4][5]",
+   "final_answer": "Kronik böbrek hastalığı, böbreklerin hasarlı ve kanı yeterince filtre etmemesi durumudur. Bu durum, kan dolaşımında fazla su ve atık birikmesine neden olur ve kalp hastalığı, anemi, yüksek kan basıncı, yüksek potasyum seviyesi, düşük kalsiyum seviyesi ve depresyon gibi sağlık sorunlarına yol açabilir. Kronik böbrek hastalığı, çeşitli seviyelerde ciddi olabilir ve genellikle zamanla kötüleşir. Tedavi, hastalığın ilerlemesini yavaşlatmaya yardımcı olur, ancak böbreklerin tamamen çalışmamasına neden olabilir. [1][2][3][1][3]\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_ckd",
+    "mp_ckd",
+    "niddk_ckd"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.653
+    },
+    {
+     "doc_id": "mp_ckd",
+     "score": 0.648
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.632
+    },
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.607
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.595
+    }
+   ],
+   "words": 65,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.54
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 6,
+   "question": "Yüksek tansiyon belirti verir mi?",
+   "route": "llm",
+   "seconds": 27.73,
+   "retries": 0,
+   "raw_answer": "Yüksek tansiyon genellikle belirtilmez, bu nedenle çoğu insan bunu bilmez. Yüksek tansiyonun varlığını ancak kan basıncını düzenli olarak ölçmekle öğrenirsiniz. [1][2]\n\nKan basıncını ölçmek, yüksek tansiyonun varlığını belirlemek için tek yoludur. [1][2]\n\nDiğer bir deyişle, yüksek tansiyon belirti vermez, ancak kan basıncını ölçmekle öğrenirsiniz. [1][2]\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Yüksek tansiyon genellikle belirtilmez, bu nedenle çoğu insan bunu bilmez. Yüksek tansiyonun varlığını ancak kan basıncını düzenli olarak ölçmekle öğrenirsiniz. [1]\n\nKan basıncını ölçmek, yüksek tansiyonun varlığını belirlemek için tek yoludur. [1]\n\nDiğer bir deyişle, yüksek tansiyon belirti vermez, ancak kan basıncını ölçmekle öğrenirsiniz. [1]\n\nHekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_hbp"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.717
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.702
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.679
+    },
+    {
+     "doc_id": "mp_hbp",
+     "score": 0.675
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.658
+    }
+   ],
+   "words": 44,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 10.1
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 7,
+   "question": "Anemi nedir, tam kan sayımı ne işe yarar?",
+   "route": "llm",
+   "seconds": 27.68,
+   "retries": 0,
+   "raw_answer": "Anemi, kansızlık olarak tanımlanır. Tam kan sayımı (Complete Blood Count - CBC), anemi ve diğer kan hastalıklarını tanımlamak, izlemek ve tedavi etmek için kullanılır. CBC, kan hücrelerinin sayısını ve boyutunu ölçer. Bu test, kırmızı kan hücreleri, beyaz kan hücreleri, pıhtı hücreleri, hemoglobin, hematokrit ve ortalama kırmızı kan hücresi hacmi (MCV) ölçer. Anemi tanısında tam kan sayımı ve biyokimya tahlili gerekir. CBC, yalnızca bir sağlık testidir ve doktorunuzun sizin sağlık durumunu belirlemek için kullandığı bir araçtır. Hezimine danışabilirsiniz.",
+   "final_answer": "Anemi, kansızlık olarak tanımlanır. Tam kan sayımı (Complete Blood Count - CBC), anemi ve diğer kan hastalıklarını tanımlamak, izlemek ve tedavi etmek için kullanılır. CBC, kan hücrelerinin sayısını ve boyutunu ölçer. Bu test, kırmızı kan hücreleri, beyaz kan hücreleri, pıhtı hücreleri, hemoglobin, hematokrit ve ortalama kırmızı kan hücresi hacmi (MCV) ölçer. Anemi tanısında tam kan sayımı ve biyokimya tahlili gerekir. CBC, yalnızca bir sağlık testidir ve doktorunuzun sizin sağlık durumunu belirlemek için kullandığı bir araçtır. Hezimine danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_test_cbc"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.748
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.702
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.699
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.685
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.676
+    }
+   ],
+   "words": 76,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.09
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 8,
+   "question": "KOAH nedir ve spirometri testi nasıl yapılır?",
+   "route": "postcheck_fail",
+   "seconds": 28.88,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusunu YALNIZ aşağıda verilen KAYNAKLAR'a dayanarak Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\nKOAH (kronik akciğer hastalığı) nedir? KOAH, akciğerlerin kronik olarak zarar görmesi sonucu oluşur. Spirometri testi, akciğerlerin işlevini ölçmek için kullanılan bir testtir. Test, akciğerlerin nasıl çalıştığını ve hava akımını ölçer.\n\nSpirometri testi nasıl yapılır? Spirometri testi, bir cihazda (spirometer) hava akımını ölçmek için kullanılır. Test, kişinin akciğerlerini derin bir nefesle doldurup sonra mümkün olan en hızlı şekilde havayı dışarı atması gerekir. Bu test, KOAH tanısında yardımcı olur.\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": false,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "cdc_copd",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.734
+    },
+    {
+     "doc_id": "mp_test_lung",
+     "score": 0.697
+    },
+    {
+     "doc_id": "mc_copd_S4_DEVICE",
+     "score": 0.696
+    }
+   ],
+   "words": 91,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 10.26
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 9,
+   "question": "Koroner arter hastalığı nedir?",
+   "route": "llm",
+   "seconds": 29.12,
+   "retries": 0,
+   "raw_answer": "Koroner arter hastalığı, ABD'de en yaygın kalp hastalığı ve erkek ve kadınların ölüm nedenidir. Koroner arter hastalığı, kalp kasına kan ve oksijen taşıyan koroner arterlerin hasar görmesi veya hastalanması sonucu kalp kasına gerekli kanın sağlanamamasına neden olur.\n\nKaynak: [1], [2], [3], [4], [5]\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Koroner arter hastalığı, ABD'de en yaygın kalp hastalığı ve erkek ve kadınların ölüm nedenidir. Koroner arter hastalığı, kalp kasına kan ve oksijen taşıyan koroner arterlerin hasar görmesi veya hastalanması sonucu kalp kasına gerekli kanın sağlanamamasına neden olur.\n\nKaynak: [1], [2], [1], [2], [1]\n\nHekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_cad",
+    "cdc_cad"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_cad",
+     "score": 0.712
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.672
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.671
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.664
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.659
+    }
+   ],
+   "words": 41,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.58
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 10,
+   "question": "Eşik üstü sonucu ne anlama gelir?",
+   "route": "postcheck_fail",
+   "seconds": 27.25,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusunu YALNIZ aşağıda verilen KAYNAKLAR'a dayanarak Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\nEşik üstü sonucu, modelin araştırmada sabitlenmiş eşiğine göre sınıflamasıdır. Bu sonuç, bir hekimle değerlendirmeniz önerilir. [1] [2]\n\nKAYNAKLAR'daki tanımla, eşik üstü sonucu, tansiyonunuzun bir sağlık çalışanı tarafından yeniden ölçülmesi için hekiminize danışın. [5]\n\nSonuç olarak, eşik üstü sonucu, bir hekimle değerlendirmeniz önerilir. Heziminize danışın.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.669
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.635
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.551
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.535
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.535
+    }
+   ],
+   "words": 59,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 11.41
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 11,
+   "question": "\"Sonuç üretilmedi\" neden olur?",
+   "route": "postcheck_fail",
+   "seconds": 27.62,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusuna göre, \"Sonuç üretilmedi\" neden olur? Bu soruya, KAYNAKLAR'daki bilgiyi dayanarak Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\nSonuç üretilmedi, çünkü gerekli bir bilgi eksik veya belirsiz olduğu için analiz bilerek sonuç vermedi. Eksik bilgi tahminle doldurulmaz. Bu durum, KAYNAKLAR'daki [1] Terim sözlüğü'ndeki \"Sonuç üretilmedi\" tanımına göre açıklanır.\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.693
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.573
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.567
+    },
+    {
+     "doc_id": "mc_hf_S2_BASIC_LAB",
+     "score": 0.493
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.49
+    }
+   ],
+   "words": 60,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.22
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 12,
+   "question": "İç test ile dış doğrulama arasındaki fark nedir?",
+   "route": "postcheck_fail",
+   "seconds": 30.33,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusunu YALNIZ aşağıda verilen KAYNAKLAR'a dayanarak Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\nİç test ile dış doğrulama arasındaki fark, modelin farklı veri kaynaklarında test edilmesidir. İç test, modelin geliştirildiği veri kaynağında, eğitimde kullanılmayan kişilerde bir kez test edildi. Dış doğrulama, model farklı bir veri kaynağında test edildi. Bu fark, modelin farklı veri kaynaklarında nasıl performans gösterdiğini gösterir.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": false,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.651
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.646
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.597
+    },
+    {
+     "doc_id": "mc_af_S4_DEVICE",
+     "score": 0.539
+    },
+    {
+     "doc_id": "mc_anemia_LR16",
+     "score": 0.535
+    }
+   ],
+   "words": 64,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.96
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 13,
+   "question": "Karaciğer fibrozisi modelinin kanıt düzeyi nedir?",
+   "route": "llm",
+   "seconds": 28.83,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusuna Türkçe ve kısa biçimde yanıt veriyorum:\n\nKaraciğer fibrozisi modelinin kanıt düzeyi, ABD ulusal sağlık taraması (NHANES 2021–23) verisinde, eğitimde kullanılmayan kişilerde test edildiği için iç test (NHANES L 2021–23) düzeyidir. Bu model yalnız ABD ulusal sağlık taraması (NHANES 2021–23) verisinde test edildi; başka ülke veya hastane verisinde henüz test edilmedi. (Kaynak: [1], [2])\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Kullanıcı sorusuna Türkçe ve kısa biçimde yanıt veriyorum:\n\nKaraciğer fibrozisi modelinin kanıt düzeyi, ABD ulusal sağlık taraması (NHANES 2021–23) verisinde, eğitimde kullanılmayan kişilerde test edildiği için iç test (NHANES L 2021–23) düzeyidir. Bu model yalnız ABD ulusal sağlık taraması (NHANES 2021–23) verisinde test edildi; başka ülke veya hastane verisinde henüz test edilmedi. (Kaynak: [1], [2])\n\nHekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mc_fibrosis_final",
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.694
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.686
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.651
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.642
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.636
+    }
+   ],
+   "words": 52,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.67
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 14,
+   "question": "Deneysel modül ne demek?",
+   "route": "llm",
+   "seconds": 25.09,
+   "retries": 0,
+   "raw_answer": "Deneysel modül, kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizlerdir. Bu modülde kullanılan veri, ABD ulusal sağlık taraması (NHANES) gibi tarama programlarından elde edilmiştir. Deneysel modül sonuçları, ana modüllerle aynı ağırlıkta yorumlanmamalıdır. [1], [2], [3], [4], [5]\n\nHekiminize danışabilirsiniz.",
+   "final_answer": "Deneysel modül, kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizlerdir. Bu modülde kullanılan veri, ABD ulusal sağlık taraması (NHANES) gibi tarama programlarından elde edilmiştir. Deneysel modül sonuçları, ana modüllerle aynı ağırlıkta yorumlanmamalıdır. [1], [2], [2], [2], [2]\n\nHekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.689
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.633
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.546
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.545
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.538
+    }
+   ],
+   "words": 36,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.31
+  },
+  {
+   "model": "llama3:latest",
+   "qid": 15,
+   "question": "eGFR nedir?",
+   "route": "postcheck_fail",
+   "seconds": 32.88,
+   "retries": 0,
+   "raw_answer": "Kullanıcı sorusunu Türkçe, kısa (en çok 150 kelime) ve sade biçimde açıklamaktır.\n\neGFR (Estimated Glomerular Filtration Rate), kidney filtration rateını tahmin etmek için kullanılan bir ölçektir. Kidney filtration rateı, kan dolaşımında bulunan atık maddelerin filtrelenmesi hızını gösterir. eGFR testi, kan creatinine seviyesini ve bazı diğer faktörleri kullanarak kidney filtration rateını tahmin eder. Bu test, kidney hastalığını teşhis etmek ve takip etmek için kullanılır. eGFR sonuçları, kidney healthını göstermektedir. (1-5)\n\nKaynak: [1-5]",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "number_not_in_sources"
+   ],
+   "cited": false,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.737
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.722
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.695
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.649
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.643
+    }
+   ],
+   "words": 68,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.85
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 1,
+   "question": "Atriyal fibrilasyon nedir?",
+   "route": "llm",
+   "seconds": 31.96,
+   "retries": 0,
+   "raw_answer": "Atriyal fibrilasyon (AFib), kalp ritminizdeki en yaygın sorunlardan biridir. Kalp, normalde düzenli ve uygun hızda pompa etmesi gereken bir organ. Ancak AFib durumunda, kalp'in üst çatıllarındaki normal pompa etkinliği bozulur ve kalp'in alt çatıllarına yeterli kan akışını sağlayamaz. Bu durumda, kalp, daha sık ve düzenizm olmayan bir şekilde pompa etmeye başlar. Bu, kafanızı döndürme, yorgunluk ve kalp atışının hızlanmasını gibi belirtiler doğrultusunda rahatsızlıklar yaratabilir.\n\nAFib, kısa süreli dönemlerde veya kalıcı bir durum olarak ortaya çıkabilir. Bu durum, kalp kirliliği ve diğer kalp hastalıklarına neden olabilecek bir risk oluşturur. Ancak bazı kişilerde AFib belirtileri göstermez. Bu durumda, kalp doktorunuzun takip etmesi gerekebilir.\n\nAFib'in nedenleri, kalp dokusu veya kalp atışları ile ilgili değişiklikler olabilir. Bu değişiklikler, yüksek kan basıncı, kalp ve kapilere zarar veren hastalıklar, kalp doğası bozuklukları, infeksiyonlar ve yaşlanma gibi faktörlere bağlı olabilir. Bazı durumlarda neden belirlenemez.\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.",
+   "final_answer": "Atriyal fibrilasyon (AFib), kalp ritminizdeki en yaygın sorunlardan biridir. Kalp, normalde düzenli ve uygun hızda pompa etmesi gereken bir organ. Ancak AFib durumunda, kalp'in üst çatıllarındaki normal pompa etkinliği bozulur ve kalp'in alt çatıllarına yeterli kan akışını sağlayamaz. Bu durumda, kalp, daha sık ve düzenizm olmayan bir şekilde pompa etmeye başlar. Bu, kafanızı döndürme, yorgunluk ve kalp atışının hızlanmasını gibi belirtiler doğrultusunda rahatsızlıklar yaratabilir.\n\nAFib, kısa süreli dönemlerde veya kalıcı bir durum olarak ortaya çıkabilir. Bu durum, kalp kirliliği ve diğer kalp hastalıklarına neden olabilecek bir risk oluşturur. Ancak bazı kişilerde AFib belirtileri göstermez. Bu durumda, kalp doktorunuzun takip etmesi gerekebilir.\n\nAFib'in nedenleri, kalp dokusu veya kalp atışları ile ilgili değişiklikler olabilir. Bu değişiklikler, yüksek kan basıncı, kalp ve kapilere zarar veren hastalıklar, kalp doğası bozuklukları, infeksiyonlar ve yaşlanma gibi faktörlere bağlı olabilir. Bazı durumlarda neden belirlenemez.\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_af"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_af",
+     "score": 0.809
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.807
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.797
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.796
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.75
+    }
+   ],
+   "words": 147,
+   "en_stopword_pct": 2.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.54
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 2,
+   "question": "Karaciğer fibrozisi ne demek ve FibroScan ne ölçer?",
+   "route": "llm",
+   "seconds": 20.84,
+   "retries": 0,
+   "raw_answer": "Karaciğer fibrozisi, karaciğerde形成的答案如下：\n\n肝纤维化是指肝脏出现瘢痕组织替代健康组织的情况，导致肝脏永久性损伤和功能障碍。瘢痕组织会部分阻塞肝脏内血液流动。随着肝纤维化的加重，肝脏功能逐渐衰竭。很多人在早期可能没有明显症状，直到肝脏严重受损。\n\nFibroScan是一种用于测量肝脏硬度的无创检查方法。它使用一种称为超声剪切波弹性成像的技术，可以评估肝纤维化的程度。通过测量肝脏的硬度，FibroScan有助于判断是否存在肝纤维化及其严重程度。如果怀疑有肝纤维化，建议咨询医生进行FibroScan检查。",
+   "final_answer": "Karaciğer fibrozisi, karaciğerde形成的答案如下：\n\n肝纤维化是指肝脏出现瘢痕组织替代健康组织的情况，导致肝脏永久性损伤和功能障碍。瘢痕组织会部分阻塞肝脏内血液流动。随着肝纤维化的加重，肝脏功能逐渐衰竭。很多人在早期可能没有明显症状，直到肝脏严重受损。\n\nFibroScan是一种用于测量肝脏硬度的无创检查方法。它使用一种称为超声剪切波弹性成像的技术，可以评估肝纤维化的程度。通过测量肝脏的硬度，FibroScan有助于判断是否存在肝纤维化及其严重程度。如果怀疑有肝纤维化，建议咨询医生进行FibroScan检查。\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "int_next_steps",
+    "niddk_nafld_dx"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.79
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.679
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.677
+    },
+    {
+     "doc_id": "niddk_cirrhosis",
+     "score": 0.676
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.673
+    }
+   ],
+   "words": 17,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 194,
+   "tr_char_pct": 0.74
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 3,
+   "question": "Osteoporoz kimlerde daha sık görülür?",
+   "route": "llm",
+   "seconds": 34.32,
+   "retries": 0,
+   "raw_answer": "Osteoporoz, belirli risk faktörlerine sahip olan kişilere daha sık görülür. Bu risk faktörleri şunlardır:\n\n- Cinsiyet: Osteoporoz, özellikle menopoz sonrası olan kadınlar arasında daha yaygın. [1]\n- Yaş: Yaşın arttıkça risk artar, özellikle 50 yaş üstü kişilerde en yaygın. [1]\n- Vücut boyutu: Zayıf ve deliğe sahip kişilerde daha yaygın. [1]\n- Rasyon: Beyaz ve Asya kadınları en yüksek risk gruptadır. Afrikalı Amerikan ve Meksika Amerikan kadınları ve erkekler daha düşük risklidir. [1]\n- Aile tarihi: Ailenizde osteoporoz veya kırık bacak tarihi varsa, risikiniz daha yüksek olabilir. [1]\n- Hormon değişiklikleri: Belirli hormon seviyelerinin düşmesi, osteoporoz riskini artırabilir. [1]\n- Dieta: Kalsiyum veya vitamini D eksikliği ve yeterli protein tüketim yoksa risikiniz artabilir. [1]\n- Belirli ilaç kullanımı: Kortikosteroidler, proton pompalama engelleri, antiepileptikler gibi ilaçlar osteoporoz riskini artırabilir. [1]\n- Diğer sağlık durumları: Endokrin hastalıkları, belirli digestive hastalıkları, reumatoid artrit, belirli türlerde kanser ve HIV gibi hastalıklar osteoporoz riskini artırabilir. [1]\n\nHayat tarzınız, örneğin sigara içme, uzun süreli kahve içme ve fiziksel aktivite eksikliği de osteoporoz riskini artırabilir. [2]\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.",
+   "final_answer": "Osteoporoz, belirli risk faktörlerine sahip olan kişilere daha sık görülür. Bu risk faktörleri şunlardır:\n\n- Cinsiyet: Osteoporoz, özellikle menopoz sonrası olan kadınlar arasında daha yaygın. [1]\n- Yaş: Yaşın arttıkça risk artar, özellikle 50 yaş üstü kişilerde en yaygın. [1]\n- Vücut boyutu: Zayıf ve deliğe sahip kişilerde daha yaygın. [1]\n- Rasyon: Beyaz ve Asya kadınları en yüksek risk gruptadır. Afrikalı Amerikan ve Meksika Amerikan kadınları ve erkekler daha düşük risklidir. [1]\n- Aile tarihi: Ailenizde osteoporoz veya kırık bacak tarihi varsa, risikiniz daha yüksek olabilir. [1]\n- Hormon değişiklikleri: Belirli hormon seviyelerinin düşmesi, osteoporoz riskini artırabilir. [1]\n- Dieta: Kalsiyum veya vitamini D eksikliği ve yeterli protein tüketim yoksa risikiniz artabilir. [1]\n- Belirli ilaç kullanımı: Kortikosteroidler, proton pompalama engelleri, antiepileptikler gibi ilaçlar osteoporoz riskini artırabilir. [1]\n- Diğer sağlık durumları: Endokrin hastalıkları, belirli digestive hastalıkları, reumatoid artrit, belirli türlerde kanser ve HIV gibi hastalıklar osteoporoz riskini artırabilir. [1]\n\nHayat tarzınız, örneğin sigara içme, uzun süreli kahve içme ve fiziksel aktivite eksikliği de osteoporoz riskini artırabilir. [1]\n\nBu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_osteoporosis"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.726
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.668
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.662
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.644
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.587
+    }
+   ],
+   "words": 156,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.07
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 4,
+   "question": "HbA1c testi neyi gösterir?",
+   "route": "llm",
+   "seconds": 22.76,
+   "retries": 0,
+   "raw_answer": "HbA1c testi, son iki ila üç ay boyunca kan şekerinizin ortalama seviyenizi gösterir [2, 4]. Test, kan içindeki şeker (glükoz) moleküllerinin kırmızı kan hücrelerine (hemoglobin) yapışma oranını ölçer [1, 2, 4]. Bu test, evde kan şeker testi yaparken o anki kan şeker seviyenizi ölçerken, HbA1c testi 3 aylık ortalama seviyeyi verir [3, 5]. Test sonucu, normal, prediabetik veya diyabetik olma durumunu belirlemek için kullanılır [5].",
+   "final_answer": "HbA1c testi, son iki ila üç ay boyunca kan şekerinizin ortalama seviyenizi gösterir [2, 4]. Test, kan içindeki şeker (glükoz) moleküllerinin kırmızı kan hücrelerine (hemoglobin) yapışma oranını ölçer [1, 2, 4]. Bu test, evde kan şeker testi yaparken o anki kan şeker seviyenizi ölçerken, HbA1c testi 3 aylık ortalama seviyeyi verir [3, 5]. Test sonucu, normal, prediabetik veya diyabetik olma durumunu belirlemek için kullanılır [1].\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_test_a1c"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.792
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "niddk_a1c",
+     "score": 0.754
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.747
+    }
+   ],
+   "words": 58,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.0
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 5,
+   "question": "Kronik böbrek hastalığı nedir?",
+   "route": "llm",
+   "seconds": 37.95,
+   "retries": 0,
+   "raw_answer": "Kronik böbrek hastalığı (CKD), böbreklerin zararlı olup sağlıklı besinleme yapamadıkları bir durumdur. Böbreklerin işlevi azalması nedeniyle, vücudumuzda fazla sıvı ve toksinler kalır ve bu durum sağlıksızlık risklerine neden olabilir, örneğin kalp hastalıkları gibi [1].\n\nCKD ile ilgili diğer sağlık sorunları arasında:\n- Renal anemi (kırmızı kulelerin az olması)\n- Hastalıkların daha sık ortaya çıkması\n- Kalsiyum seviyelerinin düşmesi, potasyum ve fosfor seviyelerinin artması\n- Yemek isteğinin azalması veya az yemek yeme\n- Depresyon veya yaşam kalitesinin düşmesi [1].\n\nCKD, bazı durumlarda uzun süreli bir süreç olabilir ve genellikle zamanla daha kötüye gider. Ancak, tedavi uygulanabilir ve hastalığın ilerlemesini yavaşlatabilir. CKD, böbrek failure'ına veya son-phase böbrek hastalığına (ESKD) ulaşabilir ve aynı zamanda kalp hastalığı ve kusur riskini artırabilir [1].\n\nBöbreklerin işlevini tamamen kaybetmesi durumunda, dializ veya böbrek transplantsi gerekebilir. Böbrek failure'ı dializ veya böbrek transplantsi ile tedavi edilirken, son-phase böbrek hastalığı olarak adlandırılır [1].\n\nBu durumun varlığını belirlemek için kan ve sıvı testleri gereklidir. CKD, tıbbi durumları kontrol etmek ve hastalığın ilerlemesini yavaşlatmak için ilaçlarla tedavi edilebilir [2].\n\nKronik böbrek hastalığı genellikle uzun süreli bir süreç olup, birçok kişi vücutlarında belirtiler olmaksızın ilerler. Bu nedenle, CKD'nin varlığını belirlemek için sadece testler yeterlidir [2].\n\nKronik böbre",
+   "final_answer": "Kronik böbrek hastalığı (CKD), böbreklerin zararlı olup sağlıklı besinleme yapamadıkları bir durumdur. Böbreklerin işlevi azalması nedeniyle, vücudumuzda fazla sıvı ve toksinler kalır ve bu durum sağlıksızlık risklerine neden olabilir, örneğin kalp hastalıkları gibi [1].\n\nCKD ile ilgili diğer sağlık sorunları arasında:\n- Renal anemi (kırmızı kulelerin az olması)\n- Hastalıkların daha sık ortaya çıkması\n- Kalsiyum seviyelerinin düşmesi, potasyum ve fosfor seviyelerinin artması\n- Yemek isteğinin azalması veya az yemek yeme\n- Depresyon veya yaşam kalitesinin düşmesi [1].\n\nCKD, bazı durumlarda uzun süreli bir süreç olabilir ve genellikle zamanla daha kötüye gider. Ancak, tedavi uygulanabilir ve hastalığın ilerlemesini yavaşlatabilir. CKD, böbrek failure'ına veya son-phase böbrek hastalığına (ESKD) ulaşabilir ve aynı zamanda kalp hastalığı ve kusur riskini artırabilir [1].\n\nBöbreklerin işlevini tamamen kaybetmesi durumunda, dializ veya böbrek transplantsi gerekebilir. Böbrek failure'ı dializ veya böbrek transplantsi ile tedavi edilirken, son-phase böbrek hastalığı olarak adlandırılır [1].\n\nBu durumun varlığını belirlemek için kan ve sıvı testleri gereklidir. CKD, tıbbi durumları kontrol etmek ve hastalığın ilerlemesini yavaşlatmak için ilaçlarla tedavi edilebilir [2].\n\nKronik böbrek hastalığı genellikle uzun süreli bir süreç olup, birçok kişi vücutlarında belirtiler olmaksızın ilerler. Bu nedenle, CKD'nin varlığını belirlemek için sadece testler yeterlidir [2].\n\nKronik böbre\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_ckd",
+    "mp_ckd"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.653
+    },
+    {
+     "doc_id": "mp_ckd",
+     "score": 0.648
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.632
+    },
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.607
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.595
+    }
+   ],
+   "words": 188,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.9
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 6,
+   "question": "Yüksek tansiyon belirti verir mi?",
+   "route": "llm",
+   "seconds": 20.18,
+   "retries": 0,
+   "raw_answer": "Yüksek tansiyon genellikle belirti vermez [1][2]. Bu durumda tansiyonunuzun düzenli olarak ölçülmesi gerekmektedir. Tansiyonunuzun belirli bir seviyede olduğuna dair bir belirti olmazsa bile, yüksek tansiyonunuz olabilir. Bu nedenle, tansiyonunuzu düzenli olarak kontrol etmek ve gerektiğinde doktora danışmak önemlidir. Hekiminize danışabilirsiniz.",
+   "final_answer": "Yüksek tansiyon genellikle belirti vermez [1]. Bu durumda tansiyonunuzun düzenli olarak ölçülmesi gerekmektedir. Tansiyonunuzun belirli bir seviyede olduğuna dair bir belirti olmazsa bile, yüksek tansiyonunuz olabilir. Bu nedenle, tansiyonunuzu düzenli olarak kontrol etmek ve gerektiğinde doktora danışmak önemlidir. Hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_hbp"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.717
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.702
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.679
+    },
+    {
+     "doc_id": "mp_hbp",
+     "score": 0.675
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.658
+    }
+   ],
+   "words": 39,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 4.01
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 7,
+   "question": "Anemi nedir, tam kan sayımı ne işe yarar?",
+   "route": "llm",
+   "seconds": 25.9,
+   "retries": 0,
+   "raw_answer": "Anemi, kan içindeki hemoglobin miktarının azalması veya kan kapasitesinin azalmasıyla karakterize olur. Hemoglobin, kan damilere oksijen taşıyan bir proteindir ve anemi durumu, oksijen taşıma yeteneğinin düşmesine neden olur.\n\nTam kan sayımı (CBC), hemoglobin, kan hücreleri (kırmızı, beyaz ve plazma hücreleri) ve diğer kan parametrelerini ölçer. Bu test, kansızlık (anemi) gibi kan hücrelerinin üretimini ve durumunu kontrol etmek için kullanılır. CBC, hemoglobin seviyelerini, kan hücrelerinin sayısını ve boyutunu ölçer. Bu test, anemi gibi kan durumlarını tanılamak ve izlemek için önemlidir.\n\nCBC, anemi gibi kan durumlarını tanılamak ve izlemek için kullanılır. Ancak, bu test tek başına bir tanıya yetecek kadar kapsamlı değildir; diğer testler ve sağlık tarihinizle birlikte değerlendirilmelidir. Bu nedenle, CBC sonuçlarınızı bir sağlık profesyoneline danışmanız önemlidir.",
+   "final_answer": "Anemi, kan içindeki hemoglobin miktarının azalması veya kan kapasitesinin azalmasıyla karakterize olur. Hemoglobin, kan damilere oksijen taşıyan bir proteindir ve anemi durumu, oksijen taşıma yeteneğinin düşmesine neden olur.\n\nTam kan sayımı (CBC), hemoglobin, kan hücreleri (kırmızı, beyaz ve plazma hücreleri) ve diğer kan parametrelerini ölçer. Bu test, kansızlık (anemi) gibi kan hücrelerinin üretimini ve durumunu kontrol etmek için kullanılır. CBC, hemoglobin seviyelerini, kan hücrelerinin sayısını ve boyutunu ölçer. Bu test, anemi gibi kan durumlarını tanılamak ve izlemek için önemlidir.\n\nCBC, anemi gibi kan durumlarını tanılamak ve izlemek için kullanılır. Ancak, bu test tek başına bir tanıya yetecek kadar kapsamlı değildir; diğer testler ve sağlık tarihinizle birlikte değerlendirilmelidir. Bu nedenle, CBC sonuçlarınızı bir sağlık profesyoneline danışmanız önemlidir.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_test_cbc"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.748
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.702
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.699
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.685
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.676
+    }
+   ],
+   "words": 116,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.36
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 8,
+   "question": "KOAH nedir ve spirometri testi nasıl yapılır?",
+   "route": "llm",
+   "seconds": 29.56,
+   "retries": 0,
+   "raw_answer": "KOAH, kronik akciğer hastalığı (Chronic Obstructive Pulmonary Disease, COPD) anlamına gelir. Spirometri testi, doktorunuz tarafından yapılıp, akciğerinizin fonksiyonunu ölçmek için kullanılan bir testdir. Test sırasında, size bir soft clip nösteniz takılacaktır. Daha sonra, duman tight olarak dudağınızın etrafına bir alet takarak, derin bir nefes alıp, mümkün olduğunca hızlı ve zor bir şekilde dışarı çıkarmaya çalışmanız istenecektir. Bu test, akciğerinizin akıcı olup olmadığını ve akıcı seviyenizi belirlemek için kullanılır. Bu test, akciğerinizin genel durumunu değerlendirmek için hekiminize danışmanız gerekmektedir.",
+   "final_answer": "KOAH, kronik akciğer hastalığı (Chronic Obstructive Pulmonary Disease, COPD) anlamına gelir. Spirometri testi, doktorunuz tarafından yapılıp, akciğerinizin fonksiyonunu ölçmek için kullanılan bir testdir. Test sırasında, size bir soft clip nösteniz takılacaktır. Daha sonra, duman tight olarak dudağınızın etrafına bir alet takarak, derin bir nefes alıp, mümkün olduğunca hızlı ve zor bir şekilde dışarı çıkarmaya çalışmanız istenecektir. Bu test, akciğerinizin akıcı olup olmadığını ve akıcı seviyenizi belirlemek için kullanılır. Bu test, akciğerinizin genel durumunu değerlendirmek için hekiminize danışmanız gerekmektedir.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "cdc_copd",
+    "int_analyses"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_copd",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.734
+    },
+    {
+     "doc_id": "mp_test_lung",
+     "score": 0.697
+    },
+    {
+     "doc_id": "mc_copd_S4_DEVICE",
+     "score": 0.696
+    }
+   ],
+   "words": 78,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.11
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 9,
+   "question": "Koroner arter hastalığı nedir?",
+   "route": "llm",
+   "seconds": 26.44,
+   "retries": 0,
+   "raw_answer": "Koroner arter hastalığı (CAD), Amerika Birleşik Devletleri’ndeki en yaygın kalp hastalığındır ve her iki cins için de öncelikli ölüm sebebidir [1, 2]. Bu hastalığın temeli, kalp ağırlarına besleyen arterlerde kuraklık oluşturacak olan kolesterol, yağ, kalsiyum ve diğer maddelerin toplulaşmasıdır [3, 5]. Plakların büyümesi, arterlerin daralmasına neden olur ve kalp kasına akışkan kanın ve oksijenin akmasına engel olur [3]. Bu durum zaman içinde kısmi veya tamamen kan ve oksijen akışını engelleyebilir [3].\n\nBu hastalığın ilk belirtileri bazen kalp infarkti olabilir [4]. Kadınlar arasında daha sık görülen bir tür, küçük kalp ağırlarına zarar veren plakların toplulaşması olan koroner mikrovasküler hastalığı içerebilir [5].\n\nKoroner arter hastalığı hakkında daha fazla bilgi almak için hekiminize danışabilirsiniz.",
+   "final_answer": "Koroner arter hastalığı (CAD), Amerika Birleşik Devletleri’ndeki en yaygın kalp hastalığındır ve her iki cins için de öncelikli ölüm sebebidir [1, 2]. Bu hastalığın temeli, kalp ağırlarına besleyen arterlerde kuraklık oluşturacak olan kolesterol, yağ, kalsiyum ve diğer maddelerin toplulaşmasıdır [3, 5]. Plakların büyümesi, arterlerin daralmasına neden olur ve kalp kasına akışkan kanın ve oksijenin akmasına engel olur [1]. Bu durum zaman içinde kısmi veya tamamen kan ve oksijen akışını engelleyebilir [1].\n\nBu hastalığın ilk belirtileri bazen kalp infarkti olabilir [2]. Kadınlar arasında daha sık görülen bir tür, küçük kalp ağırlarına zarar veren plakların toplulaşması olan koroner mikrovasküler hastalığı içerebilir [1].\n\nKoroner arter hastalığı hakkında daha fazla bilgi almak için hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_cad",
+    "cdc_cad"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_cad",
+     "score": 0.712
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.672
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.671
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.664
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.659
+    }
+   ],
+   "words": 104,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.67
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 10,
+   "question": "Eşik üstü sonucu ne anlama gelir?",
+   "route": "llm",
+   "seconds": 18.92,
+   "retries": 0,
+   "raw_answer": "Eşik üstü sonucu alırsanız, bu sonucu bir hekimle değerlendirmeniz önerilir [2]. Bu, araştırmada belirlenen bir eşiğe göre sınıflandırma olup, tanı değildir [1]. Hastalığınız olmayabilir ama bu sonucu bir sağlık profesyoneli tarafından incelenmesi gerekmektedir [2].",
+   "final_answer": "Eşik üstü sonucu alırsanız, bu sonucu bir hekimle değerlendirmeniz önerilir [2]. Bu, araştırmada belirlenen bir eşiğe göre sınıflandırma olup, tanı değildir [1]. Hastalığınız olmayabilir ama bu sonucu bir sağlık profesyoneli tarafından incelenmesi gerekmektedir [2].\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "int_next_steps"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.669
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.635
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.551
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.535
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.535
+    }
+   ],
+   "words": 31,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.02
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 11,
+   "question": "\"Sonuç üretilmedi\" neden olur?",
+   "route": "llm",
+   "seconds": 17.66,
+   "retries": 0,
+   "raw_answer": "Sonuç üretilmedi nedeni, gerekli bir bilgi eksik veya belirsiz olduğundan analiz bilerek sonuç verilemedi. Bu durumda, eksik bilgileri tamamlayabilir veya hekiminize danışabilirsiniz.",
+   "final_answer": "Sonuç üretilmedi nedeni, gerekli bir bilgi eksik veya belirsiz olduğundan analiz bilerek sonuç verilemedi. Bu durumda, eksik bilgileri tamamlayabilir veya hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "int_glossary"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.693
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.573
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.567
+    },
+    {
+     "doc_id": "mc_hf_S2_BASIC_LAB",
+     "score": 0.493
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.49
+    }
+   ],
+   "words": 22,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 3.28
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 12,
+   "question": "İç test ile dış doğrulama arasındaki fark nedir?",
+   "route": "llm",
+   "seconds": 26.59,
+   "retries": 0,
+   "raw_answer": "İç test ve dış doğrulama arasındaki ana fark, modelin test edildiği veri kaynağının farklı olup olmadığını belirtir.\n\nİç testde [3], model geliştirildiği aynı veri kaynağında test edilir. Bu test, eğitim sırasında kullanılmayan kişilerde yapılır. Örneğin, NHANES A 1999–2000 veri kümesinde modelin performansı iç testle değerlendirilir.\n\nDış doğrulamada [4] ve [5], model farklı veri kaynaklarında test edilir. Bu, modelin genelleme yeteneklerini ölçer. Örneğin, CPSC 2018 veri kümesinde modelin performansı dış doğrulama ile değerlendirilir.\n\nBu farklılıklar, modelin belirli bir veri kümesine özgü performansı ve genelleme yeteneklerini değerlendirmenin yollarını gösterir. Dış doğrulama genellikle daha kapsayıcı ve modelin gerçek dünya performansını daha iyi yansıtır.",
+   "final_answer": "İç test ve dış doğrulama arasındaki ana fark, modelin test edildiği veri kaynağının farklı olup olmadığını belirtir.\n\nİç testde [1], model geliştirildiği aynı veri kaynağında test edilir. Bu test, eğitim sırasında kullanılmayan kişilerde yapılır. Örneğin, NHANES A 1999–2000 veri kümesinde modelin performansı iç testle değerlendirilir.\n\nDış doğrulamada [2] ve [3], model farklı veri kaynaklarında test edilir. Bu, modelin genelleme yeteneklerini ölçer. Örneğin, CPSC 2018 veri kümesinde modelin performansı dış doğrulama ile değerlendirilir.\n\nBu farklılıklar, modelin belirli bir veri kümesine özgü performansı ve genelleme yeteneklerini değerlendirmenin yollarını gösterir. Dış doğrulama genellikle daha kapsayıcı ve modelin gerçek dünya performansını daha iyi yansıtır.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "mc_af_S4_DEVICE",
+    "mc_anemia_LR16"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.651
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.646
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.597
+    },
+    {
+     "doc_id": "mc_af_S4_DEVICE",
+     "score": 0.539
+    },
+    {
+     "doc_id": "mc_anemia_LR16",
+     "score": 0.535
+    }
+   ],
+   "words": 97,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.2
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 13,
+   "question": "Karaciğer fibrozisi modelinin kanıt düzeyi nedir?",
+   "route": "llm",
+   "seconds": 18.7,
+   "retries": 0,
+   "raw_answer": "Karaciğer fibrozisi modelinin kanıt düzeyi, ABD ulusal sağlık taraması (NHANES 2021–23) verisinde, eğitimde kullanılmayan kişilerde test edildi. Ancak başka bir ülkenin veya hastane verilerinde henüz test edilmedi [2]. Bu, modelin genelleme yetisinin sınırlı olduğunu gösteriyor.",
+   "final_answer": "Karaciğer fibrozisi modelinin kanıt düzeyi, ABD ulusal sağlık taraması (NHANES 2021–23) verisinde, eğitimde kullanılmayan kişilerde test edildi. Ancak başka bir ülkenin veya hastane verilerinde henüz test edilmedi [1]. Bu, modelin genelleme yetisinin sınırlı olduğunu gösteriyor.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.694
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.686
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.651
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.642
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.636
+    }
+   ],
+   "words": 33,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.09
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 14,
+   "question": "Deneysel modül ne demek?",
+   "route": "llm",
+   "seconds": 22.41,
+   "retries": 0,
+   "raw_answer": "Deneysel modül, kanıtı zayıf olan veya tek bir veri kaynağında test edilmiş analizlerden oluşur [1]. Bu modüller, kanıt düzeyi açısından ana modüllerden daha zayıftır [2]. Deneysel modüllerin sonuçları, ana modüllerle aynı ağırlıkta yorumlanmamalıdır [2].\n\nBu uygulamada kullanılan deneysel modül, teşhis edilmemiş diyabet, kansızlık gibi durumlar için test edilmiştir [3][4][5]. Bu modüller, ABD ulusal sağlık taraması (NHANES) gibi belirli veri kaynaklarında test edilmiş olup, genel bir uygulama için yeterli kanıt sağlamaz. Bu nedenle, deneysel modüllerin sonuçları, genel bir tanı veya tedavi önerisine dayanılamaz [2].",
+   "final_answer": "Deneysel modül, kanıtı zayıf olan veya tek bir veri kaynağında test edilmiş analizlerden oluşur [1]. Bu modüller, kanıt düzeyi açısından ana modüllerden daha zayıftır [2]. Deneysel modüllerin sonuçları, ana modüllerle aynı ağırlıkta yorumlanmamalıdır [2].\n\nBu uygulamada kullanılan deneysel modül, teşhis edilmemiş diyabet, kansızlık gibi durumlar için test edilmiştir [2]. Bu modüller, ABD ulusal sağlık taraması (NHANES) gibi belirli veri kaynaklarında test edilmiş olup, genel bir uygulama için yeterli kanıt sağlamaz. Bu nedenle, deneysel modüllerin sonuçları, genel bir tanı veya tedavi önerisine dayanılamaz [2].\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.689
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.633
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.546
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.545
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.538
+    }
+   ],
+   "words": 78,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.01
+  },
+  {
+   "model": "qwen2.5:7b",
+   "qid": 15,
+   "question": "eGFR nedir?",
+   "route": "llm",
+   "seconds": 31.57,
+   "retries": 0,
+   "raw_answer": "eGFR, estimated glomerular filtration rate (eski filtraasyon kuvveti) anlamına gelir ve bu test, vücudunun kirpiklerinin işleyişini kontrol etmek için kullanılır. Kirpikler, vücudunun kanından zit maddeleri ve ekstra suyu temizlemede rol oynar. eGFR, genellikle kreatinin seviyeleri ve bazen cystatin C seviyeleri kullanılarak hesaplanır. Kreatinin, vücudunun kaslarındaki normal zararlar sonucu ortaya çıkan bir zit madde olup, kirpiklerin işleyişini ölçmek için kullanılır. Ancak, kreatinin seviyeleri, kişinin boyu, ağırlığı, cinsiyeti ve yaşına bağlı olarak değişebilir. Bu nedenle, eGFR hesabında kreatinin seviyelerine ek olarak yaş, ağırlık, boy ve cinsiyet faktörleri de dikkate alınır. eGFR, kirpiklerin kanıdan zit maddeleri temizleme hızını ölçer ve bu değer, kirpik sağlığı hakkında bilgi verir. eGFR, 90-100 arasında ise kirpik hastalığı olma olasılığı düşük, 60-90 arasında ise erken aşamalı kirpik hastalığı olabilir, 15-60 arasında ise kirpik hastalığı olabilir ve 15 altında ise kirpik faaliyeti bozukluğu olabilir. Bu testler genellikle kirpik sağlığı hakkında daha fazla bilgi almak için kullanılır.",
+   "final_answer": "eGFR, estimated glomerular filtration rate (eski filtraasyon kuvveti) anlamına gelir ve bu test, vücudunun kirpiklerinin işleyişini kontrol etmek için kullanılır. Kirpikler, vücudunun kanından zit maddeleri ve ekstra suyu temizlemede rol oynar. eGFR, genellikle kreatinin seviyeleri ve bazen cystatin C seviyeleri kullanılarak hesaplanır. Kreatinin, vücudunun kaslarındaki normal zararlar sonucu ortaya çıkan bir zit madde olup, kirpiklerin işleyişini ölçmek için kullanılır. Ancak, kreatinin seviyeleri, kişinin boyu, ağırlığı, cinsiyeti ve yaşına bağlı olarak değişebilir. Bu nedenle, eGFR hesabında kreatinin seviyelerine ek olarak yaş, ağırlık, boy ve cinsiyet faktörleri de dikkate alınır. eGFR, kirpiklerin kanıdan zit maddeleri temizleme hızını ölçer ve bu değer, kirpik sağlığı hakkında bilgi verir. eGFR, 90-100 arasında ise kirpik hastalığı olma olasılığı düşük, 60-90 arasında ise erken aşamalı kirpik hastalığı olabilir, 15-60 arasında ise kirpik hastalığı olabilir ve 15 altında ise kirpik faaliyeti bozukluğu olabilir. Bu testler genellikle kirpik sağlığı hakkında daha fazla bilgi almak için kullanılır.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": false,
+   "sources": [
+    "mp_test_egfr"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.737
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.722
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.695
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.649
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.643
+    }
+   ],
+   "words": 143,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.6
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 1,
+   "question": "Atriyal fibrilasyon nedir?",
+   "route": "llm",
+   "seconds": 10.23,
+   "retries": 0,
+   "raw_answer": "Atriyal fibrilasyon (AFib) veya AF, en sık görülen kalp ritim bozukluklarından biridir [1, 4]. Kalp ritiminde sorunlar olan aritmilerdir. AFib’de kalp düzensizce atar ve normalden daha hızlı olabilir. Kalbin üst ve alt odaları düzgün çalışmaz, bu da alt odaların yeterince dolmasına veya akciğerlere ve vücuda yeterli kan pompalayamamasına neden olabilir [1, 4]. Bu durum baş dönmesi, yorgunluk ve çarpıntı gibi belirtilere yol açabilir [1]. AFib, kısa süreli epizotlarda veya kalıcı bir durum olarak ortaya çıkabilir [1, 3]. AFib, inme ve diğer kalp rahatsızlıkları riskini artırabilir [1]. AFib’nin nedeni yüksek tansiyon, koroner arter hastalığı, doğuştan kalp kusurları, enfeksiyonlar veya yaşlanma gibi çeşitli faktörler olabilir [2]. AFib tanısı, tıbbi geçmişin değerlendirilmesi, fiziksel muayene, kan testleri, elektrokardiyogram (EKG), ekokardiyogram ve kalp monitörü gibi testlerle konulabilir [5]. Hekiminizle danışabilirsiniz.",
+   "final_answer": "Atriyal fibrilasyon (AFib) veya AF, en sık görülen kalp ritim bozukluklarından biridir [1, 4]. Kalp ritiminde sorunlar olan aritmilerdir. AFib’de kalp düzensizce atar ve normalden daha hızlı olabilir. Kalbin üst ve alt odaları düzgün çalışmaz, bu da alt odaların yeterince dolmasına veya akciğerlere ve vücuda yeterli kan pompalayamamasına neden olabilir [1, 4]. Bu durum baş dönmesi, yorgunluk ve çarpıntı gibi belirtilere yol açabilir [1]. AFib, kısa süreli epizotlarda veya kalıcı bir durum olarak ortaya çıkabilir [1, 3]. AFib, inme ve diğer kalp rahatsızlıkları riskini artırabilir [1]. AFib’nin nedeni yüksek tansiyon, koroner arter hastalığı, doğuştan kalp kusurları, enfeksiyonlar veya yaşlanma gibi çeşitli faktörler olabilir [1]. AFib tanısı, tıbbi geçmişin değerlendirilmesi, fiziksel muayene, kan testleri, elektrokardiyogram (EKG), ekokardiyogram ve kalp monitörü gibi testlerle konulabilir [1]. Hekiminizle danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_af"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_af",
+     "score": 0.809
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.807
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.797
+    },
+    {
+     "doc_id": "cdc_af",
+     "score": 0.796
+    },
+    {
+     "doc_id": "mp_af",
+     "score": 0.75
+    }
+   ],
+   "words": 117,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.08
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 2,
+   "question": "Karaciğer fibrozisi ne demek ve FibroScan ne ölçer?",
+   "route": "llm",
+   "seconds": 5.09,
+   "retries": 0,
+   "raw_answer": "Karaciğer fibrozisi, karaciğerde sertleşme veya doku hasarı anlamına gelir [1, 4]. FibroScan gibi karaciğer elastografisi testleri, karaciğerin sertliğini ölçerek bu durumu değerlendirmeye yardımcı olur [2]. Eşik üstü durumdaysanız, yani FibroScan sonuçlarınız yüksekse, hekiminize danışmanız önerilir [1]. Karaciğer fibrozisi tanısı için karaciğer enzimleri, trombosit ve şeker tahlilleri gibi ek analizler de gerekebilir [5]. Bu testler, karaciğerin fonksiyonunu değerlendirmek ve fibrozisin derecesini belirlemek için kullanılır [2]. Hekiminiz, FibroScan sonuçlarını diğer test sonuçlarıyla birlikte değerlendirerek size daha iyi bir tanı koyabilir [2]. Hekiminize danışabilirsiniz.",
+   "final_answer": "Karaciğer fibrozisi, karaciğerde sertleşme veya doku hasarı anlamına gelir [1, 4]. FibroScan gibi karaciğer elastografisi testleri, karaciğerin sertliğini ölçerek bu durumu değerlendirmeye yardımcı olur [2]. Eşik üstü durumdaysanız, yani FibroScan sonuçlarınız yüksekse, hekiminize danışmanız önerilir [1]. Karaciğer fibrozisi tanısı için karaciğer enzimleri, trombosit ve şeker tahlilleri gibi ek analizler de gerekebilir [3]. Bu testler, karaciğerin fonksiyonunu değerlendirmek ve fibrozisin derecesini belirlemek için kullanılır [2]. Hekiminiz, FibroScan sonuçlarını diğer test sonuçlarıyla birlikte değerlendirerek size daha iyi bir tanı koyabilir [2]. Hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_next_steps",
+    "niddk_nafld_dx",
+    "int_analyses"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.79
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.679
+    },
+    {
+     "doc_id": "niddk_nafld_dx",
+     "score": 0.677
+    },
+    {
+     "doc_id": "niddk_cirrhosis",
+     "score": 0.676
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.673
+    }
+   ],
+   "words": 74,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 6.72
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 3,
+   "question": "Osteoporoz kimlerde daha sık görülür?",
+   "route": "postcheck_fail",
+   "seconds": 7.59,
+   "retries": 0,
+   "raw_answer": "Osteoporoz, kemiklerin zayıflamasına ve kırılganlaşmasına neden olan bir hastalıktır [4]. Bu durum, kemiklerdeki mineral yoğunluğunun ve kemik kütlesinin azalmasıyla ortaya çıkar.\n\nOsteoporoz, özellikle kadınlarda daha sık görülür. Menopoz sonrası kadınlarda, yaş ilerledikçe ve beyaz veya Asyalı olmak üzere belirli etnik gruplarda risk faktörleri daha yüksek olabilir [1]. Ayrıca, ailede osteoporoz öyküsü olanlar, anemi nervoza gibi yeme bozuklukları olanlar, sigara içen, uzun süre alkol kullanan veya hareketsiz kalan kişilerde de risk artabilir [1, 2].\n\nOsteoporoz tanısı genellikle rutin tarama sırasında konulur [3]. Doktorunuz, tıbbi geçmişinizi, kırık öykünüzü ve fiziksel bir muayene yapabilir. Kemik yoğunluğunu ölçmek için bir kemik dansitometri taraması da yapılabilir [3]. Ayrıca, kırık risk değerlendirme anketi ile kırık olasılığınız değerlendirilebilir [3].\n\nOsteoporozun önlenmesinde sağlıklı bir beslenme (özellikle kalsiyum ve D vitamini açısından zengin), düzenli fiziksel aktivite, alkol tüketiminin sınırlandırılması ve sigara içmemek gibi önlemler alınabilir [5]. \n\nBu konuda hekiminize danışabilirsiniz.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "forbidden_phrase"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.726
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.668
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.662
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.644
+    },
+    {
+     "doc_id": "mp_osteoporosis",
+     "score": 0.587
+    }
+   ],
+   "words": 133,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.79
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 4,
+   "question": "HbA1c testi neyi gösterir?",
+   "route": "postcheck_fail",
+   "seconds": 7.49,
+   "retries": 0,
+   "raw_answer": "Hemoglobin A1c (HbA1c) testi, son iki ila üç aydaki ortalama kan şekeri düzeyinizi gösterir [2, 4]. Kan şekeri, yediğiniz yiyeceklerden gelen bir şeker olan glikoza dönüşür [2]. Kırmızı kan hücrelerinizde bulunan hemoglobin adı verilen bir proteine glikoz bağlanır [2, 3]. Kan şekeri yükseldiğinde, daha fazla hemoglobin glikoza bağlanır [2, 3, 4]. HbA1c testi, glikoza bağlanan kırmızı kan hücrelerinin yüzdesini ölçer [2, 3, 4]. [5] Normal bir HbA1c düzeyi 5,7%'den düşüktür. 5,7% ile 6,4% arasında ise prediabet, 6,5% veya daha yüksek ise diyabet anlamına gelir [5]. Bu test, diyabet veya prediabet tanısında ve diyabet yönetiminde kullanılır [3, 4]. Hekiminizle konuşarak sonuçların sizin için ne anlama geldiğini öğrenmelisiniz [5].",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "percent"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.792
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.761
+    },
+    {
+     "doc_id": "niddk_a1c",
+     "score": 0.754
+    },
+    {
+     "doc_id": "mp_test_a1c",
+     "score": 0.747
+    }
+   ],
+   "words": 92,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.06
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 5,
+   "question": "Kronik böbrek hastalığı nedir?",
+   "route": "llm",
+   "seconds": 7.34,
+   "retries": 0,
+   "raw_answer": "Kronik böbrek hastalığı (CKD), böbreklerin kanı filtreleme yeteneğini azaltan ve zamanla ilerleyen bir durumdur [1, 2, 3]. Böbrekler, atık maddelerin ve fazla sıvının vücuttan atılmasını sağlar, aynı zamanda kan basıncını kontrol eder ve hormonlar üretir [2]. CKD’nin yaygın nedenleri diyabet ve yüksek tansiyondur [2, 3].\n\nCKD’nin ilerlemesiyle anemi, enfeksiyonlara yakalanma riski, kan ve idrarda dengesizlikler (yüksek veya düşük kalsiyum, potasyum ve fosfor seviyeleri), iştah kaybı ve depresyon gibi sağlık sorunları ortaya çıkabilir [1]. CKD, kalp hastalığı, felç ve böbrek yetmezliği gibi ciddi komplikasyonlara yol açabilir [1, 3, 5].\n\nBöbrek yetmezliği durumunda, hayatta kalmak için diyaliz veya böbrek nakli gerekebilir [1, 2]. Erken teşhis ve tedavi, CKD’nin ilerlemesini yavaşlatmaya yardımcı olabilir [3, 4]. Hekiminizle konuşarak bu konuda daha fazla bilgi alabilirsiniz.",
+   "final_answer": "Kronik böbrek hastalığı (CKD), böbreklerin kanı filtreleme yeteneğini azaltan ve zamanla ilerleyen bir durumdur [1, 2, 3]. Böbrekler, atık maddelerin ve fazla sıvının vücuttan atılmasını sağlar, aynı zamanda kan basıncını kontrol eder ve hormonlar üretir [2]. CKD’nin yaygın nedenleri diyabet ve yüksek tansiyondur [2, 3].\n\nCKD’nin ilerlemesiyle anemi, enfeksiyonlara yakalanma riski, kan ve idrarda dengesizlikler (yüksek veya düşük kalsiyum, potasyum ve fosfor seviyeleri), iştah kaybı ve depresyon gibi sağlık sorunları ortaya çıkabilir [1]. CKD, kalp hastalığı, felç ve böbrek yetmezliği gibi ciddi komplikasyonlara yol açabilir [1, 3, 5].\n\nBöbrek yetmezliği durumunda, hayatta kalmak için diyaliz veya böbrek nakli gerekebilir [1, 2]. Erken teşhis ve tedavi, CKD’nin ilerlemesini yavaşlatmaya yardımcı olabilir [3, 4]. Hekiminizle konuşarak bu konuda daha fazla bilgi alabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_ckd",
+    "mp_ckd"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.653
+    },
+    {
+     "doc_id": "mp_ckd",
+     "score": 0.648
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.632
+    },
+    {
+     "doc_id": "cdc_ckd",
+     "score": 0.607
+    },
+    {
+     "doc_id": "niddk_ckd",
+     "score": 0.595
+    }
+   ],
+   "words": 109,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 5.75
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 6,
+   "question": "Yüksek tansiyon belirti verir mi?",
+   "route": "llm",
+   "seconds": 6.46,
+   "retries": 0,
+   "raw_answer": "Yüksek tansiyon genellikle belirti vermez, bu nedenle birçok kişi yüksek tansiyonunu bilmez [1]. Yüksek tansiyonun olup olmadığını belirlemenin tek yolu düzenli olarak kan basıncınızı ölçmektir [1, 2]. Kan basıncınızın hangi seviyelerde olduğunu anlamak için [3] ve [4] kaynaklarındaki kategorilere bakabilirsiniz. Yüksek tansiyonun belirtileri şunlardır: göğüs ağrısı, nefes darlığı, sırt ağrısı, uyuşukluk, güçsüzlük, görme değişiklikleri veya konuşma güçlüğü [3]. Yüksek tansiyonunuzun olup olmadığını belirlemek için sağlık hizmeti sağlayıcınızdan düzenli olarak kan basıncı ölçümü yaptırmanız önerilir [4]. Hekiminiz, kan basıncınızı ölçmek için bir manometre, stetoskop veya elektronik sensör ve bir tansiyon ölçüm cihazı kullanacaktır [4]. [5] kaynakta belirtildiği gibi, yüksek tansiyon tanısı koymak için ek testler (şeker, kolesterol, kreatinin, idrar) gerekebilir. Bu konuda hekiminize danışabilirsiniz.",
+   "final_answer": "Yüksek tansiyon genellikle belirti vermez, bu nedenle birçok kişi yüksek tansiyonunu bilmez [1]. Yüksek tansiyonun olup olmadığını belirlemenin tek yolu düzenli olarak kan basıncınızı ölçmektir [1, 2]. Kan basıncınızın hangi seviyelerde olduğunu anlamak için [1] ve [2] kaynaklarındaki kategorilere bakabilirsiniz. Yüksek tansiyonun belirtileri şunlardır: göğüs ağrısı, nefes darlığı, sırt ağrısı, uyuşukluk, güçsüzlük, görme değişiklikleri veya konuşma güçlüğü [1]. Yüksek tansiyonunuzun olup olmadığını belirlemek için sağlık hizmeti sağlayıcınızdan düzenli olarak kan basıncı ölçümü yaptırmanız önerilir [2]. Hekiminiz, kan basıncınızı ölçmek için bir manometre, stetoskop veya elektronik sensör ve bir tansiyon ölçüm cihazı kullanacaktır [2]. [3] kaynakta belirtildiği gibi, yüksek tansiyon tanısı koymak için ek testler (şeker, kolesterol, kreatinin, idrar) gerekebilir. Bu konuda hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "cdc_hbp",
+    "mp_hbp",
+    "int_analyses"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.717
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.702
+    },
+    {
+     "doc_id": "cdc_hbp",
+     "score": 0.679
+    },
+    {
+     "doc_id": "mp_hbp",
+     "score": 0.675
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.658
+    }
+   ],
+   "words": 104,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 10.5
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 7,
+   "question": "Anemi nedir, tam kan sayımı ne işe yarar?",
+   "route": "llm",
+   "seconds": 6.85,
+   "retries": 0,
+   "raw_answer": "Tam kan sayımı (CBC), kan içindeki farklı hücrelerin sayısı ve boyutunu ölçen bir dizi kan testidir [2]. Kırmızı kan hücreleri oksijeni taşır, beyaz kan hücreleri enfeksiyonlarla savaşır ve trombositler kan pıhtılaşmasına yardımcı olur [2]. Tam kan sayımı, enfeksiyonlar, anemi, bağışıklık sistemi bozuklukları ve kan kanserleri gibi durumları izlemek veya teşhis etmek için kullanılabilir [1, 3]. Ayrıca genel sağlık kontrolünde de rutin olarak yapılabilir [3]. Anemi durumunda tam kan sayımı ve biyokimya tahlili gibi ek testler gerekebilir [4]. Tam kan sayımı, bir sağlık uzmanının diğer faktörlerle birlikte, sizin sağlığınız hakkında daha kapsamlı bir değerlendirme yapmasına yardımcı olan bir araçtır [5]. Hekiminizle görüşerek daha fazla bilgi edinebilirsiniz.",
+   "final_answer": "Tam kan sayımı (CBC), kan içindeki farklı hücrelerin sayısı ve boyutunu ölçen bir dizi kan testidir [1]. Kırmızı kan hücreleri oksijeni taşır, beyaz kan hücreleri enfeksiyonlarla savaşır ve trombositler kan pıhtılaşmasına yardımcı olur [1]. Tam kan sayımı, enfeksiyonlar, anemi, bağışıklık sistemi bozuklukları ve kan kanserleri gibi durumları izlemek veya teşhis etmek için kullanılabilir [1, 3]. Ayrıca genel sağlık kontrolünde de rutin olarak yapılabilir [1]. Anemi durumunda tam kan sayımı ve biyokimya tahlili gibi ek testler gerekebilir [2]. Tam kan sayımı, bir sağlık uzmanının diğer faktörlerle birlikte, sizin sağlığınız hakkında daha kapsamlı bir değerlendirme yapmasına yardımcı olan bir araçtır [1]. Hekiminizle görüşerek daha fazla bilgi edinebilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_test_cbc",
+    "int_analyses"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.748
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.702
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.699
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.685
+    },
+    {
+     "doc_id": "mp_test_cbc",
+     "score": 0.676
+    }
+   ],
+   "words": 98,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.74
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 8,
+   "question": "KOAH nedir ve spirometri testi nasıl yapılır?",
+   "route": "llm",
+   "seconds": 6.39,
+   "retries": 0,
+   "raw_answer": "KOAH (kronik akciğer hastalığı), akciğerlerin kronik inflamasyonu sonucu ortaya çıkan bir hastalıktır [2]. Tanı koymak için genellikle solunum testi olan spirometri kullanılır [1, 2]. Spirometri testinde, akciğerlerinizde ne kadar hava geçtiği ölçülür [3]. Test sırasında, burun inleyen bir klips takılır ve ağzınızla bir cihazın içine nefes vermeniz istenir [4]. Bazen, hava yollarınızı açan bir ilaç da verilebilir ve ardından tekrar nefes vererek ne kadar hava üretebildiğiniz ölçülür [4]. Spirometri sonuçlarınız, KOAH'ın \"eşik üstü\" veya \"eşik altı\" araştırma sınıflandırmasına göre hekiminiz tarafından değerlendirilir [3]. Bu sınıflandırma, KOAH'ınızın şiddetini belirlemeye yardımcı olur [3]. Hekiminiz, spirometri sonuçlarınıza göre size uygun tedavi planını oluşturacaktır [3]. Bu konuda hekiminize danışabilirsiniz.",
+   "final_answer": "KOAH (kronik akciğer hastalığı), akciğerlerin kronik inflamasyonu sonucu ortaya çıkan bir hastalıktır [1]. Tanı koymak için genellikle solunum testi olan spirometri kullanılır [1, 2]. Spirometri testinde, akciğerlerinizde ne kadar hava geçtiği ölçülür [2]. Test sırasında, burun inleyen bir klips takılır ve ağzınızla bir cihazın içine nefes vermeniz istenir [3]. Bazen, hava yollarınızı açan bir ilaç da verilebilir ve ardından tekrar nefes vererek ne kadar hava üretebildiğiniz ölçülür [3]. Spirometri sonuçlarınız, KOAH'ın \"eşik üstü\" veya \"eşik altı\" araştırma sınıflandırmasına göre hekiminiz tarafından değerlendirilir [2]. Bu sınıflandırma, KOAH'ınızın şiddetini belirlemeye yardımcı olur [2]. Hekiminiz, spirometri sonuçlarınıza göre size uygun tedavi planını oluşturacaktır [2]. Bu konuda hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_analyses",
+    "int_next_steps",
+    "mp_test_lung"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "cdc_copd",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_analyses",
+     "score": 0.776
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.734
+    },
+    {
+     "doc_id": "mp_test_lung",
+     "score": 0.697
+    },
+    {
+     "doc_id": "mc_copd_S4_DEVICE",
+     "score": 0.696
+    }
+   ],
+   "words": 98,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.44
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 9,
+   "question": "Koroner arter hastalığı nedir?",
+   "route": "postcheck_fail",
+   "seconds": 11.83,
+   "retries": 0,
+   "raw_answer": "Koroner arter hastalığı (CAD), Amerika Birleşik Devletleri’nde en sık görülen kalp hastalığıdır ve erkekler ve kadınlar için ölümün başlıca nedenlerinden biridir [1, 2, 4]. Bu hastalık, kalbin kasına kan ve oksijen taşıyan koroner arterleri etkiler [1, 2]. Arterler hasar gördüğünde veya hastalığa yakalandığında, kalp ihtiyaç duyduğu kanı alamaz [1]. CAD, zamanla, arter duvarlarına plak adı verilen bir madde birikmesiyle gelişir [3]. Bu plak, yağ, kolesterol, kalsiyum ve kanınızdaki diğer maddelerden oluşur [3]. Plak birikimi, arterleri daraltır ve kalp kasına kan akışını azaltır [3]. Bu durum, kalbin düzgün çalışmasını engelleyebilir [3]. CAD, büyük bir koroner arterin %50 veya daha fazlası daralmasıyla (obstrüktif CAD) veya daha az daralmasıyla (nonobstrüktif CAD) veya küçük kalp damarlarını etkileyen koroner mikrodamarsal hastalığına (kadınlarda daha yaygın) neden olabilir [5]. Hekiminize danışabilirsiniz.",
+   "final_answer": "Bu soruya kurallara uygun ve kaynaklarla doğrulanabilir bir yanıt üretemedim. Bu konuda kaynaklarımda bilgi yok; hekiminize danışın.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [
+    "percent"
+   ],
+   "cited": true,
+   "sources": [],
+   "retrieval": [
+    {
+     "doc_id": "mp_cad",
+     "score": 0.712
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.672
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.671
+    },
+    {
+     "doc_id": "cdc_cad",
+     "score": 0.664
+    },
+    {
+     "doc_id": "mp_cad",
+     "score": 0.659
+    }
+   ],
+   "words": 113,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.14
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 10,
+   "question": "Eşik üstü sonucu ne anlama gelir?",
+   "route": "llm",
+   "seconds": 5.08,
+   "retries": 0,
+   "raw_answer": "Eşik üstü bir sonuç, modelin araştırmada sabitlenmiş eşiğine göre sınıflandırılması anlamına gelir [1]. Bu, ileri değerlendirme önerilen bir durumdur [3]. Eşik değeri 0.1383250919'dur [4]. Eşik üstü bir sonuç, bir hekimle değerlendirilmesi önerilir [2]. Bu sonuç hastalığı dışlamaz; belirtiniz veya endişeniz varsa hekiminize danışın [2]. Hekiminiz tansiyonunuzu yeniden ölçebilir [5]. Hekiminize danışabilirsiniz.",
+   "final_answer": "Eşik üstü bir sonuç, modelin araştırmada sabitlenmiş eşiğine göre sınıflandırılması anlamına gelir [1]. Bu, ileri değerlendirme önerilen bir durumdur [1]. Eşik değeri 0.1383250919'dur [3]. Eşik üstü bir sonuç, bir hekimle değerlendirilmesi önerilir [2]. Bu sonuç hastalığı dışlamaz; belirtiniz veya endişeniz varsa hekiminize danışın [2]. Hekiminiz tansiyonunuzu yeniden ölçebilir [2]. Hekiminize danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "int_next_steps",
+    "mc_ckd_B"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.669
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.635
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.551
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.535
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.535
+    }
+   ],
+   "words": 45,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.66
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 11,
+   "question": "\"Sonuç üretilmedi\" neden olur?",
+   "route": "llm",
+   "seconds": 2.68,
+   "retries": 0,
+   "raw_answer": "Sonuç üretilmedi, eksik veya belirsiz bilgi nedeniyle [3]. Bu durumda, eksik bilgileri tamamlayabilir veya hekiminize danışabilirsiniz [3].",
+   "final_answer": "Sonuç üretilmedi, eksik veya belirsiz bilgi nedeniyle [1]. Bu durumda, eksik bilgileri tamamlayabilir veya hekiminize danışabilirsiniz [1].\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_next_steps"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.693
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.573
+    },
+    {
+     "doc_id": "int_next_steps",
+     "score": 0.567
+    },
+    {
+     "doc_id": "mc_hf_S2_BASIC_LAB",
+     "score": 0.493
+    },
+    {
+     "doc_id": "mc_ckd_B",
+     "score": 0.49
+    }
+   ],
+   "words": 15,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 2.88
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 12,
+   "question": "İç test ile dış doğrulama arasındaki fark nedir?",
+   "route": "llm",
+   "seconds": 4.53,
+   "retries": 0,
+   "raw_answer": "İç test, modelin geliştirildiği veri kaynağında bir kez test edildiğini gösterir [3]. Dış doğrulama ise modelin farklı bir veri kaynağında test edildiğini gösterir [1, 2]. Model kartında, Atriyal Fibrilasyon (AF) için hem iç test hem de dış doğrulama sonuçları yer almaktadır. Dış doğrulama testleri, PTB-XL, Challenge 2021, CPSC 2018, CPSC-Extra ve Chapman-Shaoxing gibi farklı veri havuzlarında gerçekleştirilmiştir [4]. Bu testlerde ΔAUC değerleri farklılık göstermektedir. [4]",
+   "final_answer": "İç test, modelin geliştirildiği veri kaynağında bir kez test edildiğini gösterir [1]. Dış doğrulama ise modelin farklı bir veri kaynağında test edildiğini gösterir [1, 2]. Model kartında, Atriyal Fibrilasyon (AF) için hem iç test hem de dış doğrulama sonuçları yer almaktadır. Dış doğrulama testleri, PTB-XL, Challenge 2021, CPSC 2018, CPSC-Extra ve Chapman-Shaoxing gibi farklı veri havuzlarında gerçekleştirilmiştir [2]. Bu testlerde ΔAUC değerleri farklılık göstermektedir. [2]\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_glossary",
+    "mc_af_S4_DEVICE"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.651
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.646
+    },
+    {
+     "doc_id": "int_glossary",
+     "score": 0.597
+    },
+    {
+     "doc_id": "mc_af_S4_DEVICE",
+     "score": 0.539
+    },
+    {
+     "doc_id": "mc_anemia_LR16",
+     "score": 0.535
+    }
+   ],
+   "words": 62,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 7.71
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 13,
+   "question": "Karaciğer fibrozisi modelinin kanıt düzeyi nedir?",
+   "route": "llm",
+   "seconds": 5.53,
+   "retries": 0,
+   "raw_answer": "Bu model, karaciğer fibrozisi (LSM ≥ 8 kPa) için tasarlanmıştır [1]. İç testler, ABD ulusal sağlık taraması (NHANES) 2021-23 verilerinde, eğitimde kullanılmayan kişilerde test edilmiştir [2]. Modelin kanıt düzeyi, test AUC'si 0,794'e sahiptir [3]. Bu, modelin ön tarama sıralayıcısı olarak kullanıldığını ve bağımsız dış doğrulama ve zamansal doğrulama olmadığını gösterir [2, 3]. Model, FIB-4 ve NFS gibi temel ölçümlere göre küçük iyileştirmeler göstermiştir [4], ancak bu ölçümler hedef için kalibre edilmemiştir [3]. Bu nedenle, sonuçlar kesin bir tanı koymak yerine, ileri değerlendirme için bir sıralayıcı olarak kullanılmalıdır [5]. Hekiminizle danışabilirsiniz.",
+   "final_answer": "Bu model, karaciğer fibrozisi (LSM ≥ 8 kPa) için tasarlanmıştır [1]. İç testler, ABD ulusal sağlık taraması (NHANES) 2021-23 verilerinde, eğitimde kullanılmayan kişilerde test edilmiştir [2]. Modelin kanıt düzeyi, test AUC'si 0,794'e sahiptir [1]. Bu, modelin ön tarama sıralayıcısı olarak kullanıldığını ve bağımsız dış doğrulama ve zamansal doğrulama olmadığını gösterir [2, 3]. Model, FIB-4 ve NFS gibi temel ölçümlere göre küçük iyileştirmeler göstermiştir [1], ancak bu ölçümler hedef için kalibre edilmemiştir [1]. Bu nedenle, sonuçlar kesin bir tanı koymak yerine, ileri değerlendirme için bir sıralayıcı olarak kullanılmalıdır [1]. Hekiminizle danışabilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mc_fibrosis_final",
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.694
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.686
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.651
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.642
+    },
+    {
+     "doc_id": "mc_fibrosis_final",
+     "score": 0.636
+    }
+   ],
+   "words": 81,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.72
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 14,
+   "question": "Deneysel modül ne demek?",
+   "route": "llm",
+   "seconds": 5.16,
+   "retries": 0,
+   "raw_answer": "Deneysel modül, kanıt düzeyi sınırlı olan ve yalnızca araştırma amaçlı kullanılan bir modüldür [2]. Bu modüller, genellikle ABD Ulusal Sağlık Taraması (NHANES) gibi tek bir veri kaynağında test edilmiş analizlerdir [3, 4]. Sonuçları ana modüllerle aynı ağırlıkta değerlendirilmemelidir [2]. Bu uygulamanın \"Teşhis Edilmemiş Diyabet\", \"Anemi (kansızlık)\" modülleri deneysel sınıflandırmaya sahiptir [3, 4]. Hekiminizle görüşebilirsiniz.",
+   "final_answer": "Deneysel modül, kanıt düzeyi sınırlı olan ve yalnızca araştırma amaçlı kullanılan bir modüldür [1]. Bu modüller, genellikle ABD Ulusal Sağlık Taraması (NHANES) gibi tek bir veri kaynağında test edilmiş analizlerdir [3, 4]. Sonuçları ana modüllerle aynı ağırlıkta değerlendirilmemelidir [1]. Bu uygulamanın \"Teşhis Edilmemiş Diyabet\", \"Anemi (kansızlık)\" modülleri deneysel sınıflandırmaya sahiptir [3, 4]. Hekiminizle görüşebilirsiniz.\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "int_evidence"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "int_glossary",
+     "score": 0.689
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.633
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.546
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.545
+    },
+    {
+     "doc_id": "int_evidence",
+     "score": 0.538
+    }
+   ],
+   "words": 48,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 9.43
+  },
+  {
+   "model": "gemma3:4b",
+   "qid": 15,
+   "question": "eGFR nedir?",
+   "route": "llm",
+   "seconds": 5.73,
+   "retries": 0,
+   "raw_answer": "eGFR, tahmin edilen glomerüler filtrasyon oranını ifade eder [1, 2]. Bu test, böbreklerinizi ne kadar iyi çalıştığını değerlendirmek için kullanılır. Böbrekler, atık ürünleri ve fazla suyu kana karıştırdıktan sonra bunları idrarla (öksürük) atarlar. eGFR, böbreklerinizi değerlendirmek için kullanılan bir ölçüdür [1, 2].\n\neGFR, yaş, kilo, boy ve cinsiyet gibi faktörleri içeren bir matematiksel formül kullanılarak hesaplanır [2]. eGFR sonuçları, bir dakikada böbreklerin ne kadar kan filtrelediğini gösteren bir sayıdır [3].\n\neGFR sonuçlarınızın ne anlama geldiğini doktorunuzdan açıklamasını isteyin [3]. eGFR, mükemmel bir test değildir ve her zaman böbrek hasarını yansıtmayabilir. Ayrıca, hasar olmasa bile normalden sapma gösterebilir [3].",
+   "final_answer": "eGFR, tahmin edilen glomerüler filtrasyon oranını ifade eder [1, 2]. Bu test, böbreklerinizi ne kadar iyi çalıştığını değerlendirmek için kullanılır. Böbrekler, atık ürünleri ve fazla suyu kana karıştırdıktan sonra bunları idrarla (öksürük) atarlar. eGFR, böbreklerinizi değerlendirmek için kullanılan bir ölçüdür [1, 2].\n\neGFR, yaş, kilo, boy ve cinsiyet gibi faktörleri içeren bir matematiksel formül kullanılarak hesaplanır [1]. eGFR sonuçları, bir dakikada böbreklerin ne kadar kan filtrelediğini gösteren bir sayıdır [1].\n\neGFR sonuçlarınızın ne anlama geldiğini doktorunuzdan açıklamasını isteyin [1]. eGFR, mükemmel bir test değildir ve her zaman böbrek hasarını yansıtmayabilir. Ayrıca, hasar olmasa bile normalden sapma gösterebilir [1].\n\nAraştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+   "violations": [],
+   "cited": true,
+   "sources": [
+    "mp_test_egfr"
+   ],
+   "retrieval": [
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.737
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.722
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.695
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.649
+    },
+    {
+     "doc_id": "mp_test_egfr",
+     "score": 0.643
+    }
+   ],
+   "words": 90,
+   "en_stopword_pct": 0.0,
+   "non_latin_chars": 0,
+   "tr_char_pct": 8.71
+  }
+ ]
+}

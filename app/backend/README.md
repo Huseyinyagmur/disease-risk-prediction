@@ -39,6 +39,7 @@ dışıdır ve `/health`'te listelenir.
 | `POST /predict` | `{"fields": {...}}` → hastalık başına sonuç (`OK` / `ABSTAIN` / `NOT_APPLICABLE`) |
 | `POST /eligibility` | (Phase XLV) aynı gövde → her app_visible model için `READY` / `MISSING` / `OUT_OF_SCOPE` / `ABSTAIN`, eksik alanlar, gerekçe, hedef-tanımlayan girdi uyarıları; alan hataları 422 yerine `field_errors` listesinde. **Model çalıştırmaz** (`/predict` ile ortak `Service.precheck`) |
 | `POST /ecg/af` | multipart: `header_file` (.hea), `signal_file` (.dat/.mat), `age_years`, `sex` → kilitli AF-ECGDELI-OCTAVE-v1 → af_S4_DEVICE (60 sn zaman aşımı) |
+| `POST /assistant/ask` | (Phase XLVIII) `{"question": …, "results": [{disease_key, outcome, missing_fields}]}` → yerel açıklama asistanı (Ollama 127.0.0.1:11434 + RAG); yanıt, kaynaklar, uyarı. Ollama yoksa 503; `/health > assistant`'ta gerekçe. Ayrıntı: `app/docs/assistant.md` |
 
 Alan değeri doğrudan (`"age_years": 55`) veya birimle (`"glucose_fasting_mgdl": {"value": 5.6, "unit": "mmol/L"}`)
 verilir. Bilinmeyen alan, sayısal olmayan değer, desteklenmeyen birim, makul aralık dışı değer, tutarsız tansiyon/

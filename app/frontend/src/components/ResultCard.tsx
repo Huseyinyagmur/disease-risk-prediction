@@ -19,6 +19,19 @@ export function decisionText(r: ModelResult, schema: Schema | null): { text: str
 
 const isMissingReason = (x: string) => x.startsWith('eksik zorunlu alan');
 
+/** Phase XLVIII: AF formdan (/predict) EKG'siz -> "EKG kaydı gerekiyor" (yaş kapsam dışı vb. NOT_APPLICABLE metni değişmez).
+ * Yalnız sunum; durum kodu ve gerekçe sunucudan gelir. Önek metni app_config > ui.text_tr. */
+export function needsEcg(r: ModelResult, schema: Schema | null): boolean {
+  const pre = schema?.ui?.text_tr.ecg_required_reason_prefix;
+  return r.model_id === 'af_S4_DEVICE' && r.status === 'NOT_APPLICABLE' && !!pre && r.reasons.some((x) => x.startsWith(pre));
+}
+
+/** Phase XLVIII: "yapısal boşluk …" notu (osteo age_last_period) yalnız "Teknik ayrıntı" içinde görünür. */
+const isTechOnlyReason = (schema: Schema | null, x: string) => {
+  const pre = schema?.ui?.text_tr.structural_blank_prefix;
+  return !!pre && x.startsWith(pre);
+};
+
 interface Props {
   r: ModelResult;
   info?: ModelInfo;
@@ -29,8 +42,10 @@ interface Props {
 
 export function ResultCard({ r, info, schema, experimental, onEcg }: Props) {
   const d = decisionText(r, schema);
+  const ecgNeeded = needsEcg(r, schema);
+  if (ecgNeeded) d.text = t(schema, 'ecg_required');
   const outcome = outcomeOf(r);
-  const reasons = r.reasons.filter((x) => !isMissingReason(x)).map((x) => humanize(schema, x));
+  const reasons = r.reasons.filter((x) => !isMissingReason(x) && !isTechOnlyReason(schema, x)).map((x) => humanize(schema, x));
   const evPlain = schema?.ui?.evidence_plain_tr[r.model_id];
   return (
     <article data-testid={`result-${r.model_id}`} data-status={r.status} data-class={r.decision?.research_class ?? ''}
@@ -42,7 +57,7 @@ export function ResultCard({ r, info, schema, experimental, onEcg }: Props) {
 
       <div className={`mb-2 rounded border px-3 py-2 ${d.cls}`} data-testid="decision">
         <p className="text-sm font-semibold">{d.text}</p>
-        {r.decision && <p className="text-xs">{r.decision.label_tr}. {t(schema, 'no_probability')}</p>}
+        {r.decision && <p className="text-xs" data-testid="decision-note">{t(schema, 'decision_note')}</p>}
       </div>
 
       <div className="mb-2 rounded border border-indigo-200 bg-indigo-50 px-3 py-2 text-indigo-950" data-testid="next-step">
@@ -58,7 +73,7 @@ export function ResultCard({ r, info, schema, experimental, onEcg }: Props) {
 
       {r.status !== 'OK' && (reasons.length > 0 || r.missing_fields.length > 0) && (
         <div className="mb-2 text-xs" data-testid="reasons">
-          <p className="font-medium">{r.status === 'ABSTAIN' ? t(schema, 'reasons_abstain') : t(schema, 'reasons_na')}</p>
+          <p className="font-medium">{r.status === 'ABSTAIN' ? t(schema, 'reasons_abstain') : ecgNeeded ? t(schema, 'reasons_needed') : t(schema, 'reasons_na')}</p>
           {reasons.length > 0 && <ul className="list-disc pl-5">{reasons.map((x) => <li key={x}>{x}</li>)}</ul>}
           {r.missing_fields.length > 0 && (
             <p className="mt-1">{t(schema, 'missing_list', { x: r.missing_fields.map((f) => fieldLabel(schema, f)).join(', ') })}</p>

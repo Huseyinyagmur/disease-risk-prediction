@@ -4,3 +4,10 @@
 *.mat binary
 *.hea -text
 *.png binary
+# Phase XLVIII: asistan bilgi tabanı/indeks ve kilitli değerlendirme dosyaları SHA256 ile doğrulanır (satır sonu dönüşümü yok)
+*.f32 binary
+app/backend/assistant/kb/** -text
+app/backend/assistant/assistant_lock.json -text
+app/backend/assistant/assistant_config.json -text
+phase_xlviii/eval/*.json -text
+phase_xlviii/eval/*.sha256 -text

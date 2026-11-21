@@ -1,0 +1,7 @@
+c62df36c43808e03d9aea783731e6d906b48c8621d8806a9fe0b2363aae95923  phase_xlviii/eval/emergency_v2_questions.json
+49a4bf5faed363adc7205e877d9e08b82d4623515e86e965c0b262d15b703765  app/backend/assistant/assistant_config.json
+ab3b74f382bb47dcc81dcc2e7ac637f48ca22ef1f77a0f34563999413b8f05c0  app/backend/healthrisk_api/assistant/guard.py
+7eeb1b7e1d72b42ff8aada022fbf238204ec11bd0a3d3c69b5ab3f3ade465e8f  app/backend/healthrisk_api/assistant/engine.py
+31eb93dfed1a703bf1da5a2f9ce4626962b45955b9da8822e9d6700fef28e5ce  app/backend/assistant/assistant_lock.json
+4864ad06cdf00622dc6229eee766f27206488aaec57b9674d4640791985bb555  phase_xlviii/scripts/run_emergency_v2.py
+# kilit: 2026-11-21T13:11:51Z — çalıştırılmadan önce

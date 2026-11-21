@@ -27,8 +27,9 @@ Sürüm: 0.1.0 · OpenAPI 3.1.0 · makine tarafından okunur şema: [`openapi.js
 | `POST /eligibility` | canlı panel: model başına `READY` / `MISSING` / `OUT_OF_SCOPE` / `ABSTAIN`; **model çalıştırmaz** | 200, 422 (gövde biçimi) |
 | `POST /predict` | hastalık başına sonuç: `OK` / `ABSTAIN` / `NOT_APPLICABLE` | 200, 422 |
 | `POST /ecg/af` | multipart EKG (`header_file`, `signal_file`, `age_years`, `sex`) → ilk 10 sn → kilitli AF-ECGDELI-OCTAVE-v1 → `af_S4_DEVICE` | 200, 413 (> 2 MB), 422, 429 (pipeline meşgul) |
+| `POST /assistant/ask` | (Phase XLVIII) açıklama asistanı: soru + isteğe bağlı sonuç **etiketleri** → ön filtre → RAG → yerel LLM (Ollama, 127.0.0.1) → yanıt + kaynaklar + uyarı. Ayrıntı: [assistant.md](assistant.md) | 200, 422, 429 (meşgul), 503 (asistan devre dışı) |
 
-OpenAPI'deki yollar: `/ecg/af`, `/eligibility`, `/health`, `/models`, `/predict`, `/schema`.
+OpenAPI'deki yollar: `/assistant/ask` (Phase XLVIII), `/ecg/af`, `/eligibility`, `/health`, `/models`, `/predict`, `/schema`. `GET /health` Phase XLVIII'den itibaren `assistant` anahtarı (etkin mi, gerekçe, kilitli model digest'leri, anonim rota sayaçları) içerir; genel `status` değerini etkilemez.
 
 ## Akış (/predict)
 

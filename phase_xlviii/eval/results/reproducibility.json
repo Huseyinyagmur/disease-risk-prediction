@@ -1,0 +1,48 @@
+{
+ "n": 67,
+ "same_decision": 66,
+ "same_route": 66,
+ "identical_text": 50,
+ "llm_calls": 36,
+ "identical_text_llm": 19,
+ "decision_changes": [
+  [
+   "G2-04",
+   true,
+   false
+  ]
+ ],
+ "run2_by_group": {
+  "G1": "14/16",
+  "G2": "9/10",
+  "G3": "9/10",
+  "G4": "8/10",
+  "G5": "10/10",
+  "G6": "11/11"
+ },
+ "run2_total": 61,
+ "timing_run1_all": {
+  "n": 67,
+  "mean": 2.39,
+  "median": 1.86,
+  "max": 7.59
+ },
+ "timing_run1_llm": {
+  "n": 36,
+  "mean": 4.41,
+  "median": 4.25,
+  "max": 7.59
+ },
+ "timing_run1_fixed": {
+  "n": 31,
+  "mean": 0.04,
+  "median": 0.0,
+  "max": 0.36
+ },
+ "timing_run2_llm": {
+  "n": 36,
+  "mean": 4.79,
+  "median": 4.92,
+  "max": 7.18
+ }
+}

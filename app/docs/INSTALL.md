@@ -132,6 +132,13 @@ temiz klonda AF'yi etkinleştirmez. SHA uyuşmazsa AF bilerek çalışmaz (donmu
 - Doğrulama: `GET /health` → `af_pipeline.enabled = true`; panelde AF satırı "Eksik: EKG kaydı"; arayüzde "EKG ile AF
   analizi" → `app/frontend/public/samples/00691_hr.hea` + `.dat` (PTB-XL, AF). Süre makine yüküne bağlı ≈ 7–30 sn.
 
+## 4b. Açıklama asistanı (Phase XLVIII, isteğe bağlı) [bu makinede doğrulandı]
+
+Ollama'yı kurun (0.40.16 ile denendi; yalnız `127.0.0.1:11434`), sonra `ollama pull gemma3:4b` ve `ollama pull bge-m3`
+(≈ 4,6 GB). Digest'ler `app/backend/assistant/assistant_lock.json` ile aynı olmalıdır; değilse veya Ollama çalışmıyorsa
+yalnız asistan devre dışı kalır (`GET /health > assistant.reason`), uygulamanın geri kalanı etkilenmez. Bilgi tabanı ve
+indeks depodadır; yeniden üretim ve atıf: `app/backend/assistant/README.md`; kullanım: [assistant.md](assistant.md).
+
 ## 5. Testler
 
 | paket | komut | gereksinim | durum |
@@ -144,8 +151,12 @@ temiz klonda AF'yi etkinleştirmez. SHA uyuşmazsa AF bilerek çalışmaz (donmu
 
 Yalnız depodaki dosyalarla çalışan testler için: `-m "not slow and not requires_research_tree"`.
 
-`PW_OUT` verilmezse Playwright raporları `phase_xlv/results` altına yazılır; proje kuralı gereği her fazda kendi klasörünü
-verin.
+`PW_OUT` verilmezse Playwright raporları `phase_xlviii/results/playwright` altına yazılır (Phase XLVIII; ekran görüntüsü, axe ve
+zamanlama çıktılarının varsayılanları da `phase_xlviii/`); proje kuralı gereği her fazda kendi klasörünü verin.
+
+Asistan testleri (Phase XLVIII): backend `tests/test_phase48_assistant.py` (Ollama gerektirmeyenler sahte Ollama ile; gerçek
+Ollama testi `ollama` işaretli, yoksa SKIP), Vitest `src/components/AssistantPanel.test.tsx`, Playwright `e2e/assistant.spec.ts`
+(asistan devre dışıysa gerekçeli SKIP).
 
 ## 6. Sık hatalar
 

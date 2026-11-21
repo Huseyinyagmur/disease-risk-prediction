@@ -1,0 +1,38 @@
+{
+ "llama3:latest": {
+  "n": 15,
+  "mean_seconds": 28.33,
+  "max_seconds": 36.25,
+  "llm_route": 9,
+  "postcheck_fail": 6,
+  "no_source": 0,
+  "cited": 9,
+  "mean_en_stopword_pct": 0.17,
+  "answers_with_non_latin": 0,
+  "mean_tr_char_pct": 8.4
+ },
+ "qwen2.5:7b": {
+  "n": 15,
+  "mean_seconds": 25.72,
+  "max_seconds": 37.95,
+  "llm_route": 15,
+  "postcheck_fail": 0,
+  "no_source": 0,
+  "cited": 9,
+  "mean_en_stopword_pct": 0.13,
+  "answers_with_non_latin": 1,
+  "mean_tr_char_pct": 6.64
+ },
+ "gemma3:4b": {
+  "n": 15,
+  "mean_seconds": 6.53,
+  "max_seconds": 11.83,
+  "llm_route": 12,
+  "postcheck_fail": 3,
+  "no_source": 0,
+  "cited": 15,
+  "mean_en_stopword_pct": 0.0,
+  "answers_with_non_latin": 0,
+  "mean_tr_char_pct": 7.89
+ }
+}

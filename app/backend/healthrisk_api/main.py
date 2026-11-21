@@ -7,12 +7,12 @@ import ipaddress
 import logging
 import threading
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from . import __version__
@@ -22,7 +22,7 @@ from .validation import ValidationError422
 
 _SERVICE: Optional[Service] = None
 _LOG = logging.getLogger('healthrisk_api')
-KNOWN_PATHS = {'/health', '/models', '/schema', '/predict', '/eligibility', '/ecg/af'}
+KNOWN_PATHS = {'/health', '/models', '/schema', '/predict', '/eligibility', '/ecg/af', '/assistant/ask'}  # + Phase XLVIII
 
 
 def get_service() -> Service:
@@ -34,6 +34,26 @@ def get_service() -> Service:
 
 def disclaimer() -> str:
     return get_service().disclaimer
+
+
+_ASSISTANT = None
+
+
+def get_assistant():
+    """Phase XLVIII: açıklama asistanı (tembel kurulum). Kurulamazsa None; uygulamanın geri kalanı etkilenmez."""
+    global _ASSISTANT
+    if _ASSISTANT is None:
+        from .assistant import Assistant
+        svc = get_service()
+        fui = svc.config['form'].get('field_ui_tr', {})
+
+        def field_label(name):
+            if name in fui:
+                return fui[name]['label']
+            f = svc.schema['fields'].get(name)
+            return f['label_tr'] if f else svc.config['form']['virtual_field_labels_tr'].get(name)
+        _ASSISTANT = Assistant(svc.disclaimer, svc.config['ui']['disease_names_tr'], field_label)
+    return _ASSISTANT
 
 
 class _Stats:
@@ -116,6 +136,10 @@ def health():
     h = get_service().health()
     h['request_stats'] = STATS.snapshot()
     h['privacy'] = get_service().config['privacy']['policy']
+    try:
+        h['assistant'] = get_assistant().status()          # Phase XLVIII: genel 'status'u etkilemez
+    except Exception as ex:                                 # yapılandırma hatası: yalnız tür
+        h['assistant'] = dict(enabled=False, reason=f'asistan kurulamadı: {type(ex).__name__}')
     return _wrap(h)
 
 
@@ -171,3 +195,39 @@ async def ecg_af(header_file: UploadFile = File(..., description='WFDB başlığ
     r['pipeline']['features_ms'] = feats
     return _wrap(dict(result=r, clinical_probability_eligibility=False,
                       note='AF modeli: donmuş model + kilitli pipeline; karar "araştırma sınıflaması"dır.'))
+
+
+# ---------------------------------------------------------------- Phase XLVIII: açıklama asistanı
+class ResultLabel(BaseModel):
+    """Oturumdaki sonuç ETİKETİ (kapalı sözlük). Ham sağlık değeri alanı yoktur; bilinmeyen anahtarlar yok sayılır."""
+    model_config = ConfigDict(extra='ignore')
+    disease_key: str = Field(max_length=40)
+    outcome: str = Field(max_length=20)
+    missing_fields: List[str] = Field(default_factory=list, max_length=40)
+
+
+class AskRequest(BaseModel):
+    model_config = ConfigDict(extra='ignore')              # ör. 'fields' gönderilse bile bağlama girmez
+    question: str = Field(min_length=1, max_length=2000)
+    results: List[ResultLabel] = Field(default_factory=list, max_length=40)
+
+
+@app.post('/assistant/ask')
+def assistant_ask(req: AskRequest):
+    """Soru → güvenlik ön filtresi → RAG → yerel LLM (127.0.0.1:11434) → yanıt + kaynaklar + sabit uyarı.
+    Soru/yanıt loglanmaz, saklanmaz. Ollama yoksa 503 (gerekçe /health > assistant)."""
+    from .assistant import AssistantBusy, AssistantUnavailable
+    try:
+        a = get_assistant()
+    except Exception as ex:
+        raise HTTPException(status_code=503, detail=f'asistan kurulamadı: {type(ex).__name__}')
+    try:
+        r = a.ask(req.question, [x.model_dump() for x in req.results])
+    except AssistantUnavailable as ex:
+        raise HTTPException(status_code=503, detail=f'asistan devre dışı: {ex}')
+    except AssistantBusy:
+        raise HTTPException(status_code=429, detail='asistan meşgul; birkaç saniye sonra yeniden deneyin')
+    r.pop('retrieval', None)                                 # iç ayrıntı: yalnız değerlendirme betiklerinde
+    r.pop('violations', None)
+    r['clinical_probability_eligibility'] = False
+    return _wrap(r)

@@ -1,9 +1,9 @@
 // @screenshots: faz raporu için ekran görüntüleri (sentetik profiller, açık PhysioNet örnek EKG). Phase XLVII: sihirbaz akışı;
-// masaüstü (1440), tablet (768) ve mobil (375) genişlikleri. Çıktı: SHOTS_DIR (varsayılan phase_xlvii/screenshots).
+// masaüstü (1440), tablet (768) ve mobil (375) genişlikleri. Çıktı: SHOTS_DIR (varsayılan phase_xlviii/screenshots; Phase XLVIII'de güncellendi).
 import { expect, test, type Page } from '@playwright/test';
 import { expectPanel, gotoStep, loadEcgSample, loadProfile, mainNav, openEcg, openForm, runEcg, submit } from './helpers';
 
-const DIR = process.env.SHOTS_DIR ?? '../../phase_xlvii/screenshots';
+const DIR = process.env.SHOTS_DIR ?? '../../phase_xlviii/screenshots';
 const shot = (page: Page, name: string, fullPage = true) => page.screenshot({ path: `${DIR}/${name}.png`, fullPage });
 
 test.describe('@screenshots', () => {

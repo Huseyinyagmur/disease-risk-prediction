@@ -162,10 +162,70 @@
           }
         }
       }
+    },
+    "/assistant/ask": {
+      "post": {
+        "summary": "Assistant Ask",
+        "description": "Soru → güvenlik ön filtresi → RAG → yerel LLM (127.0.0.1:11434) → yanıt + kaynaklar + sabit uyarı.\nSoru/yanıt loglanmaz, saklanmaz. Ollama yoksa 503 (gerekçe /health > assistant).",
+        "operationId": "assistant_ask_assistant_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AskRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Question"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/ResultLabel"
+            },
+            "type": "array",
+            "maxItems": 40,
+            "title": "Results"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "AskRequest"
+      },
       "Body_ecg_af_ecg_af_post": {
         "properties": {
           "header_file": {
@@ -236,6 +296,35 @@
           "fields"
         ],
         "title": "PredictRequest"
+      },
+      "ResultLabel": {
+        "properties": {
+          "disease_key": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Disease Key"
+          },
+          "outcome": {
+            "type": "string",
+            "maxLength": 20,
+            "title": "Outcome"
+          },
+          "missing_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 40,
+            "title": "Missing Fields"
+          }
+        },
+        "type": "object",
+        "required": [
+          "disease_key",
+          "outcome"
+        ],
+        "title": "ResultLabel",
+        "description": "Oturumdaki sonuç ETİKETİ (kapalı sözlük). Ham sağlık değeri alanı yoktur; bilinmeyen anahtarlar yok sayılır."
       },
       "ValidationError": {
         "properties": {

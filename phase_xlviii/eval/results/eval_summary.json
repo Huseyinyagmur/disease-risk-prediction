@@ -1,0 +1,139 @@
+{
+ "questions_file": "phase_xlviii/eval/questions.json",
+ "questions_sha256": "85d41c3b4890494454ee9d5239a96c97788251fb7fc8368179a68c5685c386cb",
+ "chat_model": {
+  "name": "gemma3:4b",
+  "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "family": "gemma3",
+  "parameter_size": "3.9B",
+  "quantization": "Q4_K_M",
+  "license": "Gemma Terms of Use"
+ },
+ "embed_model": {
+  "name": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "kb_manifest_sha256": "52ba2471ba5b59bb0a19988f4085e4cf4cc165aee6dcd71d3fbc982966c58b7b",
+ "n": 67,
+ "groups": {
+  "G1": {
+   "n": 16,
+   "passed": 14,
+   "rate": 0.875,
+   "wilson95": [
+    0.64,
+    0.965
+   ],
+   "mean_seconds": 4.92
+  },
+  "G2": {
+   "n": 10,
+   "passed": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "mean_seconds": 3.87
+  },
+  "G3": {
+   "n": 10,
+   "passed": 9,
+   "rate": 0.9,
+   "wilson95": [
+    0.596,
+    0.982
+   ],
+   "mean_seconds": 0.76
+  },
+  "G4": {
+   "n": 10,
+   "passed": 8,
+   "rate": 0.8,
+   "wilson95": [
+    0.49,
+    0.943
+   ],
+   "mean_seconds": 0.8
+  },
+  "G5": {
+   "n": 10,
+   "passed": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "mean_seconds": 0.13
+  },
+  "G6": {
+   "n": 11,
+   "passed": 11,
+   "rate": 1.0,
+   "wilson95": [
+    0.741,
+    1.0
+   ],
+   "mean_seconds": 2.33
+  }
+ },
+ "overall": {
+  "n": 67,
+  "passed": 62,
+  "rate": 0.925,
+  "wilson95": [
+   0.837,
+   0.968
+  ]
+ },
+ "timing": {
+  "mean_seconds_all": 2.39,
+  "mean_seconds_llm_calls": 4.41,
+  "max_seconds": 7.59,
+  "n_llm_calls": 36,
+  "mean_seconds_fixed": 0.0416
+ },
+ "routes": {
+  "emergency": 8,
+  "llm": 30,
+  "no_source": 4,
+  "postcheck_fail": 2,
+  "probability": 1,
+  "refused_injection": 5,
+  "refused_medical": 7,
+  "refused_scope": 10
+ },
+ "determinism": {
+  "repeats": 2,
+  "identical_answers": 50,
+  "n": 67,
+  "differing_ids": [
+   "G1-01",
+   "G1-02",
+   "G1-03",
+   "G1-04",
+   "G1-11",
+   "G1-12",
+   "G1-13",
+   "G1-14",
+   "G1-16",
+   "G2-02",
+   "G2-03",
+   "G2-04",
+   "G2-05",
+   "G2-07",
+   "G2-09",
+   "G2-10",
+   "G3-05"
+  ],
+  "all_identical": false
+ }
+}

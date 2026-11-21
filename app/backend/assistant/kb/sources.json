@@ -1,0 +1,874 @@
+{
+ "phase": "XLVIII",
+ "generated_by": "app/backend/assistant/scripts/fetch_external.py",
+ "accessed": "2026-11-21",
+ "note": "Metin parçaları kaynak sayfadan değiştirilmeden alındı; tedavi/ilaç/doz bölümleri asistan kuralları gereği seçilmedi. WHO ve NHLBI yalnız bağlantıdır.",
+ "text_sources": [
+  {
+   "id": "mp_af",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/atrialfibrillation.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Atrial+Fibrillation%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "af",
+   "title": "Atrial Fibrillation",
+   "sections_kept": [
+    "What is atrial fibrillation (AFib)?",
+    "What causes atrial fibrillation (AFib)?",
+    "Who is more likely to develop atrial fibrillation (AFib)?",
+    "What are the symptoms of atrial fibrillation (AFib)?",
+    "What other problems can AFib cause?",
+    "How is atrial fibrillation (AFib) diagnosed?",
+    "Can atrial fibrillation (AFib) be prevented?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for atrial fibrillation (AFib)?"
+   ],
+   "raw_sha256": "ac3f56cacc485d5a926e53f3df4828837249485dc06c648961907d427d4e8fa1",
+   "text_file": "kb/external/mp_af.md",
+   "text_sha256": "7e532264f9adfbf572fa8f9b84d93b8de77ae47d990196f08b21a19b68870b05",
+   "chars": 4474
+  },
+  {
+   "id": "mp_cirrhosis",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/cirrhosis.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Cirrhosis%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "liver_fibrosis",
+   "title": "Cirrhosis",
+   "sections_kept": [
+    "Overview"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "7000ed2873004d15d4005ed340e4646a1914cc564d6740b6b2f29415872d15bb",
+   "text_file": "kb/external/mp_cirrhosis.md",
+   "text_sha256": "d2990631cffcf8d52b6294e01b60d93b21936c6932472a8069725c7323042e7f",
+   "chars": 1081
+  },
+  {
+   "id": "mp_steatotic_liver",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/steatoticliverdisease.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Steatotic+Liver+Disease%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "liver_fibrosis",
+   "title": "Steatotic Liver Disease",
+   "sections_kept": [
+    "What is steatotic liver disease?",
+    "What is metabolic dysfunction-associated steatotic liver disease (MASLD)?",
+    "What is alcohol-associated liver disease (ALD)?",
+    "Who is more likely to develop steatotic liver disease?",
+    "What are the symptoms of steatotic liver disease?",
+    "How is steatotic liver disease diagnosed?",
+    "What are some lifestyle changes that can help with steatotic liver disease?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for steatotic liver disease?"
+   ],
+   "raw_sha256": "ff31cdc51e88e047042d999523cf49c741d30b64ec47d98baff6315b2a8c57b1",
+   "text_file": "kb/external/mp_steatotic_liver.md",
+   "text_sha256": "b7be272f1fcac0e22a295a2167c266ad6ff6c69ec5ecaf8e3e31c6e9263acdd7",
+   "chars": 4760
+  },
+  {
+   "id": "mp_osteoporosis",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/osteoporosis.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Osteoporosis%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "osteoporosis",
+   "title": "Osteoporosis",
+   "sections_kept": [
+    "What is osteoporosis?",
+    "What causes osteoporosis?",
+    "Who is more likely to develop osteoporosis?",
+    "What are the symptoms of osteoporosis?",
+    "How is osteoporosis diagnosed?",
+    "Can osteoporosis be prevented?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for osteoporosis?"
+   ],
+   "raw_sha256": "aacd54d83739abd14b1b0007a42ab2f06e37d5e00215a11fe707d80a97a678ec",
+   "text_file": "kb/external/mp_osteoporosis.md",
+   "text_sha256": "9168037af50dcb7fffe57717b80b4a6909680078d973cfa6453c2917e1ceb099",
+   "chars": 4034
+  },
+  {
+   "id": "mp_diabetes",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/diabetes.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Diabetes%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "diabetes",
+   "title": "Diabetes",
+   "sections_kept": [
+    "What is diabetes?",
+    "What are the types of diabetes?",
+    "What causes diabetes?",
+    "Who is more likely to develop diabetes?",
+    "What are the symptoms of diabetes?",
+    "How is diabetes diagnosed?",
+    "Can diabetes be prevented?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for diabetes?"
+   ],
+   "raw_sha256": "8a7c039152cf0dced66e924ea175af4b6c0d602b2ff76c23b80d647d742a5e0c",
+   "text_file": "kb/external/mp_diabetes.md",
+   "text_sha256": "ecee1ce3f6b73e2e9e8fdea1e5524ba223dd671b465abacc00d97ab1ee6423af",
+   "chars": 4746
+  },
+  {
+   "id": "mp_ckd",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/chronickidneydisease.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Chronic+Kidney+Disease%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "kidney",
+   "title": "Chronic Kidney Disease",
+   "sections_kept": [
+    "Overview"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "44c0915e717a78854b099465ff559fee473317a8429bca9ad2654c2f6c9064b5",
+   "text_file": "kb/external/mp_ckd.md",
+   "text_sha256": "c01a21207c7fddc4bd7285dae2deb1df74ea6f3506adf0c7e714636da85d3e1d",
+   "chars": 1622
+  },
+  {
+   "id": "mp_hbp",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/highbloodpressure.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22High+Blood+Pressure%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "hypertension",
+   "title": "High Blood Pressure",
+   "sections_kept": [
+    "What is blood pressure?"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "740650bf7827533aeb52bd8925f615425c47441c37b29597e3a8393506cb753c",
+   "text_file": "kb/external/mp_hbp.md",
+   "text_sha256": "fa4a45eca43ccb0a9b4b992a5b999f4148f62bd8d01832bb4a4f664a67d4fd91",
+   "chars": 2439
+  },
+  {
+   "id": "mp_anemia",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/anemia.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Anemia%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "anemia",
+   "title": "Anemia",
+   "sections_kept": [
+    "Overview"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "5b54196a4ab05ce6874294cd56a41f491e3718e8b76bc2594091a86df09b21a6",
+   "text_file": "kb/external/mp_anemia.md",
+   "text_sha256": "6934d38cde283c432e074d6bdd5fe7f8bc7f38ca22f0ff941a0130b7510db916",
+   "chars": 1102
+  },
+  {
+   "id": "mp_copd",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/copd.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22COPD%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "copd",
+   "title": "COPD",
+   "sections_kept": [
+    "What is COPD?",
+    "What are the types of COPD?",
+    "What causes COPD?",
+    "Who is more likely to develop COPD?",
+    "What are the symptoms of COPD?",
+    "How is COPD diagnosed?",
+    "Can COPD be prevented?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for COPD?"
+   ],
+   "raw_sha256": "454461cbbcaa7efb67a0c1d9e38d7d57e1a0b3bc54b58e7841f44fc2a3676439",
+   "text_file": "kb/external/mp_copd.md",
+   "text_sha256": "1ec0064ec6e6eca90b50acea9176ddd7faf054eb7faf975fed315a17184c2824",
+   "chars": 3849
+  },
+  {
+   "id": "mp_cad",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/coronaryarterydisease.html",
+   "fetched_via": "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=title%3A%22Coronary+Artery+Disease%22&retmax=10",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "cad",
+   "title": "Coronary Artery Disease",
+   "sections_kept": [
+    "What is coronary artery disease?",
+    "What causes coronary artery disease?",
+    "What are the types of coronary artery disease?",
+    "Who is more likely to have coronary artery disease?",
+    "What are symptoms of coronary artery disease?",
+    "What other problems does coronary artery disease cause?",
+    "How is coronary artery disease diagnosed?",
+    "Can coronary artery disease be prevented?"
+   ],
+   "sections_excluded": [
+    "What are the treatments for coronary artery disease?"
+   ],
+   "raw_sha256": "2e98c178485681929fb2d5de32e2f279ab378619a7196d11c7b3de2c02b53d15",
+   "text_file": "kb/external/mp_cad.md",
+   "text_sha256": "c173c987f1383b0a9aa50692a2c6257e5587ed82951f0816cd50345bb94a43f1",
+   "chars": 4167
+  },
+  {
+   "id": "mp_test_a1c",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/hemoglobin-a1c-hba1c-test/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/hemoglobin-a1c-hba1c-test/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "diabetes",
+   "title": "Hemoglobin A1C (HbA1c) Test",
+   "sections_kept": [
+    "What is a hemoglobin A1C (HbA1C) test?",
+    "What is it used for?",
+    "Why do I need an A1C test?",
+    "What happens during an A1C test?",
+    "Will I need to do anything to prepare for the test?",
+    "Are there any risks to the test?",
+    "What do the results mean?",
+    "Is there anything else I need to know about an A1C test?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "7799fb238e65464ac1bc94e7c451aa2b2d208f0e391112d9e5c981d86efc58fa",
+   "text_file": "kb/external/mp_test_a1c.md",
+   "text_sha256": "cd4bd4f291a3826dfb89fe9be3b697b84f59a4842da8fcb9d256f48cb78dc0c8",
+   "chars": 6260
+  },
+  {
+   "id": "mp_test_cbc",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "anemia",
+   "title": "Complete Blood Count (CBC)",
+   "sections_kept": [
+    "What is a Complete Blood Count?",
+    "What is it used for?",
+    "Why do I need a complete blood count?",
+    "What happens during a complete blood count?",
+    "Will I need to do anything to prepare for the test?",
+    "Are there any risks to the test?",
+    "What do the results mean?",
+    "Is there anything else I need to know about a complete blood count?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "9c838c7cffa95325a8becca2e11050acc5495e1b4d97cc43d970a19888b8d090",
+   "text_file": "kb/external/mp_test_cbc.md",
+   "text_sha256": "1f785ca798577e9fe32d7a639f1ca7244904d16367d1514287a8a7da955b6543",
+   "chars": 3599
+  },
+  {
+   "id": "mp_test_lft",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/liver-function-tests/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/liver-function-tests/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "liver_fibrosis",
+   "title": "Liver Function Tests",
+   "sections_kept": [
+    "What are liver function tests?",
+    "What are they used for?",
+    "Why do I need liver function testing?",
+    "What happens during a liver function test?",
+    "Will I need to do anything to prepare for the test?",
+    "Are there any risks to the test?",
+    "What do the results mean?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "09c027e8dd05dc35bebc3a571a0f5a8c4aa07f8a50464e6367170a0ed971a249",
+   "text_file": "kb/external/mp_test_lft.md",
+   "text_sha256": "6be89ea0223e720af7e821f818ed2e956790ca42d9f63aee26a25f1e2cff14e0",
+   "chars": 5538
+  },
+  {
+   "id": "mp_test_ecg",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/electrocardiogram/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/electrocardiogram/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "af",
+   "title": "Electrocardiogram",
+   "sections_kept": [
+    "What is an electrocardiogram (EKG) test?",
+    "What is it used for?",
+    "Why do I need an EKG test?",
+    "What happens during an EKG test?",
+    "Will I need to do anything to prepare for the test?",
+    "Are there any risks to the test?",
+    "What do the results mean?",
+    "Is there anything else I need to know about an EKG?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "dd041111bbdb326921dd5e32f0eb28c2021dd5af9c6fde052f541987b4c10be2",
+   "text_file": "kb/external/mp_test_ecg.md",
+   "text_sha256": "5e03030bd067fa0c7f0dfc9ca1249b0ff74a09108659862a1817e6f42d2bccdc",
+   "chars": 7833
+  },
+  {
+   "id": "mp_test_lung",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/lung-function-tests/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/lung-function-tests/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "copd",
+   "title": "Lung Function Tests",
+   "sections_kept": [
+    "What are lung function tests?",
+    "What are lung function tests used for?",
+    "Why do I need a lung function test?",
+    "What happens during lung function testing?",
+    "Will I need to do anything to prepare for the tests?",
+    "Are there any risks to the tests?",
+    "What do the results mean?",
+    "Is there anything else I need to know about lung function tests?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "eab697f3002bd0fea47df422f78f91b76065f24bcb8736d5bb51a5825033d8e2",
+   "text_file": "kb/external/mp_test_lung.md",
+   "text_sha256": "7701cabab536da85a11224242587bce073f874908e3398c6d4404633e902a989",
+   "chars": 9894
+  },
+  {
+   "id": "mp_test_egfr",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/estimated-glomerular-filtration-rate-egfr-and-gfr-tests/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/estimated-glomerular-filtration-rate-egfr-and-gfr-tests/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "kidney",
+   "title": "Estimated Glomerular Filtration Rate (eGFR) and GFR Tests",
+   "sections_kept": [
+    "What are estimated glomerular filtration rate (eGFR) and GFR tests?",
+    "What is it used for?",
+    "Why do I need a GFR test?",
+    "What happens during a GFR test?",
+    "Will I need to do anything to prepare for these tests?",
+    "Are there any risks to the test?",
+    "What do the results mean?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "30a8bc76283bc0b081108f5b2b1b838a84c8490dd0f831f448cac7505f3b47f5",
+   "text_file": "kb/external/mp_test_egfr.md",
+   "text_sha256": "549c166133481ea9cc5907ca09c9b024f6c5b2389a70e564a8e15658191243e7",
+   "chars": 9089
+  },
+  {
+   "id": "mp_test_uacr",
+   "publisher": "MedlinePlus, U.S. National Library of Medicine (NLM)",
+   "url": "https://medlineplus.gov/lab-tests/microalbumin-creatinine-ratio/",
+   "fetched_via": "https://medlineplus.gov/lab-tests/microalbumin-creatinine-ratio/",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); MedlinePlus \"Linking to and Using Content\" — health topic summaries and medical test information are not copyrighted",
+   "attribution": "Source: MedlinePlus, National Library of Medicine.",
+   "policy_url": "https://medlineplus.gov/about/using/usingcontent/",
+   "disease_key": "kidney",
+   "title": "Microalbumin Creatinine Ratio",
+   "sections_kept": [
+    "What is a microalbumin creatinine ratio test?",
+    "What is it used for?",
+    "Why do I need a microalbumin creatinine ratio test?",
+    "What happens during a microalbumin creatinine ratio test?",
+    "Will I need to do anything to prepare for the test?",
+    "Are there any risks to the test?",
+    "What do the results mean?",
+    "Is there anything else I need to know about a microalbumin creatinine ratio?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "5e2c3a7863764ad8778843572e446dca0735580269e0a2c3dcd5a7a8cfa0af38",
+   "text_file": "kb/external/mp_test_uacr.md",
+   "text_sha256": "45670340aab8493f1fe6cf2d29e9ddc326328ccfe7008cdf68023dbdf84af372",
+   "chars": 8017
+  },
+  {
+   "id": "cdc_diabetes",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/diabetes/about/index.html",
+   "fetched_via": "https://www.cdc.gov/diabetes/about/index.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "diabetes",
+   "title": "Diabetes Basics",
+   "sections_kept": [
+    "Key points",
+    "Overview",
+    "Type 1 diabetes",
+    "Type 2 diabetes",
+    "Gestational diabetes",
+    "Type 2 diabetes and prediabetes",
+    "Type 1 diabetes",
+    "Gestational diabetes",
+    "Diabetes by the numbers"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "cc22c52666920a9a77ddf61b7ee96fd1b1a39a29fef16061d74ad71596cee609",
+   "text_file": "kb/external/cdc_diabetes.md",
+   "text_sha256": "26acc23fc1ee25a92c0887e58dacf315674e42fae35990a4b0095fa72411090d",
+   "chars": 4135
+  },
+  {
+   "id": "cdc_ckd",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/kidney-disease/about/index.html",
+   "fetched_via": "https://www.cdc.gov/kidney-disease/about/index.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "kidney",
+   "title": "Chronic Kidney Disease Basics",
+   "sections_kept": [
+    "Key points",
+    "Your hard-working kidneys",
+    "CKD",
+    "Symptoms",
+    "Reducing risk",
+    "CKD by the numbers",
+    "About the CKD Initiative"
+   ],
+   "sections_excluded": [
+    "Resources"
+   ],
+   "raw_sha256": "8edd3084ab5973cea43a1b87472ab42b7afd4b30d369f55d937cc917ed454cf4",
+   "text_file": "kb/external/cdc_ckd.md",
+   "text_sha256": "e20133341b42e697f8d89bff9d8d99f3a0ac68b1a6dd3e9dec362b0fdc3e2e17",
+   "chars": 4047
+  },
+  {
+   "id": "cdc_hbp",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/high-blood-pressure/about/index.html",
+   "fetched_via": "https://www.cdc.gov/high-blood-pressure/about/index.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "hypertension",
+   "title": "About High Blood Pressure",
+   "sections_kept": [
+    "Key points",
+    "Overview",
+    "Signs and symptoms",
+    "Complications",
+    "Heart and blood vessel disease",
+    "Stroke and brain health",
+    "Kidney disease",
+    "Risk factors",
+    "Prevention",
+    "Diagnosis",
+    "Blood pressure categories"
+   ],
+   "sections_excluded": [
+    "Treatment"
+   ],
+   "raw_sha256": "afb28d8fa692e95dfb97af3bfa610f10af9585c23060648282a4dda21796cf6b",
+   "text_file": "kb/external/cdc_hbp.md",
+   "text_sha256": "004530e933f0c5a605b36b736830a13c8c75c29c92f1efd4567cb53429ab97cd",
+   "chars": 4737
+  },
+  {
+   "id": "cdc_cad",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/heart-disease/about/coronary-artery-disease.html",
+   "fetched_via": "https://www.cdc.gov/heart-disease/about/coronary-artery-disease.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "cad",
+   "title": "About Coronary Artery Disease (CAD)",
+   "sections_kept": [
+    "Key points",
+    "What it is",
+    "Symptoms",
+    "Risk factors",
+    "Causes",
+    "Diagnosis",
+    "What is cardiac rehabilitation and recovery?",
+    "How can I be healthier if I have coronary artery disease?"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "e0398581681f102b86b28a3213e051a2ed0a6dc3584448da26edc7f5f33bed68",
+   "text_file": "kb/external/cdc_cad.md",
+   "text_sha256": "39c168847937baa96182fc0df765b24d3c297fdfbc42e310fbbaa473e15db587",
+   "chars": 4735
+  },
+  {
+   "id": "cdc_copd",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/copd/about/index.html",
+   "fetched_via": "https://www.cdc.gov/copd/about/index.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "copd",
+   "title": "About COPD",
+   "sections_kept": [
+    "Key points",
+    "What it is",
+    "Symptoms",
+    "Complications",
+    "Causes and risk factors",
+    "Risk factors",
+    "Reducing risk",
+    "Who is at risk",
+    "Diagnosis",
+    "Getting tested",
+    "Lifestyle changes"
+   ],
+   "sections_excluded": [
+    "Treatment and management",
+    "Treatment options"
+   ],
+   "raw_sha256": "bd392baf859f4a1ee357a496e08f0ff07938c7fec1571cd0f234c09417b00bf4",
+   "text_file": "kb/external/cdc_copd.md",
+   "text_sha256": "1813e0ec4468f21b0af8a1e52da75467b1f90904cc055aa8c4fb268776777d68",
+   "chars": 2770
+  },
+  {
+   "id": "cdc_af",
+   "publisher": "Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/heart-disease/about/atrial-fibrillation.html",
+   "fetched_via": "https://www.cdc.gov/heart-disease/about/atrial-fibrillation.html",
+   "accessed": "2026-11-21",
+   "license": "public domain (U.S. federal work); CDC \"Use of Agency Materials\": attribution, non-endorsement disclaimer, substantive content unchanged, free-availability statement",
+   "attribution": "Source: CDC. Materials developed by CDC; available on the agency website for no charge. Use does not imply endorsement by CDC, HHS or the U.S. Government.",
+   "policy_url": "https://www.cdc.gov/other/agencymaterials.html",
+   "disease_key": "af",
+   "title": "About Atrial Fibrillation",
+   "sections_kept": [
+    "Key points",
+    "What it is",
+    "Facts about AFib",
+    "Symptoms",
+    "Risk factors",
+    "What are the consequences of AFib?"
+   ],
+   "sections_excluded": [
+    "How is AFib related to stroke?",
+    "Treatment and recovery",
+    "Resources"
+   ],
+   "raw_sha256": "6976e1dfd0f768860f71ee525c69f7d440f6d07f7bf4b61515c94fed3c8cda88",
+   "text_file": "kb/external/cdc_af.md",
+   "text_sha256": "57b460f26aad1c0500347728465efb9f3f1907c00ae427a117f281cfc0e4fda9",
+   "chars": 2260
+  },
+  {
+   "id": "niddk_diabetes",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "diabetes",
+   "title": "What Is Diabetes?",
+   "sections_kept": [
+    "What Is Diabetes?",
+    "What are the different types of diabetes?",
+    "Type 1 diabetes",
+    "Type 2 diabetes",
+    "Gestational diabetes",
+    "Prediabetes",
+    "Other types of diabetes",
+    "How common are diabetes and prediabetes?",
+    "What other health problems can people with diabetes develop?"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "e619f68707f4ee3ae6722326bde6541ec52d2137ac61a889846c1b043b045717",
+   "text_file": "kb/external/niddk_diabetes.md",
+   "text_sha256": "6528c375a6606828fc1edad98e563df1abf89d7d2ac1cd60f07127843b8aa1d2",
+   "chars": 3809
+  },
+  {
+   "id": "niddk_ckd",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/what-is-chronic-kidney-disease",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/what-is-chronic-kidney-disease",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "kidney",
+   "title": "What Is Chronic Kidney Disease in Adults?",
+   "sections_kept": [
+    "What Is Chronic Kidney Disease in Adults?",
+    "How common is CKD in adults?",
+    "Which adults are more likely to develop CKD?",
+    "What are the complications of CKD in adults?",
+    "Symptoms of early CKD",
+    "Symptoms of advanced CKD",
+    "What clinical studies for CKD are looking for participants?",
+    "What have we learned about CKD from NIDDK-funded research?"
+   ],
+   "sections_excluded": [
+    "Clinical Trials for CKD in Adults",
+    "What are clinical trials for CKD?",
+    "References"
+   ],
+   "raw_sha256": "42d5cb06b52281e6b85ccf2b5339be4beae9b5d766de2472ded78e9bfe9bfaf8",
+   "text_file": "kb/external/niddk_ckd.md",
+   "text_sha256": "3b4dc83c8a1ec401019e4c1527f97efa77a1b66ab3512f4d7fbd94a9f82b2c78",
+   "chars": 5349
+  },
+  {
+   "id": "niddk_nafld",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/definition-facts",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/definition-facts",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "liver_fibrosis",
+   "title": "Definition & Facts of NAFLD & NASH",
+   "sections_kept": [
+    "Definition & Facts of NAFLD & NASH",
+    "What is NAFLD?",
+    "NAFL",
+    "NASH",
+    "How common is NAFLD?",
+    "Who is more likely to develop NAFLD?",
+    "What are the complications of NAFLD?",
+    "Liver complications",
+    "Other health problems"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "6539e0448560c2b6098933831635e512d95d472a98e761415a16b102cecc7553",
+   "text_file": "kb/external/niddk_nafld.md",
+   "text_sha256": "cfb7c92a30e9f15c3feba0443a6e922580cee2ecc6a2d38c5a632fdf7d057d36",
+   "chars": 3910
+  },
+  {
+   "id": "niddk_nafld_dx",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/diagnosis",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/diagnosis",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "liver_fibrosis",
+   "title": "Diagnosis of NAFLD & NASH",
+   "sections_kept": [
+    "How do doctors diagnose NAFLD?",
+    "Medical history",
+    "Physical exam",
+    "What tests do doctors use to diagnose NAFLD?",
+    "Blood tests",
+    "Imaging tests",
+    "Liver biopsy"
+   ],
+   "sections_excluded": [],
+   "raw_sha256": "f6a1043416bc9f613b2f33057779cc06d945dad4e65d5b2a03a4a833fca0d5ec",
+   "text_file": "kb/external/niddk_nafld_dx.md",
+   "text_sha256": "2d56ef8a11f57aa4f05abe7df57661f41618da9708617ce1d61d463cad433804",
+   "chars": 4859
+  },
+  {
+   "id": "niddk_cirrhosis",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/liver-disease/cirrhosis/definition-facts",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/liver-disease/cirrhosis/definition-facts",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "liver_fibrosis",
+   "title": "Definition & Facts for Cirrhosis",
+   "sections_kept": [
+    "Definition & Facts for Cirrhosis",
+    "What is cirrhosis?",
+    "How common is cirrhosis?",
+    "Who is more likely to develop cirrhosis?",
+    "What are the complications of cirrhosis?",
+    "Portal hypertension",
+    "Infections",
+    "Liver cancer",
+    "Liver failure",
+    "Other complications"
+   ],
+   "sections_excluded": [
+    "References"
+   ],
+   "raw_sha256": "4f2d9ba412ef0851d3eb68bdc28443406dff6f3d338feffcd2f7228f518591b8",
+   "text_file": "kb/external/niddk_cirrhosis.md",
+   "text_sha256": "0061cee6de6f1e2b549a90bd8c984cad18fc99b7e127085172f5267482482b5c",
+   "chars": 3275
+  },
+  {
+   "id": "niddk_a1c",
+   "publisher": "National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH",
+   "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+   "fetched_via": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+   "accessed": "2026-11-21",
+   "license": "copyright free (NIDDK \"Copyright\": content reproduced without changes should acknowledge NIDDK as the source)",
+   "attribution": "Source: National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), NIH. Content reproduced without changes; does not imply endorsement.",
+   "policy_url": "https://www.niddk.nih.gov/copyright",
+   "disease_key": "diabetes",
+   "title": "The A1C Test & Diabetes",
+   "sections_kept": [
+    "The A1C Test & Diabetes",
+    "What is the A1C test?",
+    "Why should a person get the A1C test?",
+    "How is the A1C test used to diagnose type 2 diabetes and prediabetes?",
+    "A1C results and what the numbers mean",
+    "Is the A1C test used during pregnancy?",
+    "Can other blood glucose tests be used to diagnose type 2 diabetes and prediabetes?",
+    "Can the A1C test result in a different diagnosis than the blood glucose tests?",
+    "Why do diabetes blood test results vary?",
+    "Blood glucose levels move up and down",
+    "Blood Glucose Measurements Compared with A1C Measurements over 4 Days",
+    "A1C tests can be affected by changes in red blood cells or hemoglobin",
+    "Small changes in temperature, equipment, or sample handling",
+    "How precise is the A1C test?",
+    "How is the A1C test used after diagnosis of diabetes?",
+    "What A1C goal should I have?",
+    "How does A1C relate to estimated average glucose?",
+    "Will the A1C test show short-term changes in blood glucose levels?"
+   ],
+   "sections_excluded": [
+    "Clinical Trials for the A1C Test and Diabetes",
+    "What are clinical trials and are they right for you?",
+    "What clinical trials are open?",
+    "References"
+   ],
+   "raw_sha256": "ca47fca7b5905765cc0167b321a28784f30858b7477a0b77e7b43fc174ccde47",
+   "text_file": "kb/external/niddk_a1c.md",
+   "text_sha256": "1ce0b89e07a69697ae6017d10374e0893d42a2837d64a6af09a748e28534df9c",
+   "chars": 11950
+  }
+ ],
+ "link_only": [
+  {
+   "id": "nhlbi_af",
+   "url": "https://www.nhlbi.nih.gov/health/atrial-fibrillation",
+   "publisher": "NHLBI, NIH",
+   "reason": "NHLBI sitesinde yeniden kullanım/telif beyanı BULUNAMADI; metin kopyalanmadı"
+  },
+  {
+   "id": "nhlbi_copd",
+   "url": "https://www.nhlbi.nih.gov/health/copd",
+   "publisher": "NHLBI, NIH",
+   "reason": "NHLBI sitesinde yeniden kullanım/telif beyanı BULUNAMADI; metin kopyalanmadı"
+  },
+  {
+   "id": "nhlbi_anemia",
+   "url": "https://www.nhlbi.nih.gov/health/anemia",
+   "publisher": "NHLBI, NIH",
+   "reason": "NHLBI sitesinde yeniden kullanım/telif beyanı BULUNAMADI; metin kopyalanmadı"
+  },
+  {
+   "id": "nhlbi_hbp",
+   "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure",
+   "publisher": "NHLBI, NIH",
+   "reason": "NHLBI sitesinde yeniden kullanım/telif beyanı BULUNAMADI; metin kopyalanmadı"
+  },
+  {
+   "id": "nhlbi_chd",
+   "url": "https://www.nhlbi.nih.gov/health/coronary-heart-disease",
+   "publisher": "NHLBI, NIH",
+   "reason": "NHLBI sitesinde yeniden kullanım/telif beyanı BULUNAMADI; metin kopyalanmadı"
+  },
+  {
+   "id": "who_diabetes",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/diabetes",
+   "publisher": "World Health Organization",
+   "reason": "WHO metinleri kopyalanmaz (görev kuralı); yalnız bağlantı"
+  },
+  {
+   "id": "who_hypertension",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/hypertension",
+   "publisher": "World Health Organization",
+   "reason": "WHO metinleri kopyalanmaz (görev kuralı); yalnız bağlantı"
+  },
+  {
+   "id": "who_copd",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease-(copd)",
+   "publisher": "World Health Organization",
+   "reason": "WHO metinleri kopyalanmaz (görev kuralı); yalnız bağlantı"
+  }
+ ]
+}

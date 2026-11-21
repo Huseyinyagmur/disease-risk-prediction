@@ -1,3 +1,4 @@
+import { AssistantPanel } from './components/AssistantPanel';
 import { DisclaimerBar, NavBar } from './components/ui';
 import { About } from './pages/About';
 import { DataEntry } from './pages/DataEntry';
@@ -22,8 +23,9 @@ export function App() {
         {page === 'about' && <About />}
       </main>
       <footer className="border-t border-slate-200 py-3 text-center text-[11px] text-slate-500">
-        HealthRisk AI Research V2 · Phase XLVII arayüzü · yalnız localhost · klinik karar aracı değildir
+        HealthRisk AI Research V2 · Phase XLVIII arayüzü · yalnız localhost · klinik karar aracı değildir
       </footer>
+      <AssistantPanel />
     </div>
   );
 }

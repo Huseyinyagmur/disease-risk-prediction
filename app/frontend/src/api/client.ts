@@ -1,6 +1,6 @@
 // Backend istemcisi. Tüm istekler aynı kökenden /api önekiyle gider (Vite vekili -> 127.0.0.1 backend).
 // Hiçbir yanıt veya girdi tarayıcı depolamasına yazılmaz; önbellek kapalı (cache: 'no-store').
-import type { EcgResponse, EligibilityResponse, ModelInfo, PredictResponse, Schema } from './types';
+import type { AssistantResponse, AssistantResultLabel, EcgResponse, EligibilityResponse, ModelInfo, PredictResponse, Schema } from './types';
 
 export const API_BASE = '/api';
 
@@ -51,6 +51,14 @@ export const api = {
   eligibility: (fields: FieldPayload, signal?: AbortSignal) =>
     request<EligibilityResponse>('/eligibility', json(fields, signal)),
   predict: (fields: FieldPayload) => request<PredictResponse>('/predict', json(fields)),
+  /** Phase XLVIII: yalnız soru + sonuç ETİKETLERİ (ham değer yok). */
+  assistantAsk: (question: string, results: AssistantResultLabel[], signal?: AbortSignal) =>
+    request<AssistantResponse>('/assistant/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, results }),
+      signal,
+    }),
   ecgAf: (form: FormData, onUpload?: (fraction: number) => void) =>
     new Promise<EcgResponse>((resolve, reject) => {
       // XHR: yükleme ilerlemesi için (fetch yükleme ilerlemesi vermez)

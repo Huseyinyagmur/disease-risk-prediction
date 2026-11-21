@@ -217,3 +217,39 @@ export interface EcgResponse {
   result: ModelResult;
   note: string;
 }
+
+// Phase XLVIII: açıklama asistanı (POST /assistant/ask). Yalnız etiketler gönderilir; ham sağlık değeri alanı yoktur.
+export type AssistantOutcome = 'ESIK_USTU' | 'ESIK_ALTI' | 'ABSTAIN' | 'NOT_APPLICABLE' | 'ECG_REQUIRED';
+
+export interface AssistantResultLabel {
+  disease_key: string;
+  outcome: AssistantOutcome;
+  missing_fields: string[];
+}
+
+export interface AssistantSource {
+  doc_id: string;
+  title: string;
+  section: string;
+  kind: 'internal' | 'external';
+  publisher?: string | null;
+  url?: string;
+  ref?: string;
+  attribution?: string | null;
+}
+
+export interface AssistantResponse {
+  route: string;
+  answer: string;
+  sources: AssistantSource[];
+  llm_used: boolean;
+  local_model: boolean;
+  disclaimer: string;
+}
+
+export interface AssistantStatus {
+  enabled: boolean;
+  reason: string | null;
+  local_only?: boolean;
+  chat_model?: { name: string; digest: string } | null;
+}

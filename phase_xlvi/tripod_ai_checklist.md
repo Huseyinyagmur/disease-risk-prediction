@@ -1,7 +1,7 @@
 # Phase XLVI — TRIPOD+AI kontrol listesi × model
 
 Kaynak: Collins GS ve ark. TRIPOD+AI statement. *BMJ* 2024;385:e078378. doi:10.1136/bmj-2023-078378 (PMID 38626948).
-Madde metinleri makalenin Tablo 2'sinden (Europe PMC tam metni, CC BY; `data/refs/collins2024_full.xml`,
+Madde metinleri makalenin Tablo 2'sinden (CC BY; makale DOI ile atıflanır, tam metin depoda tutulmaz;
 `data/refs/tripod_ai_table2.json`) otomatik alınmıştır; tabloda kısaltıldı. D = geliştirme, E = değerlendirme.
 
 Değerlendirme birimi: model kartı (`model_cards/<model_id>.md`) + kartın gösterdiği kaynak faz dosyaları. Kartlar bir dergi

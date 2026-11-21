@@ -9,9 +9,13 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from conftest import AF_ENV, skip_module_without
 from healthrisk_api.ecg_af import AF_FEATURES
 from healthrisk_api.paths import V2
 
+REQ = ('phase_xxxiii/results/records33.csv', 'phase_xxxiii/data/raw') + AF_ENV
+skip_module_without(*REQ)                                           # temiz klon: toplama hatası yerine SKIP
+pytestmark = pytest.mark.requires_research_tree(*REQ)
 P33 = V2 / 'phase_xxxiii'
 RAW = P33 / 'data/raw'
 COLS = ['rel', 'source', 'origin', 'completed'] + AF_FEATURES

@@ -26,7 +26,11 @@ def _run(service, m):
     return _CACHE[m]
 
 
-@pytest.mark.parametrize('model', MODELS)
+def _tree(m):
+    return pytest.mark.requires_research_tree(*PL.REQUIRED_FILES[m])
+
+
+@pytest.mark.parametrize('model', [pytest.param(m, marks=_tree(m)) for m in MODELS])
 def test_parity_explained(service, model):
     r, ex = _run(service, model)
     assert r['n_sampled'] == min(200, r['dev_pool_complete'])
@@ -44,6 +48,7 @@ def test_parity_explained(service, model):
             assert bmi['n_mismatch'] == 0
 
 
+@pytest.mark.requires_research_tree(*PL.REQUIRED_FILES['ckd_A'])
 def test_ckd_meds_now_match_training(service):
     """Karar 3: dm_pills/dm_insulin eğitim tanımıyla üretilir -> KBH'de bu feature'larda fark kalmaz."""
     for m in ('ckd_A', 'ckd_B'):
@@ -53,10 +58,10 @@ def test_ckd_meds_now_match_training(service):
         assert feats['dm_pills']['transform'] == 'dm_pills_train'
 
 
-@pytest.mark.parametrize('model', [pytest.param(m, marks=pytest.mark.xfail(
+@pytest.mark.parametrize('model', [pytest.param(m, marks=[_tree(m), pytest.mark.xfail(
     strict=True, reason='eğitim BMI\'si döngüye göre karışık hassasiyetli (≤2009–10: 0,01; sonrası 0,1); tek yuvarlama '
-                        'ikisini birden üretemez' + (' + osteo yaş (age_cap80, karar 2)' if m == 'osteo_final' else '')))
-    if m in MIXED_BMI_PRECISION else m for m in MODELS])
+                        'ikisini birden üretemez' + (' + osteo yaş (age_cap80, karar 2)' if m == 'osteo_final' else ''))])
+    if m in MIXED_BMI_PRECISION else pytest.param(m, marks=_tree(m)) for m in MODELS])
 def test_parity_strict(service, model):
     r, _ = _run(service, model)
     o = r['outcome']

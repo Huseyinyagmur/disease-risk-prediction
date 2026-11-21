@@ -359,6 +359,8 @@ class Service:
     def eligibility(self, raw_fields):
         """app_visible her model için durum: READY (çalışabilir) / MISSING (eksik alan veya yanıtsız uygunluk sorusu) /
         OUT_OF_SCOPE (popülasyon dışı) / ABSTAIN (diğer: bilinmeyen kategori, gebelik 'bilmiyorum', model devre dışı).
+        `reasons`: ana durumun (kişiye özel) gerekçeleri; `additional_reasons`: aynı anda geçerli diğer nedenler
+        (ör. AF çalışma ortamı yok; arayüzde "Ayrıca: …"). Tüm nedenler = reasons + additional_reasons.
         Tahmin YAPILMAZ, olasılık/eşik kullanılmaz."""
         F, notes, errors = self.validate_partial(raw_fields)
         out = []
@@ -380,19 +382,33 @@ class Service:
             else:
                 state = 'ABSTAIN'
             reasons = [x for x in r['reasons'] if not (ecg and x.startswith('eksik zorunlu alan'))]
-            details = []
+            details, additional = [], []
+            if r['status'] == STATUS_NA and st['enabled']:
+                # Phase XLVI kapanış: popülasyon dışı kişide diğer uygunluk sorunları da döner (durumu değiştirmez)
+                _, ab, _ = EL.check(mid, F)
+                additional += [x for x in ab if x not in reasons]
             if ecg and not self.af.enabled:
                 # Phase XLVI: AF çalışma ortamı (kilit, pipeline, Octave, ECGDeli) yoksa veya doğrulanamıyorsa EKG
-                # yüklense de karar üretilemez. Panel "Eksik: EKG kaydı" yerine "Karar verilemez" göstermelidir.
-                state, miss = 'ABSTAIN', []
-                reasons = [self.af_unavailable_reason()] + [x for x in r['reasons'] if x.startswith('model devre dışı')]
+                # yüklense de karar üretilemez; ecg_record eksik sayılmaz. Kapanış düzeltmesi: kişiye özel neden
+                # (kapsam dışı, eksik alan, şema dışı kategori) varsa ana durum odur, ortam nedeni additional_reasons'ta
+                # ("Ayrıca: …"). Kişiye özel neden yoksa ana durum ABSTAIN + ortam nedeni.
+                env = self.af_unavailable_reason()
+                miss = [m for m in miss if m != 'ecg_record']
+                person = [x for x in reasons if not x.startswith('model devre dışı')]
+                if state == 'OUT_OF_SCOPE' or miss or person:
+                    if state == 'MISSING' and not miss:
+                        state = 'ABSTAIN'
+                    additional.append(env)
+                else:
+                    state = 'ABSTAIN'
+                    reasons = [env] + [x for x in r['reasons'] if x.startswith('model devre dışı')]
                 details = list(self.af.problems)
             elif ecg and state == 'MISSING' and 'ecg_record' in miss:
                 reasons.append('AF modeli yalnız EKG kaydı (.hea + .dat/.mat) yüklenerek çalışır: POST /ecg/af')
             item = dict(model_id=mid, disease=r['disease'], disease_key=r['disease_key'], role=r['role'],
                         app_mode=r['app_mode'], module_label=r['module_label'], endpoint='/ecg/af' if ecg else '/predict',
                         state=state, missing_fields=miss, unknown_categories=r['unknown_categories'], reasons=reasons,
-                        details=details)
+                        additional_reasons=additional, details=details)
             if ecg:
                 item['af_pipeline_available'] = bool(self.af.enabled)
             out.append(item)

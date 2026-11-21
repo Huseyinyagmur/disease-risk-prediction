@@ -101,6 +101,8 @@ export interface EligModel {
   missing_fields: string[];
   unknown_categories: { field: string; value: string }[];
   reasons: string[];
+  /** Phase XLVI kapanış: ana durumla aynı anda geçerli diğer nedenler (ör. AF çalışma ortamı yok). Arayüz: "Ayrıca: …". */
+  additional_reasons?: string[];
   /** Teknik ayrıntı (Phase XLVI): ör. AF çalışma ortamı sorunlarının tam metni. */
   details?: string[];
   /** Yalnız AF satırında (Phase XLVI): kilitli Octave/ECGDeli pipeline'ı kullanılabilir mi. */

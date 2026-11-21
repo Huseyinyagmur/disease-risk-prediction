@@ -1,0 +1,171 @@
+{
+ "lock_file": "phase_xxviii/config/af_pipeline_lock.json",
+ "ecgdeli_commit": "3c13b1b2ff55152360f3cee992c1d1d66099aa14",
+ "rows": [
+  {
+   "item": "kilit dosyası (sidecar)",
+   "path": "phase_xxviii/config/af_pipeline_lock.json",
+   "expected": "88aecd0769eac4ad9349fd7879f6e06ceafa34e020be09071190ae09c439341d",
+   "actual": "88aecd0769eac4ad9349fd7879f6e06ceafa34e020be09071190ae09c439341d",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "pipeline kodu",
+   "path": "phase_xxviii/pipeline/af_pipeline_v1.py",
+   "expected": "2bf3c307024711fdac2ffad463e63ae18368c361a1536c0a96ee1a4e7ede08a6",
+   "actual": "2bf3c307024711fdac2ffad463e63ae18368c361a1536c0a96ee1a4e7ede08a6",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "Octave 10.3.0 octave-cli.exe",
+   "path": "Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/bin/octave-cli.exe",
+   "expected": "14891b7697bdb679d1839a75b0e56330c1ec63c19ed0519dd55b35a3f446a2df",
+   "actual": "14891b7697bdb679d1839a75b0e56330c1ec63c19ed0519dd55b35a3f446a2df",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "Octave paketi signal 1.4.6",
+   "path": "Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/share/octave/packages/signal-1.4.6",
+   "expected": "klasör var",
+   "actual": "klasör var",
+   "ok": true,
+   "note": "Windows 7z paketiyle gelir; ayrı pkg install yok"
+  },
+  {
+   "item": "Octave paketi statistics 1.7.5",
+   "path": "Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/share/octave/packages/statistics-1.7.5",
+   "expected": "klasör var",
+   "actual": "klasör var",
+   "ok": true,
+   "note": "Windows 7z paketiyle gelir; ayrı pkg install yok"
+  },
+  {
+   "item": "Octave paketi image 2.18.1",
+   "path": "Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/share/octave/packages/image-2.18.1",
+   "expected": "klasör var",
+   "actual": "klasör var",
+   "ok": true,
+   "note": "Windows 7z paketiyle gelir; ayrı pkg install yok"
+  },
+  {
+   "item": "ECGDeli v1.1 kaynak ağacı (26 .m)",
+   "path": "Clinical_Optimization_Phase25/src/ecg_extraction/native_source",
+   "expected": "cfa133de285a1d8f20d9cd368edbf1ed7dd8207ee1954637f769ca918a94c28b",
+   "actual": "cfa133de285a1d8f20d9cd368edbf1ed7dd8207ee1954637f769ca918a94c28b",
+   "ok": true,
+   "note": "bulunan .m: 26"
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Clinical_Optimization_Phase25/src/ecg_extraction/compat/swt.m",
+   "expected": "49fc1b4d02bcb2a5eea690d24a5b88b5c7410e6abde180ac81d5263b84efa978",
+   "actual": "49fc1b4d02bcb2a5eea690d24a5b88b5c7410e6abde180ac81d5263b84efa978",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Clinical_Optimization_Phase25/src/ecg_extraction/compat/test_swt25.m",
+   "expected": "da3bd8e8b89c852849a4d2268b8e10afe646f9641780ce1bd1b9d61b776bc6fa",
+   "actual": "da3bd8e8b89c852849a4d2268b8e10afe646f9641780ce1bd1b9d61b776bc6fa",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Clinical_Optimization_Phase25/src/ecg_extraction/compat/wextend.m",
+   "expected": "1799f899b5ec1b809e3ee53418f66648392a27452c036cce434608dce63dcdbb",
+   "actual": "1799f899b5ec1b809e3ee53418f66648392a27452c036cce434608dce63dcdbb",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/findpeaks.m",
+   "expected": "067e6d41310f851562b586f8cc83bf9d822c098a54397877519d9f2a174eb335",
+   "actual": "067e6d41310f851562b586f8cc83bf9d822c098a54397877519d9f2a174eb335",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/maxk.m",
+   "expected": "18c5d135436080ab7170dfea123a9e61cf39894f60b2a869e2aa5495a9431eff",
+   "actual": "18c5d135436080ab7170dfea123a9e61cf39894f60b2a869e2aa5495a9431eff",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/mink.m",
+   "expected": "d84a7314c8f4b75a87f466c38acea5115c2da2bcb4e48bf7bbbc7b9380567e09",
+   "actual": "d84a7314c8f4b75a87f466c38acea5115c2da2bcb4e48bf7bbbc7b9380567e09",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/nanmean.m",
+   "expected": "7dfa4102cb2a6ddcff4034633df555e30d27eaa7295375ecec3b32d60037f606",
+   "actual": "7dfa4102cb2a6ddcff4034633df555e30d27eaa7295375ecec3b32d60037f606",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/octave_quantile26.m",
+   "expected": "fbb85f15aa238ebc6301a1dc18525ec830ec4b93d97ba4fc5ea12f0653c986d4",
+   "actual": "fbb85f15aa238ebc6301a1dc18525ec830ec4b93d97ba4fc5ea12f0653c986d4",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "uyumluluk dosyası",
+   "path": "Strong_Model_External_Validation_Phase26/src/ecg/compat/quantile.m",
+   "expected": "aea5da862f58088f343f7f7a9df4bfb94c0a94de7a84a7c7a174af9f4e3e55d8",
+   "actual": "aea5da862f58088f343f7f7a9df4bfb94c0a94de7a84a7c7a174af9f4e3e55d8",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "vendored WFDB",
+   "path": "Clinical_Optimization_Phase25/src/ecg_extraction/vendor",
+   "expected": "4.3.1",
+   "actual": "4.3.1",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "ilk 10 sn ön adımı kaynağı",
+   "path": "phase_xxxiii/scripts/t3_extract.py",
+   "expected": "uyuşuyor",
+   "actual": "uyuşuyor",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "item": "ECGDeli v1.1 arşivi (isteğe bağlı)",
+   "path": "Clinical_Model_Improvement_Phase24/data/raw/af_source/ECGdeli_v1.1.zip",
+   "expected": "5da77e68f3170f20ff4f94ef63b069e3aa11b86faddeaf1b093d9c487ee2d9ad",
+   "actual": "5da77e68f3170f20ff4f94ef63b069e3aa11b86faddeaf1b093d9c487ee2d9ad",
+   "ok": true,
+   "note": "GitHub zipball baytları zamanla değişebilir; belirleyici kontrol kaynak ağacı SHA256"
+  },
+  {
+   "item": "Octave 10.3.0 arşivi (isteğe bağlı)",
+   "path": "Clinical_Optimization_Phase25/data/raw/runtime/octave-10.3.0-complete.7z",
+   "expected": "4595b055c73de090839f5b86f289b0ac22b69549676b3452252306fffdc37ac6",
+   "actual": "4595b055c73de090839f5b86f289b0ac22b69549676b3452252306fffdc37ac6",
+   "ok": true,
+   "note": ""
+  }
+ ],
+ "server_check": {
+  "enabled": true,
+  "problems": []
+ },
+ "ok": true
+}

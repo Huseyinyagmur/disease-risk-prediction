@@ -119,6 +119,17 @@ def main():
     pf = {}
     for k in ('header_eligible',):
         pf = dedup33[k]
+    # Kapanış düzeltmesi: Challenge kaynaklarının kurum/konumu (Reyna ve ark., künye + tablo; tam metin depoda değil)
+    # ve yerelde indirilmiş Challenge alt dizinleri (yalnız dizin adları listelenir; kayıt okunmaz)
+    rsrc = js(P46 / 'data/refs/reyna2021_challenge_sources.json')
+    pm = [x for x in rsrc['papers'] if x['key'] == 'reyna2022_pmea'][0]
+    cinc = [x for x in rsrc['papers'] if x['key'] == 'reyna2021_cinc'][0]
+    t1 = {r['database']: r for r in pm['table1_sources']}
+    local_dirs = {ph: sorted(d.name for d in (V2 / ph / 'data/raw/training').iterdir() if d.is_dir())
+                  for ph in ('phase_xxix', 'phase_xxxiii')}
+    used = {'CPSC': 'cpsc_2018', 'CPSC-Extra': 'cpsc_2018_extra', 'Chapman-Shaoxing': 'chapman_shaoxing', 'G12EC': 'georgia'}
+    src_rows = '\n'.join(f"| {k} (`{v}`) | {t1[k]['source']} | {t1[k]['location']} |" for k, v in used.items())
+    excl_rows = '\n'.join(f"| {k} | {t1[k]['source']} | {t1[k]['location']} |" for k in ('PTB-XL', 'PTB'))
     md = f"""# Phase XLVI — AF doğrulama belgesi (`af_S4_DEVICE` + AF-ECGDELI-OCTAVE-v1)
 
 Kapsam: danışman isteği — hasta bazlı ayrım, aynı öznitelik çıkarımı, Challenge 2021 kaynakları, kaynaklar arası ve
@@ -260,12 +271,32 @@ Header-uygun kayıt sayıları (XXXIII): {', '.join(f'{k} {v}' for k, v in pf.it
 
 ### 4.2 PTB-XL ile çakışma
 
+**Kaynakların kurum ve konumu** (Reyna ve ark. 2022, Tablo 1, doi:{pm['doi']}; Challenge tanım makalesi Reyna ve ark.
+2021, doi:{cinc['doi']}; künyeler ve alıntılar `phase_xlvi/data/refs/reyna2021_challenge_sources.json`):
+
+| kullanılan Challenge kaynağı (dizin) | kaynak kurum | konum |
+|---|---|---|
+{src_rows}
+
+| eğitim verisiyle ilişkili Challenge kaynağı (**kullanılmadı**) | kaynak kurum | konum |
+|---|---|---|
+{excl_rows}
+
+Reyna ve ark. 2021 Chapman-Shaoxing için "Chapman University and Shaoxing People's Hospital" yazar; CPSC-Extra,
+CPSC 2018'in kullanılmamış verisidir (aynı kaynak). Makalelerde Challenge kaynakları arasında hasta veya kayıt paylaşımı
+bilgisi verilmez (BULUNAMADI).
+
 - **Kaynak düzeyinde dışlama yapıldı:** Challenge 2021'in PTB-XL kopyası (`training/ptb-xl`) ve PTB indirilmedi
-  (XXIX protokol §1). Kullanılan dört kaynağın kurum/ülke bilgisi proje dosyalarında doğrulanmadı (BULUNAMADI); XXIX
-  raporu bu kaynakları "farklı kurum ve ülke" olarak etiketler.
+  (XXIX protokol §1). Yerelde yalnız şu Challenge dizinleri vardır: XXIX {', '.join(f'`{x}`' for x in local_dirs['phase_xxix'])};
+  XXXIII {', '.join(f'`{x}`' for x in local_dirs['phase_xxxiii'])} (`data/raw/training/` listesi, bu betikte).
+- **Kayıt düzeyinde çakışmanın neden beklenmediği:** kullanılan dört kaynak Çin'deki kurumlardan (CPSC 2018,
+  Shaoxing People's Hospital) ve ABD'den (Emory University Hospital, Atlanta) gelir; PTB-XL ise PTB (Physikalisch-Technische
+  Bundesanstalt) kaynaklı Avrupa veri kümesidir. Challenge'ın PTB-XL'den türetilmiş tek alt kümesi (`ptb-xl`) ve PTB alt
+  kümesi (`ptb`) kullanılmadı. Bu nedenle PTB-XL kayıtlarının kullanılan kaynaklarda bulunması beklenmez. Bu bir
+  **çıkarımdır, kanıt değildir**: kaynak kurum bilgisine dayanır, kayıtlar karşılaştırılarak doğrulanmamıştır.
 - **Kayıt düzeyinde PTB-XL ↔ Challenge hash karşılaştırması: YAPILMADI** (önceki faz dosyalarında BULUNAMADI). Yerelde
   yalnız 100 civarı PTB-XL dalga formu vardır (`phase_xxviii/data/ptbxl500/`); tam karşılaştırma için PTB-XL
-  `records500` indirilmelidir. Bu, açık kalan bir kontroldür.
+  `records500` indirilmelidir. **Bu, açık kalan bir kontroldür.**
 - **Hasta düzeyinde tekilleştirme yapılamaz:** Challenge header'larında hasta kimliği yoktur (BULUNAMADI). Birebir kopya
   olmayan aynı-hasta kayıtları (ör. aynı hastanın farklı günlerdeki EKG'leri) tespit edilemez.
 
@@ -321,7 +352,8 @@ AFL kayıtlarının AF olarak sınıflandırılma oranı, `phase_xxxiii/results/
   pipeline'ı arasında 10 öznitelik 11/11 kayıtta birebir.
 - **Tekilleştirme:** pencere hash'iyle kaynak içi ve kaynaklar arası yapıldı; CPSC-Extra'nın AF kayıtlarının yarısı
   CPSC 2018 kopyasıydı.
-- **Açık:** PTB-XL ↔ Challenge kayıt düzeyi hash karşılaştırması yapılmadı; hasta kimliği olmadığı için aynı-hasta
+- **Açık:** PTB-XL ↔ Challenge kayıt düzeyi hash karşılaştırması yapılmadı (kaynak kurumları farklı olduğu ve Challenge'ın
+  PTB-XL/PTB alt kümeleri kullanılmadığı için çakışma beklenmez; doğrulanmadı); hasta kimliği olmadığı için aynı-hasta
   tekrarları dışlanamaz; Challenge etiketleri insan doğrulaması bilgisi taşımaz; yalnız ilk 10 sn kullanılır.
 - **Yorum sınırı:** model AF'yi sinüs ritminden iyi ayırır; diğer ritimlerde (sinüs taşikardisi, PVC, PAC, pacing) ve
   AFL'de yanlış pozitifler artar. Klinik tanı aracı değildir.

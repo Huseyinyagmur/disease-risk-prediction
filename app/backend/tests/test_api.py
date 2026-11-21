@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from conftest import LABS, base_person
+from conftest import AF_ENV, LABS, base_person
 
 RACE_MODELS = {'dm_A', 'dm_B', 'ckd_A', 'ckd_B', 'htn_M1'}
 FORBIDDEN_KEYS = ('prob', 'proba', 'probability', 'score', 'risk_percent', 'olasilik', 'olasılık')
@@ -43,6 +43,7 @@ def _walk_items(o):
             yield from _walk_items(v)
 
 
+@pytest.mark.requires_research_tree(*AF_ENV)
 def test_health(client):
     h = client.get('/health').json()
     assert h['status'] == 'ok', h

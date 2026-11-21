@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from conftest import LABS, base_person
+from conftest import AF_ENV, LABS, base_person
 from healthrisk_api.ecg_af import AF_FEATURES
 from healthrisk_api.paths import V2
 from healthrisk_api.service import parse_condition
@@ -47,7 +47,12 @@ def test_eligibility_lists_all_app_visible_models(client, service):
     assert {m['model_id'] for m in resp['models']} == set(service.models)
     assert all(m['state'] == 'MISSING' for m in resp['models'])
     af = _states(resp)['af_S4_DEVICE']
-    assert 'ecg_record' in af['missing_fields'] and af['endpoint'] == '/ecg/af'
+    assert af['endpoint'] == '/ecg/af' and 'age_years' in af['missing_fields']
+    if service.af.enabled:
+        assert 'ecg_record' in af['missing_fields'] and af['additional_reasons'] == []
+    else:                                    # temiz klon: EKG eksik sayılmaz, ortam nedeni "Ayrıca" olarak döner
+        assert 'ecg_record' not in af['missing_fields']
+        assert af['additional_reasons'] == [service.af_unavailable_reason()]
 
 
 @pytest.mark.parametrize('extra', [{}, LABS, dict(LABS, hba1c_pct=5.4, hemoglobin_gdl=13.5),
@@ -145,6 +150,7 @@ def test_af_missing_environment_reason(monkeypatch, tmp_path):
     assert feats is None and 'devre dışı' in info['abstain_reason']
 
 
+@pytest.mark.requires_research_tree('phase_xxviii/config/af_pipeline_lock.json')
 def test_af_missing_octave_reason(monkeypatch):
     import json as _json
     import healthrisk_api.ecg_af as A
@@ -164,6 +170,7 @@ def test_parse_condition_rejects_unknown():
         parse_condition('unknown_field = 1', fields)
 
 
+@pytest.mark.requires_research_tree('phase_xxviii/data/ptbxl500')
 def test_frontend_samples_are_byte_copies():
     for n in ('00165_hr.hea', '00165_hr.dat', '00691_hr.hea', '00691_hr.dat'):
         a, b = (SAMPLES / n).read_bytes(), (P28 / 'data' / 'ptbxl500' / n).read_bytes()
@@ -171,6 +178,7 @@ def test_frontend_samples_are_byte_copies():
 
 
 @pytest.mark.slow
+@pytest.mark.requires_research_tree('phase_xxviii/results/tol100_pipeline_features.csv', *AF_ENV)
 @pytest.mark.parametrize('stem', ['00691_hr', '00165_hr'])
 def test_ecg_display_payload(client, stem):
     hea, dat = (SAMPLES / f'{stem}.hea').read_bytes(), (SAMPLES / f'{stem}.dat').read_bytes()

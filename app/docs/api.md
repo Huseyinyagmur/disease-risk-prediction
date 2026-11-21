@@ -56,6 +56,10 @@ OpenAPI'deki yollar: `/ecg/af`, `/eligibility`, `/health`, `/models`, `/predict`
 | `OUT_OF_SCOPE` | Kapsam dışı: … | popülasyon dışı |
 | `ABSTAIN` | Karar verilemez: … | şema dışı kategori, gebelik "bilmiyorum", model devre dışı; **AF çalışma ortamı yok (Phase XLVI)** |
 
+Birden fazla neden aynı anda geçerliyse hepsi döner: `reasons` ana durumun (kişiye özel) gerekçeleri, `additional_reasons`
+diğer nedenlerdir (arayüz: ana satırın altında **"Ayrıca: …"**). Ör. popülasyon dışı bir kişide yanıtsız/"bilmiyorum"
+uygunluk soruları ve AF çalışma ortamı yokluğu `additional_reasons`'a yazılır; ana durum değişmez.
+
 ## /eligibility
 
 İstek: `{"fields": {...}}` (`/predict` ile aynı). Alan hataları 422 yerine `field_errors` listesinde döner; hatalı alan
@@ -94,6 +98,7 @@ başarısızsa AF satırı:
  "reasons": [
   "Octave/ECGDeli AF çalışma ortamı yok"
  ],
+ "additional_reasons": [],
  "af_pipeline_available": false,
  "details": [
   "Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı (yok/af_pipeline_lock.json). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır."
@@ -101,7 +106,12 @@ başarısızsa AF satırı:
 }
 ```
 
-Arayüz satırı: **"Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"**; "EKG kaydı yükle" bağlantısı gösterilmez. Ortam varken AF
+Arayüz satırı: **"Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"**; "EKG kaydı yükle" bağlantısı gösterilmez. Kişiye özel
+neden de varsa (Phase XLVI kapanış düzeltmesi) ana durum o nedendir, ortam nedeni `additional_reasons`'tadır; ör. yaş 95:
+`state = OUT_OF_SCOPE`, `reasons[0] = "yaş 95 model popülasyonu dışında (18–89)"`,
+`additional_reasons = ["Octave/ECGDeli AF çalışma ortamı yok"]` → arayüz
+**"Kapsam dışı: yaş 95 model popülasyonu dışında (18–89)"** ve altında **"Ayrıca: Octave/ECGDeli AF çalışma ortamı yok"**.
+Boş formda ana satır "Eksik: …" (yaş, cinsiyet; EKG kaydı eksik sayılmaz), altında yine "Ayrıca: …". Ortam varken AF
 satırı: `state = MISSING`, `missing_fields` içinde `ecg_record`, `af_pipeline_available = true`. Kilit/SHA hatasında
 gerekçe "AF pipeline devre dışı: kilit/SHA256 doğrulaması başarısız" olur. Diğer modeller etkilenmez
 (`tests/test_phase46_af_panel.py`).

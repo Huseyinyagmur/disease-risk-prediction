@@ -375,6 +375,24 @@ def cad_case(model_id='cad_DEVICE'):
                                               '(dönüşümün eşik mantığını sınar, değerin kendisini değil)'])
 
 
+# Phase XLVI kapanış: model başına gereken araştırma ağacı yolları (V2 köküne göre). Testler bunları
+# `requires_research_tree` ile işaretler; yoksa (GitHub klonu) SKIP. Ham döngü dosyalarının ayrıntısı faz betiklerindedir.
+_DM = ('phase_xlii/scripts/t1_data.py', 'phase_xlii/data/processed/dm_dev.pkl', 'phase_xlii/data/nhanes')
+_CKD = ('phase_xxxv/scripts/t1_data.py', 'phase_xxxv/data/processed/ckd_dev.pkl', 'phase_xxxiv/results/ckd_inventory_meta.json')
+REQUIRED_FILES = {
+    'dm_A': _DM, 'dm_B': _DM, 'ckd_A': _CKD, 'ckd_B': _CKD,
+    'osteo_final': ('phase_xxx/scripts/t2_osteo_data.py', 'phase_xxx/data/processed/osteo_dev.pkl', 'phase_xxx/data/raw'),
+    'fibrosis_final': ('phase_xxxi/scripts/t3_fib_data.py', 'phase_xxxi/data/processed/fib_dev.pkl', 'phase_xxx/data/raw/P',
+                       'phase_xxxi/data/raw/P'),
+    'htn_M1': ('phase_xxxvii/scripts/c37.py', 'phase_xxxvii/data/processed/htn3_dev.pkl',
+               'phase_xxxvii/results/download_manifest37.json'),
+    'anemia_LR16': ('Clinical_Optimization_Phase25/data/processed/anemia_development.pkl',
+                    'Clinical_Model_Improvement_Phase24/data/raw/nhanes/D', 'Clinical_Optimization_Phase25/data/raw/nhanes/A'),
+    'copd_S4_DEVICE': ('All_Disease_Improvement_Phase21/data/processed/copd_development.pkl',
+                       'All_Disease_Improvement_Phase21/data/raw/nhanes/G'),
+    'cad_DEVICE': ('experiments/cad_split.json', 'data/processed/cad.pkl', 'data/raw/uci_45/processed.cleveland.data'),
+}
+
 CASES = {'dm_A': dm_case, 'dm_B': dm_case, 'ckd_A': ckd_case, 'ckd_B': ckd_case, 'osteo_final': osteo_case,
          'fibrosis_final': fib_case, 'htn_M1': htn_case, 'anemia_LR16': anemia_case, 'copd_S4_DEVICE': copd_case,
          'cad_DEVICE': cad_case}

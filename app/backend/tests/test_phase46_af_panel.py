@@ -48,11 +48,36 @@ def test_af_env_missing_eligibility_says_cannot_decide(client, service, monkeypa
                                                                      before[mid]['reasons']), mid
 
 
-def test_af_env_missing_overrides_out_of_scope_and_empty_form(client, service, monkeypatch):
+def test_af_env_missing_person_reason_is_primary(client, service, monkeypatch):
+    """Kapanış düzeltmesi: birden fazla neden varsa hepsi döner. Ana durum/gerekçe kişiye özel nedendir
+    (kapsam dışı yaş, eksik yaş); ortam nedeni additional_reasons'ta ("Ayrıca: …")."""
     monkeypatch.setattr(service, 'af', _pipeline_without_env(monkeypatch))
-    for fields in ({}, {'age_years': 95, 'sex': 'female', 'pregnant': False}):
-        af = _af_row(client.post('/eligibility', json={'fields': fields}).json())
-        assert af['state'] == 'ABSTAIN' and af['reasons'][0] == 'Octave/ECGDeli AF çalışma ortamı yok'
+    env = 'Octave/ECGDeli AF çalışma ortamı yok'
+    af = _af_row(client.post('/eligibility', json={'fields': {'age_years': 95, 'sex': 'female', 'pregnant': False}}).json())
+    assert af['state'] == 'OUT_OF_SCOPE'
+    assert af['reasons'][0] == 'yaş 95 model popülasyonu dışında (18–89)' and env not in af['reasons']
+    assert af['additional_reasons'] == [env] and af['af_pipeline_available'] is False and af['details']
+    af = _af_row(client.post('/eligibility', json={'fields': {}}).json())
+    assert af['state'] == 'MISSING' and 'age_years' in af['missing_fields'] and 'ecg_record' not in af['missing_fields']
+    assert af['reasons'][0].startswith('yaş yanıtsız') and af['additional_reasons'] == [env]
+    # kişiye özel neden yoksa (form tam): ana durum ortam nedeni, ek neden yok
+    af = _af_row(client.post('/eligibility', json={'fields': base_person()}).json())
+    assert af['state'] == 'ABSTAIN' and af['reasons'] == [env] and af['additional_reasons'] == []
+
+
+def test_af_env_present_out_of_scope_has_no_env_reason(client, service):
+    if not service.af.enabled:
+        pytest.skip('AF çalışma ortamı bu makinede etkin değil')
+    af = _af_row(client.post('/eligibility', json={'fields': {'age_years': 95}}).json())
+    assert af['state'] == 'OUT_OF_SCOPE' and af['additional_reasons'] == []
+
+
+def test_out_of_scope_returns_other_eligibility_reasons(client):
+    """Popülasyon dışı (yaş 15 değil; şema 18+) — fibrozis: yaş 19 kapsam dışı + gebelik "bilmiyorum" ek neden."""
+    rows = {m['model_id']: m for m in client.post('/eligibility', json={'fields': base_person(age_years=19, pregnant='unknown')}).json()['models']}
+    fib = rows['fibrosis_final']
+    assert fib['state'] == 'OUT_OF_SCOPE' and fib['reasons'][0].startswith('yaş 19')
+    assert any('bilmiyorum' in x for x in fib['additional_reasons'])
 
 
 def test_af_octave_missing_same_reason(service, monkeypatch):

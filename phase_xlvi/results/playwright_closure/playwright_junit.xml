@@ -1,0 +1,46 @@
+<testsuites id="" name="" tests="20" failures="0" skipped="0" errors="0" time="75.680129">
+<testsuite name="privacy.spec.ts" timestamp="2026-11-21T10:18:50.059Z" hostname="chromium" tests="2" failures="0" skipped="0" time="11.334" errors="0">
+<testcase name="@gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok" classname="privacy.spec.ts" time="10.723">
+</testcase>
+<testcase name="@gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür" classname="privacy.spec.ts" time="0.611">
+</testcase>
+</testsuite>
+<testsuite name="scenarios.spec.ts" timestamp="2026-11-21T10:18:50.059Z" hostname="chromium" tests="18" failures="0" skipped="0" time="60.422" errors="0">
+<testcase name="@normal normal girdi › fibrozis: çalışabilir profil -&gt; panel Çalışabilir -&gt; sonuç OK, karar ve kanıt gösterilir" classname="scenarios.spec.ts" time="0.863">
+</testcase>
+<testcase name="@normal normal girdi › AF: PTB-XL AF örneği -&gt; OK, 10 öznitelik, lead II grafiği ve RR takogramı" classname="scenarios.spec.ts" time="9.374">
+</testcase>
+<testcase name="@normal normal girdi › AF: PTB-XL sinüs ritmi örneği -&gt; OK" classname="scenarios.spec.ts" time="9.402">
+</testcase>
+<testcase name="@normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir" classname="scenarios.spec.ts" time="10.376">
+</testcase>
+<testcase name="@eksik eksik girdi › fibrozis: eksik alanlı profil -&gt; panel &quot;Eksik: …&quot; (laboratuvarlar) -&gt; sonuç ABSTAIN ve neden" classname="scenarios.spec.ts" time="0.802">
+</testcase>
+<testcase name="@eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -&gt; Çalışabilir olur" classname="scenarios.spec.ts" time="1.531">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: formda panel &quot;Eksik: EKG kaydı&quot; gösterir" classname="scenarios.spec.ts" time="0.739">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz" classname="scenarios.spec.ts" time="0.298">
+</testcase>
+<testcase name="@eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -&gt; ABSTAIN (eksik alan)" classname="scenarios.spec.ts" time="10.462">
+</testcase>
+<testcase name="@birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -&gt; alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür" classname="scenarios.spec.ts" time="1.288">
+</testcase>
+<testcase name="@birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir" classname="scenarios.spec.ts" time="1.142">
+</testcase>
+<testcase name="@birim birim hatası › AF: 250 Hz başlıklı kayıt -&gt; ABSTAIN (&quot;500 Hz değil&quot;)" classname="scenarios.spec.ts" time="0.438">
+</testcase>
+<testcase name="@birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -&gt; sunucu 422 hatası gösterilir" classname="scenarios.spec.ts" time="0.468">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: gebe kadın profili -&gt; panel Kapsam dışı (gebe) -&gt; sonuç NOT_APPLICABLE" classname="scenarios.spec.ts" time="0.81">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: 19 yaş -&gt; Kapsam dışı (yaş ≥ 20)" classname="scenarios.spec.ts" time="0.742">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › fibrozis: gebelik &quot;bilmiyorum&quot; -&gt; Karar verilemez (ABSTAIN)" classname="scenarios.spec.ts" time="0.696">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › AF: formda yaş 95 -&gt; panel Kapsam dışı" classname="scenarios.spec.ts" time="0.663">
+</testcase>
+<testcase name="@kapsam kapsam dışı veri › AF: EKG ile yaş 95 -&gt; NOT_APPLICABLE" classname="scenarios.spec.ts" time="10.328">
+</testcase>
+</testsuite>
+</testsuites>

@@ -29,3 +29,8 @@ sha256_final_scan.json
 !phase_xxx/models/osteo_final.joblib
 !phase_xxxv/models/ckd_A_final.joblib
 !phase_xxxv/models/ckd_B_final.joblib
+
+# Makale tam metinleri depoda tutulmaz (atıf yalnız DOI ile; yerelde kalır) — Phase XLVI kapanış
+phase_xlvi/data/refs/collins2024_full.xml
+phase_xlvi/results/playwright_closure/playwright_artifacts/
+phase_xlvi/results/playwright/playwright_artifacts/

@@ -7,9 +7,13 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from conftest import AF_ENV, skip_module_without
 from healthrisk_api.ecg_af import AF_FEATURES
 from healthrisk_api.paths import V2
 
+REQ = ('phase_xxviii/results/tol100_pipeline_features.csv', 'phase_xxviii/data/ptbxl500') + AF_ENV
+skip_module_without(*REQ)                                           # temiz klon: toplama hatası yerine SKIP
+pytestmark = pytest.mark.requires_research_tree(*REQ)
 P28 = V2 / 'phase_xxviii'
 PARITY = pd.read_csv(P28 / 'results/tol100_pipeline_features.csv').sort_values('ecg_id')
 RECORDS = PARITY[PARITY.completed].ecg_id.head(5).tolist()          # sabit: en küçük 5 ecg_id

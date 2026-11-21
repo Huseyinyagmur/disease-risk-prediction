@@ -1,0 +1,32 @@
+
+[1m[46m RUN [49m[22m [36mv3.1.3 [39m[90mC:/Bitirme/HealthRisk_AI_Research_V2/app/frontend[39m
+
+ [32m✓[39m src/lib/form.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/demo/profiles.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/components/disclaimer.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1069[2mms[22m[39m
+   [33m[2m✓[22m[39m sabit uyarı — tek kaynak backend[2m > [22marayüz backend ne gönderirse onu gösterir (her ekranda; Giriş ve Hakkında dahil) [33m 1014[2mms[22m[39m
+ [32m✓[39m src/pages/Results.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 2289[2mms[22m[39m
+   [33m[2m✓[22m[39m sonuç ekranı[2m > [22mana modüller üstte, deneyseller ayrı bölümde; olasılık gösterilmez [33m 1052[2mms[22m[39m
+   [33m[2m✓[22m[39m sonuç ekranı[2m > [22mkarar metinleri: eşik üstü -> "İleri değerlendirme önerilir"; ABSTAIN -> neden; kanıt ve metrik tablosu [33m 642[2mms[22m[39m
+   [33m[2m✓[22m[39m sonuç ekranı[2m > [22mhedefi tanımlayan girdi uyarısı (HbA1c) kartta gösterilir [33m 592[2mms[22m[39m
+ [32m✓[39m src/components/RoutingPanel.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 2375[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı panel — AF çalışma ortamı[2m > [22mortam yokken, form tam (kişiye özel neden yok): Karar verilemez + gerekçe; Ayrıca satırı yok; EKG yükleme yok [33m 748[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı panel — AF çalışma ortamı[2m > [22mortam yokken, yaş 95: ana etiket Kapsam dışı: yaş …; altında Ayrıca: AF çalışma ortamı yok [33m 616[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı panel — AF çalışma ortamı[2m > [22mortam yokken, boş form: ana etiket Eksik (EKG kaydı değil, yaş); altında Ayrıca: ortam yok [33m 519[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı panel — AF çalışma ortamı[2m > [22mortam varken (önceki davranış): Eksik … EKG kaydı ve yükleme bağlantısı [33m 486[2mms[22m[39m
+ [32m✓[39m src/pages/DataEntry.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[33m 9083[2mms[22m[39m
+   [33m[2m✓[22m[39m veri giriş formu[2m > [22mbölümler ve alanlar şemadan üretilir; sabit uyarı görünür [33m 876[2mms[22m[39m
+   [33m[2m✓[22m[39m veri giriş formu[2m > [22mkoşullu soru: kadın seçilince gebelik (zorunlu) ve GDM soruları açılır, erkekte kapanır [33m 1781[2mms[22m[39m
+   [33m[2m✓[22m[39m veri giriş formu[2m > [22mbirim seçici: mmol/L seçilince değer ve birim olduğu gibi sunucuya gider (frontend dönüştürmez) [33m 2496[2mms[22m[39m
+   [33m[2m✓[22m[39m veri giriş formu[2m > [22maralık hatası: sunucunun field_errors mesajı alanın altında gösterilir [33m 1612[2mms[22m[39m
+   [33m[2m✓[22m[39m veri giriş formu[2m > [22mbiçim hatası: sayı olmayan girdi alan altında gösterilir ve hesaplama engellenir [33m 909[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı yönlendirme paneli[2m > [22mdurum rozetleri: Çalışabilir / Eksik: … / Kapsam dışı: … ve modül etiketleri [33m 441[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı yönlendirme paneli[2m > [22mKarar verilemez durumu (ör. gebelik "bilmiyorum") gerekçesiyle gösterilir [33m 409[2mms[22m[39m
+   [33m[2m✓[22m[39m canlı yönlendirme paneli[2m > [22msunucuya ulaşılamazsa panel hata gösterir [33m 419[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[32m38 passed[39m[22m[90m (38)[39m
+[2m   Start at [22m 13:14:31
+[2m   Duration [22m 21.39s[2m (transform 1.14s, setup 13.56s, collect 19.73s, tests 14.85s, environment 22.36s, prepare 13.00s)[22m
+
+JUNIT report written to C:/Bitirme/HealthRisk_AI_Research_V2/phase_xlvi/results/vitest_junit_closure.xml

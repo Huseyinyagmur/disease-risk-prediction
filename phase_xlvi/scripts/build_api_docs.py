@@ -55,9 +55,11 @@ def main_():
     A.AF_LOCK = A.V2 / 'yok' / 'af_pipeline_lock.json'
     svc.af = A.AFPipeline()
     el_noenv = c.post('/eligibility', json={'fields': person}).json()
+    el_noenv95 = c.post('/eligibility', json={'fields': {'age_years': 95, 'sex': 'female', 'pregnant': False}}).json()
     svc.af, A.AF_LOCK = real_af, real_lock
     af_row = [m for m in el['models'] if m['model_id'] == 'af_S4_DEVICE'][0]
     af_row_noenv = [m for m in el_noenv['models'] if m['model_id'] == 'af_S4_DEVICE'][0]
+    af_row_noenv95 = [m for m in el_noenv95['models'] if m['model_id'] == 'af_S4_DEVICE'][0]
 
     def tbl(rows, cols):
         return '\n'.join(['| ' + ' | '.join(cols) + ' |', '|' + '---|' * len(cols)] +
@@ -131,6 +133,10 @@ OpenAPI'deki yollar: {', '.join(f'`{p}`' for p in paths)}.
 | `OUT_OF_SCOPE` | Kapsam dışı: … | popülasyon dışı |
 | `ABSTAIN` | Karar verilemez: … | şema dışı kategori, gebelik "bilmiyorum", model devre dışı; **AF çalışma ortamı yok (Phase XLVI)** |
 
+Birden fazla neden aynı anda geçerliyse hepsi döner: `reasons` ana durumun (kişiye özel) gerekçeleri, `additional_reasons`
+diğer nedenlerdir (arayüz: ana satırın altında **"Ayrıca: …"**). Ör. popülasyon dışı bir kişide yanıtsız/"bilmiyorum"
+uygunluk soruları ve AF çalışma ortamı yokluğu `additional_reasons`'a yazılır; ana durum değişmez.
+
 ## /eligibility
 
 İstek: `{{"fields": {{...}}}}` (`/predict` ile aynı). Alan hataları 422 yerine `field_errors` listesinde döner; hatalı alan
@@ -150,10 +156,15 @@ Octave/ECGDeli veya kilitli pipeline dosyaları yoksa (ör. yalnız GitHub depos
 başarısızsa AF satırı:
 
 ```json
-{short({k: af_row_noenv[k] for k in ('model_id', 'state', 'missing_fields', 'reasons', 'af_pipeline_available', 'details')}, 900)}
+{short({k: af_row_noenv[k] for k in ('model_id', 'state', 'missing_fields', 'reasons', 'additional_reasons', 'af_pipeline_available', 'details')}, 900)}
 ```
 
-Arayüz satırı: **"Karar verilemez: {af_row_noenv['reasons'][0]}"**; "EKG kaydı yükle" bağlantısı gösterilmez. Ortam varken AF
+Arayüz satırı: **"Karar verilemez: {af_row_noenv['reasons'][0]}"**; "EKG kaydı yükle" bağlantısı gösterilmez. Kişiye özel
+neden de varsa (Phase XLVI kapanış düzeltmesi) ana durum o nedendir, ortam nedeni `additional_reasons`'tadır; ör. yaş 95:
+`state = {af_row_noenv95['state']}`, `reasons[0] = "{af_row_noenv95['reasons'][0]}"`,
+`additional_reasons = {json.dumps(af_row_noenv95['additional_reasons'], ensure_ascii=False)}` → arayüz
+**"Kapsam dışı: {af_row_noenv95['reasons'][0]}"** ve altında **"Ayrıca: {'; '.join(af_row_noenv95['additional_reasons'])}"**.
+Boş formda ana satır "Eksik: …" (yaş, cinsiyet; EKG kaydı eksik sayılmaz), altında yine "Ayrıca: …". Ortam varken AF
 satırı: `state = {af_row['state']}`, `missing_fields` içinde `ecg_record`, `af_pipeline_available = true`. Kilit/SHA hatasında
 gerekçe "AF pipeline devre dışı: kilit/SHA256 doğrulaması başarısız" olur. Diğer modeller etkilenmez
 (`tests/test_phase46_af_panel.py`).

@@ -1,7 +1,9 @@
 """Model SHA256'sı yüklemeden önce registry ile doğrulanır; uyuşmazlıkta model devre dışı ve /health'te raporlanır."""
 import json
 
-from conftest import base_person
+import pytest
+
+from conftest import AF_ENV, base_person
 
 
 def _svc_with_fake_sha(monkeypatch, target_suffix):
@@ -44,6 +46,7 @@ def test_package_version_mismatch_disables_all(monkeypatch, tmp_path):
     assert not svc.packages['ok'] and all(not s['enabled'] for s in svc.models.values())
 
 
+@pytest.mark.requires_research_tree(*AF_ENV)
 def test_af_pipeline_lock_verified(service):
     st = service.af.status()
     assert st['enabled'] and st['pipeline_version'] == 'AF-ECGDELI-OCTAVE-v1' and st['problems'] == []

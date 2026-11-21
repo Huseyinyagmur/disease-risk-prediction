@@ -162,12 +162,36 @@ Header-uygun kayıt sayıları (XXXIII): chapman_shaoxing|AF 1780, chapman_shaox
 
 ### 4.2 PTB-XL ile çakışma
 
+**Kaynakların kurum ve konumu** (Reyna ve ark. 2022, Tablo 1, doi:10.1088/1361-6579/ac79fd; Challenge tanım makalesi Reyna ve ark.
+2021, doi:10.23919/CinC53138.2021.9662687; künyeler ve alıntılar `phase_xlvi/data/refs/reyna2021_challenge_sources.json`):
+
+| kullanılan Challenge kaynağı (dizin) | kaynak kurum | konum |
+|---|---|---|
+| CPSC (`cpsc_2018`) | CPSC 2018 | Various Locations, China |
+| CPSC-Extra (`cpsc_2018_extra`) | CPSC 2018 | Various Locations, China |
+| Chapman-Shaoxing (`chapman_shaoxing`) | Shaoxing People's Hospital | Shaoxing, Zhejiang, China |
+| G12EC (`georgia`) | Emory University Hospital | Atlanta, Georgia, USA |
+
+| eğitim verisiyle ilişkili Challenge kaynağı (**kullanılmadı**) | kaynak kurum | konum |
+|---|---|---|
+| PTB-XL | Physkalisch Technische Bundesanstalt [sic] | Various Countries, Europe |
+| PTB | University Clinic Benjamin Franklin | Berlin, Germany |
+
+Reyna ve ark. 2021 Chapman-Shaoxing için "Chapman University and Shaoxing People's Hospital" yazar; CPSC-Extra,
+CPSC 2018'in kullanılmamış verisidir (aynı kaynak). Makalelerde Challenge kaynakları arasında hasta veya kayıt paylaşımı
+bilgisi verilmez (BULUNAMADI).
+
 - **Kaynak düzeyinde dışlama yapıldı:** Challenge 2021'in PTB-XL kopyası (`training/ptb-xl`) ve PTB indirilmedi
-  (XXIX protokol §1). Kullanılan dört kaynağın kurum/ülke bilgisi proje dosyalarında doğrulanmadı (BULUNAMADI); XXIX
-  raporu bu kaynakları "farklı kurum ve ülke" olarak etiketler.
+  (XXIX protokol §1). Yerelde yalnız şu Challenge dizinleri vardır: XXIX `chapman_shaoxing`, `cpsc_2018`, `cpsc_2018_extra`, `georgia`;
+  XXXIII `chapman_shaoxing`, `cpsc_2018`, `cpsc_2018_extra`, `georgia` (`data/raw/training/` listesi, bu betikte).
+- **Kayıt düzeyinde çakışmanın neden beklenmediği:** kullanılan dört kaynak Çin'deki kurumlardan (CPSC 2018,
+  Shaoxing People's Hospital) ve ABD'den (Emory University Hospital, Atlanta) gelir; PTB-XL ise PTB (Physikalisch-Technische
+  Bundesanstalt) kaynaklı Avrupa veri kümesidir. Challenge'ın PTB-XL'den türetilmiş tek alt kümesi (`ptb-xl`) ve PTB alt
+  kümesi (`ptb`) kullanılmadı. Bu nedenle PTB-XL kayıtlarının kullanılan kaynaklarda bulunması beklenmez. Bu bir
+  **çıkarımdır, kanıt değildir**: kaynak kurum bilgisine dayanır, kayıtlar karşılaştırılarak doğrulanmamıştır.
 - **Kayıt düzeyinde PTB-XL ↔ Challenge hash karşılaştırması: YAPILMADI** (önceki faz dosyalarında BULUNAMADI). Yerelde
   yalnız 100 civarı PTB-XL dalga formu vardır (`phase_xxviii/data/ptbxl500/`); tam karşılaştırma için PTB-XL
-  `records500` indirilmelidir. Bu, açık kalan bir kontroldür.
+  `records500` indirilmelidir. **Bu, açık kalan bir kontroldür.**
 - **Hasta düzeyinde tekilleştirme yapılamaz:** Challenge header'larında hasta kimliği yoktur (BULUNAMADI). Birebir kopya
   olmayan aynı-hasta kayıtları (ör. aynı hastanın farklı günlerdeki EKG'leri) tespit edilemez.
 
@@ -260,7 +284,8 @@ AFL kayıtlarının AF olarak sınıflandırılma oranı, `phase_xxxiii/results/
   pipeline'ı arasında 10 öznitelik 11/11 kayıtta birebir.
 - **Tekilleştirme:** pencere hash'iyle kaynak içi ve kaynaklar arası yapıldı; CPSC-Extra'nın AF kayıtlarının yarısı
   CPSC 2018 kopyasıydı.
-- **Açık:** PTB-XL ↔ Challenge kayıt düzeyi hash karşılaştırması yapılmadı; hasta kimliği olmadığı için aynı-hasta
+- **Açık:** PTB-XL ↔ Challenge kayıt düzeyi hash karşılaştırması yapılmadı (kaynak kurumları farklı olduğu ve Challenge'ın
+  PTB-XL/PTB alt kümeleri kullanılmadığı için çakışma beklenmez; doğrulanmadı); hasta kimliği olmadığı için aynı-hasta
   tekrarları dışlanamaz; Challenge etiketleri insan doğrulaması bilgisi taşımaz; yalnız ilk 10 sn kullanılır.
 - **Yorum sınırı:** model AF'yi sinüs ritminden iyi ayırır; diğer ritimlerde (sinüs taşikardisi, PVC, PAC, pacing) ve
   AFL'de yanlış pozitifler artar. Klinik tanı aracı değildir.

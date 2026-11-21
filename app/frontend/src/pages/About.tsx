@@ -24,7 +24,7 @@ export function About() {
         <h2 className="mb-1 text-lg font-semibold text-slate-800">Kanıta duyarlı yönlendirme</h2>
         <p>Arayüz, her modeli kanıtının gücüne ve kişinin verisine göre konumlandırır:</p>
         <ul className="mt-1 list-disc space-y-1 pl-5">
-          <li><strong>Canlı panel</strong>, girdikleriniz değiştikçe her modelin durumunu sunucudan sorar: <em>Çalışabilir</em>, <em>Eksik: …</em> (hangi alanların gerektiği), <em>Kapsam dışı: …</em> (ör. yaş aralığı, gebelik) veya <em>Karar verilemez</em> (ör. gebelik "bilmiyorum").</li>
+          <li><strong>Canlı panel</strong>, girdikleriniz değiştikçe her modelin durumunu sunucudan sorar: <em>Çalışabilir</em>, <em>Eksik: …</em> (hangi alanların gerektiği), <em>Kapsam dışı: …</em> (ör. yaş aralığı, gebelik) veya <em>Karar verilemez</em> (ör. gebelik "bilmiyorum"). Birden fazla neden varsa ana satır kişiye özel nedeni gösterir, diğerleri altında <em>Ayrıca: …</em> olarak listelenir (ör. "Ayrıca: Octave/ECGDeli AF çalışma ortamı yok").</li>
           <li><strong>Kanıt düzeyleri ayrı tutulur:</strong> iç test, zamansal doğrulama ve bağımsız dış doğrulama ayrı rozet ve tablolarda gösterilir; çapraz doğrulama sonuçları kanıt olarak gösterilmez.</li>
           <li><strong>Modül etiketi:</strong> AF ve karaciğer fibrozisi "ana modül", osteoporoz "araştırma modülü", diğerleri "deneysel"dir; deneysel sonuçlar ayrı bölümde, gri tonda gösterilir.</li>
           <li><strong>Hedefi tanımlayan girdi uyarısı:</strong> hastalığı tanımlayan değer (ör. HbA1c, ölçülen yüksek tansiyon, hemoglobin, kreatinin) girilmişse model yerine doğrudan klinik eşik kullanılması gerektiği belirtilir.</li>

@@ -87,6 +87,8 @@ flowchart TD
 - **Irk isteğe bağlıdır.** Yanıtsızsa ırk kullanan 5 model (dm A/B, ckd A/B, htn) ABSTAIN eder; varsayılan sınıf atanmaz.
 - **AF satırı** `/predict`'te her zaman NOT_APPLICABLE'dır (yalnız `/ecg/af`). `/eligibility`'de: ortam varken
   "Eksik: EKG kaydı", **ortam yoksa "Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"** (Phase XLVI).
+  Kişiye özel neden de varsa (kapsam dışı yaş, eksik alan) ana satır o nedendir; ortam nedeni altında "Ayrıca: …"
+  (`additional_reasons`; Phase XLVI kapanış düzeltmesi).
 
 ## 4. AF yolu (/ecg/af)
 

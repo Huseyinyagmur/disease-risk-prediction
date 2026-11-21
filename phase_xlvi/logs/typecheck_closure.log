@@ -1,0 +1,4 @@
+
+> healthrisk-frontend@0.45.0 typecheck
+> tsc --noEmit -p .
+

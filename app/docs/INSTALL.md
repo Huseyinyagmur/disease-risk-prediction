@@ -71,16 +71,62 @@ SHA256'sını `phase_xxviii/config/af_pipeline_lock.json` ile karşılaştırır
 |---|---|---|
 | kilit dosyası + sidecar | `phase_xxviii/config/af_pipeline_lock.json`, `af_pipeline_lock.sha256` | kendi SHA256'sı sidecar'da |
 | pipeline kodu | `phase_xxviii/pipeline/af_pipeline_v1.py` | SHA256 `2bf3c307…ede08a6` |
-| GNU Octave 10.3.0 (Windows, taşınabilir) | `Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/bin/octave-cli.exe` | exe SHA256 `14891b76…f446a2df`; paketler signal 1.4.6, statistics 1.7.5, image 2.18.1 |
+| GNU Octave 10.3.0 (Windows, taşınabilir 7z) | `Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/mingw64/bin/octave-cli.exe` | exe SHA256 `14891b76…f446a2df`; paketler signal 1.4.6, statistics 1.7.5, image 2.18.1 |
 | ECGDeli v1.1 kaynak dosyaları (26 `.m`, değiştirilmemiş) | `Clinical_Optimization_Phase25/src/ecg_extraction/native_source/` | ağaç SHA256 `cfa133de…a94c28b`; arşiv SHA256 `5da77e68…ee2d9ad` |
 | uyumluluk `.m` dosyaları (9) | `Clinical_Optimization_Phase25/src/ecg_extraction/compat/`, `Strong_Model_External_Validation_Phase26/src/ecg/compat/` | dosya başına SHA256 kilitte |
 | vendored WFDB 4.3.1 | `Clinical_Optimization_Phase25/src/ecg_extraction/vendor/` | sürüm kilitte |
 | "ilk 10 sn" ön adımının kaynak doğrulaması | `phase_xxix/scripts/t3_extract.py`, `phase_xxxiii/scripts/t3_extract.py` | dosya ve fonksiyon SHA256'sı `app/backend/healthrisk_api/ecg_window.py` içinde |
 
-- Resmî kaynaklar: GNU Octave (<https://octave.org/download>), ECGDeli (<https://github.com/KIT-IBT/ECGdeli>, GPL-3.0).
-  **Projede kullanılan indirme adresleri ve Octave paket kurulum komutları proje kayıtlarında BULUNAMADI.** Bu yüzden
-  dosyaları başka bir kaynaktan edinen kullanıcı, kilit SHA256'larının tutup tutmadığını `/health > af_pipeline.problems`
-  ile görür. SHA uyuşmazsa AF bilerek çalışmaz (donmuş pipeline dışı öznitelik üretilmez).
+### 4.1 Kilitli sürümler ve indirme kaynakları (proje kayıtlarından)
+
+| bileşen | kilitli sürüm | projede kullanılan kaynak | arşiv SHA256 (proje kaydı) |
+|---|---|---|---|
+| GNU Octave (Windows 64 bit, taşınabilir 7z) | **10.3.0**; paketler signal 1.4.6, statistics 1.7.5, image 2.18.1 (Windows 7z paketine dahil; ayrı `pkg install` yapılmadı) | `https://mirrors.nic.funet.fi/pub/gnu/gnu/octave/windows/octave-10.3.0-w64.7z` (GNU aynası; resmî: `https://ftp.gnu.org/gnu/octave/windows/octave-10.3.0-w64.7z`) — `Clinical_Optimization_Phase25/data/metadata/octave_complete_download.json` | `4595b055c73de090839f5b86f289b0ac22b69549676b3452252306fffdc37ac6` (469.597.755 bayt) |
+| ECGDeli (KIT-IBT, GPL-3.0) | **v1.1** etiketi = commit **`3c13b1b2ff55152360f3cee992c1d1d66099aa14`** (yayın 2022-10-12) | `https://api.github.com/repos/KIT-IBT/ECGdeli/zipball/v1.1` — `Clinical_Model_Improvement_Phase24/af_source_download.json` | `5da77e68f3170f20ff4f94ef63b069e3aa11b86faddeaf1b093d9c487ee2d9ad` (= kilit `ecgdeli.archive_sha256`) |
+
+Doğrulama durumu (Phase XLVI kapanış, 2026-11-21): ECGDeli zipball adresi bugün de kilitteki arşiv SHA256'sını verdi;
+arşiv yorumu ve `git rev-parse v1.1` commit'i `3c13b1b…` olarak doğruladı; zipball'dan çıkarılan ve `git checkout v1.1`
+ile alınan `.m` dosyaları kilitteki ağaç SHA256'sını (`cfa133de…`, 26 dosya) verdi **[doğrulandı]**. Octave arşivi bu
+fazda yeniden indirilmedi; projedeki kopyanın SHA256'sı yukarıdaki kayıtla aynı **[bu makinede doğrulandı]**. GNU, Octave
+arşivleri için SHA256 değil GPG imzası (`.sig`) yayımlar; resmî imza denetimi proje kayıtlarında BULUNAMADI.
+`https://github.com/KIT-IBT/ECGdeli/archive/refs/tags/v1.1.zip` adresi farklı üst klasör adı nedeniyle **farklı** arşiv
+SHA256'sı verir; belirleyici kontrol arşiv değil kaynak ağacı SHA256'sıdır.
+
+Kurulum (depo kökünden, PowerShell; 7-Zip gerekir):
+
+```powershell
+# Octave 10.3.0 -> Clinical_Optimization_Phase25/runtime/octave/octave-10.3.0-w64/...
+New-Item -ItemType Directory -Force Clinical_Optimization_Phase25\runtime\octave
+7z x octave-10.3.0-w64.7z -oClinical_Optimization_Phase25\runtime\octave
+
+# ECGDeli v1.1: yalnız .m dosyaları, üst klasör (KIT-IBT-ECGdeli-3c13b1b/) atılarak, DEĞİŞTİRİLMEDEN
+git -c core.autocrlf=false clone https://github.com/KIT-IBT/ECGdeli.git ecgdeli_src
+git -C ecgdeli_src -c core.autocrlf=false checkout 3c13b1b2ff55152360f3cee992c1d1d66099aa14
+robocopy ecgdeli_src Clinical_Optimization_Phase25\src\ecg_extraction\native_source *.m /S /XD .git
+```
+
+`core.autocrlf=false` önemlidir: satır sonu dönüşümü `.m` SHA256'larını değiştirir ve AF devre dışı kalır.
+
+### 4.2 Kurulumdan sonra SHA eşleştirmesi (betik)
+
+```powershell
+app\backend\.venv\Scripts\python.exe -B phase_xlvi\scripts\verify_af_env.py
+# isteğe bağlı: indirilen arşivleri de denetle
+app\backend\.venv\Scripts\python.exe -B phase_xlvi\scripts\verify_af_env.py --ecgdeli-zip ECGdeli_v1.1.zip --octave-7z octave-10.3.0-w64.7z
+```
+
+Betik, sunucunun başlangıç denetimiyle aynı tanımlarla şunları `phase_xxviii/config/af_pipeline_lock.json` ile karşılaştırır
+ve her satır için `OK`/`HATA` (beklenen/bulunan SHA) yazar: kilit dosyası ↔ `.sha256` sidecar, `af_pipeline_v1.py`,
+`octave-cli.exe`, üç Octave paket klasörü, ECGDeli kaynak ağacı SHA256'sı (26 `.m`; `healthrisk_api.ecg_af._tree_hash`),
+9 uyumluluk `.m` dosyası, vendored WFDB sürümü, "ilk 10 sn" ön adımının kaynak SHA'sı; sonda sunucunun kendi denetimini
+(`AFPipeline`) çalıştırır. Çıkış kodu 0 = hepsi kilitle aynı ve AF etkin; 1 = uyuşmazlık/eksik. Dosya değiştirmez.
+Tam ağaçta çıktı: `phase_xlvi/results/af_env_check.json` (21/21 OK, çıkış 0) **[bu makinede doğrulandı]**; temiz klonda
+beklenen çıkış 1 (kilit yok) **[temiz klonda doğrulandı]**.
+
+**Önemli sınır:** kilit dosyası, pipeline kodu (`phase_xxviii/`), 9 uyumluluk `.m` dosyası (Phase25/26) ve vendored WFDB
+GitHub deposunda **yoktur**; yalnız tam araştırma ağacında bulunur. Octave ve ECGDeli'yi resmî kaynaktan kurmak tek başına
+temiz klonda AF'yi etkinleştirmez. SHA uyuşmazsa AF bilerek çalışmaz (donmuş pipeline dışı öznitelik üretilmez).
+
 - Doğrulama: `GET /health` → `af_pipeline.enabled = true`; panelde AF satırı "Eksik: EKG kaydı"; arayüzde "EKG ile AF
   analizi" → `app/frontend/public/samples/00691_hr.hea` + `.dat` (PTB-XL, AF). Süre makine yüküne bağlı ≈ 7–30 sn.
 

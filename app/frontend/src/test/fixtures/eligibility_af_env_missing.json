@@ -8,10 +8,16 @@
       "app_mode": "ecg_upload_demo",
       "module_label": "ana modül",
       "endpoint": "/ecg/af",
-      "state": "ABSTAIN",
-      "missing_fields": [],
+      "state": "MISSING",
+      "missing_fields": [
+        "age_years",
+        "sex"
+      ],
       "unknown_categories": [],
       "reasons": [
+        "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor"
+      ],
+      "additional_reasons": [
         "Octave/ECGDeli AF çalışma ortamı yok"
       ],
       "details": [
@@ -46,6 +52,7 @@
         "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor",
         "eksik zorunlu alan(lar): age_years, sex, cad_chest_pain_type, sbp_1_mmhg, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -84,6 +91,7 @@
         "eksik zorunlu alan(lar): told_diabetes, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_1_mmhg, sbp_2_mmhg, sbp_3_mmhg, dbp_1_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, family_hx_diabetes, recreational_activity, smoking_status",
         "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -127,6 +135,7 @@
         "eksik zorunlu alan(lar): told_diabetes, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_1_mmhg, sbp_2_mmhg, sbp_3_mmhg, dbp_1_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, family_hx_diabetes, recreational_activity, smoking_status, total_chol_mgdl, hdl_mgdl, tg_mgdl, alt_ul, uric_acid_mgdl",
         "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -163,6 +172,7 @@
         "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor",
         "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, waist_cm, smoking_status, hba1c_pct, alt_ul, ast_ul, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, wbc_k_ul, rbc_m_ul, mcv_fl, rdw_pct, albumin_gdl"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -188,6 +198,7 @@
         "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor",
         "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, smoking_status, fev1_pre_ml, fvc_pre_ml"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -223,6 +234,7 @@
         "eksik zorunlu alan(lar): age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, smoking_status, alcohol_drinks_per_day, told_diabetes, hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl",
         "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -259,6 +271,7 @@
         "cinsiyet yanıtsız: popülasyon uygunluğu doğrulanamıyor",
         "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, waist_cm, alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, told_diabetes, tg_mgdl, hdl_mgdl, alcohol_drinks_per_day"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -289,6 +302,7 @@
         "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor",
         "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, smoking_status, alcohol_drinks_per_day, glucocorticoid_ge1month, fracture_hip, fracture_wrist, fracture_spine, fracture_after_age20, parent_hip_fracture"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -327,6 +341,7 @@
         "eksik zorunlu alan(lar): told_weak_failing_kidneys, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, told_diabetes, hx_coronary_disease, hx_heart_failure, hx_stroke, smoking_status",
         "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
       ],
+      "additional_reasons": [],
       "details": []
     },
     {
@@ -370,6 +385,7 @@
         "eksik zorunlu alan(lar): told_weak_failing_kidneys, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, told_diabetes, hx_coronary_disease, hx_heart_failure, hx_stroke, smoking_status, glucose_serum_mgdl, hba1c_pct, total_chol_mgdl, hdl_mgdl, hemoglobin_gdl",
         "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz"
       ],
+      "additional_reasons": [],
       "details": []
     }
   ],

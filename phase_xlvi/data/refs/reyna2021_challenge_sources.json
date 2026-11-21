@@ -1,0 +1,89 @@
+{
+ "retrieved_utc": "2026-11-21",
+ "note": "Yalnız künye ve kaynak tablosu (kurum/konum) alıntılandı; makale tam metni depoya konmadı. PDF SHA256 yerel indirme kopyalarınındır.",
+ "challenge_page": {
+  "url": "https://moody-challenge.physionet.org/2021/",
+  "quote": "The Challenge data include annotated twelve-lead ECG recordings from six sources in four countries across three continents."
+ },
+ "papers": [
+  {
+   "key": "reyna2021_cinc",
+   "citation": "Reyna MA, Sadr N, Perez Alday EA, et al. Will Two Do? Varying Dimensions in Electrocardiography: The PhysioNet/Computing in Cardiology Challenge 2021. Computing in Cardiology 2021;48:1-4.",
+   "doi": "10.23919/CinC53138.2021.9662687",
+   "pdf_url": "https://moody-challenge.physionet.org/2021/papers/2021ChallengePaperCinC.pdf",
+   "pdf_sha256": "d8b5449c991e93e5af5765bbcb607d1c0adcd336a574dbfb689edef974dca900",
+   "doi_verified_via": "Crossref API (title search)",
+   "quotes": [
+    "We sourced 131,155 recordings with clinical diagnoses from seven institutions in four countries",
+    "CPSC. This database contains 13,256 recordings from the China Physiological Signal Challenge (CPSC) 2018",
+    "Chapman-Shaoxing. This database contains 10,247 recordings from Chapman University and Shaoxing People's Hospital",
+    "PTB-XL. This database contains 21,837 recordings from the PTB-XL database [14]. We used this database as training data.",
+    "We did not change the data or labels from the original databases"
+   ]
+  },
+  {
+   "key": "reyna2022_pmea",
+   "citation": "Reyna MA, Sadr N, Perez Alday EA, et al. Issues in the automated classification of multilead ECGs using heterogeneous labels and populations. Physiol Meas 2022;43(8):084001.",
+   "doi": "10.1088/1361-6579/ac79fd",
+   "pdf_url": "https://moody-challenge.physionet.org/2021/papers/2021ChallengePaperPMEA.pdf",
+   "pdf_sha256": "826b569c7e50b81dd97aeb052296823164c380d7d7306c222ebba0ad262c2381",
+   "doi_verified_via": "Crossref API (title search)",
+   "table1_sources": [
+    {
+     "database": "Chapman-Shaoxing",
+     "source": "Shaoxing People's Hospital",
+     "location": "Shaoxing, Zhejiang, China"
+    },
+    {
+     "database": "CPSC",
+     "source": "CPSC 2018",
+     "location": "Various Locations, China"
+    },
+    {
+     "database": "CPSC-Extra",
+     "source": "CPSC 2018",
+     "location": "Various Locations, China"
+    },
+    {
+     "database": "G12EC",
+     "source": "Emory University Hospital",
+     "location": "Atlanta, Georgia, USA"
+    },
+    {
+     "database": "INCART",
+     "source": "St. Petersburg Institute of Cardiological Technics",
+     "location": "St. Petersburg, Russia"
+    },
+    {
+     "database": "Ningbo",
+     "source": "Ningbo First Hospital",
+     "location": "Ningbo, Zhejiang, China"
+    },
+    {
+     "database": "PTB",
+     "source": "University Clinic Benjamin Franklin",
+     "location": "Berlin, Germany"
+    },
+    {
+     "database": "PTB-XL",
+     "source": "Physkalisch Technische Bundesanstalt [sic]",
+     "location": "Various Countries, Europe"
+    },
+    {
+     "database": "UMich",
+     "source": "University of Michigan",
+     "location": "Ann Arbor, Michigan, USA"
+    },
+    {
+     "database": "Undisclosed",
+     "source": "N/A",
+     "location": "USA"
+    }
+   ],
+   "quotes": [
+    "(iii) CPSC-Extra. The CPSC-Extra database contains unused data from CPSC 2018",
+    "(iv) G12EC. The G12EC Database is a new database representing a large population from the Southeastern United States."
+   ]
+  }
+ ]
+}

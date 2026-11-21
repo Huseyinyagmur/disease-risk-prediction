@@ -10,6 +10,12 @@ export function sortByModule<T extends { module_label: string }>(xs: T[]): T[] {
   return [...xs].sort((a, b) => moduleRank(a.module_label) - moduleRank(b.module_label));
 }
 
+/** Ana durumdan ayrı, aynı anda geçerli nedenler (backend `additional_reasons`); yoksa null. */
+export function alsoLine(m: EligModel): string | null {
+  const xs = m.additional_reasons ?? [];
+  return xs.length ? 'Ayrıca: ' + xs.join('; ') : null;
+}
+
 export function stateLine(m: EligModel, schema: Schema | null): string {
   switch (m.state) {
     case 'READY':
@@ -56,6 +62,9 @@ export function RoutingPanel({ elig, loading, error }: Props) {
                 <span className="text-[11px] text-slate-500">{m.model_id}</span>
               </div>
               <p className="mt-1 text-xs" data-testid={`panel-line-${m.model_id}`}>{stateLine(m, schema)}</p>
+              {alsoLine(m) && (
+                <p className="mt-0.5 text-[11px] text-slate-600" data-testid={`panel-also-${m.model_id}`}>{alsoLine(m)}</p>
+              )}
               {m.state === 'MISSING' && m.reasons.length > 0 && (
                 <ul className="mt-1 list-disc pl-4 text-[11px] text-slate-500">
                   {m.reasons.filter((r) => !r.startsWith('eksik zorunlu alan')).map((r) => <li key={r}>{r}</li>)}

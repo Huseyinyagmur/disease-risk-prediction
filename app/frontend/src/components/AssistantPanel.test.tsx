@@ -188,3 +188,26 @@ describe('Görev 0 — sonuç kartı düzeltmeleri', () => {
     expect(within(fib).getByTestId('decision')).not.toHaveTextContent('araştırma sınıflaması (klinik karar değildir)');
   });
 });
+
+describe('v3 — genel bilgi sorusunda acil uyarı kutusu', () => {
+  it('emergency_notice varsa yanıtın üstünde ayrı, belirgin 112 kutusu; normal yanıt ve kaynaklar altında', async () => {
+    const NOTICE = "Acil bir durum yaşıyorsanız … hemen 112'yi arayın.";
+    stubAssistant({ answer: () => ({ status: 200, body: {
+      route: 'llm', llm_used: true, local_model: true, disclaimer: DISC, emergency_notice: NOTICE,
+      answer: `Göğüs ağrısının birçok nedeni olabilir [1].\n\n${DISC}`,
+      sources: [{ doc_id: 'cdc_cad', title: 'About CAD', section: 'Symptoms', kind: 'external', url: 'https://www.cdc.gov/heart-disease/about/coronary-artery-disease.html' }],
+    } }) });
+    const u = userEvent.setup();
+    renderApp('home');
+    await u.click(await screen.findByTestId('assistant-open'));
+    await u.type(screen.getByTestId('assistant-input'), 'Göğüs ağrısı nedir?');
+    await u.click(screen.getByTestId('assistant-send'));
+    const bot = await screen.findByTestId('assistant-msg-bot');
+    const box = within(bot).getByTestId('assistant-emergency-notice');
+    expect(box).toHaveAttribute('role', 'alert');
+    expect(box).toHaveTextContent(tx.asst_emergency_title);
+    expect(box).toHaveTextContent('112');
+    expect(bot.firstElementChild?.nextElementSibling).toBe(box);   // başlık satırından hemen sonra, yanıtın üstünde
+    expect(within(bot).getByTestId('assistant-sources')).toBeInTheDocument();
+  });
+});

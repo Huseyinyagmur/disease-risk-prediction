@@ -80,6 +80,26 @@ test.describe('açıklama asistanı', () => {
     await page.screenshot({ path: `${DIR}/desktop_assistant_04_acil_112.png` });
   });
 
+  test('v3: genel bilgi sorusunda acil kelimesi → en üstte 112 uyarı kutusu + normal yanıt; kişisel ifade → sabit 112', async ({ page }) => {
+    test.setTimeout(LLM_TIMEOUT + 60_000);
+    await page.goto('/');
+    await openAssistant(page);
+    await page.getByTestId('assistant-input').fill('Göğüs ağrısı nedir?');
+    await page.getByTestId('assistant-send').click();
+    const bot = page.getByTestId('assistant-msg-bot');
+    await expect(bot).toBeVisible({ timeout: LLM_TIMEOUT });
+    const box = bot.getByTestId('assistant-emergency-notice');
+    await expect(box).toBeVisible();
+    await expect(box).toContainText('112');
+    await expect(bot).toContainText('Araştırma prototipidir;');
+    await page.screenshot({ path: `${DIR}/desktop_assistant_05_genel_soru_112_kutusu.png` });
+    await page.getByTestId('assistant-input').fill('Şu an göğsümde baskı var');
+    await page.getByTestId('assistant-send').click();
+    const last = page.getByTestId('assistant-msg-bot').last();
+    await expect(last).toContainText("112'yi arayın", { timeout: 15_000 });
+    await expect(last.getByTestId('assistant-emergency-notice')).toHaveCount(0);
+  });
+
   test('mobil (375 px): panel ekrana sığar, yatay kaydırma yok', async ({ page }) => {
     test.setTimeout(LLM_TIMEOUT + 60_000);
     await page.setViewportSize({ width: 375, height: 800 });

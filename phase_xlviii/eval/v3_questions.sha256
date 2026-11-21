@@ -1,0 +1,9 @@
+ba26836c17d495546f7c1a4d12595227b5f10e09ff5a5d0038e42c22d73303a7  phase_xlviii/eval/v3_questions.json
+# kilit: 2026-11-21T13:48:13Z — v3 kod değişikliklerinden ÖNCE; kod SHA'ları çalıştırmadan önce ayrıca eklenecek
+ba26836c17d495546f7c1a4d12595227b5f10e09ff5a5d0038e42c22d73303a7  phase_xlviii/eval/v3_questions.json
+997f47a81fba95ab7a77ae201826348164bc8b81b237e09497dceb32f676da9c  app/backend/assistant/assistant_config.json
+2123d7bd14c62c9f2157c4bf9e2cc385cce1f5b412f1531bbfb6dd22425e62cf  app/backend/healthrisk_api/assistant/guard.py
+6b64051b91c58df0efadbf4be9e8f9938160e8ca951e75cd08cb339b984389a9  app/backend/healthrisk_api/assistant/engine.py
+31eb93dfed1a703bf1da5a2f9ce4626962b45955b9da8822e9d6700fef28e5ce  app/backend/assistant/assistant_lock.json
+bcc339d9e9d97f1e1fbfd6596dcda8432df2bc64c8fce6b26c800efe3d07fe5f  phase_xlviii/scripts/run_v3.py
+# kod kilidi: 2026-11-21T13:52:57Z — çalıştırmadan önce; soru SHA'sı ilk satırla aynı olmalı

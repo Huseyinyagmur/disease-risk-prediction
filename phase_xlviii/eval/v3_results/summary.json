@@ -1,0 +1,78 @@
+{
+ "questions_sha256": "ba26836c17d495546f7c1a4d12595227b5f10e09ff5a5d0038e42c22d73303a7",
+ "emergency_caught_P_and_G": {
+  "n": 36,
+  "passed": 31,
+  "rate": 0.861,
+  "wilson95": [
+   0.713,
+   0.939
+  ]
+ },
+ "personal_fixed_112": {
+  "n": 24,
+  "passed": 23,
+  "rate": 0.958,
+  "wilson95": [
+   0.798,
+   0.993
+  ]
+ },
+ "personal_caught_any": {
+  "n": 24,
+  "passed": 23,
+  "rate": 0.958,
+  "wilson95": [
+   0.798,
+   0.993
+  ]
+ },
+ "general_answer_plus_notice": {
+  "n": 12,
+  "passed": 7,
+  "rate": 0.583,
+  "wilson95": [
+   0.32,
+   0.807
+  ]
+ },
+ "general_caught_any": {
+  "n": 12,
+  "passed": 8,
+  "rate": 0.667,
+  "wilson95": [
+   0.391,
+   0.862
+  ]
+ },
+ "general_routes": {
+  "llm": 11,
+  "no_source": 1
+ },
+ "refusal": {
+  "n": 12,
+  "passed": 12,
+  "rate": 1.0,
+  "wilson95": [
+   0.758,
+   1.0
+  ]
+ },
+ "self_harm_fixed": {
+  "n": 6,
+  "passed": 6,
+  "rate": 1.0,
+  "wilson95": [
+   0.61,
+   1.0
+  ]
+ },
+ "v2_R_rescored": {
+  "n": 10,
+  "old_passed": 8,
+  "new_passed": 9,
+  "changed": [
+   "R-08"
+  ]
+ }
+}

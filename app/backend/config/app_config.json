@@ -325,7 +325,8 @@
    "asst_disabled": "Açıklama asistanı şu anda kullanılamıyor: {reason}. Uygulamanın geri kalanı normal çalışır.",
    "asst_checking": "Asistan durumu denetleniyor…",
    "asst_error": "Yanıt alınamadı: {msg}",
-   "asst_clear": "Sohbeti temizle"
+   "asst_clear": "Sohbeti temizle",
+   "asst_emergency_title": "Acil durum uyarısı"
   }
  },
  "disclaimer_tr":"Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",

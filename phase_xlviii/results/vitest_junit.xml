@@ -1,143 +1,145 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="62" failures="0" errors="0" time="22.2715266">
-    <testsuite name="src/demo/profiles.test.ts" timestamp="2026-11-21T13:19:51.743Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="0.0340777">
-        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; dört profil: çalışabilir, eksik, kapsam dışı, birim hatalı" time="0.0051059">
+<testsuites name="vitest tests" tests="63" failures="0" errors="0" time="15.0383674">
+    <testsuite name="src/components/AssistantPanel.test.tsx" timestamp="2026-11-21T13:57:14.872Z" hostname="LAPTOP-V013QBHO" tests="9" failures="0" errors="0" skipped="0" time="2.8243932">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; her sayfada açılır; yerel model notu, örnek sorular; yanıt + kaynak bağlantıları + uyarı; bekleme göstergesi" time="0.2869151">
         </testcase>
-        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; fibrosis_ready: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0135372">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; sonuç etiketleri yalnız kapalı sözlük (hastalık × durum × eksik alan adı) — form değerleri gönderilmez" time="1.1043135">
         </testcase>
-        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; missing: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0010979">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; Ollama yokken: panel gerekçeyle devre dışı; uygulamanın geri kalanı çalışır" time="0.1729003">
         </testcase>
-        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; out_of_scope: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0065161">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; 503 yanıtında hata mesajı ve devre dışı durum" time="0.1561995">
         </testcase>
-        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; unit_error: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0047082">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; sohbet tarayıcı depolamasına yazılmaz" time="0.1141541">
         </testcase>
-    </testsuite>
-    <testsuite name="src/components/AssistantPanel.test.tsx" timestamp="2026-11-21T13:19:51.747Z" hostname="LAPTOP-V013QBHO" tests="8" failures="0" errors="0" skipped="0" time="3.4733847">
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; her sayfada açılır; yerel model notu, örnek sorular; yanıt + kaynak bağlantıları + uyarı; bekleme göstergesi" time="0.5555877">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; AF EKG yüklenmemiş: &quot;EKG kaydı gerekiyor&quot; ve &quot;Ne gerekiyor?&quot;" time="0.1940899">
         </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; sonuç etiketleri yalnız kapalı sözlük (hastalık × durum × eksik alan adı) — form değerleri gönderilmez" time="1.5711067">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; osteoporoz &quot;yapısal boşluk … age_last_period&quot; yalnız Teknik ayrıntı içinde" time="0.1626394">
         </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; Ollama yokken: panel gerekçeyle devre dışı; uygulamanın geri kalanı çalışır" time="0.2677421">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; karar kutusu tekrar satırı: &quot;Araştırma sınıflamasıdır; klinik karar değildir. Olasılık gösterilmez.&quot;" time="0.1653754">
         </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; 503 yanıtında hata mesajı ve devre dışı durum" time="0.2002485">
-        </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="açıklama asistanı paneli &gt; sohbet tarayıcı depolamasına yazılmaz" time="0.1471263">
-        </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; AF EKG yüklenmemiş: &quot;EKG kaydı gerekiyor&quot; ve &quot;Ne gerekiyor?&quot;" time="0.251551">
-        </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; osteoporoz &quot;yapısal boşluk … age_last_period&quot; yalnız Teknik ayrıntı içinde" time="0.2342024">
-        </testcase>
-        <testcase classname="src/components/AssistantPanel.test.tsx" name="Görev 0 — sonuç kartı düzeltmeleri &gt; karar kutusu tekrar satırı: &quot;Araştırma sınıflamasıdır; klinik karar değildir. Olasılık gösterilmez.&quot;" time="0.2430112">
+        <testcase classname="src/components/AssistantPanel.test.tsx" name="v3 — genel bilgi sorusunda acil uyarı kutusu &gt; emergency_notice varsa yanıtın üstünde ayrı, belirgin 112 kutusu; normal yanıt ve kaynaklar altında" time="0.465911">
         </testcase>
     </testsuite>
-    <testsuite name="src/components/disclaimer.test.tsx" timestamp="2026-11-21T13:19:51.750Z" hostname="LAPTOP-V013QBHO" tests="4" failures="0" errors="0" skipped="0" time="1.2505575">
-        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; backend fixture onaylı metni taşır" time="0.0030854">
+    <testsuite name="src/components/disclaimer.test.tsx" timestamp="2026-11-21T13:57:14.874Z" hostname="LAPTOP-V013QBHO" tests="4" failures="0" errors="0" skipped="0" time="0.4385062">
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; backend fixture onaylı metni taşır" time="0.0010278">
         </testcase>
-        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; arayüz backend ne gönderirse onu gösterir (her ekranda; Giriş ve Hakkında dahil)" time="1.130552">
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; arayüz backend ne gönderirse onu gösterir (her ekranda; Giriş ve Hakkında dahil)" time="0.4088695">
         </testcase>
-        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; sunucuya ulaşılamazsa metin uydurulmaz; durum bildirilir" time="0.0396531">
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; sunucuya ulaşılamazsa metin uydurulmaz; durum bildirilir" time="0.0135086">
         </testcase>
-        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; kaynak kodda uyarı metni yok (src/, testler hariç)" time="0.0744123">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/RoutingPanel.test.tsx" timestamp="2026-11-21T13:19:51.752Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="2.2754014">
-        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, form tam (kişiye özel neden yok): Karar verilemez + gerekçe; Ayrıca satırı yok; EKG yükleme yok" time="0.8621335">
-        </testcase>
-        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, yaş 95: ana etiket Kapsam dışı: yaş …; altında Ayrıca: AF çalışma ortamı yok" time="0.5036162">
-        </testcase>
-        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, boş form: ana etiket Eksik (EKG kaydı değil, yaş); altında Ayrıca: ortam yok" time="0.4556622">
-        </testcase>
-        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam varken (önceki davranış): Eksik … EKG kaydı ve yükleme bağlantısı" time="0.4480086">
-        </testcase>
-        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; stateLine/alsoLine: terim sözlükten + backend gerekçeleri (yalnız sözlükteki sadeleştirme), metin uydurmaz" time="0.0034668">
+        <testcase classname="src/components/disclaimer.test.tsx" name="sabit uyarı — tek kaynak backend &gt; kaynak kodda uyarı metni yok (src/, testler hariç)" time="0.0138824">
         </testcase>
     </testsuite>
-    <testsuite name="src/lib/form.test.ts" timestamp="2026-11-21T13:19:51.754Z" hostname="LAPTOP-V013QBHO" tests="12" failures="0" errors="0" skipped="0" time="0.0235771">
-        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; yalnız form_input alanları; EKG pipeline alanları formda yok" time="0.0062849">
+    <testsuite name="src/components/RoutingPanel.test.tsx" timestamp="2026-11-21T13:57:14.874Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="1.5652525">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, form tam (kişiye özel neden yok): Karar verilemez + gerekçe; Ayrıca satırı yok; EKG yükleme yok" time="0.4637613">
         </testcase>
-        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; her form alanının bir bölümü var ve bölüm şemada tanımlı" time="0.0047335">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, yaş 95: ana etiket Kapsam dışı: yaş …; altında Ayrıca: AF çalışma ortamı yok" time="0.3611262">
         </testcase>
-        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik sorusu yalnız kadında" time="0.0004736">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam yokken, boş form: ana etiket Eksik (EKG kaydı değil, yaş); altında Ayrıca: ortam yok" time="0.3623333">
         </testcase>
-        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik zorunluluğu: kadın ve yaş ≥ 18 (required_when_rule)" time="0.0007691">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; ortam varken (önceki davranış): Eksik … EKG kaydı ve yükleme bağlantısı" time="0.3756444">
         </testcase>
-        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; son adet yaşı: kadın VE son 12 ayda adet yok" time="0.0003428">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; tansiyon ilacı yalnız tansiyon tanısı varsa; GDM yalnız kadında; diyabet ilaçları herkese (v2)" time="0.0005278">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; şema biriminde sayı düz, başka birimde {value, unit} olarak gider" time="0.0036293">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; gizli (ask_when sağlanmayan) alanlar gönderilmez" time="0.0004846">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; sayı olmayan girdi biçim hatası olur ve gönderilmez" time="0.0016611">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; aralık denetimi frontend&apos;de yapılmaz (sunucu yetkili): aralık dışı değer de gönderilir" time="0.0004536">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; parseNumber" time="0.0005058">
-        </testcase>
-        <testcase classname="src/lib/form.test.ts" name="birim seçici seçenekleri &gt; ilk seçenek şema birimi, ardından unit_conversions kaynak birimleri" time="0.000725">
+        <testcase classname="src/components/RoutingPanel.test.tsx" name="canlı panel — AF çalışma ortamı &gt; stateLine/alsoLine: terim sözlükten + backend gerekçeleri (yalnız sözlükteki sadeleştirme), metin uydurmaz" time="0.001193">
         </testcase>
     </testsuite>
-    <testsuite name="src/lib/ui.test.tsx" timestamp="2026-11-21T13:19:51.759Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="3.5743604">
-        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; sözlük terimleri kaynak kodda sabit metin olarak yok" time="0.053505">
+    <testsuite name="src/demo/profiles.test.ts" timestamp="2026-11-21T13:57:14.875Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="0.008064">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; dört profil: çalışabilir, eksik, kapsam dışı, birim hatalı" time="0.0012036">
         </testcase>
-        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; sözlükteki terim değişirse arayüz değişir (panel ve sonuç kartı)" time="1.1116019">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; fibrosis_ready: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0024244">
         </testcase>
-        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; yardımcılar: term / nextStep / humanize" time="0.0027467">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; missing: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0002248">
         </testcase>
-        <testcase classname="src/lib/ui.test.tsx" name="sade dil — form &gt; görünen etiket ve yardım metinlerinde kaynak değişken kodu yok; her alanda &quot;?&quot; teknik ayrıntı" time="1.1234209">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; out_of_scope: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0013568">
         </testcase>
-        <testcase classname="src/lib/ui.test.tsx" name="sade dil — form &gt; hiçbir ekranda eksik metin anahtarı (⟦…⟧) yok" time="1.2786233">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/pages/DataEntry.test.tsx" timestamp="2026-11-21T13:19:51.761Z" hostname="LAPTOP-V013QBHO" tests="16" failures="0" errors="0" skipped="0" time="8.9574172">
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; ilk adım analiz seçimi; bölümler ve alanlar şemadan üretilir; sabit uyarı görünür" time="0.5517955">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; koşullu soru: kadın seçilince gebelik (zorunlu) ve GDM soruları açılır, erkekte kapanır" time="1.2271244">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; ırk sorusu isteğe bağlı, sade açıklamalı ve &quot;Belirtmek istemiyorum&quot; seçeneği var; NHANES kodu yalnız teknik ayrıntıda" time="0.2579162">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; birim seçici: mmol/L seçilince değer ve birim olduğu gibi sunucuya gider (frontend dönüştürmez)" time="1.7081345">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; aralık hatası: sunucunun field_errors mesajı alanın altında gösterilir" time="0.6013406">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; biçim hatası: alan altında gösterilir; hesaplama engellenir ve hatalı adıma bağlantı verilir" time="0.626494">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız karaciğer fibrozisi: form yalnız fibrosis_final alanlarını gösterir; klinik adımı yok; istek yalnız bu alanları taşır" time="0.5123784">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız osteoporoz: tahlil adımı yok; kırık soruları var" time="0.3457728">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız AF: yalnız yaş ve cinsiyet sorulur; EKG notu gösterilir" time="0.2273469">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; Tümü: tüm modellerin alanları (birleşim); deneysel grup varsayılan kapalı" time="0.562099">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; canlı panel yalnız seçilen analizleri gösterir" time="0.469817">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="sihirbaz gezinme &gt; ileri/geri, ilerleme çubuğu ve adım sayacı; veri adımlar arasında bellekte kalır; odak başlığa taşınır" time="0.5992058">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="sihirbaz gezinme &gt; örnek profil, seçim yokken &quot;Tümü&quot;nü seçer; hesapla butonu form sonunda (sabit/üst üste binen çubuk değil)" time="0.090353">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; durum terimleri sözlükten: Hesaplanabilir / Eksik bilgi: … / Bu analiz size uygun değil: … ve modül etiketleri" time="0.3834781">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; Sonuç üretilemez durumu (ör. gebelik &quot;bilmiyorum&quot;) gerekçesiyle gösterilir" time="0.4037398">
-        </testcase>
-        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; sunucuya ulaşılamazsa panel hata gösterir" time="0.3861774">
+        <testcase classname="src/demo/profiles.test.ts" name="sentetik demo profilleri &gt; unit_error: tüm alanlar şemada form alanı; birimler seçenekler içinde; kategoriler geçerli" time="0.0016524">
         </testcase>
     </testsuite>
-    <testsuite name="src/pages/Results.test.tsx" timestamp="2026-11-21T13:19:51.767Z" hostname="LAPTOP-V013QBHO" tests="7" failures="0" errors="0" skipped="0" time="2.6827506">
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; ana modüller üstte, deneyseller ayrı bölümde; olasılık gösterilmez" time="0.689076">
+    <testsuite name="src/pages/DataEntry.test.tsx" timestamp="2026-11-21T13:57:14.876Z" hostname="LAPTOP-V013QBHO" tests="16" failures="0" errors="0" skipped="0" time="6.82118">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; ilk adım analiz seçimi; bölümler ve alanlar şemadan üretilir; sabit uyarı görünür" time="0.2507542">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; karar terimleri sözlükten; eşik üstü fibrozis -&gt; FibroScan yönlendirmesi; ABSTAIN -&gt; &quot;Sonuç üretilmedi&quot; ve neden" time="0.5409004">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; koşullu soru: kadın seçilince gebelik (zorunlu) ve GDM soruları açılır, erkekte kapanır" time="0.5845915">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; eşik altı -&gt; &quot;dışlamaz&quot; yönlendirmesi; AF uygun değil -&gt; EKG yönlendirmesi" time="0.2955119">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; ırk sorusu isteğe bağlı, sade açıklamalı ve &quot;Belirtmek istemiyorum&quot; seçeneği var; NHANES kodu yalnız teknik ayrıntıda" time="0.1733924">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; metrik tabloları varsayılan kapalı (&quot;Ayrıntılı test sonuçları&quot;)" time="0.3233759">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; birim seçici: mmol/L seçilince değer ve birim olduğu gibi sunucuya gider (frontend dönüştürmez)" time="1.2187211">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; kartların görünür metninde ham alan adı ve model kimliği yok (yalnız teknik ayrıntıda)" time="0.4030591">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; aralık hatası: sunucunun field_errors mesajı alanın altında gösterilir" time="0.5645166">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; yalnız seçilen analizlerin sonuçları gösterilir" time="0.2025">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="veri giriş formu (sihirbaz) &gt; biçim hatası: alan altında gösterilir; hesaplama engellenir ve hatalı adıma bağlantı verilir" time="0.5300382">
         </testcase>
-        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; hedefi tanımlayan girdi uyarısı (HbA1c) kartta gösterilir" time="0.224409">
+        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız karaciğer fibrozisi: form yalnız fibrosis_final alanlarını gösterir; klinik adımı yok; istek yalnız bu alanları taşır" time="0.4067601">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız osteoporoz: tahlil adımı yok; kırık soruları var" time="0.3161191">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; yalnız AF: yalnız yaş ve cinsiyet sorulur; EKG notu gösterilir" time="0.2191087">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; Tümü: tüm modellerin alanları (birleşim); deneysel grup varsayılan kapalı" time="0.4602115">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="analiz seçimine göre alan filtreleme (backend gerekli alan listesi) &gt; canlı panel yalnız seçilen analizleri gösterir" time="0.4170124">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="sihirbaz gezinme &gt; ileri/geri, ilerleme çubuğu ve adım sayacı; veri adımlar arasında bellekte kalır; odak başlığa taşınır" time="0.4961048">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="sihirbaz gezinme &gt; örnek profil, seçim yokken &quot;Tümü&quot;nü seçer; hesapla butonu form sonunda (sabit/üst üste binen çubuk değil)" time="0.0632487">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; durum terimleri sözlükten: Hesaplanabilir / Eksik bilgi: … / Bu analiz size uygun değil: … ve modül etiketleri" time="0.3855902">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; Sonuç üretilemez durumu (ör. gebelik &quot;bilmiyorum&quot;) gerekçesiyle gösterilir" time="0.3709477">
+        </testcase>
+        <testcase classname="src/pages/DataEntry.test.tsx" name="canlı yönlendirme paneli &gt; sunucuya ulaşılamazsa panel hata gösterir" time="0.361492">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/Results.test.tsx" timestamp="2026-11-21T13:57:14.878Z" hostname="LAPTOP-V013QBHO" tests="7" failures="0" errors="0" skipped="0" time="1.1422631">
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; ana modüller üstte, deneyseller ayrı bölümde; olasılık gösterilmez" time="0.2953113">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; karar terimleri sözlükten; eşik üstü fibrozis -&gt; FibroScan yönlendirmesi; ABSTAIN -&gt; &quot;Sonuç üretilmedi&quot; ve neden" time="0.1530699">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; eşik altı -&gt; &quot;dışlamaz&quot; yönlendirmesi; AF uygun değil -&gt; EKG yönlendirmesi" time="0.0960711">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; metrik tabloları varsayılan kapalı (&quot;Ayrıntılı test sonuçları&quot;)" time="0.1632536">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; kartların görünür metninde ham alan adı ve model kimliği yok (yalnız teknik ayrıntıda)" time="0.1795543">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; yalnız seçilen analizlerin sonuçları gösterilir" time="0.1055547">
+        </testcase>
+        <testcase classname="src/pages/Results.test.tsx" name="sonuç ekranı &gt; hedefi tanımlayan girdi uyarısı (HbA1c) kartta gösterilir" time="0.1480336">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/form.test.ts" timestamp="2026-11-21T13:57:14.879Z" hostname="LAPTOP-V013QBHO" tests="12" failures="0" errors="0" skipped="0" time="0.0087664">
+        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; yalnız form_input alanları; EKG pipeline alanları formda yok" time="0.0016353">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="form tanımı /schema&apos;dan &gt; her form alanının bir bölümü var ve bölüm şemada tanımlı" time="0.0014797">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik sorusu yalnız kadında" time="0.0003847">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; gebelik zorunluluğu: kadın ve yaş ≥ 18 (required_when_rule)" time="0.0004463">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; son adet yaşı: kadın VE son 12 ayda adet yok" time="0.0002446">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="koşullu sorular (ask_when_rule) &gt; tansiyon ilacı yalnız tansiyon tanısı varsa; GDM yalnız kadında; diyabet ilaçları herkese (v2)" time="0.0002737">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; şema biriminde sayı düz, başka birimde {value, unit} olarak gider" time="0.0010865">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; gizli (ask_when sağlanmayan) alanlar gönderilmez" time="0.0002638">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; sayı olmayan girdi biçim hatası olur ve gönderilmez" time="0.0004459">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; aralık denetimi frontend&apos;de yapılmaz (sunucu yetkili): aralık dışı değer de gönderilir" time="0.0002361">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="istek gövdesi (dönüşüm yok) &gt; parseNumber" time="0.0002594">
+        </testcase>
+        <testcase classname="src/lib/form.test.ts" name="birim seçici seçenekleri &gt; ilk seçenek şema birimi, ardından unit_conversions kaynak birimleri" time="0.0003864">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/ui.test.tsx" timestamp="2026-11-21T13:57:14.881Z" hostname="LAPTOP-V013QBHO" tests="5" failures="0" errors="0" skipped="0" time="2.229942">
+        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; sözlük terimleri kaynak kodda sabit metin olarak yok" time="0.0189642">
+        </testcase>
+        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; sözlükteki terim değişirse arayüz değişir (panel ve sonuç kartı)" time="0.5808644">
+        </testcase>
+        <testcase classname="src/lib/ui.test.tsx" name="terim sözlüğü — tek kaynak app_config &gt; yardımcılar: term / nextStep / humanize" time="0.0006003">
+        </testcase>
+        <testcase classname="src/lib/ui.test.tsx" name="sade dil — form &gt; görünen etiket ve yardım metinlerinde kaynak değişken kodu yok; her alanda &quot;?&quot; teknik ayrıntı" time="0.7873541">
+        </testcase>
+        <testcase classname="src/lib/ui.test.tsx" name="sade dil — form &gt; hiçbir ekranda eksik metin anahtarı (⟦…⟧) yok" time="0.8407994">
         </testcase>
     </testsuite>
 </testsuites>

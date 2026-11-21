@@ -12,6 +12,7 @@ interface Msg {
   role: 'user' | 'bot' | 'error';
   text: string;
   sources?: AssistantSource[];
+  notice?: string;
 }
 
 function SourceItem({ s, internalLabel }: { s: AssistantSource; internalLabel: string }) {
@@ -82,7 +83,7 @@ export function AssistantPanel() {
     setBusy(true);
     try {
       const r: AssistantResponse = await api.assistantAsk(text, withResults ? labels : []);
-      push({ role: 'bot', text: r.answer, sources: r.sources });
+      push({ role: 'bot', text: r.answer, sources: r.sources, notice: r.emergency_notice });
     } catch (e) {
       push({ role: 'error', text: t(schema, 'asst_error', { msg: detailText(e) }) });
       if (e instanceof ApiError && e.status === 503) setStatus({ enabled: false, reason: detailText(e) });
@@ -143,6 +144,13 @@ export function AssistantPanel() {
               <div key={m.id} data-testid={`assistant-msg-${m.role}`}
                 className={m.role === 'user' ? 'ml-8 rounded bg-slate-100 p-2' : m.role === 'error' ? 'rounded border border-rose-300 bg-rose-50 p-2 text-rose-900' : 'mr-4 rounded border border-indigo-200 bg-indigo-50 p-2 text-indigo-950'}>
                 <p className="mb-0.5 text-[11px] font-semibold text-slate-600">{m.role === 'user' ? t(schema, 'asst_you') : t(schema, 'asst_bot')}</p>
+                {m.notice && (
+                  <div role="alert" data-testid="assistant-emergency-notice"
+                    className="mb-2 rounded-md border-2 border-red-600 bg-red-50 p-2 text-red-900">
+                    <p className="text-xs font-bold uppercase tracking-wide">⚠ {t(schema, 'asst_emergency_title')}</p>
+                    <p className="text-sm font-semibold">{m.notice}</p>
+                  </div>
+                )}
                 {m.text.split(/\n{2,}/).map((para, i) => <p key={i} className="mb-1 whitespace-pre-line">{para}</p>)}
                 {m.sources && m.sources.length > 0 && (
                   <div data-testid="assistant-sources" className="mt-1 border-t border-indigo-200 pt-1 text-xs">

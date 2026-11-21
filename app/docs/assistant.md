@@ -26,7 +26,8 @@ Ollama çalışmıyorsa veya modeller eksikse yalnız asistan devre dışıdır;
 soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 gömme, k=5, min_score 0,45 (+ etiket sabitleri)
             │                                             │
             ├─ kendine zarar     → yalnız "112 Acil" (LLM'e gitmez; başka numara yok)
-            ├─ acil belirti      → "Acil durumda 112'yi arayın." (LLM'e gitmez)
+            ├─ acil (kişisel/belirsiz) → "Acil durumda 112'yi arayın." (LLM'e gitmez)
+            ├─ acil (genel bilgi sorusu) → 112 uyarı kutusu + normal akış
             ├─ komut enjeksiyonu → sabit ret
             ├─ olasılık sorusu   → sabit açıklama + iç kaynak (Hakkında, sözlük)
             ├─ tanı/tedavi/doz   → sabit ret
@@ -37,9 +38,12 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
                        gemma3:4b (sıcaklık 0, seed 42, top_k 1) ──► son kontrol (kod) ──► yanıt + kaynaklar + uyarı
 ```
 
-* **Acil filtresi**: v1 anahtar kelimeler + v2 genel kalıplar (`assistant_config.json > emergency_patterns`,
-  `self_harm_patterns`; araya en çok 4 sözcük, çekimler, Türkçe/ASCII). Ayrı doğrulama: 23/24 acil yakalandı, yanlış
-  alarm 4/12 (bilgi sorularında "göğüs ağrısı", "bayıldım" gibi ifadeler de 112 yanıtı alır — bilinçli temkin).
+* **Acil filtresi (v3)**: kurallar doğal Türkçe yazılır ve girdiyle aynı `guard.key()` normalizasyonundan geçer (küçük
+  harf, Türkçe → ASCII, g/ğ→k, d→t, b→p; "soluk/soluğum" aynı kök). Kural dili: boşluk = bitişik kelime, "…" = araya en
+  çok 4 sözcük, parçalar kelime başı kökü (`assistant_config.json > emergency_rules`, `self_harm_rules`, `medical_rules`).
+  İki kademe: **kişisel/şimdiki durum veya belirsiz** → LLM yok, sabit 112; **genel bilgi sorusu** → yanıtın en üstünde
+  sabit 112 uyarı kutusu (`emergency_notice`) + normal yanıt; LLM yoksa sabit 112. Kendine zarar her zaman yalnız sabit
+  yanıt (yalnız 112). Doğrulama ve kalan açıklar: `phase_xlviii/03_eval.md` §5–6.
 * **Son kontrol**: doz birimi (`500 mg` vb.; `mg/dL` gibi laboratuvar birimi değil), yasak ifadeler ("tanınız",
   "kesinlikle", "kesin olarak", "hastasınız", "almalısınız" …), kaynakta olmayan sayı veya yüzde, bilgi tabanında olmayan
   URL → yanıt atılır, yerine sabit güvenli metin gelir. Model "kaynaklarımda bilgi yok" derse sabit metin döner.
@@ -63,7 +67,7 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
   Etiketler sunucuda sade Türkçe satıra çevrilir ("Osteoporoz (kemik erimesi): sonuç üretilmedi — eksik: …").
 * Yanıt: `route` (`llm`, `no_source`, `postcheck_fail`, `emergency`, `emergency_self_harm`, `refused_medical`, `refused_scope`,
   `refused_injection`, `probability`), `answer`, `sources[]` (`doc_id`, `title`, `section`, `kind`, `url` | `ref`,
-  `publisher`, `attribution`), `llm_used`, `local_model`, `disclaimer`, `clinical_probability_eligibility=false`.
+  `publisher`, `attribution`), `emergency_notice` (yalnız genel bilgi sorusunda acil kalıbı varsa), `llm_used`, `local_model`, `disclaimer`, `clinical_probability_eligibility=false`.
 * Hatalar: 503 (asistan devre dışı; gerekçe), 429 (aynı anda tek LLM isteği), 422 (geçersiz gövde; girdi yansıtılmaz).
 
 `GET /health > assistant`: `enabled`, `reason`, model adları/digest'leri, seçenekler, indeks durumu, anonim rota sayaçları.

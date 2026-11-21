@@ -245,6 +245,8 @@ export interface AssistantResponse {
   llm_used: boolean;
   local_model: boolean;
   disclaimer: string;
+  /** v3: genel bilgi sorusunda acil kalıbı → yanıtın üstünde gösterilen sabit 112 uyarısı. */
+  emergency_notice?: string;
 }
 
 export interface AssistantStatus {

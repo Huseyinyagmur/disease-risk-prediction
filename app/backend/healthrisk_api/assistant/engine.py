@@ -68,7 +68,7 @@ class Assistant:
         self.disease_names = disease_names
         self.field_label = field_label
         self.kw = self.cfg['keywords']
-        self.patterns = dict(emergency=self.cfg.get('emergency_patterns', []), self_harm=self.cfg.get('self_harm_patterns', []))
+        self.rules = guard.Rules(self.cfg)                 # v3 kural dili (derlenmiş)
         self.T = self.cfg['texts_tr']
         self.stats = AssistantStats()
         self.ollama = Ollama(self.cfg['ollama_url'], self.cfg['limits']['llm_timeout_s'])
@@ -166,10 +166,24 @@ class Assistant:
 
     def ask(self, question: str, results=None, debug=False):
         """Döner dict(route, answer, sources, llm_used, ...). Sistem hatasında AssistantUnavailable fırlatır.
-        debug=True yalnız değerlendirme betikleri içindir (ham LLM çıktısı döner; API hiçbir zaman açmaz)."""
+        debug=True yalnız değerlendirme betikleri içindir (ham LLM çıktısı döner; API hiçbir zaman açmaz).
+        v3: genel bilgi sorusunda acil kalıbı varsa ('emergency_general') yanıt normal akıştan gelir ve en üstte
+        gösterilecek sabit 112 uyarısı `emergency_notice` alanında döner; LLM/Ollama kullanılamazsa sabit 112 yanıtı."""
         t0 = _now()
         q = (question or '').strip()[:self.cfg['limits']['question_max_chars']]
-        route, _ = guard.classify(q, self.kw, self.patterns)
+        route, _ = guard.classify(q, self.kw, self.rules)
+        if route != 'emergency_general':
+            return self._ask(q, results, debug, t0, route)
+        try:
+            r = self._ask(q, results, debug, t0, guard.classify(q, self.kw, self.rules, skip_emergency=True)[0])
+        except (AssistantUnavailable, AssistantBusy):
+            return self._fixed('emergency', self.T['emergency'], t0)
+        r['emergency_notice'] = self.T['emergency_notice']
+        r['emergency_tier'] = 'general'
+        self.stats.add('emergency_general_notice', 0.0)
+        return r
+
+    def _ask(self, q, results, debug, t0, route):
         if route == 'emergency_self_harm':
             return self._fixed('emergency_self_harm', self.T['emergency_self_harm'], t0)
         if route == 'emergency':

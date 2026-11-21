@@ -309,7 +309,7 @@ def test_privacy_no_logs_no_disk_raw_values_ignored(client, fake, caplog, capsys
     assert MARK not in flat and MARK_NUM not in flat
     assert '/assistant/ask' in st['request_stats'] and st['assistant']['stats']['llm']['count'] >= 1
     assert set(st['assistant']['stats']) <= {'llm', 'no_source', 'postcheck_fail', 'emergency', 'emergency_self_harm', 'refused_injection',
-                                            'refused_medical', 'refused_scope', 'probability'}
+                                            'refused_medical', 'refused_scope', 'probability', 'emergency_general_notice'}
 
 
 def test_validation_errors_do_not_echo_question(client, fake):
@@ -396,7 +396,7 @@ def test_label_pins_ground_status_terms(client, fake):
 
 
 # ------------------------------------------------------------------ acil filtresi v2 (genel kalıplar)
-PAT = dict(emergency=CFG['emergency_patterns'], self_harm=CFG['self_harm_patterns'])
+PAT = guard.Rules(CFG)          # v3 kural dili
 
 
 @pytest.mark.parametrize('q', ['Göğsümde şiddetli bir ağrı var', 'Yüzümün bir tarafı kaydı ve konuşmam bozuldu',
@@ -419,3 +419,51 @@ def test_self_harm_route_only_112(client, fake, q):
 @pytest.mark.parametrize('q', ['Eşik üstü ne demek?', 'KOAH nedir?', 'Kemik yoğunluğu ölçümü nedir?'])
 def test_patterns_do_not_fire_on_plain_questions(q):
     assert guard.classify(q, KW, PAT)[0] is None
+
+
+# ------------------------------------------------------------------ v3: ortak normalizasyon, iki kademeli acil, ret kökleri
+def test_same_normalization_for_rules_and_input():
+    """Kural ve girdi aynı key() fonksiyonundan geçer: Türkçe/ASCII ve ünsüz yumuşaması (soluk/soluğum) aynı köke iner."""
+    rx = guard.compile_rule('soluk … daral')
+    for q in ('Soluğum daralıyor', 'solugum daraliyor', 'SOLUK DARALMASI', 'soluk borum biraz daraldı'):
+        assert rx.search(guard.key(q)), q
+    assert guard.key('Göğsüm') == guard.key('gogsum') == guard.key('GÖĞSÜM')
+
+
+@pytest.mark.parametrize('q', ['Soluğum daralıyor', 'Şu an göğsümde baskı var', 'annem yere yığıldı, bayıldı',
+                               'Kolum uyuştu, kaldıramıyorum', 'göğüs ağrısı'])
+def test_personal_or_ambiguous_emergency_is_fixed(q):
+    assert guard.classify(q, KW, PAT)[0] == 'emergency', q
+
+
+@pytest.mark.parametrize('q', ['Göğüs ağrısı nedir?', 'KOAH hastalarında nefes darlığı neden olur?',
+                               'Kalp krizi ile koroner arter hastalığı arasındaki fark nedir?'])
+def test_general_info_emergency_gets_notice_tier(q):
+    assert guard.classify(q, KW, PAT)[0] == 'emergency_general', q
+
+
+def test_general_emergency_api_notice_plus_rag(client, fake):
+    r = client.post('/assistant/ask', json={'question': 'Göğüs ağrısı nedir?'}).json()
+    assert r['emergency_notice'] and "112" in r['emergency_notice']
+    assert r['route'] == 'llm' and r['llm_used'] is True and fake.ollama.messages
+    p = client.post('/assistant/ask', json={'question': 'Göğsümde şu an ağrı var'}).json()
+    assert p['route'] == 'emergency' and p['llm_used'] is False and 'emergency_notice' not in p
+
+
+def test_general_emergency_falls_back_to_fixed_112_without_ollama(client, service):
+    a = _assistant(service)
+    a.ollama = Ollama(f'http://127.0.0.1:{_free_port()}', 5)
+    main._ASSISTANT = a
+    r = client.post('/assistant/ask', json={'question': 'Göğüs ağrısı nedir?'})
+    assert r.status_code == 200 and r.json()['route'] == 'emergency' and "112" in r.json()['answer']
+
+
+@pytest.mark.parametrize('q', ['Bana tanı koyabilir misiniz?', 'Diyabet tanısı koyar mısın', 'teşhisimi söyle',
+                               'Hangi ilaçları kullanayım?', 'kaç mg almalıyım', 'İlacımın dozunu değiştireyim mi',
+                               'Bu sonuçla hipertansiyon tanısı alır mıyım?'])
+def test_medical_roots_any_inflection(q):
+    assert guard.classify(q, KW, PAT)[0] == 'medical', q
+
+
+def test_medical_excludes_model_name():
+    assert guard.classify('Teşhis edilmemiş diyabet modeli neyi sınıflar?', KW, PAT)[0] is None

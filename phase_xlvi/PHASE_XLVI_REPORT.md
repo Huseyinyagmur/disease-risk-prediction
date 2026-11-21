@@ -159,6 +159,23 @@ Durum: **TAMAMLANDI.** Model eğitilmedi veya yeniden fit edilmedi. Eşik, kalib
 4. **Octave/ECGDeli kurulum provenance'ı** BULUNAMADI. INSTALL yalnız sürüm ve SHA'ları veriyor.
 5. Görev metnindeki "14 hastalık" ile kayıtlardaki 15 hastalık farkı.
 
+## Kapanış düzeltmeleri (2026-11-21)
+
+Değişiklikler yalnız `phase_xlvi/`, `app/` ve `.gitignore`'da; önceki faz klasörleri salt okunur kaldı (SHA taraması:
+faz sonu envanterine göre `phase_xlvi/` ve `app/` dışında değişen 0, silinen 0, yeni 0).
+
+| # | iş | sonuç | kanıt |
+|---|---|---|---|
+| 1 | `requires_research_tree(*yollar)` işareti (conftest); modül düzeyinde veri okuyan 2 dosya `skip_module_without` | GitHub klonunda **271 geçti, 31 SKIP (gerekçeli), 0 başarısız, 0 hata**; tam ağaçta 320 geçti, 5 xfail | `results/clean_clone46b.json`, `results/pytest_backend_full_closure.xml` |
+| 2 | `/eligibility` `additional_reasons`: ana durum kişiye özel neden; AF ortamı yokluğu "Ayrıca: …" | yaş 95 → "Kapsam dışı: yaş 95 …" + "Ayrıca: Octave/ECGDeli AF çalışma ortamı yok"; form tam → "Karar verilemez: …"; popülasyon dışında diğer uygunluk sorunları da döner | `test_phase46_af_panel.py`, `RoutingPanel.test.tsx` (gerçek backend fixture'ları), Vitest 38/38 |
+| 3 | INSTALL §4: Octave 10.3.0 (7z SHA `4595b055…`), ECGDeli v1.1 = commit `3c13b1b2…` (zipball SHA `5da77e68…`); `scripts/verify_af_env.py` | tam ağaçta 21/21 OK, çıkış 0; klonda çıkış 1 (kilit yok). Zipball ve `git checkout v1.1` bugün kilitteki ağaç SHA'sını verdi | `results/af_env_check.json` |
+| 4 | Dossier §4.2: Challenge kaynaklarının kurum/konumu Reyna ve ark. 2022 Tablo 1 (doi:10.1088/1361-6579/ac79fd) ve 2021 (doi:10.23919/CinC53138.2021.9662687) | PTB-XL çakışmasının neden beklenmediği yazıldı (çıkarım; kayıt düzeyi kontrol **hâlâ yapılmadı**) | `data/refs/reyna2021_challenge_sources.json` |
+| 5 | `data/refs/collins2024_full.xml` depodan ve git geçmişinden çıkarıldı (filter-branch + force push), `.gitignore`'da; yerelde duruyor | klonda ve `git rev-list --objects --all`'da 0 | TRIPOD listesi atfı yalnız DOI |
+
+Testler (bu makine): backend tam 320 geçti / 5 xfail; Vitest 38/38; typecheck ve build OK; Playwright 20/20
+(`results/playwright_closure/`). Açık kalanlardan 1, 3 ve 4 kapandı; **2 (PTB-XL ↔ Challenge kayıt düzeyi hash
+karşılaştırması) ve 5 açık kalır.** Octave arşivi bu fazda yeniden indirilmedi; GNU imza (`.sig`) denetimi yapılmadı.
+
 ## Sınırlılıklar
 
 - Kartlar dergi makalesi değildir; TRIPOD+AI durumları kart + kaynak faz dosyalarına göre kural tabanlı atandı.

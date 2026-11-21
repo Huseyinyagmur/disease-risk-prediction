@@ -2,7 +2,7 @@
 
 Araştırma prototipi; klinik karar aracı değildir. Bu kılavuz Phase XLVI'da yazıldı. Her adımın yanında doğrulama durumu
 vardır: **[temiz klonda doğrulandı]**, **[bu makinede doğrulandı]** veya **[doğrulanmadı]**. Temiz klon sonucu:
-`phase_xlvi/results/clean_clone46.json` ve `phase_xlvi/PHASE_XLVI_REPORT.md`.
+`phase_xlvi/results/clean_clone46.json` (kapanış düzeltmesi sonrası: `phase_xlvi/results/clean_clone46b.json`) ve `phase_xlvi/PHASE_XLVI_REPORT.md`.
 
 ## 0. Gereksinimler
 
@@ -45,7 +45,9 @@ curl.exe http://127.0.0.1:8000/health
 
 AF ortamı kurulmamış temiz klonda beklenen: `status = "degraded"`, `disabled_models = []` (uygulamada görünen 11 modelin
 11'i etkin), `af_pipeline.enabled = false` ve gerekçe "Octave/ECGDeli AF çalışma ortamı yok: …". Form tabanlı tüm modeller
-çalışır. Canlı panelde AF satırı **"Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"** gösterir (Phase XLVI).
+çalışır. Canlı panelde AF satırı form doluyken **"Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"** gösterir; kişiye
+özel neden varsa (ör. yaş 95, boş form) ana satır o nedendir ve altında **"Ayrıca: Octave/ECGDeli AF çalışma ortamı yok"**
+yazar (Phase XLVI kapanış) [temiz klonda doğrulandı].
 
 `-B` bayrağı `.pyc` yazımını kapatır (proje kuralı: salt okunur klasörlere yazılmaz).
 
@@ -134,11 +136,13 @@ temiz klonda AF'yi etkinleştirmez. SHA uyuşmazsa AF bilerek çalışmaz (donmu
 
 | paket | komut | gereksinim | durum |
 |---|---|---|---|
-| Backend (hızlı) | `cd app\backend; .venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -m "not slow"` | tam araştırma ağacı (geliştirme verisi, AF kilidi, phase_xxviii örnekleri) | tam ağaçta [bu makinede doğrulandı]. **Yalnız GitHub klonunda** 2 dosya toplanamaz (`test_af_e2e.py`, `test_af_mat.py`), bunlar hariç 268 geçti / 22 başarısız: başarısızların tamamı klonda olmayan araştırma dosyalarına bağlı (parity, AF kilidi, örnek EKG kopyası); `phase_xlvi/results/clean_clone46.json` |
-| Backend (tam, AF uçtan uca) | `… -m pytest -p no:cacheprovider tests` | §4 AF ortamı | [bu makinede doğrulandı] |
-| Vitest | `cd app\frontend; npm test` | yok (backend gerekmez) | [temiz klonda doğrulandı] |
+| Backend (hızlı) | `cd app\backend; .venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -m "not slow"` | yok; araştırma ağacı gerektiren testler `requires_research_tree` ile işaretli ve dosya yoksa gerekçeli SKIP | **GitHub klonunda: 271 geçti, 31 SKIP, 0 başarısız, 0 hata** (2 `slow` seçilmedi) [temiz klonda doğrulandı, Phase XLVI kapanış; `phase_xlvi/results/clean_clone46b.json`]. SKIP gerekçesi eksik yolları listeler: geliştirme verisi (parity), AF kilidi/pipeline/Octave, phase_xxviii/xxxiii EKG kayıtları. Tam ağaçta tüm testler çalışır [bu makinede doğrulandı] |
+| Backend (tam, AF uçtan uca) | `… -m pytest -p no:cacheprovider tests` | tam araştırma ağacı + §4 AF ortamı | 320 geçti, 5 xfail (belgelenmiş BMI/osteo sınırlılığı), 0 başarısız [bu makinede doğrulandı, Phase XLVI kapanış] |
+| Vitest | `cd app\frontend; npm test` | yok (backend gerekmez) | 38/38 [temiz klonda doğrulandı, Phase XLVI kapanış] |
 | Tip denetimi | `npm run typecheck` | yok | [temiz klonda doğrulandı] |
-| Playwright | `npx playwright install chromium; npm run build; $env:PW_OUT="<çıktı klasörü>"; npx playwright test --grep-invert "@screenshots\|@timing"` | backend 127.0.0.1:8000'de çalışıyor; AF testleri için §4 | [bu makinede doğrulandı] |
+| Playwright | `npx playwright install chromium; npm run build; $env:PW_OUT="<çıktı klasörü>"; npx playwright test --grep-invert "@screenshots\|@timing"` | backend 127.0.0.1:8000'de çalışıyor; AF testleri için §4 | 20/20 [bu makinede doğrulandı, Phase XLVI kapanış; `phase_xlvi/results/playwright_closure/`] |
+
+Yalnız depodaki dosyalarla çalışan testler için: `-m "not slow and not requires_research_tree"`.
 
 `PW_OUT` verilmezse Playwright raporları `phase_xlv/results` altına yazılır; proje kuralı gereği her fazda kendi klasörünü
 verin.

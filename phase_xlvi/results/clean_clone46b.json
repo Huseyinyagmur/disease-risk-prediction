@@ -1,0 +1,128 @@
+{
+ "clone_root": "C:\\Users\\husey\\AppData\\Local\\Temp\\claude\\66f50f31719e3019\\5c6dd303-e807-4e08-a120-dfc835d279c3\\scratchpad\\clone46c",
+ "python": "3.13.3",
+ "models": {
+  "af_S4_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "mi_model": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "cad_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "dm_A": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "dm_B": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "anemia_LR16": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "copd_S4_DEVICE": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "hf_S2_BASIC_LAB": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "htn_M1": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "fibrosis_final": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "osteo_final": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "ckd_A": {
+   "exists": true,
+   "sha_ok": true
+  },
+  "ckd_B": {
+   "exists": true,
+   "sha_ok": true
+  }
+ },
+ "health": {
+  "status": "degraded",
+  "disabled_models": [],
+  "n_models": 11,
+  "af_enabled": false,
+  "af_problems": [
+   "Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı (phase_xxviii/config/af_pipeline_lock.json, phase_xxviii/config/af_pipeline_lock.sha256, phase_xxviii/pipeline/af_pipeline_v1.py). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır."
+  ],
+  "packages_ok": true,
+  "registry_problems": []
+ },
+ "eligibility_af": {
+  "state": "MISSING",
+  "reasons": [
+   "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor"
+  ],
+  "additional_reasons": [
+   "Octave/ECGDeli AF çalışma ortamı yok"
+  ],
+  "missing_fields": [
+   "age_years",
+   "sex"
+  ],
+  "af_pipeline_available": false
+ },
+ "eligibility_af_full": {
+  "state": "ABSTAIN",
+  "reasons": [
+   "Octave/ECGDeli AF çalışma ortamı yok"
+  ],
+  "additional_reasons": [],
+  "missing_fields": [],
+  "af_pipeline_available": false
+ },
+ "predict_status": 200,
+ "predict_osteo": [
+  "OK"
+ ],
+ "pytest": {
+  "returncode": 0,
+  "summary": "271 passed, 31 skipped, 2 deselected, 1 warning in 9.53s",
+  "skipped_reasons": [
+   "tests\\conftest.py:36: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxviii/results/tol100_pipeline_features.csv, phase_xxviii/data/ptbxl500, phase_xxviii/config/af_pipeline_loc",
+   "tests\\conftest.py:36: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxxiii/results/records33.csv, phase_xxxiii/data/raw, phase_xxviii/config/af_pipeline_lock.json, phase_xxviii",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: All_Disease_Improvement_Phase21/data/processed/copd_development.pkl, All_Disease_Improvement_Phase21/data/raw/nhan",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: Clinical_Optimization_Phase25/data/processed/anemia_development.pkl, Clinical_Model_Improvement_Phase24/data/raw/n",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: experiments/cad_split.json, data/processed/cad.pkl, data/raw/uci_45/processed.cleveland.data",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xlii/scripts/t1_data.py, phase_xlii/data/processed/dm_dev.pkl, phase_xlii/data/nhanes",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxviii/config/af_pipeline_lock.json",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxviii/config/af_pipeline_lock.json, phase_xxviii/config/af_pipeline_lock.sha256, phase_xxviii/pipeline/af_p",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxviii/data/ptbxl500",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxx/scripts/t2_osteo_data.py, phase_xxx/data/processed/osteo_dev.pkl, phase_xxx/data/raw",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxxi/scripts/t3_fib_data.py, phase_xxxi/data/processed/fib_dev.pkl, phase_xxx/data/raw/P, phase_xxxi/data/ra",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxxv/scripts/t1_data.py, phase_xxxv/data/processed/ckd_dev.pkl, phase_xxxiv/results/ckd_inventory_meta.json",
+   "tests\\conftest.py:43: araştırma ağacı gerekli (GitHub deposunda yok; app/docs/INSTALL.md §5): bulunamadı: phase_xxxvii/scripts/c37.py, phase_xxxvii/data/processed/htn3_dev.pkl, phase_xxxvii/results/download_manifest37.js",
+   "tests\\test_phase46_af_panel.py:101: kilit dosyası yok (temiz klon)",
+   "tests\\test_phase46_af_panel.py:116: AF çalışma ortamı bu makinede etkin değil",
+   "tests\\test_phase46_af_panel.py:70: AF çalışma ortamı bu makinede etkin değil",
+   "tests\\test_phase46_af_panel.py:87: kilit dosyası yok (temiz klon); ortam-yok yolu ayrı testte"
+  ]
+ },
+ "verify_af_env": {
+  "returncode": 1,
+  "last_lines": [
+   "       bulunan  None  [kilit yoksa diğer kontroller yapılamaz]",
+   "sunucu denetimi (AFPipeline): enabled=False problems=['Octave/ECGDeli AF çalışma ortamı yok: kilitli AF pipeline dosyaları bulunamadı (phase_xxviii/config/af_pipeline_lock.json, phase_xxviii/config/af_pipeline_lock.sha256, phase_xxviii/pipeline/af_pipeline_v1.py). AF için Octave 10.3.0 + ECGDeli v1.1 + kilitli pipeline ayrıca kurulmalıdır.']",
+   "SONUÇ: AF ortamı kilitle UYUŞMUYOR / eksik"
+  ]
+ },
+ "ok": true
+}

@@ -1,0 +1,87 @@
+{
+ "inputs": {
+  "All_Disease_Improvement_Phase21/data/raw/ptbxl/ptbxl_database.csv": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+  "All_Disease_Improvement_Phase21/config/af_splits.json": "6031e6b9c44b73324fa80e8d9926860eb032f1f260d7736a9b8bb3e756fe5fac",
+  "phase_xxxiii/results/records33.csv": "90dc62ab688def61a4a145fa9b1fcd1c025194e6bdb2fb343bdfd3d350d80c5d",
+  "phase_xxxiii/results/all_headers33.csv": "b44f443acab6bf8f68edea4d3bea3f28598ff416cb331e6796c52631d74c1363",
+  "phase_xxix/results/candidate_hashes.csv": "5f7e17fd693695d1497e6b58de602eceedeeac9144e9c3faef1a75d3279f4430",
+  "phase_xxxiii/results/b_afl_hashes.csv": "d5af9c36e3eb76f7fc6c38bc368ba744d9440b5bceaa838e2e1d6e8ad6ff73e4"
+ },
+ "A_identifier": {
+  "used_records": 10456,
+  "used_sources": {
+   "chapman_shaoxing": 4518,
+   "georgia": 2918,
+   "cpsc_2018": 2400,
+   "cpsc_2018_extra": 620
+  },
+  "used_prefixes": {
+   "JS": 4518,
+   "E": 2918,
+   "A": 2400,
+   "Q": 620
+  },
+  "used_with_HR_prefix_(Challenge_PTB-XL_copy)": 0,
+  "headers_scanned_all_4_sources": 30921,
+  "headers_from_ptb-xl_or_ptb_source": 0,
+  "note": "Challenge 2021 PTB-XL kopyası \"HR#####\" adlıdır (training/ptb-xl); kullanılan kaynaklar A/Q/JS/E önekli."
+ },
+ "ptbxl_cohort": {
+  "n": 12025,
+  "by_role": {
+   "fit|AF": 560,
+   "fit|SR": 8279,
+   "test|AF": 114,
+   "test|SR": 1458,
+   "validation|AF": 117,
+   "validation|SR": 1497
+  }
+ },
+ "B_metadata_fingerprint": {
+  "challenge_AF_SR_used": 7817,
+  "challenge_AF_SR_used_len5000_fs500": 6692,
+  "fingerprint": "yaş + cinsiyet + ritim etiketi (AF/SR) + uzunluk 5000 örnek @500 Hz",
+  "matching_pairs": 372793,
+  "challenge_records_with_>=1_match": 6524,
+  "ptbxl_records_with_>=1_match": 11817,
+  "ptbxl_test_records_with_>=1_match": 1549,
+  "mean_candidates_per_matched_challenge_record": 57.1,
+  "interpretation": "Başlık meta verisi kayıtları tekil tanımlamaz (Challenge başlığında hasta kimliği, tarih, cihaz yok); eşleşmeler aynı yaş/cinsiyet/ritmin çok sayıda kişide bulunmasından gelir. Bu kontrol çakışmayı ne kanıtlar ne dışlar; karar için sinyal karşılaştırması gerekir (C)."
+ },
+ "C_signal_hash": {
+  "challenge_hashes_compared": 10727,
+  "challenge_hash_sources": {
+   "chapman_shaoxing": 4528,
+   "georgia": 2951,
+   "cpsc_2018": 2539,
+   "cpsc_2018_extra": 709
+  },
+  "local_ptbxl_waveforms_unique": 103,
+  "local_ptbxl_by_af_role": {
+   "fit": 85,
+   "validation": 17,
+   "kohort dışı": 1
+  },
+  "window_hash_matches": 0,
+  "matched_files": [],
+  "coverage_note": "PTB-XL 21.799 kaydının yalnız 103 tanesi yerelde (records500 indirilmedi); tam kayıt düzeyi karşılaştırma için records500 (~1,7 GB) gerekir."
+ },
+ "D_positive_control": {
+  "source": "phase_xxix/results/duplicates.csv (bilinen birebir kopya grupları)",
+  "pairs": 231,
+  "detected_r>=thr": 231,
+  "min_r": 1.0
+ },
+ "D_near_duplicate": {
+  "records_ok": 10448,
+  "grouping_key": "yaş|cinsiyet|Dx kod kümesi|örnek sayısı",
+  "records_in_groups_ge2": 5946,
+  "mat_not_found": 0,
+  "pairs_tested_cross_source": 32618,
+  "pairs_tested_within_source": 26703,
+  "threshold_r_leadII": 0.99,
+  "flagged_cross_source": 0,
+  "flagged_within_source": 0,
+  "note": "Birebir kopyalar Phase XXIX/XXXIII pencere hash tekilleştirmesiyle zaten dışlanmıştı (XXIX: 226 kopya; XXXIII: 20 kopya/çelişkili grup). Bu tarama farklı kodlanmış/filtrelenmiş kopyaları arar; farklı günlerde alınmış aynı-hasta kayıtlarını tespit edemez (Challenge başlıklarında hasta kimliği yok)."
+ }
+}

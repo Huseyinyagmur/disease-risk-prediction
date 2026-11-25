@@ -1,0 +1,170 @@
+{
+ "inputs": {
+  "cleveland": {
+   "file": "data/raw/uci_45/processed.cleveland.data",
+   "sha256": "a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8"
+  },
+  "hungarian": {
+   "file": "data/raw/uci_45/processed.hungarian.data",
+   "sha256": "d1ad108f785768cd3d7e82dc522e6f5a61eea93cccfb3a46ee8076f73fc3d796"
+  },
+  "switzerland": {
+   "file": "data/raw/uci_45/processed.switzerland.data",
+   "sha256": "834a405ccf5b66ab4056bb77794adc8df0b7125186454c0a1d002d33c6c3b314"
+  },
+  "va": {
+   "file": "data/raw/uci_45/processed.va.data",
+   "sha256": "e7c93d8d0d2acdadfa4c5e8de768e2191e7f618b952e29623f1f0d5949ff6b8f"
+  }
+ },
+ "features": [
+  "age",
+  "sex",
+  "cp",
+  "trestbps",
+  "chol",
+  "fbs",
+  "restecg",
+  "thalach",
+  "exang",
+  "oldpeak",
+  "slope"
+ ],
+ "cleveland_categories": {
+  "sex": [
+   0.0,
+   1.0
+  ],
+  "cp": [
+   1.0,
+   2.0,
+   3.0,
+   4.0
+  ],
+  "fbs": [
+   0.0,
+   1.0
+  ],
+  "restecg": [
+   0.0,
+   1.0,
+   2.0
+  ],
+  "exang": [
+   0.0,
+   1.0
+  ],
+  "slope": [
+   1.0,
+   2.0,
+   3.0
+  ]
+ },
+ "summary": {
+  "Cleveland (eğitim)": {
+   "n": 303,
+   "birebir_yinelenen_satir": 0,
+   "pozitif_num_gt0": 139,
+   "prevalans": 0.459,
+   "eksiksiz_11": 303,
+   "eksiksiz_oran": 1.0,
+   "eksiksiz_pozitif": 139
+  },
+  "Hungarian": {
+   "n": 294,
+   "birebir_yinelenen_satir": 1,
+   "pozitif_num_gt0": 106,
+   "prevalans": 0.361,
+   "eksiksiz_11": 95,
+   "eksiksiz_oran": 0.323,
+   "eksiksiz_pozitif": 68
+  },
+  "Switzerland": {
+   "n": 123,
+   "birebir_yinelenen_satir": 0,
+   "pozitif_num_gt0": 115,
+   "prevalans": 0.935,
+   "eksiksiz_11": 0,
+   "eksiksiz_oran": 0.0,
+   "eksiksiz_pozitif": 0
+  },
+  "VA Long Beach": {
+   "n": 200,
+   "birebir_yinelenen_satir": 1,
+   "pozitif_num_gt0": 149,
+   "prevalans": 0.745,
+   "eksiksiz_11": 64,
+   "eksiksiz_oran": 0.32,
+   "eksiksiz_pozitif": 54
+  }
+ },
+ "missing_rate_wide": {
+  "age": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.0,
+   "Switzerland": 0.0,
+   "VA Long Beach": 0.0
+  },
+  "sex": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.0,
+   "Switzerland": 0.0,
+   "VA Long Beach": 0.0
+  },
+  "cp": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.0,
+   "Switzerland": 0.0,
+   "VA Long Beach": 0.0
+  },
+  "trestbps": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.003,
+   "Switzerland": 0.016,
+   "VA Long Beach": 0.285
+  },
+  "chol": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.078,
+   "Switzerland": 1.0,
+   "VA Long Beach": 0.28
+  },
+  "fbs": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.027,
+   "Switzerland": 0.61,
+   "VA Long Beach": 0.035
+  },
+  "restecg": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.003,
+   "Switzerland": 0.008,
+   "VA Long Beach": 0.0
+  },
+  "thalach": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.003,
+   "Switzerland": 0.008,
+   "VA Long Beach": 0.265
+  },
+  "exang": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.003,
+   "Switzerland": 0.008,
+   "VA Long Beach": 0.265
+  },
+  "oldpeak": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.0,
+   "Switzerland": 0.049,
+   "VA Long Beach": 0.28
+  },
+  "slope": {
+   "Cleveland (eğitim)": 0.0,
+   "Hungarian": 0.646,
+   "Switzerland": 0.138,
+   "VA Long Beach": 0.51
+  }
+ },
+ "note": "Uyumluluk raporu; model yeniden eğitilmedi, skor üretilmedi. Phase XLI teknik tekrarı eksiksiz-vaka alt kümesinde yapıldı (Hungarian 95, VA 64); Switzerland chol nedeniyle yapılamadı."
+}

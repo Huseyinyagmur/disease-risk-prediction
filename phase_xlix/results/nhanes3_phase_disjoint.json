@@ -1,0 +1,11 @@
+{
+ "file": "Clinical_Model_Improvement_Phase24/data/raw/nhanesIII/exam.dat",
+ "sha256": "b2eba81d3c4f921a4fafe6847818e27813eab4a3494bcc26f90a6fe3fcc71fec",
+ "rows": 31311,
+ "unique_seqn": 31311,
+ "seqn_in_both_phases": 0,
+ "phase_counts": {
+  "1": 15884,
+  "2": 15427
+ }
+}

@@ -1,0 +1,45 @@
+merkez,oznitelik,n,eksik_soru_isareti,eksik_fizyolojik_sifir,eksik_toplam,eksik_oran,cleveland_kategori_disi
+Cleveland (eğitim),age,303,0,0,0,0.0,0
+Cleveland (eğitim),sex,303,0,0,0,0.0,0
+Cleveland (eğitim),cp,303,0,0,0,0.0,0
+Cleveland (eğitim),trestbps,303,0,0,0,0.0,0
+Cleveland (eğitim),chol,303,0,0,0,0.0,0
+Cleveland (eğitim),fbs,303,0,0,0,0.0,0
+Cleveland (eğitim),restecg,303,0,0,0,0.0,0
+Cleveland (eğitim),thalach,303,0,0,0,0.0,0
+Cleveland (eğitim),exang,303,0,0,0,0.0,0
+Cleveland (eğitim),oldpeak,303,0,0,0,0.0,0
+Cleveland (eğitim),slope,303,0,0,0,0.0,0
+Hungarian,age,294,0,0,0,0.0,0
+Hungarian,sex,294,0,0,0,0.0,0
+Hungarian,cp,294,0,0,0,0.0,0
+Hungarian,trestbps,294,1,0,1,0.003,0
+Hungarian,chol,294,23,0,23,0.078,0
+Hungarian,fbs,294,8,0,8,0.027,0
+Hungarian,restecg,294,1,0,1,0.003,0
+Hungarian,thalach,294,1,0,1,0.003,0
+Hungarian,exang,294,1,0,1,0.003,0
+Hungarian,oldpeak,294,0,0,0,0.0,0
+Hungarian,slope,294,190,0,190,0.646,0
+Switzerland,age,123,0,0,0,0.0,0
+Switzerland,sex,123,0,0,0,0.0,0
+Switzerland,cp,123,0,0,0,0.0,0
+Switzerland,trestbps,123,2,0,2,0.016,0
+Switzerland,chol,123,0,123,123,1.0,0
+Switzerland,fbs,123,75,0,75,0.61,0
+Switzerland,restecg,123,1,0,1,0.008,0
+Switzerland,thalach,123,1,0,1,0.008,0
+Switzerland,exang,123,1,0,1,0.008,0
+Switzerland,oldpeak,123,6,0,6,0.049,0
+Switzerland,slope,123,17,0,17,0.138,0
+VA Long Beach,age,200,0,0,0,0.0,0
+VA Long Beach,sex,200,0,0,0,0.0,0
+VA Long Beach,cp,200,0,0,0,0.0,0
+VA Long Beach,trestbps,200,56,1,57,0.285,0
+VA Long Beach,chol,200,7,49,56,0.28,0
+VA Long Beach,fbs,200,7,0,7,0.035,0
+VA Long Beach,restecg,200,0,0,0,0.0,0
+VA Long Beach,thalach,200,53,0,53,0.265,0
+VA Long Beach,exang,200,53,0,53,0.265,0
+VA Long Beach,oldpeak,200,56,0,56,0.28,0
+VA Long Beach,slope,200,102,0,102,0.51,0

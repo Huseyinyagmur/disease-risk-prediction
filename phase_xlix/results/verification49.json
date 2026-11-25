@@ -1,0 +1,59 @@
+{
+ "utc": "2026-11-25T15:56:29.547159+00:00",
+ "files_before": 158763,
+ "files_after": 158780,
+ "phase_xlix_new_files": [
+  "phase_xlix/PHASE_XLIX_REPORT.md",
+  "phase_xlix/final_report_inputs.md",
+  "phase_xlix/logs/pytest_full.log",
+  "phase_xlix/logs/scenario_counts.txt",
+  "phase_xlix/model_results.csv",
+  "phase_xlix/results/af_near_duplicate_pairs.csv",
+  "phase_xlix/results/af_overlap_check.json",
+  "phase_xlix/results/nhanes3_phase_disjoint.json",
+  "phase_xlix/results/pytest_backend_full.xml",
+  "phase_xlix/results/references_found.csv",
+  "phase_xlix/results/sha256_before.json",
+  "phase_xlix/results/uci_cad_feature_availability.csv",
+  "phase_xlix/results/uci_cad_feature_availability.json",
+  "phase_xlix/scripts/af_overlap_check.py",
+  "phase_xlix/scripts/build_inputs.py",
+  "phase_xlix/scripts/uci_cad_availability.py",
+  "phase_xlix/scripts/verify49.py"
+ ],
+ "checks": {
+  "V1_prior_changed_0": {
+   "pass": true,
+   "detail": []
+  },
+  "V1_prior_deleted_0": {
+   "pass": true,
+   "detail": []
+  },
+  "V1_new_outside_phase_0": {
+   "pass": true,
+   "detail": []
+  },
+  "V1_app_unchanged": {
+   "pass": true,
+   "detail": null
+  },
+  "V2_model_sha_eq_registry_13": {
+   "pass": true,
+   "detail": []
+  },
+  "V3_model_results_vs_registry": {
+   "pass": true,
+   "detail": {
+    "compared": 63,
+    "mismatch": []
+   }
+  },
+  "V4_test_xml_backend": {
+   "pass": true,
+   "detail": null
+  }
+ },
+ "passed": 7,
+ "failed": 0
+}

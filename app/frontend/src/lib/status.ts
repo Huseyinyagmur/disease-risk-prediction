@@ -31,6 +31,9 @@ export const ELIG_LOOK: Record<EligState, { cls: string; symbol: string }> = {
   ABSTAIN: { cls: 'border-dashed border-slate-500 bg-white text-slate-900', symbol: '?' },
 };
 
+/** Phase L2: hiç bilgi girilmemiş analiz — nötr (uyarı rengi değil). */
+export const NOT_STARTED_LOOK = { cls: 'border-slate-300 bg-slate-50 text-slate-700', symbol: '○' };
+
 /** Phase XLVIII: AF formdan (/predict) EKG'siz -> "EKG kaydı gerekiyor" (yaş kapsam dışı vb. NOT_APPLICABLE metni değişmez).
  * Yalnız sunum; durum kodu ve gerekçe sunucudan gelir. Önek metni app_config > ui.text_tr. (Phase L: ResultCard'dan taşındı.) */
 export function needsEcg(r: ModelResult, schema: Schema | null): boolean {

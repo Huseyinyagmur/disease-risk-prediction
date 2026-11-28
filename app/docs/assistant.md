@@ -51,6 +51,11 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
   bağlanırsa yanıt atılır. (b) `probability_claim`: olumsuzlanmamış "olasılık …" cümlesi (ör. "sadece bir olasılık
   gösterir") atılır. (c) Atıf temizliği: yalnız atıftan oluşan satırlar silinir, art arda yazılmış atıflar ("[3], [3]")
   tek gruba birleşir; kaynak listesi kalan atıflardan kurulur.
+  **Phase L2 ekleri** (ayrı, kilitli geliştirme setiyle; `phase_l2/02_assistant_tuning.md`):
+  - Yasak ifadeler cümle düzeyinde, Türkçe harf duyarsız denetlenir.
+  - "kesinlikle" ve "kesin olarak" olumsuz cümlede serbesttir ("… kesin olarak söylenemez").
+  - "reçete" ve "ilacınızı" yalnız hekime yönlendiren ve emir içermeyen cümlede serbesttir.
+  - Atıflı yanıta eklenmiş "kaynaklarımda bilgi yok" cümlesi silinir.
 * **Etiket sabitleme (Phase L)**: oturum etiketi varsa yalnız o durumun sözlük tanımı ve AYNI durumun "Ne yapmalıyım?"
   parçaları (genel + hastalığa özgü) bağlama sabitlenir (`assistant_config.json > label_pins`). Eskiden tüm durumları
   içeren "Genel" parçası sabitleniyordu; AF eşik üstü etiketinde eşik altı metni ("dışlamaz") yanıta taşınıyordu.
@@ -91,13 +96,25 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
 
 ## 5. Arayüz
 
-Her sayfada sağ altta **"Açıklama asistanı"** düğmesi. Phase L: masaüstünde (≥ 1024 px) sağda tam yükseklik yan panel
-(ekranın ~%38'i); içerik ve uyarı bandı panel kadar daralır. Panelin sol kenarı sürüklenerek veya ←/→ tuşlarıyla
-boyutlandırılır (en dar 360 px); "Paneli genişlet" ile ekranın ~%92'si olur. Tablet ve mobilde tam ekran açılır.
-Panel: "Yerel model — veriler bilgisayarınızdan çıkmaz" notu; büyük düğmeli örnek sorular (sonuç varsa yalnız sonuç
-ETİKETLERİNE göre seçilir: `ui.asst_examples_by_outcome_tr`, `ui.asst_examples_by_disease_tr`; yoksa varsayılan üç soru);
-yanıt beklenirken gösterge; belirgin acil uyarı kutusu; yanıt altında katlanabilir kaynak listesi (yeni sekmede açılır);
-sonuç varsa "Bu oturumdaki sonuç etiketlerini ekle" kutusu (varsayılan açık) ve sabit araştırma uyarısı.
+Her sayfada sağ altta **"Açıklama asistanı"** düğmesi.
+
+Yerleşim (Phase L2; gerekçe `phase_l2/01_design_brief.md`):
+- **Masaüstü (≥ 1024 px).** Sağdan kayan çekmece açılır (en çok 460 px) ve arka plan hafifçe kararır. İçerik daralmaz;
+  ekranda en çok iki sütun okunur.
+- **Paneli genişlet.** Panel ortada açılır: en çok 860 px genişlik, en çok 760 px yükseklik.
+- **Tablet ve mobil.** Panel tam ekran açılır.
+- **Kiplik.** Panel kipli bir iletişim kutusudur: `aria-modal`, arka plan `inert`, Esc kapatır, Tab panel içinde döner.
+  Karartmaya tıklamak paneli kapatır.
+
+Sohbet görünümü:
+- Mesajlar balonla gösterilir: kullanıcı sağda, asistan solda. Satır uzunluğu en çok 680 px.
+- Boş durumda kısa bir karşılama ve 3–4 küçük chip görünür. Chip'ler, sonuç varsa yalnız sonuç ETİKETLERİNE göre seçilir
+  (`ui.asst_examples_by_outcome_tr`, `ui.asst_examples_by_disease_tr`).
+- Yanıt beklenirken "yazıyor" göstergesi görünür. Acil uyarı kutusu belirgindir. Kaynaklar balonun altında küçük ve
+  katlıdır.
+- Sunucunun her yanıta eklediği uzun araştırma uyarısı balonda tekrarlanmaz. Panelin altında kısa tek satırlık uyarı her
+  zaman görünür. API değişmedi; uyarı yine yanıtta gelir.
+
 Ollama yoksa panel gerekçeyi gösterir ve giriş kapalıdır. Metinlerin tek kaynağı `app_config.json > ui.text_tr`
 (`asst_*`).
 

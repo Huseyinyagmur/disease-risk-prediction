@@ -40,6 +40,7 @@ function apply(schema: Schema, rule: TextRule, m: RegExpMatchArray): string {
   let s = (rule.text ?? '')
     .replace(/\{feature\}/g, schema.ui?.feature_labels_tr?.[g1] ?? fieldLabel(schema, g1))
     .replace(/\{label\}/g, fieldLabel(schema, g1))
+    .replace(/\{short\}/g, schema.form.field_ui_tr?.[g1]?.short ?? fieldLabel(schema, g1)) // Phase L2: kısa ad
     .replace(/\{unit\}/g, unitText(schema, schema.fields[g1]?.unit))
     .replace(/\{unit(\d)\}/g, (_, i: string) => unitText(schema, m[Number(i)]));
   s = s.replace(/\$(\d)/g, (_, i: string) => num(m[Number(i)] ?? ''));

@@ -49,7 +49,8 @@ export function ResultCard({ r, info, schema, experimental, onEcg }: Props) {
         </span>
         <div>
           <p className="text-lg font-semibold leading-snug">{d.text}</p>
-          {r.decision && <p className="mt-0.5 text-sm opacity-90" data-testid="decision-note">{t(schema, 'decision_note')}</p>}
+          {/* Phase L2: not her kartta görsel olarak tekrarlanmaz (özet şeridinde bir kez); ekran okuyucu için kalır */}
+          {r.decision && <p className="sr-only" data-testid="decision-note">{t(schema, 'decision_note')}</p>}
         </div>
       </div>
 

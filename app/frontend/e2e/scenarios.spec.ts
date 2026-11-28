@@ -123,14 +123,14 @@ test.describe('@birim birim hatası', () => {
     await loadProfile(page, 'fibrosis_ready');
     await gotoStep(page, 'laboratuvar');
     await page.locator('#f-albumin_gdl').fill('42');
-    await expect(page.getByTestId('err-albumin_gdl')).toContainText('Albümin (kan) 1,0–6,5 g/dL arasında olmalı.');
+    await expect(page.getByTestId('err-albumin_gdl')).toContainText('Albümin 1,0–6,5 g/dL arasında olmalı.');
     await expect(page.getByTestId('err-albumin_gdl')).not.toContainText(/makul aralık|\[/);
     await expectPanel(page, 'fibrosis_final', 'MISSING', 'Albümin');
     await page.getByTestId('unit-albumin_gdl').selectOption('g/L');
     await expect(page.getByTestId('err-albumin_gdl')).toBeHidden();
     await expectPanel(page, 'fibrosis_final', 'READY');
     await submit(page);
-    await expect(page.getByTestId('unit-notes')).toContainText('Albümin (kan): 42 g/L, 4,2 g/dL olarak kullanıldı.');
+    await expect(page.getByTestId('unit-notes')).toContainText('Albümin: 42 g/L, 4,2 g/dL olarak kullanıldı.');
     await expect(page.getByTestId('unit-notes')).not.toContainText('albumin_gdl');
     await expect(page.getByTestId('result-fibrosis_final')).toHaveAttribute('data-status', 'OK');
   });
@@ -139,8 +139,8 @@ test.describe('@birim birim hatası', () => {
     await openForm(page);
     await loadProfile(page, 'unit_error');
     await gotoStep(page, 'laboratuvar');
-    await expect(page.getByTestId('err-glucose_serum_mgdl')).toContainText('Kan şekeri (açlık gerekmez) 30–800 mg/dL arasında olmalı.');
-    await expect(page.getByTestId('err-creatinine_mgdl')).toContainText('Kreatinin (kan) 0,2–15 mg/dL arasında olmalı.');
+    await expect(page.getByTestId('err-glucose_serum_mgdl')).toContainText('Kan şekeri 30–800 mg/dL arasında olmalı.');
+    await expect(page.getByTestId('err-creatinine_mgdl')).toContainText('Kreatinin 0,2–15 mg/dL arasında olmalı.');
     await page.getByTestId('submit').click();
     await expect(page.getByTestId('block-msg')).toContainText('alanda hata');
     await expect(page.getByTestId('error-step-laboratuvar')).toBeVisible();
@@ -198,7 +198,8 @@ test.describe('@kapsam kapsam dışı veri', () => {
     await loadProfile(page, 'missing');
     await page.locator('#f-pregnant').selectOption('unknown');
     await expectPanel(page, 'fibrosis_final', 'MISSING');
-    await expect(page.getByTestId('panel-fibrosis_final')).toContainText('Gebelik durumu bilinmediği için bu analiz yapılamadı');
+    // Phase L2: birden çok analizde ortak gerekçe panelin üstünde bir kez gösterilir
+    await expect(page.getByTestId('routing-panel')).toContainText('Gebelik durumu bilinmediği için bu analiz yapılamadı');
   });
 
   test('AF: formda yaş 95 -> panel Kapsam dışı', async ({ page }) => {

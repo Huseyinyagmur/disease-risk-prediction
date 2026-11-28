@@ -1,0 +1,101 @@
+{
+ "questions_file": "phase_l2/dev/questions.json",
+ "questions_sha256": "8233e813b84df7d1cd31094ef152f4a67c31980647f3deb17877f64cab97cc52",
+ "chat_model": {
+  "name": "gemma3:4b",
+  "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "family": "gemma3",
+  "parameter_size": "3.9B",
+  "quantization": "Q4_K_M",
+  "license": "Gemma Terms of Use"
+ },
+ "embed_model": {
+  "name": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "kb_manifest_sha256": "19ef65c292753d835f428f2afddc35e92394b1c53e45e3795ab3a792bc0e2c62",
+ "n": 36,
+ "groups": {
+  "G1": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 3.16
+  },
+  "G2": {
+   "n": 20,
+   "passed": 14,
+   "rate": 0.7,
+   "wilson95": [
+    0.481,
+    0.855
+   ],
+   "mean_seconds": 3.75
+  },
+  "G3": {
+   "n": 6,
+   "passed": 5,
+   "rate": 0.833,
+   "wilson95": [
+    0.436,
+    0.97
+   ],
+   "mean_seconds": 0.6
+  },
+  "G4": {
+   "n": 6,
+   "passed": 6,
+   "rate": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G5": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 0.35
+  }
+ },
+ "overall": {
+  "n": 36,
+  "passed": 29,
+  "rate": 0.806,
+  "wilson95": [
+   0.65,
+   0.902
+  ]
+ },
+ "timing": {
+  "mean_seconds_all": 2.38,
+  "mean_seconds_llm_calls": 3.86,
+  "max_seconds": 14.6,
+  "n_llm_calls": 22,
+  "mean_seconds_fixed": 0.0507
+ },
+ "routes": {
+  "emergency": 6,
+  "llm": 21,
+  "postcheck_fail": 1,
+  "refused_medical": 6,
+  "refused_scope": 2
+ }
+}

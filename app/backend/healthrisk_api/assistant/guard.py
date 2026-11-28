@@ -148,6 +148,39 @@ DOSE_RE = re.compile(r'\d+(?:[.,]\d+)?\s?(?:mg|mcg|µg|μg|miligram|mikrogram|ml
 FORBIDDEN = ['tanınız', 'tanin ', 'teşhisiniz', 'kesinlikle', 'kesin olarak', 'hastasınız', 'hastalığınız var',
              'hastalığınız vardır', 'ilacınızı', 'almalısınız', 'kullanmalısınız', 'başlamalısınız', 'bırakmalısınız',
              'dozunu', 'dozu ', 'dozajı', 'reçete', 'olasılığınız', 'olasılık değeri', 'yüzde ']
+# Phase L2: bağlama duyarlı yasak ifade denetimi (cümle düzeyinde; eşleşme norm() ile, büyük/küçük ve Türkçe harf duyarsız).
+_CERTAIN = ('kesinlikle', 'kesin olarak')
+_REFERRAL_OK = ('reçete', 'ilacınızı')
+_NEG = (' degil', 'soyleyeme', 'soylenemez', 'gelmez', 'gostermez', 'etmez', 'olamaz', ' olmaz', 'yoktur', 'bilinemez')
+_REFER_WHO = ('hekim', 'doktor')
+_REFER_VERB = ('danis', 'basvur', ' sor', 'konus')
+_IMPER = ('alin ', 'alin.', 'kullanin', 'birakin', 'baslayin', 'artirin', 'azaltin', 'yazdir', 'artirabilir', 'azaltabilir',
+          'birakabilir', 'baslayabilir', 'kullanabilir', ' alabilir', 'edilen')
+
+
+def _wn(w):
+    n = norm(w)[1:-1]
+    return n + ' ' if w.endswith(' ') else n
+
+
+def forbidden_hits(answer: str) -> list:
+    """Yasak ifadeler, cümle bağlamıyla: (1) kesinlik ifadesi olumsuz cümlede ("kesin olarak söylenemez") serbest;
+    (2) 'reçete' / 'ilacınızı' hekime yönlendiren ve emir/öneri içermeyen cümlede serbest. Diğer her eşleşme ihlaldir."""
+    hits = []
+    for sent in re.split(r'(?<=[.!?;])\s+|\n+', answer):
+        n = norm(sent)
+        for w in FORBIDDEN:
+            if _wn(w) not in n:
+                continue
+            if w in _CERTAIN and any(x in n for x in _NEG):
+                continue
+            if (w in _REFERRAL_OK and any(x in n for x in _REFER_WHO) and any(x in n for x in _REFER_VERB)
+                    and not any(x in n for x in _IMPER)):
+                continue
+            hits.append(w)
+    return hits
+
+
 URL_RE = re.compile(r'https?://[^\s)\]>"]+', re.IGNORECASE)
 
 
@@ -173,10 +206,8 @@ def postcheck(answer: str, context_text: str, allowed_urls: set) -> list:
     low = answer.lower()
     if DOSE_RE.search(answer):
         v.append('dose_unit')
-    for w in FORBIDDEN:
-        if w in low:
-            v.append('forbidden_phrase')
-            break
+    if forbidden_hits(answer):
+        v.append('forbidden_phrase')
     # yüzde yalnız kaynakta aynı değerle geçiyorsa (ör. "%95 GA"); aksi halde olasılık izlenimi riski → ihlal
     ctx_pct = _pcts(context_text)
     ans_pct = _pcts(answer)

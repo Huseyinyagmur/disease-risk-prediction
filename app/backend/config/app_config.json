@@ -132,234 +132,301 @@
   "virtual_field_labels_tr": {
    "ecg_record": "EKG kaydı"
   },
-  "field_ui_source": "Phase XLVII: yalnız sunum. label = arayüzde gösterilen sade etiket; help = alan altındaki sade açıklama; source = 'teknik ayrıntı' içindeki kaynak değişken (yalnız şema metninde geçen kodlar). Şema label_tr/note değişmez ve teknik ayrıntıda gösterilir.",
+  "field_ui_source": "Phase XLVII: yalnız sunum. label = arayüzde gösterilen sade etiket; help = alan altındaki sade açıklama; source = 'teknik ayrıntı' içindeki kaynak değişken (yalnız şema metninde geçen kodlar). Şema label_tr/note değişmez ve teknik ayrıntıda gösterilir. Phase L2: short = hata/uyarı mesajlarında kullanılan kısa ad (soru biçimli etiket yerine). Phase L2: short = hata/uyarı mesajlarında kullanılan kısa ad (soru biçimli etiket yerine).",
   "field_ui_tr": {
    "age_years": {
     "label": "Yaş",
-    "help": "Bazı analizler yalnız belirli yaş aralığında çalışır."
+    "help": "Bazı analizler yalnız belirli yaş aralığında çalışır.",
+    "short": "Yaş"
    },
    "sex": {
-    "label": "Biyolojik cinsiyet"
+    "label": "Biyolojik cinsiyet",
+    "short": "Cinsiyet"
    },
    "race_ethnicity": {
     "label": "Irk / etnik köken",
     "help": "İsteğe bağlı. Yanıtsız bırakırsanız bu bilgiyi kullanan analizler (diyabet, böbrek, hipertansiyon) sonuç üretmez.",
-    "source": "NHANES RIDRETH1 sınıfları"
+    "source": "NHANES RIDRETH1 sınıfları",
+    "short": "Irk / etnik köken"
    },
    "pregnant": {
     "label": "Şu an gebe misiniz?",
-    "help": "Gebelikte bazı analizler geçerli değildir. \"Bilmiyorum\" seçilirse bu analizler sonuç üretmez."
+    "help": "Gebelikte bazı analizler geçerli değildir. \"Bilmiyorum\" seçilirse bu analizler sonuç üretmez.",
+    "short": "Gebelik"
    },
    "height_cm": {
-    "label": "Boy"
+    "label": "Boy",
+    "short": "Boy"
    },
    "weight_kg": {
-    "label": "Kilo"
+    "label": "Kilo",
+    "short": "Kilo"
    },
    "waist_cm": {
     "label": "Bel çevresi",
-    "help": "Mezura ile, kalça kemiğinin üst kenarı hizasından ölçülmüş değer (tahmini değil)."
+    "help": "Mezura ile, kalça kemiğinin üst kenarı hizasından ölçülmüş değer (tahmini değil).",
+    "short": "Bel çevresi"
    },
    "sbp_1_mmhg": {
     "label": "Büyük tansiyon (sistolik), 1. ölçüm",
-    "help": "Oturarak, en az 5 dakika dinlendikten sonra art arda 3 ölçüm yapın."
+    "help": "Oturarak, en az 5 dakika dinlendikten sonra art arda 3 ölçüm yapın.",
+    "short": "Büyük tansiyon (1. ölçüm)"
    },
    "dbp_1_mmhg": {
-    "label": "Küçük tansiyon (diyastolik), 1. ölçüm"
+    "label": "Küçük tansiyon (diyastolik), 1. ölçüm",
+    "short": "Küçük tansiyon (1. ölçüm)"
    },
    "sbp_2_mmhg": {
-    "label": "Büyük tansiyon (sistolik), 2. ölçüm"
+    "label": "Büyük tansiyon (sistolik), 2. ölçüm",
+    "short": "Büyük tansiyon (2. ölçüm)"
    },
    "dbp_2_mmhg": {
-    "label": "Küçük tansiyon (diyastolik), 2. ölçüm"
+    "label": "Küçük tansiyon (diyastolik), 2. ölçüm",
+    "short": "Küçük tansiyon (2. ölçüm)"
    },
    "sbp_3_mmhg": {
-    "label": "Büyük tansiyon (sistolik), 3. ölçüm"
+    "label": "Büyük tansiyon (sistolik), 3. ölçüm",
+    "short": "Büyük tansiyon (3. ölçüm)"
    },
    "dbp_3_mmhg": {
-    "label": "Küçük tansiyon (diyastolik), 3. ölçüm"
+    "label": "Küçük tansiyon (diyastolik), 3. ölçüm",
+    "short": "Küçük tansiyon (3. ölçüm)"
    },
    "smoking_status": {
     "label": "Sigara kullanımı",
-    "help": "\"Hiç içmedi\": yaşamı boyunca 100'den az sigara içmiş olmak."
+    "help": "\"Hiç içmedi\": yaşamı boyunca 100'den az sigara içmiş olmak.",
+    "short": "Sigara kullanımı"
    },
    "alcohol_drinks_per_day": {
     "label": "Günde ortalama kaç alkollü içki (son 12 ay)",
     "help": "Hiç içmiyorsanız 0 yazın. Örnek: haftada 7 içki = günde 1.",
-    "source": "NHANES ALQ121 × ALQ130 / 365"
+    "source": "NHANES ALQ121 × ALQ130 / 365",
+    "short": "Günlük alkollü içki"
    },
    "told_hypertension": {
-    "label": "Doktorunuz size yüksek tansiyon olduğunu söyledi mi?"
+    "label": "Doktorunuz size yüksek tansiyon olduğunu söyledi mi?",
+    "short": "Yüksek tansiyon tanısı"
    },
    "on_bp_medication": {
-    "label": "Tansiyon ilacı kullanıyor musunuz?"
+    "label": "Tansiyon ilacı kullanıyor musunuz?",
+    "short": "Tansiyon ilacı"
    },
    "told_diabetes": {
     "label": "Doktorunuz size diyabet (şeker hastalığı) olduğunu söyledi mi?",
     "help": "\"Sınırda\" denildiyse Hayır seçin.",
-    "source": "NHANES DIQ010 (sınırda = hayır)"
+    "source": "NHANES DIQ010 (sınırda = hayır)",
+    "short": "Diyabet tanısı"
    },
    "on_insulin": {
-    "label": "İnsülin kullanıyor musunuz?"
+    "label": "İnsülin kullanıyor musunuz?",
+    "short": "İnsülin kullanımı"
    },
    "on_diabetes_pills": {
-    "label": "Şeker hapı kullanıyor musunuz?"
+    "label": "Şeker hapı kullanıyor musunuz?",
+    "short": "Şeker hapı kullanımı"
    },
    "hx_coronary_disease": {
-    "label": "Koroner kalp hastalığı, anjina veya kalp krizi geçirdiniz mi?"
+    "label": "Koroner kalp hastalığı, anjina veya kalp krizi geçirdiniz mi?",
+    "short": "Koroner kalp hastalığı"
    },
    "hx_heart_failure": {
-    "label": "Kalp yetmezliği tanınız var mı?"
+    "label": "Kalp yetmezliği tanınız var mı?",
+    "short": "Kalp yetmezliği"
    },
    "hx_stroke": {
-    "label": "İnme (felç) geçirdiniz mi?"
+    "label": "İnme (felç) geçirdiniz mi?",
+    "short": "İnme öyküsü"
    },
    "family_hx_diabetes": {
     "label": "Yakın kan akrabalarınızda (anne, baba, kardeş) diyabet var mı?",
-    "source": "NHANES MCQ300C"
+    "source": "NHANES MCQ300C",
+    "short": "Ailede diyabet"
    },
    "gestational_diabetes_hx": {
-    "label": "Gebeliğinizde size şeker (gebelik diyabeti) olduğu söylendi mi?"
+    "label": "Gebeliğinizde size şeker (gebelik diyabeti) olduğu söylendi mi?",
+    "short": "Gebelik diyabeti öyküsü"
    },
    "recreational_activity": {
     "label": "Tipik bir haftada orta veya yoğun tempolu spor / egzersiz yapıyor musunuz?",
-    "source": "NHANES PAQ650 / PAQ665"
+    "source": "NHANES PAQ650 / PAQ665",
+    "short": "Düzenli egzersiz"
    },
    "glucocorticoid_ge1month": {
     "label": "En az 1 ay boyunca neredeyse her gün kortizon (ör. prednizon) ilacı kullandınız mı?",
-    "source": "NHANES OSQ130"
+    "source": "NHANES OSQ130",
+    "short": "Kortizon kullanımı"
    },
    "fracture_hip": {
-    "label": "Hiç kalça kırığı geçirdiniz mi?"
+    "label": "Hiç kalça kırığı geçirdiniz mi?",
+    "short": "Kalça kırığı"
    },
    "fracture_wrist": {
-    "label": "Hiç el bileği kırığı geçirdiniz mi?"
+    "label": "Hiç el bileği kırığı geçirdiniz mi?",
+    "short": "El bileği kırığı"
    },
    "fracture_spine": {
-    "label": "Hiç omurga kırığı geçirdiniz mi?"
+    "label": "Hiç omurga kırığı geçirdiniz mi?",
+    "short": "Omurga kırığı"
    },
    "fracture_after_age20": {
     "label": "20 yaşından sonra herhangi bir kemiğiniz kırıldı mı?",
-    "source": "NHANES OSQ080"
+    "source": "NHANES OSQ080",
+    "short": "20 yaş sonrası kırık"
    },
    "parent_hip_fracture": {
-    "label": "Anne veya babanız kalça kırığı geçirdi mi?"
+    "label": "Anne veya babanız kalça kırığı geçirdi mi?",
+    "short": "Ebeveynde kalça kırığı"
    },
    "menses_absent_12m": {
-    "label": "Son 12 ayda adetiniz tamamen kesildi mi?"
+    "label": "Son 12 ayda adetiniz tamamen kesildi mi?",
+    "short": "Adetin kesilmesi"
    },
    "hrt_ever": {
-    "label": "Hiç hormon tedavisi kullandınız mı?"
+    "label": "Hiç hormon tedavisi kullandınız mı?",
+    "short": "Hormon tedavisi"
    },
    "age_last_period_years": {
-    "label": "Son adetinizi kaç yaşında gördünüz?"
+    "label": "Son adetinizi kaç yaşında gördünüz?",
+    "short": "Son adet yaşı"
    },
    "hba1c_pct": {
-    "label": "HbA1c (3 aylık şeker ortalaması)"
+    "label": "HbA1c (3 aylık şeker ortalaması)",
+    "short": "HbA1c"
    },
    "glucose_serum_mgdl": {
-    "label": "Kan şekeri (açlık gerekmez)"
+    "label": "Kan şekeri (açlık gerekmez)",
+    "short": "Kan şekeri"
    },
    "glucose_fasting_mgdl": {
-    "label": "Açlık kan şekeri (en az 8 saat açlık)"
+    "label": "Açlık kan şekeri (en az 8 saat açlık)",
+    "short": "Açlık kan şekeri"
    },
    "total_chol_mgdl": {
-    "label": "Total kolesterol"
+    "label": "Total kolesterol",
+    "short": "Total kolesterol"
    },
    "hdl_mgdl": {
-    "label": "HDL (iyi) kolesterol"
+    "label": "HDL (iyi) kolesterol",
+    "short": "HDL kolesterol"
    },
    "tg_mgdl": {
-    "label": "Trigliserit"
+    "label": "Trigliserit",
+    "short": "Trigliserit"
    },
    "alt_ul": {
-    "label": "ALT (karaciğer enzimi)"
+    "label": "ALT (karaciğer enzimi)",
+    "short": "ALT"
    },
    "ast_ul": {
-    "label": "AST (karaciğer enzimi)"
+    "label": "AST (karaciğer enzimi)",
+    "short": "AST"
    },
    "ggt_ul": {
-    "label": "GGT (karaciğer enzimi)"
+    "label": "GGT (karaciğer enzimi)",
+    "short": "GGT"
    },
    "alp_ul": {
-    "label": "ALP (alkalen fosfataz)"
+    "label": "ALP (alkalen fosfataz)",
+    "short": "ALP"
    },
    "albumin_gdl": {
-    "label": "Albümin (kan)"
+    "label": "Albümin (kan)",
+    "short": "Albümin"
    },
    "platelets_k_ul": {
-    "label": "Trombosit (kan pulcuğu) sayısı"
+    "label": "Trombosit (kan pulcuğu) sayısı",
+    "short": "Trombosit"
    },
    "uric_acid_mgdl": {
-    "label": "Ürik asit"
+    "label": "Ürik asit",
+    "short": "Ürik asit"
    },
    "creatinine_mgdl": {
-    "label": "Kreatinin (kan)"
+    "label": "Kreatinin (kan)",
+    "short": "Kreatinin"
    },
    "urine_albumin_mgl": {
-    "label": "İdrarda albümin"
+    "label": "İdrarda albümin",
+    "short": "İdrarda albümin"
    },
    "urine_creatinine_mgdl": {
-    "label": "İdrarda kreatinin"
+    "label": "İdrarda kreatinin",
+    "short": "İdrarda kreatinin"
    },
    "wbc_k_ul": {
-    "label": "Beyaz kan hücresi (lökosit, WBC)"
+    "label": "Beyaz kan hücresi (lökosit, WBC)",
+    "short": "Lökosit (WBC)"
    },
    "rbc_m_ul": {
-    "label": "Kırmızı kan hücresi (eritrosit, RBC)"
+    "label": "Kırmızı kan hücresi (eritrosit, RBC)",
+    "short": "Eritrosit (RBC)"
    },
    "mcv_fl": {
-    "label": "MCV (ortalama kırmızı hücre hacmi)"
+    "label": "MCV (ortalama kırmızı hücre hacmi)",
+    "short": "MCV"
    },
    "rdw_pct": {
-    "label": "RDW (kırmızı hücre boyut dağılımı)"
+    "label": "RDW (kırmızı hücre boyut dağılımı)",
+    "short": "RDW"
    },
    "hemoglobin_gdl": {
-    "label": "Hemoglobin"
+    "label": "Hemoglobin",
+    "short": "Hemoglobin"
    },
    "rip3_pgml": {
     "label": "RIP3 (araştırma testi)",
-    "help": "Rutin laboratuvar testi değildir; yalnız özel araştırma testiyle ölçülür."
+    "help": "Rutin laboratuvar testi değildir; yalnız özel araştırma testiyle ölçülür.",
+    "short": "RIP3"
    },
    "fev1_pre_ml": {
     "label": "FEV1 — bronş açıcı ilaç öncesi",
-    "help": "Solunum testi (spirometri) sonucu; birim mL (ör. 3,2 L = 3200 mL)."
+    "help": "Solunum testi (spirometri) sonucu; birim mL (ör. 3,2 L = 3200 mL).",
+    "short": "FEV1"
    },
    "fvc_pre_ml": {
     "label": "FVC — bronş açıcı ilaç öncesi",
-    "help": "Solunum testi (spirometri) sonucu; birim mL. FEV1, FVC'den büyük olamaz."
+    "help": "Solunum testi (spirometri) sonucu; birim mL. FEV1, FVC'den büyük olamaz.",
+    "short": "FVC"
    },
    "cad_chest_pain_type": {
     "label": "Göğüs ağrısı tipi (hekim değerlendirmesi)",
-    "source": "UCI Heart Disease: cp"
+    "source": "UCI Heart Disease: cp",
+    "short": "Göğüs ağrısı tipi"
    },
    "cad_resting_ecg": {
     "label": "Dinlenme EKG sonucu (hekim değerlendirmesi)",
-    "source": "UCI Heart Disease: restecg"
+    "source": "UCI Heart Disease: restecg",
+    "short": "Dinlenme EKG sonucu"
    },
    "cad_max_hr_bpm": {
     "label": "Efor testinde ulaşılan en yüksek nabız",
-    "source": "UCI Heart Disease: thalach"
+    "source": "UCI Heart Disease: thalach",
+    "short": "Efor testinde en yüksek nabız"
    },
    "cad_exercise_angina": {
     "label": "Efor testi sırasında göğüs ağrısı oldu mu?",
-    "source": "UCI Heart Disease: exang"
+    "source": "UCI Heart Disease: exang",
+    "short": "Efor sırasında göğüs ağrısı"
    },
    "cad_st_depression_mm": {
     "label": "Efor testinde ST çökmesi",
-    "source": "UCI Heart Disease: oldpeak"
+    "source": "UCI Heart Disease: oldpeak",
+    "short": "Efor testinde ST çökmesi"
    },
    "cad_st_slope": {
     "label": "Efor testinde ST eğimi",
-    "source": "UCI Heart Disease: slope"
+    "source": "UCI Heart Disease: slope",
+    "short": "Efor testinde ST eğimi"
    },
    "told_weak_failing_kidneys": {
     "label": "Doktorunuz size böbrek hastalığı (zayıf veya yetersiz böbrek) olduğunu söyledi mi?",
-    "source": "NHANES KIQ022"
+    "source": "NHANES KIQ022",
+    "short": "Böbrek hastalığı tanısı"
    },
    "on_dialysis": {
     "label": "Son 12 ayda diyalize girdiniz mi?",
-    "source": "NHANES KIQ025"
+    "source": "NHANES KIQ025",
+    "short": "Diyaliz"
    }
   }
  },
@@ -615,7 +682,7 @@
    "race_no_answer": "Belirtmek istemiyorum (yanıtsız)",
    "format_error": "Sayı girin (ondalık ayırıcı nokta veya virgül).",
    "panel_title": "Seçtiğiniz analizlerin durumu",
-   "panel_sub": "Girdikleriniz değiştikçe sunucuda denetlenir. Analiz çalıştırılmaz; yalnız hangi analizin sonuç üretebileceği gösterilir.",
+   "panel_sub": "Girdikçe güncellenir. Analiz çalıştırılmaz; yalnız hangisinin sonuç verebileceği gösterilir.",
    "panel_updating": "güncelleniyor…",
    "panel_current": "güncel",
    "panel_empty": "Henüz analiz seçilmedi.",
@@ -701,12 +768,22 @@
    "ecg_sample_sr_desc": "Kayıt etiketi normal sinüs ritmi olan örnek (PTB-XL 00165).",
    "ecg_wait": "Analiz yaklaşık 10–30 sn sürebilir; bu sayfadan ayrılmayın.",
    "ecg_sample_loaded": "{title} yüklendi (PTB-XL {id}). Açık PhysioNet kaydı (geliştirme kümesinden; test kaydı değil). Yaş ve cinsiyet SENTETİK (60, erkek).",
-   "footer": "HealthRisk AI Research V2 · Phase L arayüzü · yalnız localhost · klinik karar aracı değildir",
+   "footer": "HealthRisk AI Research V2 · Phase L2 arayüzü · yalnız localhost · klinik karar aracı değildir",
    "ecg_uploading": "Yükleniyor… %{p}",
    "ecg_processing": "Sunucuda işleniyor… {s} sn (bu bilgisayarda ölçülen süre 7–30 sn; en çok 60 sn)",
    "ecg_err_busy": "EKG analizi şu an başka bir kaydı işliyor (aynı anda tek kayıt); birkaç saniye sonra tekrar deneyin.",
    "ecg_err_size": "Dosya boyutu sınırı (2 MB) aşıldı.",
-   "evidence_missing_short": "kayıt yok"
+   "evidence_missing_short": "kayıt yok",
+   "panel_not_started": "Henüz bilgi girilmedi",
+   "panel_progress": "{a}/{n} bilgi girildi",
+   "panel_show_missing": "Eksikleri göster",
+   "panel_common": "Birden fazla analiz için geçerli: {x}",
+   "panel_ready_hint": "Bilgiler bu analiz için yeterli.",
+   "profile_toggle": "Örnek profillerle dene (sentetik)",
+   "asst_welcome": "Merhaba. Uygulamadaki terimleri ve sonuç kartlarını kaynaklara dayanarak açıklarım. Tanı koymam; ilaç veya doz önermem.",
+   "asst_typing": "Asistan yazıyor",
+   "asst_disclaimer_short": "Araştırma prototipi: mevcut durumu sınıflar, tanı değildir; negatif sonuç hastalığı dışlamaz.",
+   "asst_new_chat": "Yeni sohbet"
   },
   "default_selected_module_labels": [
    "ana modül",
@@ -865,11 +942,11 @@
    },
    {
     "re": "^(\\w+): şemada olmayan değer",
-    "text": "Bir sorunun yanıtı geçersiz ({label}); bu analiz sonuç üretmez."
+    "text": "Bir sorunun yanıtı geçersiz ({short}); bu analiz sonuç üretmez."
    },
    {
     "re": "^şemada olmayan kategori: (\\w+)=",
-    "text": "Bir sorunun yanıtı geçersiz ({label}); bu analiz sonuç üretmez."
+    "text": "Bir sorunun yanıtı geçersiz ({short}); bu analiz sonuç üretmez."
    },
    {
     "re": "^ırk/etnik köken yanıtsız",
@@ -911,15 +988,15 @@
   "field_error_rules_tr": [
    {
     "re": "^(\\w+)=(\\S+) .*makul aralık dışında \\[(.+), (.+)\\]$",
-    "text": "{label} $3–$4 {unit} arasında olmalı."
+    "text": "{short} $3–$4 {unit} arasında olmalı."
    },
    {
     "re": "^(\\w+) sayısal olmalı",
-    "text": "{label} bir sayı olmalı."
+    "text": "{short} bir sayı olmalı."
    },
    {
     "re": "^(\\w+): desteklenmeyen birim",
-    "text": "{label} için bu birim kullanılamaz."
+    "text": "{short} için bu birim kullanılamaz."
    },
    {
     "re": "^tutarsız okuma (\\d): sistolik \\((\\S+)\\) ≤ diyastolik \\((\\S+)\\)",
@@ -952,9 +1029,10 @@
   "unit_note_rules_tr": [
    {
     "re": "^(\\w+): (\\S+) (\\S+) -> (\\S+) (\\S+)",
-    "text": "{label}: $2 $3, $4 $5 olarak kullanıldı."
+    "text": "{short}: $2 $3, $4 $5 olarak kullanıldı."
    }
-  ]
+  ],
+  "text_tr_l2_source": "Phase L2: phase_l2/scripts/patch_app_config_l2.py"
  },
  "disclaimer_tr": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
  "privacy": {

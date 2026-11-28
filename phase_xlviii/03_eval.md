@@ -255,3 +255,50 @@ Ortalama (18): doğruluk 1,61 / 2, sadakat 1,83 / 2, Türkçe 4,44 / 5. Güvenli
   (G2-04 örneği). Raporlanan oranlar 1. çalıştırmadır.
 - Test seti küçük (67) ve sentetiktir. GA'lar geniştir. Gerçek kullanıcı soruları farklı dağılımda olabilir.
 - Süreler bu GPU'lu dizüstü makineye özgüdür.
+
+---
+
+## Ek (Phase L, 2026-11-28): bilgi tabanı v2 sonrası regresyon
+
+Bu bölüm sonradan eklendi; yukarıdaki sonuçlar (62/67, v2, v3) ESKİ sürüme aittir ve değiştirilmedi.
+Phase L'de iç belgeler durum başına ayrıldı (eşik üstü / eşik altı; "Ne yapmalıyım?" durum başına). Etiket sabitleme
+etiketin kendi durumuna bağlandı. Son kontrole `threshold_polarity` ve `probability_claim` eklendi. İndeks manifesti
+`19ef65c2…` oldu. Ana test seti yalnız regresyon için bir kez koşuldu:
+
+| grup | eski (1. koşu) | Phase L |
+|---|---|---|
+| G1 | 14/16 | 13/16 |
+| G2 | 10/10 | 7/10 |
+| G3 | 9/10 | 10/10 |
+| G4 | 8/10 | 10/10 |
+| G5 | 10/10 | 10/10 |
+| G6 | 11/11 | 10/11 |
+| toplam | 62/67 | **60/67** |
+
+G2 düşüşü Phase L kaynaklıdır: son kontrol iki yanıtı "reçete" ve olumsuz "kesin olarak" nedeniyle attı; iki yanıta da
+"kaynaklarımda bilgi yok" eklenince kaynak listesi boşaldı. Ayrıntı: `phase_l/02_assistant_fix.md`.
+
+## Ek (Phase L2, 2026-11-28): son kontrol ayarı (ayrı geliştirme seti) sonrası regresyon
+
+Ayar, test setlerinden bağımsız ve önceden SHA ile kilitlenmiş 36 soruluk dev setiyle yapıldı:
+`phase_l2/dev/questions.json`, SHA `8233e813…`. Üç genel kural eklendi:
+1. olumsuz cümlede kesinlik ifadesi serbest;
+2. hekime yönlendiren ve emir içermeyen cümlede "reçete" ya da "ilacınızı" serbest;
+3. atıflı yanıttaki gereksiz "kaynaklarımda bilgi yok" cümlesi silinir.
+
+Dev setinde güvenlik grupları değişmedi (G3 5/6 önce ve sonra, G4 6/6, G5 2/2). Ana test seti bir kez koşuldu; sonrasında
+ayar yapılmadı:
+
+| grup | eski (1. koşu) | Phase L | Phase L2 |
+|---|---|---|---|
+| G1 | 14/16 | 13/16 | 14/16 |
+| G2 | 10/10 | 7/10 | 8/10 |
+| G3 | 9/10 | 10/10 | 10/10 |
+| G4 | 8/10 | 10/10 | 10/10 |
+| G5 | 10/10 | 10/10 | 10/10 |
+| G6 | 11/11 | 10/11 | 10/11 |
+| toplam | 62/67 | 60/67 | **62/67** (Wilson %95 GA 0,837–0,968) |
+
+Bu bir iyileşme iddiası değildir. Kalan başarısızlıklardan ikisi kilitli değerlendiricinin sözcük düzeyindeki
+denetiminden geliyor: G2-06'da olumsuz cümlede "kesin olarak", G6-08'de "Japonya". G2-09'u `probability_claim` attı.
+Ayrıntı: `phase_l2/02_assistant_tuning.md`.

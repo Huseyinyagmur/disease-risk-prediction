@@ -84,7 +84,6 @@ export function Results() {
           </div>
         </section>
       )}
-      <p className="mt-4 text-sm text-slate-600">{prediction.note}</p>
     </div>
   );
 }

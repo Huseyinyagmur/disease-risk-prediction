@@ -1,9 +1,9 @@
 // @screenshots: faz raporu için ekran görüntüleri (sentetik profiller, açık PhysioNet örnek EKG). Phase XLVII: sihirbaz akışı;
-// masaüstü (1440), tablet (768) ve mobil (375) genişlikleri. Çıktı: SHOTS_DIR (varsayılan phase_l/screenshots/after; Phase L'de güncellendi).
+// masaüstü (1440), tablet (768) ve mobil (375) genişlikleri. Çıktı: SHOTS_DIR (varsayılan phase_l2/results/suite_shots; Phase L'de güncellendi).
 import { expect, test, type Page } from '@playwright/test';
 import { expectPanel, gotoStep, loadEcgSample, loadProfile, mainNav, openEcg, openForm, runEcg, submit } from './helpers';
 
-const DIR = process.env.SHOTS_DIR ?? '../../phase_l/screenshots/after'; // Phase L
+const DIR = process.env.SHOTS_DIR ?? '../../phase_l2/results/suite_shots'; // Phase L2
 const shot = (page: Page, name: string, fullPage = true) => page.screenshot({ path: `${DIR}/${name}.png`, fullPage });
 
 test.describe('@screenshots', () => {
@@ -112,7 +112,7 @@ test.describe('@screenshots', () => {
     await page.getByTestId('results-summary').screenshot({ path: `${DIR}/L_desktop_02_ozet_seridi.png` });
     await shot(page, 'L_desktop_03_sonuclar_varsayilan_secim');
     await page.getByTestId('assistant-open').click();
-    await expect(page.getByTestId('assistant-panel')).toHaveAttribute('data-layout', 'side');
+    await expect(page.getByTestId('assistant-panel')).toHaveAttribute('data-layout', 'drawer'); // Phase L2: çekmece
     await expect(page.getByTestId('assistant-examples')).toHaveAttribute('data-from-results', 'true');
     await shot(page, 'L_desktop_04_asistan_yan_panel', false);
     await page.getByTestId('assistant-expand').click();

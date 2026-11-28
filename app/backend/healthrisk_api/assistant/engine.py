@@ -243,6 +243,7 @@ class Assistant:
             self.busy.release()
         ans = ans.strip()
         dbg = dict(raw_answer=ans, retrieval=[dict(doc_id=c['doc_id'], score=round(s, 3)) for s, c in hits]) if debug else {}
+        ans = _drop_redundant_no_info(ans)                   # Phase L2: atıflı yanıttaki gereksiz "bilgi yok" cümlesi
         if _is_no_source(ans):
             return {**self._fixed('no_source', self.T['no_source'], t0), **dbg}
         ctx_text = '\n'.join(c['text'] + ' ' + c['title'] + ' ' + (c['section'] or '') for c in good)
@@ -311,6 +312,16 @@ def _tidy_citations(ans: str) -> str:
     ans = _CITE_RUN.sub(lambda m: '[' + ', '.join(re.findall(r'\d{1,2}(?:\s*[–-]\s*\d{1,2})?', m.group(0))) + ']', ans)
     ans = _CITE_ONLY_LINE.sub('', ans)
     return re.sub(r'\n{3,}', '\n\n', ans).strip()
+
+
+_NO_INFO_SENT = re.compile(r'\s*[^.!?\n]*kaynaklarımda bilgi yok[^.!?\n]*[.!?]?', re.IGNORECASE)
+
+
+def _drop_redundant_no_info(ans: str) -> str:
+    """Phase L2: atıflı bilgi içeren yanıta eklenmiş "… kaynaklarımda bilgi yok …" cümlesi silinir (kaynak listesi boşalmasın).
+    Yanıtın geri kalanında atıf yoksa (bilgi yok) cümle kalır."""
+    rest = _NO_INFO_SENT.sub('', ans).strip()
+    return rest if rest != ans.strip() and CITE_RE.search(rest) else ans
 
 
 def _clean(s: str) -> str:

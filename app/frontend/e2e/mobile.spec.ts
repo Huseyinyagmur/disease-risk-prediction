@@ -67,18 +67,26 @@ test.describe('@mobil yerleşim', () => {
         await mainNav(page).getByRole('button', { name, exact: true }).click();
         await noHorizontalOverflow(page, `${w} ${name}`);
       }
-      // Phase L: asistan paneli — ≥ 1024 px sağda yan panel ve içerik panelin altında kalmaz; altında tam ekran
+      // Phase L2: asistan — ≥ 1024 px sağ çekmece (karartma; içerik DARALMAZ, en çok 2 sütun), genişletilmiş ortada ≤ 860 px;
+      // altında tam ekran
       await mainNav(page).getByRole('button', { name: 'Sonuçlar', exact: true }).click();
       await page.getByTestId('assistant-open').click();
       const panel = page.getByTestId('assistant-panel');
-      await expect(panel).toHaveAttribute('data-layout', w >= 1024 ? 'side' : 'fullscreen');
+      await expect(panel).toHaveAttribute('data-layout', w >= 1024 ? 'drawer' : 'fullscreen');
       const pb = (await panel.boundingBox())!;
       if (w >= 1024) {
         expect(pb.height).toBeGreaterThanOrEqual(h - 1);
-        expect(pb.width / w).toBeGreaterThan(0.3);
-        const main = (await page.locator('main').boundingBox())!;
-        expect(main.x + main.width, `${w}: içerik paneli altında`).toBeLessThanOrEqual(pb.x + 1);
+        expect(pb.width).toBeLessThanOrEqual(461);
+        await expect(page.getByTestId('assistant-backdrop')).toBeVisible();
         await expect(page.getByTestId('disclaimer')).toBeInViewport();
+        await page.getByTestId('assistant-expand').click();
+        await expect(panel).toHaveAttribute('data-layout', 'centered');
+        const cb = (await panel.boundingBox())!;
+        expect(cb.width).toBeLessThanOrEqual(861);
+        expect(Math.abs(cb.x + cb.width / 2 - w / 2)).toBeLessThan(2); // ortalanmış
+        const bubble = page.getByTestId('assistant-examples');
+        expect((await bubble.boundingBox())!.width).toBeLessThanOrEqual(681); // satır uzunluğu ≤ 680 px
+        await page.getByTestId('assistant-expand').click();
       } else {
         expect(pb.x).toBe(0);
         expect(Math.round(pb.width)).toBe(w);

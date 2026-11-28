@@ -1,5 +1,5 @@
 // Phase L: anlaşılırlık iyileştirmesi — davranış testleri (fixture: gerçek backend /schema; sentetik tahmin yanıtları).
-import { act, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { AssistantResultLabel } from './api/types';
@@ -125,32 +125,7 @@ describe('madde 7: açıklama asistanı', () => {
     expect(d.qs).toEqual(schema.ui!.text_tr.asst_examples.split('|'));
   });
 
-  it('masaüstünde sağda yan panel; içerik daralır; genişlet düğmesi; kaynaklar katlanır; uyarı panelde', async () => {
-    vi.stubGlobal('matchMedia', (q: string) => ({ matches: q.includes('1024'), addEventListener() {}, removeEventListener() {} }));
-    mockFetch();
-    const u = userEvent.setup();
-    renderApp();
-    await u.click(await screen.findByTestId('assistant-open'));
-    const panel = screen.getByTestId('assistant-panel');
-    expect(panel).toHaveAttribute('data-layout', 'side');
-    expect(screen.getByTestId('app-shell').style.marginRight).not.toBe('');
-    expect(within(panel).getByTestId('assistant-local-note')).toHaveTextContent('veriler bilgisayarınızdan çıkmaz');
-    expect(within(panel).getByTestId('assistant-disclaimer')).toHaveTextContent('negatif sonuç hastalığı dışlamaz');
-    await u.click(within(panel).getByTestId('assistant-expand'));
-    expect(panel).toHaveAttribute('data-layout', 'side-wide');
-    const sep = within(panel).getByTestId('assistant-resize');
-    const wideW = Number(sep.getAttribute('aria-valuenow'));
-    await u.click(within(panel).getByTestId('assistant-expand'));
-    const normalW = Number(sep.getAttribute('aria-valuenow'));
-    expect(normalW).toBeLessThan(wideW);
-    act(() => sep.focus());
-    await u.keyboard('{ArrowLeft}'); // sol ok: panel 32 px genişler
-    expect(Number(sep.getAttribute('aria-valuenow'))).toBe(normalW + 32);
-    for (let i = 0; i < 20; i++) await u.keyboard('{ArrowRight}');
-    expect(Number(sep.getAttribute('aria-valuenow'))).toBe(360); // en dar 360 px'te durur
-    await u.click(within(panel).getByTestId('assistant-close'));
-    expect(screen.getByTestId('app-shell').style.marginRight).toBe('');
-  });
+  // Phase L2: masaüstü yan panel testi kaldırıldı; yerine çekmece + karartma (phase_l2.test.tsx).
 
   it('tablet/mobil (matchMedia eşleşmez): tam ekran, genişlet düğmesi yok', async () => {
     mockFetch();

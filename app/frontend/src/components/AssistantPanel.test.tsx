@@ -61,7 +61,9 @@ describe('açıklama asistanı paneli', () => {
     expect(await within(panel).findByTestId('assistant-waiting')).toHaveTextContent(tx.asst_waiting);
     const bot = await within(panel).findByTestId('assistant-msg-bot');
     expect(bot).toHaveTextContent('araştırmada sabitlenmiş eşiğe');
-    expect(bot).toHaveTextContent(DISC);
+    // Phase L2: uzun uyarı balonda tekrarlanmaz; panelin altında kısa tek satır görünür
+    expect(bot).not.toHaveTextContent(DISC);
+    expect(within(panel).getByTestId('assistant-disclaimer')).toHaveTextContent(schema.ui!.text_tr.asst_disclaimer_short);
     const src = within(bot).getByTestId('assistant-sources');
     const link = within(src).getByRole('link');
     expect(link).toHaveAttribute('href', 'https://medlineplus.gov/lab-tests/hemoglobin-a1c-hba1c-test/');

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { EligState, Evidence, Metric, Tier } from '../api/types';
-import { ELIG_LOOK } from '../lib/status';
+import { ELIG_LOOK, NOT_STARTED_LOOK } from '../lib/status';
 import { term, t } from '../lib/ui';
 import { useSession, type Page } from '../state/session';
 
@@ -20,7 +20,7 @@ export function DisclaimerText() {
 export function DisclaimerBar() {
   return (
     <div role="note" aria-label="Sabit uyarı" data-testid="disclaimer"
-      className="z-30 border-b sm:sticky sm:top-0 border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900">
+      className="z-30 border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-xs leading-snug text-amber-950 sm:sticky sm:top-0">
       <span className="font-semibold">Uyarı: </span>
       <DisclaimerText />
     </div>
@@ -62,14 +62,16 @@ export function PageTitle({ children, sub }: { children: ReactNode; sub?: ReactN
   );
 }
 
-/** Durum rozeti; metin terim sözlüğünden (app_config > ui.terms_tr.eligibility). Phase L: renk + simge lib/status.ts. */
-export function StateBadge({ state }: { state: EligState }) {
+/** Durum rozeti; metin terim sözlüğünden (app_config > ui.terms_tr.eligibility). Phase L: renk + simge lib/status.ts.
+ * Phase L2: notStarted → nötr "Henüz bilgi girilmedi" (sunucu durumu MISSING kalır; yalnız gösterim). */
+export function StateBadge({ state, notStarted = false }: { state: EligState; notStarted?: boolean }) {
   const { schema } = useSession();
-  const look = ELIG_LOOK[state];
+  const look = notStarted ? NOT_STARTED_LOOK : ELIG_LOOK[state];
   return (
-    <span data-testid="state-badge" data-state={state} className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-sm font-medium ${look.cls}`}>
+    <span data-testid="state-badge" data-state={notStarted ? 'NOT_STARTED' : state}
+      className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium ${look.cls}`}>
       <span aria-hidden="true">{look.symbol}</span>
-      {term(schema, 'eligibility', state)}
+      {notStarted ? t(schema, 'panel_not_started') : term(schema, 'eligibility', state)}
     </span>
   );
 }

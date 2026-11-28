@@ -1,10 +1,10 @@
 // Phase XLVIII: açıklama asistanı paneli uçtan uca (gerçek backend + yerel Ollama 127.0.0.1:11434 çalışırken).
 // Ollama yoksa (/health > assistant.enabled=false) testler gerekçeyle SKIP olur. Ekran görüntüleri: SHOTS_DIR
-// (varsayılan phase_l/screenshots/after). Profiller sentetiktir.
+// (varsayılan phase_l2/results/suite_shots). Profiller sentetiktir.
 import { expect, test, type Page, type Request } from '@playwright/test';
 import { gotoStep, loadProfile, openForm, submit } from './helpers';
 
-const DIR = process.env.SHOTS_DIR ?? '../../phase_l/screenshots/after'; // Phase L
+const DIR = process.env.SHOTS_DIR ?? '../../phase_l2/results/suite_shots'; // Phase L2
 const LLM_TIMEOUT = 240_000;
 
 async function assistantEnabled(page: Page): Promise<{ ok: boolean; reason: string }> {
@@ -36,13 +36,17 @@ test.describe('açıklama asistanı', () => {
     const bot = page.getByTestId('assistant-msg-bot');
     await expect(bot).toBeVisible({ timeout: LLM_TIMEOUT });
     await expect(page.getByTestId('assistant-waiting')).toBeHidden();
-    await expect(bot).toContainText('Araştırma prototipidir;');
+    // Phase L2: uzun uyarı balonda tekrarlanmaz; panel altında kısa satır
+    await expect(bot).not.toContainText('Araştırma prototipidir;');
+    await expect(page.getByTestId('assistant-disclaimer')).toContainText('negatif sonuç hastalığı dışlamaz');
     await expect(bot.getByTestId('assistant-sources')).toBeVisible();
     await bot.getByTestId('assistant-sources').locator('summary').click(); // Phase L: kaynaklar katlanır liste
     await expect(bot.getByTestId('assistant-sources').locator('li').first()).toBeVisible();
     await page.screenshot({ path: `${DIR}/desktop_assistant_02_yanit.png` });
-    // başka sayfada da açık ve sohbet bellekte
+    // Phase L2: panel kiplidir (arka plan inert); kapatılıp sayfa değiştirilir, yeniden açılınca sohbet bellekte durur
+    await page.getByTestId('assistant-close').click();
     await page.getByRole('navigation', { name: 'Ana gezinme' }).getByRole('button', { name: 'Model kartları' }).click();
+    await page.getByTestId('assistant-open').click();
     await expect(page.getByTestId('assistant-msg-bot')).toBeVisible();
     // sayfa yenilenince sohbet silinir
     await page.reload();
@@ -93,7 +97,7 @@ test.describe('açıklama asistanı', () => {
     const box = bot.getByTestId('assistant-emergency-notice');
     await expect(box).toBeVisible();
     await expect(box).toContainText('112');
-    await expect(bot).toContainText('Araştırma prototipidir;');
+    await expect(page.getByTestId('assistant-disclaimer')).toBeVisible();
     await page.screenshot({ path: `${DIR}/desktop_assistant_05_genel_soru_112_kutusu.png` });
     await page.getByTestId('assistant-input').fill('Şu an göğsümde baskı var');
     await page.getByTestId('assistant-send').click();

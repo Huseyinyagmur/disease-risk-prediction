@@ -173,25 +173,22 @@ export function DataEntry() {
     <div>
       <PageTitle sub={t(schema, 'page_sub')}>{t(schema, 'page_title')}</PageTitle>
 
-      <section aria-label={t(schema, 'profile_title')} className="mb-4 rounded-lg border border-dashed border-violet-400 bg-violet-50 p-3">
-        <p className="mb-2 text-xs text-violet-900">
-          <span className="font-semibold">{t(schema, 'profile_title')}</span> — {t(schema, 'profile_note')}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {DEMO_PROFILES.map((p) => (
-            <button key={p.id} type="button" title={p.description} data-testid={`profile-${p.id}`} onClick={() => loadProfile(p.id)}
-              className="rounded border border-violet-400 bg-white px-3 py-1 text-xs text-violet-900 hover:bg-violet-100">
-              {p.title}
-            </button>
-          ))}
-          <button type="button" onClick={clearForm} data-testid="clear-form" className="rounded border border-slate-400 bg-white px-3 py-1 text-xs text-slate-700 hover:bg-slate-100">
-            {t(schema, 'clear_form')}
+      <section aria-label={t(schema, 'profile_title')} data-testid="profile-bar"
+        className="mb-5 flex flex-wrap items-center gap-x-2 gap-y-1.5 border-b border-slate-200 pb-3 text-xs text-slate-600">
+        <span className="font-medium text-slate-700" title={t(schema, 'profile_note')}>{t(schema, 'profile_toggle')}:</span>
+        {DEMO_PROFILES.map((p) => (
+          <button key={p.id} type="button" title={p.description} data-testid={`profile-${p.id}`} onClick={() => loadProfile(p.id)}
+            className="rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs text-slate-700 hover:border-violet-400 hover:bg-violet-50">
+            {p.title}
           </button>
-        </div>
-        {profileLabel && <p className="mt-2 text-xs text-violet-900" data-testid="profile-loaded">{t(schema, 'profile_loaded', { name: profileLabel })}</p>}
+        ))}
+        <button type="button" onClick={clearForm} data-testid="clear-form" className="rounded-full px-2.5 py-1 text-xs text-slate-600 underline hover:bg-slate-100">
+          {t(schema, 'clear_form')}
+        </button>
+        {profileLabel && <span className="text-violet-900" data-testid="profile-loaded">{t(schema, 'profile_loaded', { name: profileLabel })}</span>}
       </section>
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <form className="min-w-0 space-y-4" onSubmit={(e) => { e.preventDefault(); void submit(); }} noValidate aria-label={t(schema, 'page_title')}>
           <nav aria-label={t(schema, 'wizard_label')} data-testid="wizard-steps" className="rounded-lg border border-slate-200 bg-white p-3">
             <div className="mb-2 flex items-center justify-between gap-2 text-xs text-slate-700">
@@ -202,11 +199,11 @@ export function DataEntry() {
               className="mb-3 h-2 w-full overflow-hidden rounded bg-slate-200">
               <div className="h-full bg-indigo-600 transition-[width] motion-reduce:transition-none" style={{ width: `${Math.round(((idx + 1) / steps.length) * 100)}%` }} />
             </div>
-            <ol className="flex flex-wrap gap-1">
+            <ol className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
               {steps.map((s, i) => (
                 <li key={s}>
                   <button type="button" data-testid={`step-${s}`} aria-current={s === cur ? 'step' : undefined} onClick={() => setStep(s)}
-                    className={`rounded px-3 py-1.5 text-sm ${s === cur ? 'bg-slate-800 font-semibold text-white' : i < idx ? 'border border-indigo-300 bg-indigo-50 text-indigo-950 hover:bg-indigo-100' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-100'}`}>
+                    className={`whitespace-nowrap rounded px-3 py-1.5 text-sm ${s === cur ? 'bg-slate-800 font-semibold text-white' : i < idx ? 'border border-indigo-300 bg-indigo-50 text-indigo-950 hover:bg-indigo-100' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-100'}`}>
                     {i + 1}. {stepTitle(s)}
                     {errorSteps.includes(s) && <span className={s === cur ? 'ml-1 text-rose-200' : 'ml-1 text-rose-700'}> ⚠</span>}
                   </button>

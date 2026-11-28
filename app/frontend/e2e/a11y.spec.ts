@@ -6,7 +6,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { gotoStep, loadEcgSample, loadProfile, mainNav, openEcg, runEcg, submit } from './helpers';
 
-const OUT = process.env.AXE_OUT ?? '../../phase_l/results/axe_results.json';
+const OUT = process.env.AXE_OUT ?? '../../phase_l2/results/axe_results.json';
 const rows: { screen: string; viewport: string; violations: { id: string; impact: string | null; nodes: number; help: string; targets: string[] }[] }[] = [];
 
 async function audit(page: Page, screen: string) {

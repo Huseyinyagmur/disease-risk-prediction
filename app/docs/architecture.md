@@ -97,6 +97,12 @@ flowchart TD
 - **Canlı panel eski yanıtı göstermez (Phase L).** `/eligibility` yanıtı istendiği girdinin anahtarıyla saklanır; girdi
   değişince yeni yanıt gelene dek durum rozeti gösterilmez (önceden "Formu temizle" sonrası kısa süre, istek hatasında
   süresiz eski "Hesaplanabilir" görünüyordu).
+- **Kompakt durum paneli (Phase L2).** Her analiz tek satırda: ad, durum rozeti ve "x/y bilgi girildi" ilerlemesi.
+  İlerleme, modelin formdan girilen zorunlu alanlarından hesaplanır.
+  - Eksikler katlıdır ("Eksikleri göster").
+  - Hiç bilgi girilmemişse nötr "Henüz bilgi girilmedi" görünür. Sunucu durumu yine `MISSING`'dir; değişen yalnız
+    gösterimdir.
+  - Birden çok analizde aynı olan sade gerekçe, panelin üstünde bir kez yazılır.
 
 ## 4. AF yolu (/ecg/af)
 

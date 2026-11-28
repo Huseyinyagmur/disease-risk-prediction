@@ -54,6 +54,8 @@ export interface FieldUi {
   label: string;
   help?: string;
   source?: string;
+  /** Phase L2: mesajlarda kullanılan kısa ad (ör. "Son adet yaşı"). */
+  short?: string;
 }
 
 export type Outcome = 'ESIK_USTU' | 'ESIK_ALTI' | 'ABSTAIN' | 'NOT_APPLICABLE';

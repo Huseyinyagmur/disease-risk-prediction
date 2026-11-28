@@ -1,0 +1,12 @@
+<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="77.395023">
+<testsuite name="l2_shots.spec.ts" timestamp="2026-11-28T08:59:55.111Z" hostname="chromium" tests="4" failures="0" skipped="0" time="76.063" errors="0">
+<testcase name="@l2shots › d1440 (1440px)" classname="l2_shots.spec.ts" time="38.546">
+</testcase>
+<testcase name="@l2shots › d1920 (1920px)" classname="l2_shots.spec.ts" time="13.01">
+</testcase>
+<testcase name="@l2shots › t768 (768px)" classname="l2_shots.spec.ts" time="12.297">
+</testcase>
+<testcase name="@l2shots › m390 (390px)" classname="l2_shots.spec.ts" time="12.21">
+</testcase>
+</testsuite>
+</testsuites>

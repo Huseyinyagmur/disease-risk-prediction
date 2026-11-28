@@ -201,7 +201,7 @@ describe('analiz seçimine göre alan filtreleme (backend gerekli alan listesi)'
     expect(await screen.findByTestId('panel-empty')).toBeInTheDocument();
     await selectOnly(u, ['liver_fibrosis', 'osteoporosis']);
     await screen.findByTestId('panel-fibrosis_final');
-    const ids = screen.getAllByTestId(/^panel-(?!line|warnings|empty|also|details)/).map((e) => e.getAttribute('data-testid'));
+    const ids = screen.getAllByTestId(/^panel-(?!line|warnings|empty|also|details|progress|missing|common)/).map((e) => e.getAttribute('data-testid'));
     expect(ids).toEqual(['panel-fibrosis_final', 'panel-osteo_final']);
     expect(screen.queryByTestId('panel-warnings')).toBeNull(); // diyabet uyarısı seçilmeyen analize ait
   });
@@ -292,7 +292,7 @@ describe('canlı yönlendirme paneli', () => {
     const af = screen.getByTestId('panel-af_S4_DEVICE');
     expect(af).toHaveTextContent('EKG kaydı');
     expect(within(af).getByTestId('panel-line-af_S4_DEVICE')).not.toHaveTextContent('.hea');
-    const ids = screen.getAllByTestId(/^panel-(?!line|warnings|also|details)/).map((e) => e.getAttribute('data-testid'));
+    const ids = screen.getAllByTestId(/^panel-(?!line|warnings|also|details|progress|missing|common)/).map((e) => e.getAttribute('data-testid'));
     expect(ids.slice(0, 2).sort()).toEqual(['panel-af_S4_DEVICE', 'panel-fibrosis_final']);
     expect(ids[2]).toBe('panel-osteo_final');
     expect(screen.getByTestId('panel-warnings')).toHaveTextContent('Diyabet hedefini tanımlayan ölçüm');

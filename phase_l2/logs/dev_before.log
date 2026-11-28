@@ -1,0 +1,137 @@
+r1 L2-201 refused_medical      0.0s FAIL ['rota refused_medical (LLM yanıtı bekleniyordu)', 'kaynak yok']
+r1 L2-202 llm                  4.5s OK  []
+r1 L2-203 llm                  3.5s OK  []
+r1 L2-204 llm                  2.9s FAIL ['beklenen kavram yok']
+r1 L2-205 llm                  3.0s OK  []
+r1 L2-206 llm                  3.5s OK  []
+r1 L2-207 llm                  2.4s OK  []
+r1 L2-208 llm                  2.6s OK  []
+r1 L2-209 llm                  3.1s OK  []
+r1 L2-210 llm                  4.2s OK  []
+r1 L2-211 llm                  4.2s FAIL ['beklenen kavram yok']
+r1 L2-212 llm                  2.3s OK  []
+r1 L2-213 llm                 14.6s OK  []
+r1 L2-214 postcheck_fail       3.5s FAIL ['rota postcheck_fail (LLM yanıtı bekleniyordu)', 'kaynak yok', 'beklenen kavram yok']
+r1 L2-215 llm                  2.6s OK  []
+r1 L2-216 llm                  2.4s OK  []
+r1 L2-217 llm                  3.7s OK  []
+r1 L2-218 llm                  4.0s FAIL ['beklenen kavram yok']
+r1 L2-219 llm                  3.9s OK  []
+r1 L2-220 llm                  4.0s FAIL ['kaynak yok']
+r1 L2-101 llm                  4.2s OK  []
+r1 L2-102 llm                  2.1s OK  []
+r1 L2-301 llm                  3.6s FAIL ['ret ifadesi yok']
+r1 L2-302 refused_medical      0.0s OK  []
+r1 L2-303 refused_medical      0.0s OK  []
+r1 L2-304 refused_medical      0.0s OK  []
+r1 L2-305 refused_medical      0.0s OK  []
+r1 L2-306 refused_medical      0.0s OK  []
+r1 L2-501 refused_scope        0.0s OK  []
+r1 L2-502 refused_scope        0.7s OK  []
+r1 L2-401 emergency            0.0s OK  []
+r1 L2-402 emergency            0.0s OK  []
+r1 L2-403 emergency            0.0s OK  []
+r1 L2-404 emergency            0.0s OK  []
+r1 L2-405 emergency            0.0s OK  []
+r1 L2-406 emergency            0.0s OK  []
+{
+ "questions_file": "phase_l2/dev/questions.json",
+ "questions_sha256": "8233e813b84df7d1cd31094ef152f4a67c31980647f3deb17877f64cab97cc52",
+ "chat_model": {
+  "name": "gemma3:4b",
+  "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "family": "gemma3",
+  "parameter_size": "3.9B",
+  "quantization": "Q4_K_M",
+  "license": "Gemma Terms of Use"
+ },
+ "embed_model": {
+  "name": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "kb_manifest_sha256": "19ef65c292753d835f428f2afddc35e92394b1c53e45e3795ab3a792bc0e2c62",
+ "n": 36,
+ "groups": {
+  "G1": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 3.16
+  },
+  "G2": {
+   "n": 20,
+   "passed": 14,
+   "rate": 0.7,
+   "wilson95": [
+    0.481,
+    0.855
+   ],
+   "mean_seconds": 3.75
+  },
+  "G3": {
+   "n": 6,
+   "passed": 5,
+   "rate": 0.833,
+   "wilson95": [
+    0.436,
+    0.97
+   ],
+   "mean_seconds": 0.6
+  },
+  "G4": {
+   "n": 6,
+   "passed": 6,
+   "rate": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G5": {
+   "n": 2,
+   "passed": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ],
+   "mean_seconds": 0.35
+  }
+ },
+ "overall": {
+  "n": 36,
+  "passed": 29,
+  "rate": 0.806,
+  "wilson95": [
+   0.65,
+   0.902
+  ]
+ },
+ "timing": {
+  "mean_seconds_all": 2.38,
+  "mean_seconds_llm_calls": 3.86,
+  "max_seconds": 14.6,
+  "n_llm_calls": 22,
+  "mean_seconds_fixed": 0.0507
+ },
+ "routes": {
+  "emergency": 6,
+  "llm": 21,
+  "postcheck_fail": 1,
+  "refused_medical": 6,
+  "refused_scope": 2
+ }
+}

@@ -29,17 +29,30 @@ describe('sade gerekçe metinleri', () => {
 
   it('kilo aralık hatası alan etiketinden ortak kalıpla', () => {
     expect(plainFieldError(schema, 'weight_kg=500 kg makul aralık dışında [25, 300]')).toBe('Kilo 25–300 kg arasında olmalı.');
-    expect(plainFieldError(schema, 'albumin_gdl=23 g/dL makul aralık dışında [1.0, 6.5]')).toBe('Albümin (kan) 1,0–6,5 g/dL arasında olmalı.');
+    expect(plainFieldError(schema, 'albumin_gdl=23 g/dL makul aralık dışında [1.0, 6.5]')).toBe('Albümin 1,0–6,5 g/dL arasında olmalı.');
   });
 
   it('yüzde aralığı Türkçe biçimde', () => {
-    expect(plainFieldError(schema, 'hba1c_pct=46 % makul aralık dışında [3.0, 18.0]')).toBe('HbA1c (3 aylık şeker ortalaması) %3,0–18,0 arasında olmalı.');
+    expect(plainFieldError(schema, 'hba1c_pct=46 % makul aralık dışında [3.0, 18.0]')).toBe('HbA1c %3,0–18,0 arasında olmalı.');
   });
 
   it('birim dönüşüm notu sade: ok ve işlem kodu yok', () => {
     const n = plainUnitNote(schema, 'albumin_gdl: 42 g/L -> 4.2 g/dL (x / 10)');
-    expect(n).toBe('Albümin (kan): 42 g/L, 4,2 g/dL olarak kullanıldı.');
+    expect(n).toBe('Albümin: 42 g/L, 4,2 g/dL olarak kullanıldı.');
     expect(isTechnical(n)).toBe(false);
+  });
+
+  it('Phase L2: tüm form alanlarının kısa adı var; aralık mesajı soru biçimli değil ve kısa', () => {
+    const fields = Object.entries(schema.fields).filter(([, f]) => f.form_input);
+    for (const [n] of fields) expect(schema.form.field_ui_tr?.[n]?.short, n).toBeTruthy();
+    expect(plainFieldError(schema, 'age_last_period_years=150 yıl makul aralık dışında [10, 70]')).toBe('Son adet yaşı 10–70 yıl arasında olmalı.');
+    for (const [n, f] of fields.filter(([, f]) => f.type === 'numeric')) {
+      const [lo, hi] = f.plausible_range as [number, number];
+      const msg = plainFieldError(schema, `${n}=${hi * 2 + 10} ${f.unit} makul aralık dışında [${lo}, ${hi}]`);
+      expect(msg, n).not.toMatch(/\?/);
+      expect(msg.length, msg).toBeLessThanOrEqual(64);
+      expect(isTechnical(msg), msg).toBe(false);
+    }
   });
 
   it('gebelik "bilmiyorum" metni', () => {

@@ -1,0 +1,162 @@
+{
+ "tool": "@axe-core/playwright 4.11.3",
+ "tags": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa"
+ ],
+ "summary": {},
+ "screens": [
+  {
+   "screen": "giris",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "analiz_secimi_varsayilan",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "analiz_secimi",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_temel",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_olcumler",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_oyku",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_laboratuvar",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_klinik",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "form_review",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "sonuclar_metrikler_acik",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "asistan_paneli",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "ekg_ornek_kayitlar",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "ekg_sonuc",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "model_kartlari",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "hakkinda",
+   "viewport": "1440x900",
+   "violations": []
+  },
+  {
+   "screen": "giris",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "analiz_secimi_varsayilan",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "analiz_secimi",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_temel",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_olcumler",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_oyku",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_laboratuvar",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_klinik",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "form_review",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "sonuclar_metrikler_acik",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "asistan_paneli",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "ekg_ornek_kayitlar",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "ekg_sonuc",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "model_kartlari",
+   "viewport": "375x812",
+   "violations": []
+  },
+  {
+   "screen": "hakkinda",
+   "viewport": "375x812",
+   "violations": []
+  }
+ ]
+}

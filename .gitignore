@@ -49,3 +49,9 @@ phase_l/results/sha_after.json
 phase_l/results/playwright/playwright_artifacts/
 phase_l/results/playwright_shots_rerun/
 phase_l/logs/backend_server*.log
+phase_l2/results/sha_before.json
+phase_l2/results/sha_after.json
+phase_l2/results/playwright/playwright_artifacts/
+phase_l2/results/pw_before/playwright_artifacts/
+phase_l2/results/pw_shots/playwright_artifacts/
+phase_l2/logs/backend_server*.log

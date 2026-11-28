@@ -1,0 +1,52 @@
+{
+ "n_before": 158916,
+ "n_after": 159057,
+ "changed_outside": [],
+ "deleted_outside": [],
+ "added_outside": [],
+ "changed_previous_phase_files": [],
+ "append_only_exceptions": {
+  "phase_xlviii/03_eval.md": true
+ },
+ "logic_files_changed": [],
+ "registry_files_changed": [],
+ "app_config_registry_sha_unchanged": true,
+ "module_labels_unchanged": true,
+ "disclaimer": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+ "app_changed": [
+  "app/backend/config/app_config.json",
+  "app/backend/healthrisk_api/assistant/engine.py",
+  "app/backend/healthrisk_api/assistant/guard.py",
+  "app/docs/architecture.md",
+  "app/docs/assistant.md",
+  "app/frontend/e2e/a11y.spec.ts",
+  "app/frontend/e2e/assistant.spec.ts",
+  "app/frontend/e2e/mobile.spec.ts",
+  "app/frontend/e2e/scenarios.spec.ts",
+  "app/frontend/e2e/screenshots.spec.ts",
+  "app/frontend/e2e/timing.spec.ts",
+  "app/frontend/playwright.config.ts",
+  "app/frontend/src/App.tsx",
+  "app/frontend/src/api/types.ts",
+  "app/frontend/src/components/AssistantPanel.test.tsx",
+  "app/frontend/src/components/AssistantPanel.tsx",
+  "app/frontend/src/components/ResultCard.tsx",
+  "app/frontend/src/components/RoutingPanel.tsx",
+  "app/frontend/src/components/ui.tsx",
+  "app/frontend/src/lib/plain.test.ts",
+  "app/frontend/src/lib/plain.ts",
+  "app/frontend/src/lib/status.ts",
+  "app/frontend/src/pages/DataEntry.test.tsx",
+  "app/frontend/src/pages/DataEntry.tsx",
+  "app/frontend/src/pages/Results.tsx",
+  "app/frontend/src/phase_l.test.tsx",
+  "app/frontend/src/test/fixtures/schema.json"
+ ],
+ "app_added": [
+  "app/backend/tests/test_phase_l2.py",
+  "app/frontend/e2e/l2_shots.spec.ts",
+  "app/frontend/src/phase_l2.test.tsx"
+ ],
+ "app_deleted": [],
+ "ok": true
+}

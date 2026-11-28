@@ -54,6 +54,7 @@ test.describe('@mobil yerleşim', () => {
       await expect(page.getByTestId('analysis-select')).toBeVisible();
       await noHorizontalOverflow(page, `${w} seçim`);
       await barDoesNotOverlap(page, `${w} seçim`);
+      await page.getByTestId('select-all').click(); // Phase L: varsayılan 3 analiz; tüm adımlar için Tümü
       await loadProfile(page, 'fibrosis_ready');
       for (const s of ['temel', 'olcumler', 'oyku', 'laboratuvar', 'klinik', 'review']) {
         await gotoStep(page, s);
@@ -66,6 +67,24 @@ test.describe('@mobil yerleşim', () => {
         await mainNav(page).getByRole('button', { name, exact: true }).click();
         await noHorizontalOverflow(page, `${w} ${name}`);
       }
+      // Phase L: asistan paneli — ≥ 1024 px sağda yan panel ve içerik panelin altında kalmaz; altında tam ekran
+      await mainNav(page).getByRole('button', { name: 'Sonuçlar', exact: true }).click();
+      await page.getByTestId('assistant-open').click();
+      const panel = page.getByTestId('assistant-panel');
+      await expect(panel).toHaveAttribute('data-layout', w >= 1024 ? 'side' : 'fullscreen');
+      const pb = (await panel.boundingBox())!;
+      if (w >= 1024) {
+        expect(pb.height).toBeGreaterThanOrEqual(h - 1);
+        expect(pb.width / w).toBeGreaterThan(0.3);
+        const main = (await page.locator('main').boundingBox())!;
+        expect(main.x + main.width, `${w}: içerik paneli altında`).toBeLessThanOrEqual(pb.x + 1);
+        await expect(page.getByTestId('disclaimer')).toBeInViewport();
+      } else {
+        expect(pb.x).toBe(0);
+        expect(Math.round(pb.width)).toBe(w);
+      }
+      await noHorizontalOverflow(page, `${w} asistan`);
+      await page.getByTestId('assistant-close').click();
     });
   }
 });

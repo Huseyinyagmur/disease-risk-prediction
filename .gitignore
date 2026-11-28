@@ -42,3 +42,10 @@ phase_xlvii/results/playwright_screenshots/playwright_artifacts/
 # Phase XLVIII
 phase_xlviii/logs/
 phase_xlviii/results/playwright/playwright_artifacts/
+
+# Phase L: büyük SHA envanterleri ve test artefaktları izlenmez (raporda özet; yeniden üretilebilir)
+phase_l/results/sha_before.json
+phase_l/results/sha_after.json
+phase_l/results/playwright/playwright_artifacts/
+phase_l/results/playwright_shots_rerun/
+phase_l/logs/backend_server*.log

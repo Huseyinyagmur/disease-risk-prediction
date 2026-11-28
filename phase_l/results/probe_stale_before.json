@@ -1,0 +1,44 @@
+[
+ {
+  "t": 0,
+  "s": [
+   "panel-fibrosis_final=READY",
+   "panel-osteo_final=READY"
+  ]
+ },
+ {
+  "t": 50,
+  "s": [
+   "panel-fibrosis_final=READY",
+   "panel-osteo_final=READY"
+  ]
+ },
+ {
+  "t": 100,
+  "s": [
+   "panel-fibrosis_final=READY",
+   "panel-osteo_final=READY"
+  ]
+ },
+ {
+  "t": 200,
+  "s": [
+   "panel-fibrosis_final=READY",
+   "panel-osteo_final=READY"
+  ]
+ },
+ {
+  "t": 400,
+  "s": [
+   "panel-fibrosis_final=MISSING",
+   "panel-osteo_final=MISSING"
+  ]
+ },
+ {
+  "t": 1500,
+  "s": [
+   "panel-fibrosis_final=MISSING",
+   "panel-osteo_final=MISSING"
+  ]
+ }
+]

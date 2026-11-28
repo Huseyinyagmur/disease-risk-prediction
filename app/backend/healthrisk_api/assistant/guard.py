@@ -190,7 +190,45 @@ def postcheck(answer: str, context_text: str, allowed_urls: set) -> list:
         if u.rstrip('.,;') not in allowed_urls:
             v.append('url_not_in_kb')
             break
+    if threshold_polarity_error(answer):
+        v.append('threshold_polarity')
+    if probability_claim(answer):
+        v.append('probability_claim')
     return v
+
+
+_PROB_NEG = ('gosterilmez', 'gostermez', 'gosterilmiyor', 'gostermiyor', 'degildir', 'degil', 'verilmez', 'vermez', 'yok')
+
+
+def probability_claim(answer: str) -> bool:
+    """Phase L: 'olasılık' geçen ve olumsuzlanmamış cümle (ör. "sadece bir olasılık gösterir") ihlaldir; uygulama
+    olasılık göstermez (clinical_probability_eligibility=false; sistem istemi kural 4)."""
+    for s in re.split(r'(?<=[.!?;])\s+|\n+', answer):
+        n = norm(s)
+        if 'olasilik' in n and not any(f' {w}' in n for w in _PROB_NEG):
+            return True
+    return False
+
+
+_BELOW = (' esik alti', ' negatif')
+
+
+def threshold_polarity_error(answer: str) -> bool:
+    """Phase L: "dışlamaz" yalnız eşik altı (negatif) sonuç için söylenebilir. İhlal:
+    (a) aynı cümlede eşik üstü + dışla…, eşik altı/negatif sözü yok; veya
+    (b) yanıt eşik üstünden söz ediyor, eşik altı/negatiften hiç söz etmiyor ve bir cümle dışla… içeriyor."""
+    sents = [norm(s) for s in re.split(r'(?<=[.!?;])\s+|\n+', answer) if s.strip()]
+    whole = norm(answer)
+    above = ' esik ustu' in whole
+    below_any = any(b in whole for b in _BELOW)
+    for s in sents:
+        if 'dislamaz' not in s and 'dislar' not in s:
+            continue
+        if any(b in s for b in _BELOW):
+            continue
+        if ' esik ustu' in s or (above and not below_any):
+            return True
+    return False
 
 
 # ------------------------------------------------------------------ bağlam etiketleri

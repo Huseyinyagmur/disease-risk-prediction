@@ -37,117 +37,407 @@
  "form": {
   "source": "Phase XLV: yalnız sunum (bölüm sırası, kategori etiketleri). Alan listesi, birim, aralık ve koşullar şemadan gelir; model mantığını etkilemez.",
   "sections": [
-   {"id": "temel", "title_tr": "Temel bilgiler", "optional": false},
-   {"id": "olcumler", "title_tr": "Ölçümler", "optional": false, "description_tr": "Boy, kilo, bel çevresi ve oturarak, ≥ 5 dk dinlenme sonrası ardışık 3 tansiyon okuması."},
-   {"id": "oyku", "title_tr": "Öykü ve ilaçlar", "optional": false},
-   {"id": "laboratuvar", "title_tr": "Tahlil ve solunum testi", "optional": true, "description_tr": "İsteğe bağlı. Kan/idrar tahlili veya solunum testi sonuçlarınız varsa girin; bazı analizler yalnız bu değerlerle çalışır."},
-   {"id": "klinik", "title_tr": "Hekim değerlendirmesi ve efor testi", "optional": true, "description_tr": "İsteğe bağlı. Yalnız koroner arter hastalığı analizi kullanır; hekim muayenesi ve efor testi sonucu gerekir."}
+   {
+    "id": "temel",
+    "title_tr": "Temel bilgiler",
+    "optional": false,
+    "description_tr": "Yaş, cinsiyet ve gebelik durumu, her analizin kimler için geliştirildiğini kontrol etmek için sorulur."
+   },
+   {
+    "id": "olcumler",
+    "title_tr": "Ölçümler",
+    "optional": false,
+    "description_tr": "Boy, kilo, bel çevresi ve tansiyon analizlerin çoğunda kullanılır. Tansiyonu oturarak, en az 5 dakika dinlendikten sonra art arda 3 kez ölçün."
+   },
+   {
+    "id": "oyku",
+    "title_tr": "Öykü ve ilaçlar",
+    "optional": false,
+    "description_tr": "Aldığınız tanılar ve kullandığınız ilaçlar, bazı analizlerin size uygun olup olmadığını belirler; bir kısmı analizde de kullanılır."
+   },
+   {
+    "id": "laboratuvar",
+    "title_tr": "Tahlil ve solunum testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Kan/idrar tahlili veya solunum testi sonuçlarınız varsa girin; bazı analizler yalnız bu değerlerle çalışır."
+   },
+   {
+    "id": "klinik",
+    "title_tr": "Hekim değerlendirmesi ve efor testi",
+    "optional": true,
+    "description_tr": "İsteğe bağlı. Yalnız koroner arter hastalığı analizi kullanır; hekim muayenesi ve efor testi sonucu gerekir."
+   }
   ],
   "section_rules": {
-   "temel_fields": ["age_years", "sex", "pregnant", "race_ethnicity"],
-   "olcumler_units": ["cm", "kg", "mmHg"],
-   "laboratuvar_sources": ["laboratuvar", "arastirma_assay", "spirometri"],
-   "klinik_sources": ["klinik_degerlendirme", "efor_testi"]
+   "temel_fields": [
+    "age_years",
+    "sex",
+    "pregnant",
+    "race_ethnicity"
+   ],
+   "olcumler_units": [
+    "cm",
+    "kg",
+    "mmHg"
+   ],
+   "laboratuvar_sources": [
+    "laboratuvar",
+    "arastirma_assay",
+    "spirometri"
+   ],
+   "klinik_sources": [
+    "klinik_degerlendirme",
+    "efor_testi"
+   ]
   },
   "category_labels_tr": {
-   "_boolean": {"true": "Evet", "false": "Hayır", "unknown": "Bilmiyorum"},
-   "sex": {"female": "Kadın", "male": "Erkek"},
-   "race_ethnicity": {"mexican_american": "Meksika kökenli Amerikalı", "other_hispanic": "Diğer Hispanik", "nh_white": "Hispanik olmayan beyaz", "nh_black": "Hispanik olmayan siyah", "other_incl_multi": "Diğer / çok ırklı"},
-   "smoking_status": {"never": "Hiç içmedi (yaşamı boyunca < 100 sigara)", "former": "Bıraktı", "current": "Şu an içiyor"},
-   "cad_chest_pain_type": {"typical_angina": "Tipik anjina", "atypical_angina": "Atipik anjina", "non_anginal": "Anjinal olmayan ağrı", "asymptomatic": "Asemptomatik"},
-   "cad_resting_ecg": {"normal": "Normal", "st_t_abnormality": "ST-T anormalliği", "lv_hypertrophy": "Sol ventrikül hipertrofisi"},
-   "cad_st_slope": {"upsloping": "Yukarı eğimli", "flat": "Düz", "downsloping": "Aşağı eğimli"}
+   "_boolean": {
+    "true": "Evet",
+    "false": "Hayır",
+    "unknown": "Bilmiyorum"
+   },
+   "sex": {
+    "female": "Kadın",
+    "male": "Erkek"
+   },
+   "race_ethnicity": {
+    "mexican_american": "Meksika kökenli Amerikalı",
+    "other_hispanic": "Diğer Hispanik",
+    "nh_white": "Hispanik olmayan beyaz",
+    "nh_black": "Hispanik olmayan siyah",
+    "other_incl_multi": "Diğer / çok ırklı"
+   },
+   "smoking_status": {
+    "never": "Hiç içmedi (yaşamı boyunca < 100 sigara)",
+    "former": "Bıraktı",
+    "current": "Şu an içiyor"
+   },
+   "cad_chest_pain_type": {
+    "typical_angina": "Tipik anjina",
+    "atypical_angina": "Atipik anjina",
+    "non_anginal": "Anjinal olmayan ağrı",
+    "asymptomatic": "Asemptomatik"
+   },
+   "cad_resting_ecg": {
+    "normal": "Normal",
+    "st_t_abnormality": "ST-T anormalliği",
+    "lv_hypertrophy": "Sol ventrikül hipertrofisi"
+   },
+   "cad_st_slope": {
+    "upsloping": "Yukarı eğimli",
+    "flat": "Düz",
+    "downsloping": "Aşağı eğimli"
+   }
   },
-  "virtual_field_labels_tr": {"ecg_record": "EKG kaydı (.hea + .dat/.mat)"},
+  "virtual_field_labels_tr": {
+   "ecg_record": "EKG kaydı"
+  },
   "field_ui_source": "Phase XLVII: yalnız sunum. label = arayüzde gösterilen sade etiket; help = alan altındaki sade açıklama; source = 'teknik ayrıntı' içindeki kaynak değişken (yalnız şema metninde geçen kodlar). Şema label_tr/note değişmez ve teknik ayrıntıda gösterilir.",
   "field_ui_tr": {
-   "age_years": {"label": "Yaş", "help": "Bazı analizler yalnız belirli yaş aralığında çalışır."},
-   "sex": {"label": "Biyolojik cinsiyet"},
-   "race_ethnicity": {"label": "Irk / etnik köken", "help": "İsteğe bağlı. Yanıtsız bırakırsanız bu bilgiyi kullanan analizler (diyabet, böbrek, hipertansiyon) sonuç üretmez.", "source": "NHANES RIDRETH1 sınıfları"},
-   "pregnant": {"label": "Şu an gebe misiniz?", "help": "Gebelikte bazı analizler geçerli değildir. \"Bilmiyorum\" seçilirse bu analizler sonuç üretmez."},
-   "height_cm": {"label": "Boy"},
-   "weight_kg": {"label": "Kilo"},
-   "waist_cm": {"label": "Bel çevresi", "help": "Mezura ile, kalça kemiğinin üst kenarı hizasından ölçülmüş değer (tahmini değil)."},
-   "sbp_1_mmhg": {"label": "Büyük tansiyon (sistolik), 1. ölçüm", "help": "Oturarak, en az 5 dakika dinlendikten sonra art arda 3 ölçüm yapın."},
-   "dbp_1_mmhg": {"label": "Küçük tansiyon (diyastolik), 1. ölçüm"},
-   "sbp_2_mmhg": {"label": "Büyük tansiyon (sistolik), 2. ölçüm"},
-   "dbp_2_mmhg": {"label": "Küçük tansiyon (diyastolik), 2. ölçüm"},
-   "sbp_3_mmhg": {"label": "Büyük tansiyon (sistolik), 3. ölçüm"},
-   "dbp_3_mmhg": {"label": "Küçük tansiyon (diyastolik), 3. ölçüm"},
-   "smoking_status": {"label": "Sigara kullanımı", "help": "\"Hiç içmedi\": yaşamı boyunca 100'den az sigara içmiş olmak."},
-   "alcohol_drinks_per_day": {"label": "Günde ortalama kaç alkollü içki (son 12 ay)", "help": "Hiç içmiyorsanız 0 yazın. Örnek: haftada 7 içki = günde 1.", "source": "NHANES ALQ121 × ALQ130 / 365"},
-   "told_hypertension": {"label": "Doktorunuz size yüksek tansiyon olduğunu söyledi mi?"},
-   "on_bp_medication": {"label": "Tansiyon ilacı kullanıyor musunuz?"},
-   "told_diabetes": {"label": "Doktorunuz size diyabet (şeker hastalığı) olduğunu söyledi mi?", "help": "\"Sınırda\" denildiyse Hayır seçin.", "source": "NHANES DIQ010 (sınırda = hayır)"},
-   "on_insulin": {"label": "İnsülin kullanıyor musunuz?"},
-   "on_diabetes_pills": {"label": "Şeker hapı kullanıyor musunuz?"},
-   "hx_coronary_disease": {"label": "Koroner kalp hastalığı, anjina veya kalp krizi geçirdiniz mi?"},
-   "hx_heart_failure": {"label": "Kalp yetmezliği tanınız var mı?"},
-   "hx_stroke": {"label": "İnme (felç) geçirdiniz mi?"},
-   "family_hx_diabetes": {"label": "Yakın kan akrabalarınızda (anne, baba, kardeş) diyabet var mı?", "source": "NHANES MCQ300C"},
-   "gestational_diabetes_hx": {"label": "Gebeliğinizde size şeker (gebelik diyabeti) olduğu söylendi mi?"},
-   "recreational_activity": {"label": "Tipik bir haftada orta veya yoğun tempolu spor / egzersiz yapıyor musunuz?", "source": "NHANES PAQ650 / PAQ665"},
-   "glucocorticoid_ge1month": {"label": "En az 1 ay boyunca neredeyse her gün kortizon (ör. prednizon) ilacı kullandınız mı?", "source": "NHANES OSQ130"},
-   "fracture_hip": {"label": "Hiç kalça kırığı geçirdiniz mi?"},
-   "fracture_wrist": {"label": "Hiç el bileği kırığı geçirdiniz mi?"},
-   "fracture_spine": {"label": "Hiç omurga kırığı geçirdiniz mi?"},
-   "fracture_after_age20": {"label": "20 yaşından sonra herhangi bir kemiğiniz kırıldı mı?", "source": "NHANES OSQ080"},
-   "parent_hip_fracture": {"label": "Anne veya babanız kalça kırığı geçirdi mi?"},
-   "menses_absent_12m": {"label": "Son 12 ayda adetiniz tamamen kesildi mi?"},
-   "hrt_ever": {"label": "Hiç hormon tedavisi kullandınız mı?"},
-   "age_last_period_years": {"label": "Son adetinizi kaç yaşında gördünüz?"},
-   "hba1c_pct": {"label": "HbA1c (3 aylık şeker ortalaması)"},
-   "glucose_serum_mgdl": {"label": "Kan şekeri (açlık gerekmez)"},
-   "glucose_fasting_mgdl": {"label": "Açlık kan şekeri (en az 8 saat açlık)"},
-   "total_chol_mgdl": {"label": "Total kolesterol"},
-   "hdl_mgdl": {"label": "HDL (iyi) kolesterol"},
-   "tg_mgdl": {"label": "Trigliserit"},
-   "alt_ul": {"label": "ALT (karaciğer enzimi)"},
-   "ast_ul": {"label": "AST (karaciğer enzimi)"},
-   "ggt_ul": {"label": "GGT (karaciğer enzimi)"},
-   "alp_ul": {"label": "ALP (alkalen fosfataz)"},
-   "albumin_gdl": {"label": "Albümin (kan)"},
-   "platelets_k_ul": {"label": "Trombosit (kan pulcuğu) sayısı"},
-   "uric_acid_mgdl": {"label": "Ürik asit"},
-   "creatinine_mgdl": {"label": "Kreatinin (kan)"},
-   "urine_albumin_mgl": {"label": "İdrarda albümin"},
-   "urine_creatinine_mgdl": {"label": "İdrarda kreatinin"},
-   "wbc_k_ul": {"label": "Beyaz kan hücresi (lökosit, WBC)"},
-   "rbc_m_ul": {"label": "Kırmızı kan hücresi (eritrosit, RBC)"},
-   "mcv_fl": {"label": "MCV (ortalama kırmızı hücre hacmi)"},
-   "rdw_pct": {"label": "RDW (kırmızı hücre boyut dağılımı)"},
-   "hemoglobin_gdl": {"label": "Hemoglobin"},
-   "rip3_pgml": {"label": "RIP3 (araştırma testi)", "help": "Rutin laboratuvar testi değildir; yalnız özel araştırma testiyle ölçülür."},
-   "fev1_pre_ml": {"label": "FEV1 — bronş açıcı ilaç öncesi", "help": "Solunum testi (spirometri) sonucu; birim mL (ör. 3,2 L = 3200 mL)."},
-   "fvc_pre_ml": {"label": "FVC — bronş açıcı ilaç öncesi", "help": "Solunum testi (spirometri) sonucu; birim mL. FEV1, FVC'den büyük olamaz."},
-   "cad_chest_pain_type": {"label": "Göğüs ağrısı tipi (hekim değerlendirmesi)", "source": "UCI Heart Disease: cp"},
-   "cad_resting_ecg": {"label": "Dinlenme EKG sonucu (hekim değerlendirmesi)", "source": "UCI Heart Disease: restecg"},
-   "cad_max_hr_bpm": {"label": "Efor testinde ulaşılan en yüksek nabız", "source": "UCI Heart Disease: thalach"},
-   "cad_exercise_angina": {"label": "Efor testi sırasında göğüs ağrısı oldu mu?", "source": "UCI Heart Disease: exang"},
-   "cad_st_depression_mm": {"label": "Efor testinde ST çökmesi", "source": "UCI Heart Disease: oldpeak"},
-   "cad_st_slope": {"label": "Efor testinde ST eğimi", "source": "UCI Heart Disease: slope"},
-   "told_weak_failing_kidneys": {"label": "Doktorunuz size böbrek hastalığı (zayıf veya yetersiz böbrek) olduğunu söyledi mi?", "source": "NHANES KIQ022"},
-   "on_dialysis": {"label": "Son 12 ayda diyalize girdiniz mi?", "source": "NHANES KIQ025"}
+   "age_years": {
+    "label": "Yaş",
+    "help": "Bazı analizler yalnız belirli yaş aralığında çalışır."
+   },
+   "sex": {
+    "label": "Biyolojik cinsiyet"
+   },
+   "race_ethnicity": {
+    "label": "Irk / etnik köken",
+    "help": "İsteğe bağlı. Yanıtsız bırakırsanız bu bilgiyi kullanan analizler (diyabet, böbrek, hipertansiyon) sonuç üretmez.",
+    "source": "NHANES RIDRETH1 sınıfları"
+   },
+   "pregnant": {
+    "label": "Şu an gebe misiniz?",
+    "help": "Gebelikte bazı analizler geçerli değildir. \"Bilmiyorum\" seçilirse bu analizler sonuç üretmez."
+   },
+   "height_cm": {
+    "label": "Boy"
+   },
+   "weight_kg": {
+    "label": "Kilo"
+   },
+   "waist_cm": {
+    "label": "Bel çevresi",
+    "help": "Mezura ile, kalça kemiğinin üst kenarı hizasından ölçülmüş değer (tahmini değil)."
+   },
+   "sbp_1_mmhg": {
+    "label": "Büyük tansiyon (sistolik), 1. ölçüm",
+    "help": "Oturarak, en az 5 dakika dinlendikten sonra art arda 3 ölçüm yapın."
+   },
+   "dbp_1_mmhg": {
+    "label": "Küçük tansiyon (diyastolik), 1. ölçüm"
+   },
+   "sbp_2_mmhg": {
+    "label": "Büyük tansiyon (sistolik), 2. ölçüm"
+   },
+   "dbp_2_mmhg": {
+    "label": "Küçük tansiyon (diyastolik), 2. ölçüm"
+   },
+   "sbp_3_mmhg": {
+    "label": "Büyük tansiyon (sistolik), 3. ölçüm"
+   },
+   "dbp_3_mmhg": {
+    "label": "Küçük tansiyon (diyastolik), 3. ölçüm"
+   },
+   "smoking_status": {
+    "label": "Sigara kullanımı",
+    "help": "\"Hiç içmedi\": yaşamı boyunca 100'den az sigara içmiş olmak."
+   },
+   "alcohol_drinks_per_day": {
+    "label": "Günde ortalama kaç alkollü içki (son 12 ay)",
+    "help": "Hiç içmiyorsanız 0 yazın. Örnek: haftada 7 içki = günde 1.",
+    "source": "NHANES ALQ121 × ALQ130 / 365"
+   },
+   "told_hypertension": {
+    "label": "Doktorunuz size yüksek tansiyon olduğunu söyledi mi?"
+   },
+   "on_bp_medication": {
+    "label": "Tansiyon ilacı kullanıyor musunuz?"
+   },
+   "told_diabetes": {
+    "label": "Doktorunuz size diyabet (şeker hastalığı) olduğunu söyledi mi?",
+    "help": "\"Sınırda\" denildiyse Hayır seçin.",
+    "source": "NHANES DIQ010 (sınırda = hayır)"
+   },
+   "on_insulin": {
+    "label": "İnsülin kullanıyor musunuz?"
+   },
+   "on_diabetes_pills": {
+    "label": "Şeker hapı kullanıyor musunuz?"
+   },
+   "hx_coronary_disease": {
+    "label": "Koroner kalp hastalığı, anjina veya kalp krizi geçirdiniz mi?"
+   },
+   "hx_heart_failure": {
+    "label": "Kalp yetmezliği tanınız var mı?"
+   },
+   "hx_stroke": {
+    "label": "İnme (felç) geçirdiniz mi?"
+   },
+   "family_hx_diabetes": {
+    "label": "Yakın kan akrabalarınızda (anne, baba, kardeş) diyabet var mı?",
+    "source": "NHANES MCQ300C"
+   },
+   "gestational_diabetes_hx": {
+    "label": "Gebeliğinizde size şeker (gebelik diyabeti) olduğu söylendi mi?"
+   },
+   "recreational_activity": {
+    "label": "Tipik bir haftada orta veya yoğun tempolu spor / egzersiz yapıyor musunuz?",
+    "source": "NHANES PAQ650 / PAQ665"
+   },
+   "glucocorticoid_ge1month": {
+    "label": "En az 1 ay boyunca neredeyse her gün kortizon (ör. prednizon) ilacı kullandınız mı?",
+    "source": "NHANES OSQ130"
+   },
+   "fracture_hip": {
+    "label": "Hiç kalça kırığı geçirdiniz mi?"
+   },
+   "fracture_wrist": {
+    "label": "Hiç el bileği kırığı geçirdiniz mi?"
+   },
+   "fracture_spine": {
+    "label": "Hiç omurga kırığı geçirdiniz mi?"
+   },
+   "fracture_after_age20": {
+    "label": "20 yaşından sonra herhangi bir kemiğiniz kırıldı mı?",
+    "source": "NHANES OSQ080"
+   },
+   "parent_hip_fracture": {
+    "label": "Anne veya babanız kalça kırığı geçirdi mi?"
+   },
+   "menses_absent_12m": {
+    "label": "Son 12 ayda adetiniz tamamen kesildi mi?"
+   },
+   "hrt_ever": {
+    "label": "Hiç hormon tedavisi kullandınız mı?"
+   },
+   "age_last_period_years": {
+    "label": "Son adetinizi kaç yaşında gördünüz?"
+   },
+   "hba1c_pct": {
+    "label": "HbA1c (3 aylık şeker ortalaması)"
+   },
+   "glucose_serum_mgdl": {
+    "label": "Kan şekeri (açlık gerekmez)"
+   },
+   "glucose_fasting_mgdl": {
+    "label": "Açlık kan şekeri (en az 8 saat açlık)"
+   },
+   "total_chol_mgdl": {
+    "label": "Total kolesterol"
+   },
+   "hdl_mgdl": {
+    "label": "HDL (iyi) kolesterol"
+   },
+   "tg_mgdl": {
+    "label": "Trigliserit"
+   },
+   "alt_ul": {
+    "label": "ALT (karaciğer enzimi)"
+   },
+   "ast_ul": {
+    "label": "AST (karaciğer enzimi)"
+   },
+   "ggt_ul": {
+    "label": "GGT (karaciğer enzimi)"
+   },
+   "alp_ul": {
+    "label": "ALP (alkalen fosfataz)"
+   },
+   "albumin_gdl": {
+    "label": "Albümin (kan)"
+   },
+   "platelets_k_ul": {
+    "label": "Trombosit (kan pulcuğu) sayısı"
+   },
+   "uric_acid_mgdl": {
+    "label": "Ürik asit"
+   },
+   "creatinine_mgdl": {
+    "label": "Kreatinin (kan)"
+   },
+   "urine_albumin_mgl": {
+    "label": "İdrarda albümin"
+   },
+   "urine_creatinine_mgdl": {
+    "label": "İdrarda kreatinin"
+   },
+   "wbc_k_ul": {
+    "label": "Beyaz kan hücresi (lökosit, WBC)"
+   },
+   "rbc_m_ul": {
+    "label": "Kırmızı kan hücresi (eritrosit, RBC)"
+   },
+   "mcv_fl": {
+    "label": "MCV (ortalama kırmızı hücre hacmi)"
+   },
+   "rdw_pct": {
+    "label": "RDW (kırmızı hücre boyut dağılımı)"
+   },
+   "hemoglobin_gdl": {
+    "label": "Hemoglobin"
+   },
+   "rip3_pgml": {
+    "label": "RIP3 (araştırma testi)",
+    "help": "Rutin laboratuvar testi değildir; yalnız özel araştırma testiyle ölçülür."
+   },
+   "fev1_pre_ml": {
+    "label": "FEV1 — bronş açıcı ilaç öncesi",
+    "help": "Solunum testi (spirometri) sonucu; birim mL (ör. 3,2 L = 3200 mL)."
+   },
+   "fvc_pre_ml": {
+    "label": "FVC — bronş açıcı ilaç öncesi",
+    "help": "Solunum testi (spirometri) sonucu; birim mL. FEV1, FVC'den büyük olamaz."
+   },
+   "cad_chest_pain_type": {
+    "label": "Göğüs ağrısı tipi (hekim değerlendirmesi)",
+    "source": "UCI Heart Disease: cp"
+   },
+   "cad_resting_ecg": {
+    "label": "Dinlenme EKG sonucu (hekim değerlendirmesi)",
+    "source": "UCI Heart Disease: restecg"
+   },
+   "cad_max_hr_bpm": {
+    "label": "Efor testinde ulaşılan en yüksek nabız",
+    "source": "UCI Heart Disease: thalach"
+   },
+   "cad_exercise_angina": {
+    "label": "Efor testi sırasında göğüs ağrısı oldu mu?",
+    "source": "UCI Heart Disease: exang"
+   },
+   "cad_st_depression_mm": {
+    "label": "Efor testinde ST çökmesi",
+    "source": "UCI Heart Disease: oldpeak"
+   },
+   "cad_st_slope": {
+    "label": "Efor testinde ST eğimi",
+    "source": "UCI Heart Disease: slope"
+   },
+   "told_weak_failing_kidneys": {
+    "label": "Doktorunuz size böbrek hastalığı (zayıf veya yetersiz böbrek) olduğunu söyledi mi?",
+    "source": "NHANES KIQ022"
+   },
+   "on_dialysis": {
+    "label": "Son 12 ayda diyalize girdiniz mi?",
+    "source": "NHANES KIQ025"
+   }
   }
  },
  "ui": {
   "source": "Phase XLVII: arayüz metinlerinin (terim sözlüğü, analiz seçimi, sihirbaz, 'Ne yapmalıyım?' yönlendirmeleri, sade kanıt açıklamaları) TEK kaynağı. Yalnız sunum; model, eşik, uygunluk ve dönüşüm mantığını etkilemez. Yönlendirmeler tanı veya tedavi önerisi içermez.",
   "terms_tr": {
-   "eligibility": {"READY": "Hesaplanabilir", "MISSING": "Eksik bilgi", "OUT_OF_SCOPE": "Bu analiz size uygun değil", "ABSTAIN": "Sonuç üretilemez"},
-   "result": {"OK": "Sonuç üretildi", "ABSTAIN": "Sonuç üretilmedi", "NOT_APPLICABLE": "Bu analiz size uygun değil"},
-   "decision": {"ESIK_USTU": "Eşik üstü — ileri değerlendirme önerilir", "ESIK_ALTI": "Eşik altı"},
-   "tiers": {"internal_test": "İç test", "temporal": "Zamansal doğrulama", "external": "Dış doğrulama"}
+   "eligibility": {
+    "READY": "Hesaplanabilir",
+    "MISSING": "Eksik bilgi",
+    "OUT_OF_SCOPE": "Bu analiz size uygun değil",
+    "ABSTAIN": "Sonuç üretilemez"
+   },
+   "result": {
+    "OK": "Sonuç üretildi",
+    "ABSTAIN": "Sonuç üretilmedi",
+    "NOT_APPLICABLE": "Bu analiz size uygun değil"
+   },
+   "decision": {
+    "ESIK_USTU": "Eşik üstü — ileri değerlendirme önerilir",
+    "ESIK_ALTI": "Eşik altı"
+   },
+   "tiers": {
+    "internal_test": "İç test",
+    "temporal": "Zamansal doğrulama",
+    "external": "Dış doğrulama"
+   }
   },
   "glossary_tr": [
-   {"term": "Eşik üstü / Eşik altı", "code": "ESIK_USTU / ESIK_ALTI", "text": "Modelin araştırmada sabitlenmiş eşiğine göre sınıflaması. Tanı değildir; olasılık gösterilmez."},
-   {"term": "Sonuç üretilmedi", "code": "ABSTAIN", "text": "Gerekli bir bilgi eksik veya belirsiz olduğu için analiz bilerek sonuç vermedi. Eksik bilgi tahminle doldurulmaz."},
-   {"term": "Bu analiz size uygun değil", "code": "NOT_APPLICABLE / OUT_OF_SCOPE", "text": "Analiz sizin grubunuz (ör. yaş aralığı, gebelik, mevcut tanı) için geliştirilmedi."},
-   {"term": "Hesaplanabilir", "code": "READY", "text": "Girdiğiniz bilgiler bu analiz için yeterli."},
-   {"term": "Eksik bilgi", "code": "MISSING", "text": "Analizin çalışması için listelenen bilgilerin girilmesi gerekiyor."},
-   {"term": "İç test", "code": "internal_test", "text": "Model, geliştirildiği veri kaynağında, eğitimde kullanılmayan kişilerde bir kez test edildi."},
-   {"term": "Zamansal doğrulama", "code": "temporal", "text": "Model aynı kaynağın başka bir dönemine ait verisinde test edildi."},
-   {"term": "Dış doğrulama", "code": "external", "text": "Model farklı bir veri kaynağında test edildi. Kartta bağımsız olup olmadığı ayrıca yazar."},
-   {"term": "Ana modül / araştırma modülü / deneysel", "code": "module_label", "text": "Danışman tanımlı modül etiketi. Deneysel sonuçlar ana modüllerle aynı ağırlıkta yorumlanmamalıdır."}
+   {
+    "term": "Eşik üstü",
+    "code": "ESIK_USTU",
+    "text": "Model sonucu, araştırmada sabitlenmiş eşiğin üstünde kaldı. Tanı değildir ve hastalık olduğu anlamına gelmez; olasılık gösterilmez. Sonucun bir hekimle değerlendirilmesi önerilir."
+   },
+   {
+    "term": "Eşik altı",
+    "code": "ESIK_ALTI",
+    "text": "Model sonucu, araştırmada sabitlenmiş eşiğin altında kaldı. Tanı değildir; olasılık gösterilmez. Eşik altı (negatif) sonuç hastalığı dışlamaz."
+   },
+   {
+    "term": "Sonuç üretilmedi",
+    "code": "ABSTAIN",
+    "text": "Gerekli bir bilgi eksik veya belirsiz olduğu için analiz bilerek sonuç vermedi. Eksik bilgi tahminle doldurulmaz."
+   },
+   {
+    "term": "Bu analiz size uygun değil",
+    "code": "NOT_APPLICABLE / OUT_OF_SCOPE",
+    "text": "Analiz sizin grubunuz (ör. yaş aralığı, gebelik, mevcut tanı) için geliştirilmedi."
+   },
+   {
+    "term": "Hesaplanabilir",
+    "code": "READY",
+    "text": "Girdiğiniz bilgiler bu analiz için yeterli."
+   },
+   {
+    "term": "Eksik bilgi",
+    "code": "MISSING",
+    "text": "Analizin çalışması için listelenen bilgilerin girilmesi gerekiyor."
+   },
+   {
+    "term": "İç test",
+    "code": "internal_test",
+    "text": "Model, geliştirildiği veri kaynağında, eğitimde kullanılmayan kişilerde bir kez test edildi."
+   },
+   {
+    "term": "Zamansal doğrulama",
+    "code": "temporal",
+    "text": "Model aynı kaynağın başka bir dönemine ait verisinde test edildi."
+   },
+   {
+    "term": "Dış doğrulama",
+    "code": "external",
+    "text": "Model farklı bir veri kaynağında test edildi. Kartta bağımsız olup olmadığı ayrıca yazar."
+   },
+   {
+    "term": "Ana modül / araştırma modülü / deneysel",
+    "code": "module_label",
+    "text": "Danışman tanımlı modül etiketi. Deneysel sonuçlar ana modüllerle aynı ağırlıkta yorumlanmamalıdır."
+   }
   ],
   "disease_names_tr": {
    "af": "Atriyal fibrilasyon (ritim bozukluğu)",
@@ -204,28 +494,83 @@
     "ABSTAIN": "Eksik veya belirsiz bilgi nedeniyle sonuç üretilmedi; eksik bilgileri tamamlayabilir ya da hekiminize danışabilirsiniz.",
     "NOT_APPLICABLE": "Bu analiz sizin durumunuz için geliştirilmedi; sağlığınızla ilgili sorularınız için hekiminize danışın."
    },
-   "liver_fibrosis": {"ESIK_USTU": "Karaciğer elastografisi (FibroScan) için hekiminize danışın."},
-   "af": {"ESIK_USTU": "EKG'nizin bir hekim tarafından değerlendirilmesi için hekiminize danışın.", "ESIK_ALTI": "Bu sonuç AF'yi dışlamaz; yalnız kaydın ilk 10 saniyesi değerlendirildi. Çarpıntı gibi belirtileriniz varsa hekiminize danışın.", "NOT_APPLICABLE": "AF analizi için EKG kaydınızı \"EKG ile AF\" sayfasından yükleyin; sorularınız için hekiminize danışın."},
-   "osteoporosis": {"ESIK_USTU": "Kemik yoğunluğu ölçümü (DXA) için hekiminize danışın."},
-   "diabetes": {"ESIK_USTU": "Kan şekeri testleri (HbA1c veya açlık kan şekeri) için hekiminize danışın."},
-   "kidney": {"ESIK_USTU": "Böbrek fonksiyon testleri (kan kreatinini ve idrar albümini) için hekiminize danışın."},
-   "hypertension": {"ESIK_USTU": "Tansiyonunuzun bir sağlık çalışanı tarafından yeniden ölçülmesi için hekiminize danışın."},
-   "anemia": {"ESIK_USTU": "Tam kan sayımının değerlendirilmesi için hekiminize danışın."},
-   "copd": {"ESIK_USTU": "Solunum testinizin (bronş açıcı sonrası spirometri) değerlendirilmesi için hekiminize danışın."},
-   "cad": {"ESIK_USTU": "Kalp değerlendirmesi için hekiminize danışın."}
+   "liver_fibrosis": {
+    "ESIK_USTU": "Karaciğer elastografisi (FibroScan) için hekiminize danışın."
+   },
+   "af": {
+    "ESIK_USTU": "EKG'nizin bir hekim tarafından değerlendirilmesi için hekiminize danışın. AF dışındaki bazı ritim bozuklukları (ör. ekstrasistol, flutter, hızlı kalp atımı) da bu sonucu verebilir.",
+    "ESIK_ALTI": "Bu sonuç AF'yi dışlamaz; yalnız kaydın ilk 10 saniyesi değerlendirildi. Çarpıntı gibi belirtileriniz varsa hekiminize danışın.",
+    "NOT_APPLICABLE": "AF analizi için EKG kaydınızı \"EKG ile AF\" sayfasından yükleyin; sorularınız için hekiminize danışın."
+   },
+   "osteoporosis": {
+    "ESIK_USTU": "Kemik yoğunluğu ölçümü (DXA) için hekiminize danışın."
+   },
+   "diabetes": {
+    "ESIK_USTU": "Kan şekeri testleri (HbA1c veya açlık kan şekeri) için hekiminize danışın."
+   },
+   "kidney": {
+    "ESIK_USTU": "Böbrek fonksiyon testleri (kan kreatinini ve idrar albümini) için hekiminize danışın."
+   },
+   "hypertension": {
+    "ESIK_USTU": "Tansiyonunuzun bir sağlık çalışanı tarafından yeniden ölçülmesi için hekiminize danışın."
+   },
+   "anemia": {
+    "ESIK_USTU": "Tam kan sayımının değerlendirilmesi için hekiminize danışın."
+   },
+   "copd": {
+    "ESIK_USTU": "Solunum testinizin (bronş açıcı sonrası spirometri) değerlendirilmesi için hekiminize danışın."
+   },
+   "cad": {
+    "ESIK_USTU": "Kalp değerlendirmesi için hekiminize danışın."
+   }
+  },
+  "limitations_extra_source": "Phase L: registry sınırlılıklarına (salt okunur) EK, arayüzde aynı listede gösterilir. Sayılar phase_xxxiii/results/b_rhythm_fpr.csv ve afl_results.csv 'Havuz (4 kaynak, ikincil)' satırlarından birebir alınmıştır (FP/n, Wilson %95 GA). Flutter (AFL) satırı yanlış pozitif değil 'AF olarak sınıflandırılma oranı'dır; birincil metriklere katılmamıştır.",
+  "limitations_extra_tr": {
+   "af_S4_DEVICE": [
+    "Başka ritimlerde \"eşik üstü\" çıkma oranı (yanlış pozitif; Challenge 2021'in 4 kaynağı birlikte, Phase XXXIII; parantez içinde %95 güven aralığı): ventrikül kaynaklı ekstrasistol (PVC) 19/62 = 0,306 (0,206–0,430); kalp pili ritmi 3/10 = 0,300 (0,108–0,603); sinüs taşikardisi (hızlı kalp atımı) 43/237 = 0,181 (0,138–0,235); kulakçık kaynaklı ekstrasistol (PAC/SVPB) 20/131 = 0,153 (0,101–0,224); diğer ritimler 72/1142 = 0,063 (0,050–0,079).",
+    "Atriyal flutter kayıtlarının 420/651'i = 0,645 (0,608–0,681) AF olarak sınıflandı (aynı 4 kaynak, Phase XXXIII). Flutter bu modelin ayırdığı bir sınıf değildir; bu oran birincil metriklere katılmamıştır."
+   ]
   },
   "analysis_groups_tr": [
-   {"module_label": "ana modül", "title": "Ana modüller", "description": "En güçlü kanıta sahip analizler."},
-   {"module_label": "araştırma modülü", "title": "Araştırma modülü", "description": "Kanıtı sınırlı; araştırma amaçlı."},
-   {"module_label": "deneysel", "title": "Deneysel modüller", "description": "Kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizler. Sonuçları ana modüllerle aynı ağırlıkta yorumlamayın.", "collapsed": true}
+   {
+    "module_label": "ana modül",
+    "title": "Ana modüller",
+    "description": "En güçlü kanıta sahip analizler."
+   },
+   {
+    "module_label": "araştırma modülü",
+    "title": "Araştırma modülü",
+    "description": "Kanıtı sınırlı; araştırma amaçlı."
+   },
+   {
+    "module_label": "deneysel",
+    "title": "Deneysel modüller (isteğe bağlı)",
+    "description": "Kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizler. Sonuçları ana modüllerle aynı ağırlıkta yorumlamayın.",
+    "collapsed": true
+   }
   ],
   "reason_replacements_source": "Sunucu gerekçe metinlerindeki teknik ifadelerin sade karşılığı (yalnız gösterim; ham metin 'Teknik ayrıntı' içinde kalır). Alan kodları ayrıca alan etiketine çevrilir.",
   "reason_replacements_tr": [
-   ["policy.optional_race gereği varsayılan sınıf atanmaz", "bu bilgi tahminle doldurulmaz"],
-   ["model popülasyonu", "analizin geliştirildiği grup"],
-   ["popülasyon uygunluğu doğrulanamıyor", "analizin size uygun olup olmadığı doğrulanamıyor"],
-   [": POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)", " (\"EKG ile AF\" sayfası)"],
-   [": POST /ecg/af", " (\"EKG ile AF\" sayfası)"]
+   [
+    "policy.optional_race gereği varsayılan sınıf atanmaz",
+    "bu bilgi tahminle doldurulmaz"
+   ],
+   [
+    "model popülasyonu",
+    "analizin geliştirildiği grup"
+   ],
+   [
+    "popülasyon uygunluğu doğrulanamıyor",
+    "analizin size uygun olup olmadığı doğrulanamıyor"
+   ],
+   [
+    ": POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)",
+    " (\"EKG ile AF\" sayfası)"
+   ],
+   [
+    ": POST /ecg/af",
+    " (\"EKG ile AF\" sayfası)"
+   ]
   ],
   "text_tr": {
    "page_title": "Veri girişi",
@@ -326,10 +671,292 @@
    "asst_checking": "Asistan durumu denetleniyor…",
    "asst_error": "Yanıt alınamadı: {msg}",
    "asst_clear": "Sohbeti temizle",
-   "asst_emergency_title": "Acil durum uyarısı"
-  }
+   "asst_emergency_title": "Acil durum uyarısı",
+   "reason_fallback": "Bu analiz için bir koşul sağlanmadı; ayrıntısı \"Teknik ayrıntı\" bölümünde.",
+   "field_error_fallback": "Bu değer kabul edilmedi; ayrıntısı \"Teknik ayrıntı\" bölümünde.",
+   "needs_label": "Gerekenler",
+   "step_of_named": "Adım {i} / {n}: {name}",
+   "step_skipped": "Seçtiğiniz analizler için gerekmeyen adımlar atlandı: {x}.",
+   "step_why": "Neden soruluyor?",
+   "summary_label": "Sonuç özeti",
+   "summary_line": "{n} analiz",
+   "summary_ESIK_USTU": "{n} eşik üstü",
+   "summary_ESIK_ALTI": "{n} eşik altı",
+   "summary_ABSTAIN": "{n} sonuç üretilmedi",
+   "summary_NOT_APPLICABLE": "{n} uygun değil",
+   "summary_ECG_REQUIRED": "{n} EKG kaydı bekliyor",
+   "summary_note": "Her kartın ayrıntısı aşağıda. Eşik üstü tanı değildir; eşik altı hastalığı dışlamaz.",
+   "evidence_done": "yapıldı",
+   "evidence_missing": "yok",
+   "evidence_missing_note": "Üstü çizili: bu tür test bu model için yapılmadı veya kayıtlı sonucu yok.",
+   "asst_expand": "Paneli genişlet",
+   "asst_shrink": "Paneli daralt",
+   "asst_resize": "Panel genişliğini değiştir (sol/sağ ok tuşları)",
+   "asst_suggest_title": "Gördüğünüz sonuçlara göre örnek sorular",
+   "asst_sources_n": "Kaynaklar ({n})",
+   "ecg_samples_title": "Örnek kayıtla dene",
+   "ecg_sample_af_title": "AF kaydı",
+   "ecg_sample_af_desc": "Kayıt etiketi atriyal fibrilasyon olan örnek (PTB-XL 00691).",
+   "ecg_sample_sr_title": "Sinüs ritmi kaydı",
+   "ecg_sample_sr_desc": "Kayıt etiketi normal sinüs ritmi olan örnek (PTB-XL 00165).",
+   "ecg_wait": "Analiz yaklaşık 10–30 sn sürebilir; bu sayfadan ayrılmayın.",
+   "ecg_sample_loaded": "{title} yüklendi (PTB-XL {id}). Açık PhysioNet kaydı (geliştirme kümesinden; test kaydı değil). Yaş ve cinsiyet SENTETİK (60, erkek).",
+   "footer": "HealthRisk AI Research V2 · Phase L arayüzü · yalnız localhost · klinik karar aracı değildir",
+   "ecg_uploading": "Yükleniyor… %{p}",
+   "ecg_processing": "Sunucuda işleniyor… {s} sn (bu bilgisayarda ölçülen süre 7–30 sn; en çok 60 sn)",
+   "ecg_err_busy": "EKG analizi şu an başka bir kaydı işliyor (aynı anda tek kayıt); birkaç saniye sonra tekrar deneyin.",
+   "ecg_err_size": "Dosya boyutu sınırı (2 MB) aşıldı.",
+   "evidence_missing_short": "kayıt yok"
+  },
+  "default_selected_module_labels": [
+   "ana modül",
+   "araştırma modülü"
+  ],
+  "default_selected_source": "Phase L: ilk açılışta yalnız ana modüller + araştırma modülü (osteoporoz) seçili; deneyseller kapalı.",
+  "disease_needs_tr": {
+   "af": [
+    {
+     "text": "EKG kaydı gerekir"
+    }
+   ],
+   "liver_fibrosis": [
+    {
+     "text": "Kan tahlili gerekir"
+    }
+   ],
+   "osteoporosis": [
+    {
+     "text": "Tahlil gerekmez",
+     "none": true
+    }
+   ],
+   "diabetes": [
+    {
+     "text": "Tahlil gerekmez",
+     "none": true
+    },
+    {
+     "text": "Tahlil varsa kullanılır"
+    }
+   ],
+   "kidney": [
+    {
+     "text": "Tahlil gerekmez",
+     "none": true
+    },
+    {
+     "text": "Tahlil varsa kullanılır"
+    }
+   ],
+   "hypertension": [
+    {
+     "text": "Kan ve idrar tahlili gerekir"
+    }
+   ],
+   "anemia": [
+    {
+     "text": "Kan tahlili gerekir"
+    }
+   ],
+   "copd": [
+    {
+     "text": "Solunum testi gerekir"
+    }
+   ],
+   "cad": [
+    {
+     "text": "Hekim muayenesi ve efor testi gerekir"
+    }
+   ]
+  },
+  "feature_labels_tr": {
+   "age": "Yaş",
+   "bmi": "Vücut kitle indeksi (boy ve kilodan hesaplanır)",
+   "egfr": "Böbrek süzme hızı (kreatininden hesaplanır)"
+  },
+  "unit_display_tr": {
+   "10^3/µL": "bin/µL",
+   "10^6/µL": "milyon/µL",
+   "kg/m2": "kg/m²",
+   "mL/dk/1.73m2": "mL/dk/1,73 m²"
+  },
+  "reason_rules_source": "Phase L: phase_l/scripts/scan_reasons.py ile toplanan tüm sunucu metinleri (phase_l/results/reason_scan.json) için yazıldı; Vitest her metnin sade karşılığını denetler.",
+  "reason_rules_tr": [
+   {
+    "re": "^eksik zorunlu alan",
+    "hide": true
+   },
+   {
+    "re": "^yapısal boşluk",
+    "hide": true
+   },
+   {
+    "re": "^(\\w+)=(\\S+) (\\S*) ?model girdi aralığı dışında \\[(.+), (.+)\\]$",
+    "hide_if_other": true,
+    "text": "{feature}: bu analiz yalnız $4–$5 {unit3} arasındaki değerlerle geliştirildi (sizin değeriniz: $2)."
+   },
+   {
+    "re": "^age: yaş ≥ 90",
+    "text": "90 yaş ve üstünde bu analiz sonuç üretmez (eğitim verisinde 89 yaş üstü gizlilik nedeniyle tek değerle kodlanmıştı)."
+   },
+   {
+    "re": "^yaş (\\S+) model popülasyonu dışında \\(≥ (\\d+)\\)$",
+    "text": "Bu analiz yalnız $2 yaş ve üstündeki kişiler için geliştirildi (girdiğiniz yaş: $1)."
+   },
+   {
+    "re": "^yaş (\\S+) model popülasyonu dışında \\((\\d+)–(\\d+)(?: \\(model girdi aralığı\\))?\\)$",
+    "text": "Bu analiz yalnız $2–$3 yaş arasındaki kişiler için geliştirildi (girdiğiniz yaş: $1)."
+   },
+   {
+    "re": "^yaş (\\S+): erkekte model popülasyonu (\\d+)–(\\d+)$",
+    "text": "Bu analiz erkeklerde yalnız $2–$3 yaş arası için geliştirildi (girdiğiniz yaş: $1)."
+   },
+   {
+    "re": "^yaş (\\S+): kadında model popülasyonu (\\d+)–(\\d+) \\(gebe olmayan\\)$",
+    "text": "Bu analiz kadınlarda yalnız $2–$3 yaş arası ve gebe olmayanlar için geliştirildi (girdiğiniz yaş: $1)."
+   },
+   {
+    "re": "^yaş yanıtsız",
+    "text": "Yaş girilmediği için bu analizin size uygun olup olmadığı belirlenemiyor."
+   },
+   {
+    "re": "^cinsiyet yanıtsız",
+    "text": "Cinsiyet seçilmediği için bu analizin size uygun olup olmadığı belirlenemiyor."
+   },
+   {
+    "re": "^gebelik durumu \"bilmiyorum\"",
+    "text": "Gebelik durumu bilinmediği için bu analiz yapılamadı; model gebe olmayan kişilerde geliştirildi."
+   },
+   {
+    "re": "^gebelik durumu yanıtsız",
+    "text": "Gebelik sorusu yanıtlanmadığı için bu analiz yapılamadı; model gebe olmayan kişilerde geliştirildi."
+   },
+   {
+    "re": "^gebe:",
+    "text": "Bu analiz gebe olmayan kişilerde geliştirildi; gebelikte kullanılamaz."
+   },
+   {
+    "re": "^diyabet tanısı sorusu yanıtsız",
+    "text": "Diyabet tanısı sorusu yanıtlanmadı; bu analiz yalnız diyabet tanısı almamış kişiler için geliştirildi."
+   },
+   {
+    "re": "^diyabet tanısı var",
+    "text": "Diyabet tanınız olduğu için bu analiz size uygun değil; yalnız tanı almamış kişiler için geliştirildi."
+   },
+   {
+    "re": "^diyabet ilacı/insülin",
+    "text": "Diyabet ilacı veya insülin kullananlar bu analizin geliştirildiği grupta yoktu."
+   },
+   {
+    "re": "^\"doktor zayıf/başarısız böbrek dedi mi\" yanıtsız",
+    "text": "Böbrek hastalığı sorusu yanıtlanmadı; bu analiz yalnız böbrek hastalığı tanısı olmayan kişiler için geliştirildi."
+   },
+   {
+    "re": "^tanılı böbrek hastalığı",
+    "text": "Böbrek hastalığı tanınız olduğu için bu analiz size uygun değil."
+   },
+   {
+    "re": "^diyaliz:",
+    "text": "Diyalize girenler bu analizin geliştirildiği grupta yoktu."
+   },
+   {
+    "re": "^pre-BD FEV1/FVC",
+    "text": "Solunum testinizde FEV1/FVC oranı 0,70 veya üstü (hava yolu daralması görünmüyor). Bu analiz yalnız hava yolu daralması olan kişiler için geliştirildi."
+   },
+   {
+    "re": "^(\\w+): şemada olmayan değer",
+    "text": "Bir sorunun yanıtı geçersiz ({label}); bu analiz sonuç üretmez."
+   },
+   {
+    "re": "^şemada olmayan kategori: (\\w+)=",
+    "text": "Bir sorunun yanıtı geçersiz ({label}); bu analiz sonuç üretmez."
+   },
+   {
+    "re": "^ırk/etnik köken yanıtsız",
+    "text": "Irk / etnik köken yanıtlanmadığı için bu analiz sonuç üretmez; bu bilgi tahminle doldurulmaz."
+   },
+   {
+    "re": "^AF modeli yalnız EKG kaydı",
+    "text": "AF analizi yalnız EKG kaydı yüklenerek yapılır (\"EKG ile AF\" sayfası)."
+   },
+   {
+    "re": "^EKG pipeline başarısız: örnekleme frekansı",
+    "text": "Kayıt 500 Hz değil; bu analiz yalnız 500 Hz kayıtlarla çalışır."
+   },
+   {
+    "re": "^EKG pipeline başarısız: kayıt 10 sn'den kısa",
+    "text": "Kayıt 10 saniyeden kısa; bu analiz en az 10 saniyelik kayıt gerektirir."
+   },
+   {
+    "re": "^EKG pipeline başarısız: AF pipeline meşgul",
+    "text": "EKG analizi şu an başka bir kaydı işliyor; birkaç saniye sonra tekrar deneyin."
+   },
+   {
+    "re": "^EKG pipeline başarısız",
+    "text": "EKG kaydı işlenemedi; bu kayıt için sonuç üretilmedi."
+   },
+   {
+    "re": "^pipeline şu feature",
+    "text": "EKG kaydından bazı ölçümler çıkarılamadı."
+   },
+   {
+    "re": "AF çalışma ortamı yok",
+    "text": "EKG analiz ortamı bu bilgisayarda kurulu değil; AF analizi şu an yapılamaz."
+   },
+   {
+    "re": "^(model devre dışı|bu model için uygunluk kuralı|AF pipeline devre dışı)",
+    "text": "Bu analiz şu anda bu bilgisayarda çalıştırılamıyor (teknik sorun)."
+   }
+  ],
+  "field_error_rules_tr": [
+   {
+    "re": "^(\\w+)=(\\S+) .*makul aralık dışında \\[(.+), (.+)\\]$",
+    "text": "{label} $3–$4 {unit} arasında olmalı."
+   },
+   {
+    "re": "^(\\w+) sayısal olmalı",
+    "text": "{label} bir sayı olmalı."
+   },
+   {
+    "re": "^(\\w+): desteklenmeyen birim",
+    "text": "{label} için bu birim kullanılamaz."
+   },
+   {
+    "re": "^tutarsız okuma (\\d): sistolik \\((\\S+)\\) ≤ diyastolik \\((\\S+)\\)",
+    "text": "$1. ölçümde büyük tansiyon ($2), küçük tansiyondan ($3) büyük olmalı."
+   },
+   {
+    "re": "^tutarsız spirometri",
+    "text": "FEV1 değeri FVC değerinden büyük olamaz."
+   }
+  ],
+  "asst_examples_by_outcome_tr": {
+   "ESIK_USTU": "Eşik üstü sonuç ne anlama geliyor?",
+   "ESIK_ALTI": "Eşik altı sonuç hastalığı dışlar mı?",
+   "ABSTAIN": "Neden sonuç üretilmedi?",
+   "NOT_APPLICABLE": "Bu analiz neden bana uygun değil?",
+   "ECG_REQUIRED": "AF analizi için EKG kaydını nasıl yüklerim?"
+  },
+  "asst_examples_by_disease_tr": {
+   "liver_fibrosis": "FibroScan nedir?",
+   "osteoporosis": "Kemik yoğunluğu ölçümü (DXA) nedir?",
+   "af": "Atriyal fibrilasyon nedir?",
+   "diabetes": "HbA1c testi nedir?",
+   "kidney": "İdrarda albümin testi nedir?",
+   "hypertension": "Yüksek tansiyon nedir?",
+   "anemia": "Anemi nedir?",
+   "copd": "KOAH nedir?",
+   "cad": "Koroner arter hastalığı nedir?"
+  },
+  "asst_examples_source": "Phase L: öneriler yalnız sonuç ETİKETİNDEN (hastalık anahtarı + durum) seçilir; ölçüm değeri kullanılmaz.",
+  "unit_note_rules_tr": [
+   {
+    "re": "^(\\w+): (\\S+) (\\S+) -> (\\S+) (\\S+)",
+    "text": "{label}: $2 $3, $4 $5 olarak kullanıldı."
+   }
+  ]
  },
- "disclaimer_tr":"Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
+ "disclaimer_tr": "Araştırma prototipidir; mevcut durum sınıflandırması yapar, gelecek risk tahmini değildir; negatif sonuç hastalığı dışlamaz; tanı ve tedavi için hekime başvurun.",
  "privacy": {
   "policy": "İstek gövdeleri ve sağlık verileri hiçbir log’a yazılmaz ve diske saklanmaz. Yalnız anonim sayaçlar (uç nokta başına istek sayısı, durum kodu sayısı, toplam/ortalama süre) bellekte tutulur ve /health’te döner. /ecg/af yüklemeleri yalnız işlem süresince geçici klasörde bulunur ve yanıt öncesi silinir (kilitli Octave pipeline dosya girişi ister)."
  }

@@ -1,0 +1,222 @@
+[
+ {
+  "q": "Eşik üstü ne demek?",
+  "labels": [],
+  "route": "llm",
+  "answer": "Eşik üstü, model sonucunun araştırmada belirlenen eşiğin üstünde kalması anlamına gelir [1]. Bu, tanı değildir ve bir hastalığın varlığını göstermez. Sonucun bir hekim tarafından değerlendirilmesi önerilir [1, 2]. Hekiminiz, bu sonucu diğer tıbbi bilgilerinizle birlikte değerlendirerek size en uygun tavsiyeyi verecektir [1, 2]. Hekiminize danışabilirsiniz.",
+  "raw": "Eşik üstü, model sonucunun araştırmada belirlenen eşiğin üstünde kalması anlamına gelir [1]. Bu, tanı değildir ve bir hastalığın varlığını göstermez. Sonucun bir hekim tarafından değerlendirilmesi önerilir [1, 4]. Hekiminiz, bu sonucu diğer tıbbi bilgilerinizle birlikte değerlendirerek size en uygun tavsiyeyi verecektir [1, 3, 4, 5]. Hekiminize danışabilirsiniz.",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_glossary",
+    "score": 0.745
+   },
+   {
+    "doc_id": "int_glossary",
+    "score": 0.616
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.588
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.579
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.575
+   }
+  ],
+  "sources": [
+   "int_glossary / Eşik üstü (ESIK_USTU)",
+   "int_next_steps / Osteoporoz (kemik erimesi) — eşik üstü"
+  ]
+ },
+ {
+  "q": "Eşik altı ne demek?",
+  "labels": [],
+  "route": "llm",
+  "answer": "Eşik altı, araştırmada belirlenen eşiğin altında kalmak anlamına gelir [1]. Bu, sonuçta hastalığın varlığına dair bir kanıt olmadığını gösterir [1, 2]. Eşik altı sonuç, hastalığı dışlamaz ve belirtileriniz veya endişeleriniz varsa hekiminize danışmanız önerilir [1, 2]. Bu analiz, yalnızca ilk 10 saniyelik veriyi değerlendirir [2]. Atriyal fibrilasyon (ritim bozukluğu) gibi durumlar için eşik altı sonuç, AF'yi dışlamaz [2]. Hekiminizle birlikte değerlendirmeniz önemlidir [1, 2]. Hekiminize danışabilirsiniz.",
+  "raw": "Eşik altı, araştırmada belirlenen eşiğin altında kalmak anlamına gelir [1]. Bu, sonuçta hastalığın varlığına dair bir kanıt olmadığını gösterir [1, 2]. Eşik altı sonuç, hastalığı dışlamaz ve belirtileriniz veya endişeleriniz varsa hekiminize danışmanız önerilir [1, 2]. Bu analiz, yalnızca ilk 10 saniyelik veriyi değerlendirir [4]. Atriyal fibrilasyon (ritim bozukluğu) gibi durumlar için eşik altı sonuç, AF'yi dışlamaz [4]. Hekiminizle birlikte değerlendirmeniz önemlidir [3, 4]. Hekiminize danışabilirsiniz.",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_glossary",
+    "score": 0.727
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.588
+   },
+   {
+    "doc_id": "int_glossary",
+    "score": 0.573
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.548
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.474
+   }
+  ],
+  "sources": [
+   "int_glossary / Eşik altı (ESIK_ALTI)",
+   "int_next_steps / Genel — eşik altı"
+  ]
+ },
+ {
+  "q": "Eşik üstü ne demek?",
+  "labels": [
+   "liver_fibrosis:ESIK_USTU",
+   "osteoporosis:ESIK_ALTI",
+   "af:ECG_REQUIRED"
+  ],
+  "route": "llm",
+  "answer": "Eşik üstü bir sonuç, HealthRisk AI Research V2 uygulamasında, araştırmada belirlenen eşiğin üstünde kalır. Bu, bir hastalığın varlığına dair kesin bir kanıt değildir [1]. Tanı koyma amacı taşımaz [1]. Sonucun bir hekim tarafından değerlendirilmesi önerilir [1, 2]. Karaciğer fibrozisi (sertleşme) analizinde, karaciğer elastografisi (FibroScan) için hekime danışmanız gerekir [2, 3]. Atriyal fibrilasyon (ritim bozukluğu) analizinde, EKG'nizin bir hekim tarafından değerlendirilmesi için hekime danışmanız önerilir [2]. Bu durumda, hekiminize danışabilirsiniz.",
+  "raw": "Eşik üstü bir sonuç, HealthRisk AI Research V2 uygulamasında, araştırmada belirlenen eşiğin üstünde kalır. Bu, bir hastalığın varlığına dair kesin bir kanıt değildir [1]. Tanı koyma amacı taşımaz [1]. Sonucun bir hekim tarafından değerlendirilmesi önerilir [1, 2]. Karaciğer fibrozisi (sertleşme) analizinde, karaciğer elastografisi (FibroScan) için hekime danışmanız gerekir [3, 4]. Atriyal fibrilasyon (ritim bozukluğu) analizinde, EKG'nizin bir hekim tarafından değerlendirilmesi için hekime danışmanız önerilir [9]. Bu durumda, hekiminize danışabilirsiniz.",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.785
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.783
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.76
+   },
+   {
+    "doc_id": "int_glossary",
+    "score": 0.725
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.715
+   }
+  ],
+  "sources": [
+   "int_glossary / Eşik üstü (ESIK_USTU)",
+   "int_next_steps / Genel — eşik üstü",
+   "int_analyses / Karaciğer fibrozisi (sertleşme)"
+  ]
+ },
+ {
+  "q": "Eşik altı ne demek?",
+  "labels": [
+   "liver_fibrosis:ESIK_USTU",
+   "osteoporosis:ESIK_ALTI",
+   "af:ECG_REQUIRED"
+  ],
+  "route": "llm",
+  "answer": "Eşik altı, model sonucunun araştırmada sabitlenmiş eşiğin altında kalması anlamına gelir [2]. Bu, tanı değildir ve olasılık gösterilmez. Eşik altı sonuç, hastalığın dışlamadığı anlamına gelir ve belirtileriniz veya endişeleriniz varsa hekiminize danışmanız önerilir [1]. Hekiminiz, daha fazla değerlendirme yapmanıza yardımcı olabilir [1].",
+  "raw": "Eşik altı, model sonucunun araştırmada sabitlenmiş eşiğin altında kalması anlamına gelir [5]. Bu, tanı değildir ve olasılık gösterilmez. Eşik altı sonuç, hastalığın dışlamadığı anlamına gelir ve belirtileriniz veya endişeleriniz varsa hekiminize danışmanız önerilir [6]. Hekiminiz, daha fazla değerlendirme yapmanıza yardımcı olabilir [2].",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.766
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.753
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.736
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.728
+   },
+   {
+    "doc_id": "int_glossary",
+    "score": 0.716
+   }
+  ],
+  "sources": [
+   "int_next_steps / Genel — eşik üstü",
+   "int_glossary / Eşik altı (ESIK_ALTI)"
+  ]
+ },
+ {
+  "q": "Eşik üstü ne demek?",
+  "labels": [
+   "af:ESIK_USTU"
+  ],
+  "route": "llm",
+  "answer": "Eşik üstü bir sonuç, modelin sonucunun araştırmada belirlenen eşiğin üstünde kalması anlamına gelir [1]. Bu, tanı değildir ve bir hastalığın varlığını göstermez. Sadece bir olasılık gösterir [2]. Bu durumda, EKG kaydınızı bir hekimle değerlendirmesi için hekime danışmanız önerilir [2]. Atriyal fibrilasyon (ritim bozukluğu) gibi diğer ritim bozuklukları da bu sonucu verebilir [2]. Hekiminize danışabilirsiniz.",
+  "raw": "Eşik üstü bir sonuç, modelin sonucunun araştırmada belirlenen eşiğin üstünde kalması anlamına gelir [1]. Bu, tanı değildir ve bir hastalığın varlığını göstermez. Sadece bir olasılık gösterir [2]. Bu durumda, EKG kaydınızı bir hekimle değerlendirmesi için hekime danışmanız önerilir [2, 4]. Atriyal fibrilasyon (ritim bozukluğu) gibi diğer ritim bozuklukları da bu sonucu verebilir [4]. Hekiminize danışabilirsiniz.",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.836
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.752
+   },
+   {
+    "doc_id": "int_glossary",
+    "score": 0.7
+   },
+   {
+    "doc_id": "int_analyses",
+    "score": 0.686
+   },
+   {
+    "doc_id": "mp_af",
+    "score": 0.681
+   }
+  ],
+  "sources": [
+   "int_glossary / Eşik üstü (ESIK_USTU)",
+   "int_next_steps / Genel — eşik üstü"
+  ]
+ },
+ {
+  "q": "Sonucum eşik üstü çıktı, ne yapmalıyım?",
+  "labels": [
+   "liver_fibrosis:ESIK_USTU",
+   "osteoporosis:ESIK_ALTI",
+   "af:ECG_REQUIRED"
+  ],
+  "route": "llm",
+  "answer": "Sonucunuz eşik üstü çıktı. Eşik üstü bir sonuç, araştırmada sabitlenmiş eşiğin üstünde kalır. Tanı değildir ve hastalık olduğu anlamına gelmez. Olasılık gösterilmez. Bu sonucu bir hekimle değerlendirmeniz önerilir [1, 2]. Karaciğer fibrozisi (sertleşme) analizi için hekiminize karaciğer elastografisi (FibroScan) için danışmanız önerilir [2, 3]. Başka bir durumda, belirtiniz veya endişeniz varsa hekiminize danışabilirsiniz [2]. Hekiminiz, gerekli diğer testleri ve değerlendirmeleri yapacaktır [3].",
+  "raw": "Sonucunuz eşik üstü çıktı. Eşik üstü bir sonuç, araştırmada sabitlenmiş eşiğin üstünde kalır. Tanı değildir ve hastalık olduğu anlamına gelmez. Olasılık gösterilmez. Bu sonucu bir hekimle değerlendirmeniz önerilir [1, 2]. Karaciğer fibrozisi (sertleşme) analizi için hekiminize karaciğer elastografisi (FibroScan) için danışmanız önerilir [3, 4]. Başka bir durumda, belirtiniz veya endişeniz varsa hekiminize danışabilirsiniz [6]. Hekiminiz, gerekli diğer testleri ve değerlendirmeleri yapacaktır [3].",
+  "violations": null,
+  "retrieval": [
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.814
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.785
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.752
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.714
+   },
+   {
+    "doc_id": "int_next_steps",
+    "score": 0.707
+   }
+  ],
+  "sources": [
+   "int_glossary / Eşik üstü (ESIK_USTU)",
+   "int_next_steps / Genel — eşik üstü",
+   "int_analyses / Karaciğer fibrozisi (sertleşme)"
+  ]
+ }
+]

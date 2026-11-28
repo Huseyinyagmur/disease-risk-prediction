@@ -36,6 +36,17 @@ export function fieldsForSelection(schema: Schema, models: ModelInfo[], selected
   return out;
 }
 
+/** Phase L: varsayılan seçim — modül etiketi app_config > ui.default_selected_module_labels içinde olan analizler. */
+export function defaultSelection(schema: Schema, models: ModelInfo[]): string[] {
+  const labels = new Set(schema.ui?.default_selected_module_labels ?? []);
+  return analysisOptions(models).filter((o) => labels.has(o.moduleLabel)).map((o) => o.diseaseKey);
+}
+
+/** Seçilen analizlerin hiçbirinin gerektirmediği form bölümleri (sihirbazda atlanır). */
+export function skippedSections(schema: Schema, steps: string[]): string[] {
+  return schema.form.sections.map((s) => s.id).filter((id) => !steps.includes(id));
+}
+
 export const SELECT_STEP = 'select';
 export const REVIEW_STEP = 'review';
 

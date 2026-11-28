@@ -91,11 +91,17 @@ def build_internal(out=None):
     # "Ne yapmalıyım?" yönlendirmeleri
     names = {'ESIK_USTU': 'eşik üstü', 'ESIK_ALTI': 'eşik altı', 'ABSTAIN': 'sonuç üretilmedi', 'NOT_APPLICABLE': 'uygun değil'}
     b = ['# "Ne yapmalıyım?" yönlendirmeleri', '', 'Sonuç kartındaki "Ne yapmalıyım?" kutusunun metinleri. Tanı veya tedavi önerisi değildir.', '']
-    b += ['## Genel (tüm analizler)', ''] + [f'- {names[k]}: {v}' for k, v in ui['next_steps_tr']['_default'].items()]
+    # Phase L: her (hastalık, durum) ayrı bölüm = ayrı parça. Eskiden tüm durumlar tek parçadaydı ve eşik altı metni
+    # ("dışlamaz") eşik üstü yanıtlarına taşınabiliyordu (phase_l/results/asst_probe_before.json).
+    when = {'ESIK_USTU': 'eşik üstü sonuçta', 'ESIK_ALTI': 'eşik altı sonuçta', 'ABSTAIN': 'sonuç üretilmediğinde',
+            'NOT_APPLICABLE': 'analiz uygun olmadığında'}
+    for k, v in ui['next_steps_tr']['_default'].items():
+        b += [f'## Genel — {names[k]}', '', f'Tüm analizlerde, {when[k]}: {v}', '']
     for dk, d in ui['next_steps_tr'].items():
         if dk == '_default':
             continue
-        b += ['', f'## {dn.get(dk, dk)}', ''] + [f'- {names[k]}: {v}' for k, v in d.items()]
+        for k, v in d.items():
+            b += [f'## {dn.get(dk, dk)} — {names[k]}', '', f'{dn.get(dk, dk)} analizinde, {when[k]}: {v}', '']
     docs.append(('int_next_steps', '"Ne yapmalıyım?" yönlendirmeleri', 'app_config.json > ui.next_steps_tr', None, b))
 
     # kanıt düzeyleri

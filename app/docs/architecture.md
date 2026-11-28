@@ -89,6 +89,14 @@ flowchart TD
   "Eksik: EKG kaydı", **ortam yoksa "Karar verilemez: Octave/ECGDeli AF çalışma ortamı yok"** (Phase XLVI).
   Kişiye özel neden de varsa (kapsam dışı yaş, eksik alan) ana satır o nedendir; ortam nedeni altında "Ayrıca: …"
   (`additional_reasons`; Phase XLVI kapanış düzeltmesi).
+- **Arayüzde sade metin (Phase L).** Sunucu gerekçe ve alan hatası metinleri DEĞİŞMEZ; arayüz bunları
+  `app_config.json > ui.reason_rules_tr` / `ui.field_error_rules_tr` kurallarıyla sade Türkçeye çevirir
+  (`frontend/src/lib/plain.ts`; ör. `weight_kg=500 kg makul aralık dışında [25, 300]` → "Kilo 25–300 kg arasında olmalı.").
+  Ham metin yalnız "Teknik ayrıntı" içinde kalır. Kurallar, sunucunun ürettiği tüm metinlerin sentetik taramasıyla
+  (`phase_l/scripts/scan_reasons.py`) Vitest'te denetlenir.
+- **Canlı panel eski yanıtı göstermez (Phase L).** `/eligibility` yanıtı istendiği girdinin anahtarıyla saklanır; girdi
+  değişince yeni yanıt gelene dek durum rozeti gösterilmez (önceden "Formu temizle" sonrası kısa süre, istek hatasında
+  süresiz eski "Hesaplanabilir" görünüyordu).
 
 ## 4. AF yolu (/ecg/af)
 

@@ -425,48 +425,16 @@
   "ekg": "electrocardiogram ECG",
   "elektrokardiyogram": "electrocardiogram ECG"
  },
- "label_pins_note": "Oturum etiketi varsa ilgili durumun sözlük tanımı, hastalığın \"Ne yapmalıyım?\" ve gereksinim parçaları ile \"Genel\" yönlendirme parçası bağlama SABİTLENİR (erişim skorundan bağımsız; [doc_id, bölüm öneki]). Hastalık parçaları bölüm adı = hastalık adı ile eşleşir. Phase XLVIII geliştirme kararı (dev_questions D2-01/D2-02).",
+ "label_pins_note": "Oturum etiketi varsa ilgili durumun sözlük tanımı, AYNI durumun \"Ne yapmalıyım?\" parçaları (genel + hastalığa özgü) ve hastalığın gereksinim parçası bağlama SABİTLENİR (erişim skorundan bağımsız; [doc_id, bölüm öneki]). Phase XLVIII geliştirme kararı (dev_questions D2-01/D2-02). Phase L: yönlendirme parçaları durum başına ayrıldı ve _always (tüm durumları içeren 'Genel' parçası) kaldırıldı; kök neden: AF eşik üstü etiketinde eşik altı metni ('dışlamaz') bağlama giriyor ve yanıta eşik üstü için taşınıyordu (phase_l/results/asst_probe_before.json).",
  "label_pins": {
-  "ESIK_USTU": [
-   [
-    "int_glossary",
-    "Eşik üstü / Eşik altı"
-   ]
-  ],
-  "ESIK_ALTI": [
-   [
-    "int_glossary",
-    "Eşik üstü / Eşik altı"
-   ]
-  ],
-  "ABSTAIN": [
-   [
-    "int_glossary",
-    "Sonuç üretilmedi"
-   ]
-  ],
-  "NOT_APPLICABLE": [
-   [
-    "int_glossary",
-    "Bu analiz size uygun değil"
-   ]
-  ],
-  "ECG_REQUIRED": [
-   [
-    "int_analyses",
-    "EKG ile AF"
-   ]
-  ],
-  "_always": [
-   [
-    "int_next_steps",
-    "Genel"
-   ]
-  ],
-  "_disease_docs": [
-   "int_next_steps",
-   "int_analyses"
-  ]
+  "ESIK_USTU": [["int_glossary", "Eşik üstü ("], ["int_next_steps", "Genel — eşik üstü"]],
+  "ESIK_ALTI": [["int_glossary", "Eşik altı ("], ["int_next_steps", "Genel — eşik altı"]],
+  "ABSTAIN": [["int_glossary", "Sonuç üretilmedi"], ["int_next_steps", "Genel — sonuç üretilmedi"]],
+  "NOT_APPLICABLE": [["int_glossary", "Bu analiz size uygun değil"], ["int_next_steps", "Genel — uygun değil"]],
+  "ECG_REQUIRED": [["int_analyses", "EKG ile AF"]],
+  "_disease_docs": ["int_analyses"],
+  "_disease_outcome_docs": ["int_next_steps"],
+  "outcome_section_tr": {"ESIK_USTU": "eşik üstü", "ESIK_ALTI": "eşik altı", "ABSTAIN": "sonuç üretilmedi", "NOT_APPLICABLE": "uygun değil", "ECG_REQUIRED": "uygun değil"}
  },
  "rules_version": "v3",
  "rules_note": "Phase XLVIII v3 (son tur; v3 doğrulamasından sonra ayar yapılmaz). Kurallar doğal Türkçe yazılır ve girdiyle AYNI fonksiyondan (guard.key: küçük harf, Türkçe karakter → ASCII, ünsüz yumuşaması katlama g/ğ→k, d→t, b→p) geçer; böylece \"soluk/soluğum/solugum\" aynı köke iner. Sözdizimi: boşluk = bitişik kelimeler; \" … \" = araya en çok 4 sözcük; her parça kelime başı köküdür (çekimler serbest); \"|\" = seçenek. v1 anahtar kelime listeleri de aynı fonksiyonla eşleşir. Acil iki kademelidir: kişisel/şimdiki durum (veya belirsiz) → LLM yok, sabit 112; genel bilgi sorusu → en üstte 112 uyarı kutusu + normal RAG yanıtı. Kendine zarar her durumda yalnız sabit yanıt.",

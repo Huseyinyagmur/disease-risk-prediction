@@ -1,10 +1,10 @@
 // Phase XLVIII: açıklama asistanı paneli uçtan uca (gerçek backend + yerel Ollama 127.0.0.1:11434 çalışırken).
 // Ollama yoksa (/health > assistant.enabled=false) testler gerekçeyle SKIP olur. Ekran görüntüleri: SHOTS_DIR
-// (varsayılan phase_xlviii/screenshots). Profiller sentetiktir.
+// (varsayılan phase_l/screenshots/after). Profiller sentetiktir.
 import { expect, test, type Page, type Request } from '@playwright/test';
 import { gotoStep, loadProfile, openForm, submit } from './helpers';
 
-const DIR = process.env.SHOTS_DIR ?? '../../phase_xlviii/screenshots';
+const DIR = process.env.SHOTS_DIR ?? '../../phase_l/screenshots/after'; // Phase L
 const LLM_TIMEOUT = 240_000;
 
 async function assistantEnabled(page: Page): Promise<{ ok: boolean; reason: string }> {
@@ -38,6 +38,8 @@ test.describe('açıklama asistanı', () => {
     await expect(page.getByTestId('assistant-waiting')).toBeHidden();
     await expect(bot).toContainText('Araştırma prototipidir;');
     await expect(bot.getByTestId('assistant-sources')).toBeVisible();
+    await bot.getByTestId('assistant-sources').locator('summary').click(); // Phase L: kaynaklar katlanır liste
+    await expect(bot.getByTestId('assistant-sources').locator('li').first()).toBeVisible();
     await page.screenshot({ path: `${DIR}/desktop_assistant_02_yanit.png` });
     // başka sayfada da açık ve sohbet bellekte
     await page.getByRole('navigation', { name: 'Ana gezinme' }).getByRole('button', { name: 'Model kartları' }).click();

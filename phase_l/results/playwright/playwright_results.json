@@ -1,0 +1,1531 @@
+{
+  "config": {
+    "configFile": "c:\\Bitirme\\HealthRisk_AI_Research_V2\\app\\frontend\\playwright.config.ts",
+    "rootDir": "c:/Bitirme/HealthRisk_AI_Research_V2/app/frontend/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../../phase_l/results/playwright/playwright_results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "../../phase_l/results/playwright/playwright_junit.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "c:/Bitirme/HealthRisk_AI_Research_V2/phase_l/results/playwright/playwright_artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "c:/Bitirme/HealthRisk_AI_Research_V2/app/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.52.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npx vite preview --host 127.0.0.1 --port 4173 --strictPort",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "a11y.spec.ts",
+      "file": "a11y.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@a11y erişilebilirlik",
+          "file": "a11y.spec.ts",
+          "line": 26,
+          "column": 6,
+          "specs": [
+            {
+              "title": "axe: tüm ekranlar (1440px)",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17046,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:35:30.968Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-f70dfc7df0c59d854ee0",
+              "file": "a11y.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "axe: tüm ekranlar (375px)",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15863,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:35:48.100Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-996ea7565c97a3445441",
+              "file": "a11y.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "klavye: analiz seçimi → İleri → odak adım başlığında → alan doldurma → Geri; görünür odak",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 421,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:03.966Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-191eddef7480e451f392",
+              "file": "a11y.spec.ts",
+              "line": 75,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "assistant.spec.ts",
+      "file": "assistant.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "açıklama asistanı",
+          "file": "assistant.spec.ts",
+          "line": 22,
+          "column": 6,
+          "specs": [
+            {
+              "title": "her sayfada açılır; örnek soru → yerel model yanıtı, kaynak listesi, uyarı; bekleme göstergesi",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4577,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:04.399Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7b892f05db9a15b76833-5be037cb5f7b7d52c5c6",
+              "file": "assistant.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "sonuç ekranından: yalnız etiketler gönderilir (ölçüm değeri yok); acil durum → 112 (LLM yok)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 330000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4125,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:08.979Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7b892f05db9a15b76833-33222fb41fd183dfcbee",
+              "file": "assistant.spec.ts",
+              "line": 53,
+              "column": 3
+            },
+            {
+              "title": "v3: genel bilgi sorusunda acil kelimesi → en üstte 112 uyarı kutusu + normal yanıt; kişisel ifade → sabit 112",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2354,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:13.107Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7b892f05db9a15b76833-25bf0cb42f844067788e",
+              "file": "assistant.spec.ts",
+              "line": 85,
+              "column": 3
+            },
+            {
+              "title": "mobil (375 px): panel ekrana sığar, yatay kaydırma yok",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 470,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:15.464Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7b892f05db9a15b76833-6f01bfd6eeca51ce0564",
+              "file": "assistant.spec.ts",
+              "line": 105,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@mobil yerleşim",
+          "file": "mobile.spec.ts",
+          "line": 46,
+          "column": 6,
+          "specs": [
+            {
+              "title": "375px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında",
+              "ok": true,
+              "tags": [
+                "mobil"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1269,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:15.944Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-458249a936400dda98a1",
+              "file": "mobile.spec.ts",
+              "line": 48,
+              "column": 5
+            },
+            {
+              "title": "768px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında",
+              "ok": true,
+              "tags": [
+                "mobil"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1350,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:17.216Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-442675d2e87660f740fb",
+              "file": "mobile.spec.ts",
+              "line": 48,
+              "column": 5
+            },
+            {
+              "title": "1440px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında",
+              "ok": true,
+              "tags": [
+                "mobil"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1265,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:18.569Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-aac6f95dd8451300e081",
+              "file": "mobile.spec.ts",
+              "line": 48,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "privacy.spec.ts",
+      "file": "privacy.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@gizlilik tarayıcı depolaması ve yenileme",
+          "file": "privacy.spec.ts",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok",
+              "ok": true,
+              "tags": [
+                "gizlilik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8226,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:19.842Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "62491902cb946290adea-602266ccb0aaaf827141",
+              "file": "privacy.spec.ts",
+              "line": 14,
+              "column": 3
+            },
+            {
+              "title": "sabit uyarı her ekranda görünür",
+              "ok": true,
+              "tags": [
+                "gizlilik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 569,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:28.070Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "62491902cb946290adea-49e07b2478310e439bb9",
+              "file": "privacy.spec.ts",
+              "line": 72,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "scenarios.spec.ts",
+      "file": "scenarios.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@normal normal girdi",
+          "file": "scenarios.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "fibrozis: çalışabilir profil -> panel Çalışabilir -> sonuç OK, karar ve kanıt gösterilir",
+              "ok": true,
+              "tags": [
+                "normal"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1069,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:28.648Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-f2f5db1d584639144842",
+              "file": "scenarios.spec.ts",
+              "line": 7,
+              "column": 3
+            },
+            {
+              "title": "fibrozis: yalnız \"Karaciğer fibrozisi\" seçilir -> yalnız gerekli alanlar gönderilir, panel ve sonuç yalnız fibrozis",
+              "ok": true,
+              "tags": [
+                "normal"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1004,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:29.719Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-5a83421d3cdaa6c678c4",
+              "file": "scenarios.spec.ts",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "AF: PTB-XL AF örneği -> OK, 10 öznitelik, lead II grafiği ve RR takogramı",
+              "ok": true,
+              "tags": [
+                "normal"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8407,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:30.725Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-63d6b9671b4e3397bc3f",
+              "file": "scenarios.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "AF: PTB-XL sinüs ritmi örneği -> OK",
+              "ok": true,
+              "tags": [
+                "normal"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7355,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:39.134Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-1311adf0a701f61538dc",
+              "file": "scenarios.spec.ts",
+              "line": 54,
+              "column": 3
+            },
+            {
+              "title": "AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir",
+              "ok": true,
+              "tags": [
+                "normal"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7246,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:46.491Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-48cd9df72fb219892adc",
+              "file": "scenarios.spec.ts",
+              "line": 61,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "@eksik eksik girdi",
+          "file": "scenarios.spec.ts",
+          "line": 72,
+          "column": 6,
+          "specs": [
+            {
+              "title": "fibrozis: eksik alanlı profil -> panel \"Eksik: …\" (laboratuvarlar) -> sonuç ABSTAIN ve neden",
+              "ok": true,
+              "tags": [
+                "eksik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 891,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:53.739Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-49b408f5123bf7bcd09a",
+              "file": "scenarios.spec.ts",
+              "line": 73,
+              "column": 3
+            },
+            {
+              "title": "fibrozis: laboratuvarlar tamamlanınca durum Eksik -> Çalışabilir olur",
+              "ok": true,
+              "tags": [
+                "eksik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1609,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:54.632Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-5772f6341da18a00418e",
+              "file": "scenarios.spec.ts",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "AF: formda panel \"Eksik: EKG kaydı\" gösterir",
+              "ok": true,
+              "tags": [
+                "eksik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 793,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:56.244Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-2c2d811eeecfe1c7f7f3",
+              "file": "scenarios.spec.ts",
+              "line": 95,
+              "column": 3
+            },
+            {
+              "title": "AF: yalnız .hea yüklenince analiz başlatılamaz",
+              "ok": true,
+              "tags": [
+                "eksik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 259,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:57.039Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-9ba422701b93d801f800",
+              "file": "scenarios.spec.ts",
+              "line": 101,
+              "column": 3
+            },
+            {
+              "title": "AF: yaş/cinsiyet yanıtsız -> ABSTAIN (eksik alan)",
+              "ok": true,
+              "tags": [
+                "eksik"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8477,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:36:57.301Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-00956ac8c0f2239dbb4d",
+              "file": "scenarios.spec.ts",
+              "line": 108,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "@birim birim hatası",
+          "file": "scenarios.spec.ts",
+          "line": 120,
+          "column": 6,
+          "specs": [
+            {
+              "title": "fibrozis: albümin g/L değeri g/dL biriminde -> alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür",
+              "ok": true,
+              "tags": [
+                "birim"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1389,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:05.780Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-5108bba2686e0fcc743d",
+              "file": "scenarios.spec.ts",
+              "line": 121,
+              "column": 3
+            },
+            {
+              "title": "birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir",
+              "ok": true,
+              "tags": [
+                "birim"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 909,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:07.171Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-869c75ec91b4cc5c5d7c",
+              "file": "scenarios.spec.ts",
+              "line": 138,
+              "column": 3
+            },
+            {
+              "title": "AF: 250 Hz başlıklı kayıt -> ABSTAIN (\"500 Hz değil\")",
+              "ok": true,
+              "tags": [
+                "birim"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:08.082Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-e95418e53d008eec1224",
+              "file": "scenarios.spec.ts",
+              "line": 153,
+              "column": 3
+            },
+            {
+              "title": "AF: yaş ay cinsinden girilmiş (720) -> sunucu 422 hatası gösterilir",
+              "ok": true,
+              "tags": [
+                "birim"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 570,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:08.481Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-ed85522ac7b1d66ee0f8",
+              "file": "scenarios.spec.ts",
+              "line": 168,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "@kapsam kapsam dışı veri",
+          "file": "scenarios.spec.ts",
+          "line": 179,
+          "column": 6,
+          "specs": [
+            {
+              "title": "fibrozis: gebe kadın profili -> panel Kapsam dışı (gebe) -> sonuç NOT_APPLICABLE",
+              "ok": true,
+              "tags": [
+                "kapsam"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 974,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:09.053Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-03b643d6fa6cf0b17f48",
+              "file": "scenarios.spec.ts",
+              "line": 180,
+              "column": 3
+            },
+            {
+              "title": "fibrozis: 19 yaş -> Kapsam dışı (yaş ≥ 20)",
+              "ok": true,
+              "tags": [
+                "kapsam"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 813,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:10.030Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-51ef58ab3e35acd36655",
+              "file": "scenarios.spec.ts",
+              "line": 189,
+              "column": 3
+            },
+            {
+              "title": "fibrozis: gebelik \"bilmiyorum\" -> Karar verilemez (ABSTAIN)",
+              "ok": true,
+              "tags": [
+                "kapsam"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 751,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:10.846Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-ffca31d27786ee38b15b",
+              "file": "scenarios.spec.ts",
+              "line": 196,
+              "column": 3
+            },
+            {
+              "title": "AF: formda yaş 95 -> panel Kapsam dışı",
+              "ok": true,
+              "tags": [
+                "kapsam"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 720,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:11.600Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-d76bb41267b4fcaaa349",
+              "file": "scenarios.spec.ts",
+              "line": 204,
+              "column": 3
+            },
+            {
+              "title": "AF: EKG ile yaş 95 -> NOT_APPLICABLE",
+              "ok": true,
+              "tags": [
+                "kapsam"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7391,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:12.322Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "228c869e2a0e583b8177-dafa5b870a2a077fcb3f",
+              "file": "scenarios.spec.ts",
+              "line": 210,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "screenshots.spec.ts",
+      "file": "screenshots.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@screenshots",
+          "file": "screenshots.spec.ts",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "masaüstü (1440 px)",
+              "ok": true,
+              "tags": [
+                "screenshots"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12181,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:19.721Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "677a4938ef65bfc6a6e5-c6118bff9477d43fe6c6",
+              "file": "screenshots.spec.ts",
+              "line": 10,
+              "column": 3
+            },
+            {
+              "title": "tablet768 (768 px)",
+              "ok": true,
+              "tags": [
+                "screenshots"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9109,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:31.905Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "677a4938ef65bfc6a6e5-1193de8db1233fe0a532",
+              "file": "screenshots.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "mobile375 (375 px)",
+              "ok": true,
+              "tags": [
+                "screenshots"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8845,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:41.016Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "677a4938ef65bfc6a6e5-e53522ae7ea89387af6a",
+              "file": "screenshots.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "Phase L ek görüntüler (masaüstü + tablet)",
+              "ok": true,
+              "tags": [
+                "screenshots"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9081,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:49.863Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "677a4938ef65bfc6a6e5-228efc1747a0f8d80b3b",
+              "file": "screenshots.spec.ts",
+              "line": 101,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "timing.spec.ts",
+      "file": "timing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@timing",
+          "file": "timing.spec.ts",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "AF arayüz süre ayrıştırması",
+              "ok": true,
+              "tags": [
+                "timing"
+              ],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 42580,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "{\"run\":0,\"record\":\"00691\",\"status\":\"OK\",\"click_to_request_s\":0.018,\"request_to_first_byte_s\":6.891,\"server_wall_s\":6.878,\"octave_s\":4.332,\"upload_and_queue_minus_server_s\":0.013,\"download_s\":0.0006,\"response_bytes\":19307,\"render_after_response_s\":0.067,\"click_to_chart_s\":6.976}\n"
+                        },
+                        {
+                          "text": "{\"run\":0,\"record\":\"00165\",\"status\":\"OK\",\"click_to_request_s\":0.024,\"request_to_first_byte_s\":6.802,\"server_wall_s\":6.785,\"octave_s\":4.175,\"upload_and_queue_minus_server_s\":0.017,\"download_s\":0.001,\"response_bytes\":19525,\"render_after_response_s\":0.028,\"click_to_chart_s\":6.856}\n"
+                        },
+                        {
+                          "text": "{\"run\":1,\"record\":\"00691\",\"status\":\"OK\",\"click_to_request_s\":0.023,\"request_to_first_byte_s\":6.924,\"server_wall_s\":6.91,\"octave_s\":4.384,\"upload_and_queue_minus_server_s\":0.014,\"download_s\":0.0004,\"response_bytes\":19307,\"render_after_response_s\":0.017,\"click_to_chart_s\":6.965}\n"
+                        },
+                        {
+                          "text": "{\"run\":1,\"record\":\"00165\",\"status\":\"OK\",\"click_to_request_s\":0.017,\"request_to_first_byte_s\":6.794,\"server_wall_s\":6.781,\"octave_s\":4.173,\"upload_and_queue_minus_server_s\":0.013,\"download_s\":0.0007,\"response_bytes\":19526,\"render_after_response_s\":0.016,\"click_to_chart_s\":6.828}\n"
+                        },
+                        {
+                          "text": "{\"run\":2,\"record\":\"00691\",\"status\":\"OK\",\"click_to_request_s\":0.012,\"request_to_first_byte_s\":6.914,\"server_wall_s\":6.9,\"octave_s\":4.36,\"upload_and_queue_minus_server_s\":0.014,\"download_s\":0.0005,\"response_bytes\":19308,\"render_after_response_s\":0.017,\"click_to_chart_s\":6.943}\n"
+                        },
+                        {
+                          "text": "{\"run\":2,\"record\":\"00165\",\"status\":\"OK\",\"click_to_request_s\":0.009,\"request_to_first_byte_s\":6.733,\"server_wall_s\":6.721,\"octave_s\":4.197,\"upload_and_queue_minus_server_s\":0.012,\"download_s\":0.0004,\"response_bytes\":19525,\"render_after_response_s\":0.018,\"click_to_chart_s\":6.761}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-28T08:37:58.953Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8b144b852b1422c1e11b-82ddd50a447a084d771c",
+              "file": "timing.spec.ts",
+              "line": 10,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-28T08:35:29.665Z",
+    "duration": 191944.672,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

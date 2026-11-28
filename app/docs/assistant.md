@@ -1,4 +1,4 @@
-# Açıklama asistanı (Phase XLVIII)
+# Açıklama asistanı (Phase XLVIII; Phase L güncellemesi)
 
 Uygulamadaki terimleri, sonuç kartlarını ve kapsamdaki hastalıkları **yerel** bir dil modeliyle, yalnız bilgi tabanındaki
 kaynaklara dayanarak açıklar. **Tanı koymaz; tedavi, ilaç veya doz önermez; model olasılığı vermez.** Araştırma
@@ -47,6 +47,13 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
 * **Son kontrol**: doz birimi (`500 mg` vb.; `mg/dL` gibi laboratuvar birimi değil), yasak ifadeler ("tanınız",
   "kesinlikle", "kesin olarak", "hastasınız", "almalısınız" …), kaynakta olmayan sayı veya yüzde, bilgi tabanında olmayan
   URL → yanıt atılır, yerine sabit güvenli metin gelir. Model "kaynaklarımda bilgi yok" derse sabit metin döner.
+  **Phase L ekleri:** (a) `threshold_polarity`: "dışlamaz" yalnız eşik altı (negatif) sonuç için söylenebilir; eşik üstüne
+  bağlanırsa yanıt atılır. (b) `probability_claim`: olumsuzlanmamış "olasılık …" cümlesi (ör. "sadece bir olasılık
+  gösterir") atılır. (c) Atıf temizliği: yalnız atıftan oluşan satırlar silinir, art arda yazılmış atıflar ("[3], [3]")
+  tek gruba birleşir; kaynak listesi kalan atıflardan kurulur.
+* **Etiket sabitleme (Phase L)**: oturum etiketi varsa yalnız o durumun sözlük tanımı ve AYNI durumun "Ne yapmalıyım?"
+  parçaları (genel + hastalığa özgü) bağlama sabitlenir (`assistant_config.json > label_pins`). Eskiden tüm durumları
+  içeren "Genel" parçası sabitleniyordu; AF eşik üstü etiketinde eşik altı metni ("dışlamaz") yanıta taşınıyordu.
 * **Kaynaklar**: yalnız modelin atıf yaptığı ([n]) parçaların belgeleri listelenir (atıf yoksa veya yanıt "bilgi yok" diyorsa liste boştur). Dış
   kaynaklar URL ile, iç belgeler ad ile gösterilir.
 * **Sabit uyarı** (`app_config.json > disclaimer_tr`) her yanıtın sonuna eklenir ve `disclaimer` alanında da döner.
@@ -84,9 +91,13 @@ soru ──► ön filtre (kod) ──► sayı maskeleme ──► RAG: bge-m3 
 
 ## 5. Arayüz
 
-Her sayfada sağ altta **"Açıklama asistanı"** düğmesi. Panel: "Yerel model — veriler bilgisayarınızdan çıkmaz" notu,
-örnek sorular ("Eşik üstü ne demek?", "FibroScan nedir?", "Neden sonuç üretilmedi?"), yanıt beklenirken gösterge, yanıt
-altında kaynak bağlantıları (yeni sekmede), sonuç varsa "Bu oturumdaki sonuç etiketlerini ekle" kutusu (varsayılan açık).
+Her sayfada sağ altta **"Açıklama asistanı"** düğmesi. Phase L: masaüstünde (≥ 1024 px) sağda tam yükseklik yan panel
+(ekranın ~%38'i); içerik ve uyarı bandı panel kadar daralır. Panelin sol kenarı sürüklenerek veya ←/→ tuşlarıyla
+boyutlandırılır (en dar 360 px); "Paneli genişlet" ile ekranın ~%92'si olur. Tablet ve mobilde tam ekran açılır.
+Panel: "Yerel model — veriler bilgisayarınızdan çıkmaz" notu; büyük düğmeli örnek sorular (sonuç varsa yalnız sonuç
+ETİKETLERİNE göre seçilir: `ui.asst_examples_by_outcome_tr`, `ui.asst_examples_by_disease_tr`; yoksa varsayılan üç soru);
+yanıt beklenirken gösterge; belirgin acil uyarı kutusu; yanıt altında katlanabilir kaynak listesi (yeni sekmede açılır);
+sonuç varsa "Bu oturumdaki sonuç etiketlerini ekle" kutusu (varsayılan açık) ve sabit araştırma uyarısı.
 Ollama yoksa panel gerekçeyi gösterir ve giriş kapalıdır. Metinlerin tek kaynağı `app_config.json > ui.text_tr`
 (`asst_*`).
 
@@ -95,11 +106,16 @@ Ollama yoksa panel gerekçeyi gösterir ve giriş kapalıdır. Metinlerin tek ka
 `app/backend/assistant/README.md` (dosyalar, atıf, yeniden üretim) ve `phase_xlviii/02_knowledge_base.md` (kaynak listesi,
 lisanslar). Değerlendirme: `phase_xlviii/03_eval.md`.
 
+**İndeks v2 (Phase L):** iç belgelerde eşik üstü ve eşik altı ayrı sözlük bölümleri; "Ne yapmalıyım?" metinleri
+(hastalık, durum) başına ayrı bölümler. Manifest SHA256 `19ef65c2…`, kilit `assistant_lock.json > kb_index` (önceki
+`52ba2471…`). Sohbet/gömme modeli ve seçenekler değişmedi. `03_eval.md`'deki ana sonuçlar (62/67, v2, v3) ESKİ indekse
+aittir. Yeni indeksle ana test seti yalnız regresyon kontrolü olarak bir kez koşuldu: `phase_l/02_assistant_fix.md`.
+
 ## 7. Testler
 
 ```powershell
 cd app\backend
-.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_phase48_assistant.py -m "not ollama"   # sahte Ollama
+.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_phase48_assistant.py tests\test_phase_l.py -m "not ollama"   # sahte Ollama
 .venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_phase48_assistant.py -m ollama          # gerçek Ollama
 cd ..\frontend
 npx vitest run src/components/AssistantPanel.test.tsx

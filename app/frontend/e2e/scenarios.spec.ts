@@ -123,13 +123,14 @@ test.describe('@birim birim hatası', () => {
     await loadProfile(page, 'fibrosis_ready');
     await gotoStep(page, 'laboratuvar');
     await page.locator('#f-albumin_gdl').fill('42');
-    await expect(page.getByTestId('err-albumin_gdl')).toContainText('makul aralık dışında');
+    await expect(page.getByTestId('err-albumin_gdl')).toContainText('Albümin (kan) 1,0–6,5 g/dL arasında olmalı.');
+    await expect(page.getByTestId('err-albumin_gdl')).not.toContainText(/makul aralık|\[/);
     await expectPanel(page, 'fibrosis_final', 'MISSING', 'Albümin');
     await page.getByTestId('unit-albumin_gdl').selectOption('g/L');
     await expect(page.getByTestId('err-albumin_gdl')).toBeHidden();
     await expectPanel(page, 'fibrosis_final', 'READY');
     await submit(page);
-    await expect(page.getByTestId('unit-notes')).toContainText('Albümin (kan): 42 g/L -> 4.2 g/dL');
+    await expect(page.getByTestId('unit-notes')).toContainText('Albümin (kan): 42 g/L, 4,2 g/dL olarak kullanıldı.');
     await expect(page.getByTestId('unit-notes')).not.toContainText('albumin_gdl');
     await expect(page.getByTestId('result-fibrosis_final')).toHaveAttribute('data-status', 'OK');
   });
@@ -138,8 +139,8 @@ test.describe('@birim birim hatası', () => {
     await openForm(page);
     await loadProfile(page, 'unit_error');
     await gotoStep(page, 'laboratuvar');
-    await expect(page.getByTestId('err-glucose_serum_mgdl')).toContainText('makul aralık dışında [30, 800]');
-    await expect(page.getByTestId('err-creatinine_mgdl')).toContainText('makul aralık dışında [0.2, 15]');
+    await expect(page.getByTestId('err-glucose_serum_mgdl')).toContainText('Kan şekeri (açlık gerekmez) 30–800 mg/dL arasında olmalı.');
+    await expect(page.getByTestId('err-creatinine_mgdl')).toContainText('Kreatinin (kan) 0,2–15 mg/dL arasında olmalı.');
     await page.getByTestId('submit').click();
     await expect(page.getByTestId('block-msg')).toContainText('alanda hata');
     await expect(page.getByTestId('error-step-laboratuvar')).toBeVisible();
@@ -170,7 +171,8 @@ test.describe('@birim birim hatası', () => {
     await page.getByTestId('ecg-age').fill('720');
     await page.getByTestId('ecg-run').click();
     await expect(page.getByTestId('ecg-error')).toContainText('HTTP 422');
-    await expect(page.getByTestId('ecg-error')).toContainText('makul aralık dışında');
+    await expect(page.getByTestId('ecg-error')).toContainText('Yaş 18–120 yıl arasında olmalı.');
+    await expect(page.getByTestId('ecg-error')).not.toContainText('age_years');
   });
 });
 
@@ -179,7 +181,7 @@ test.describe('@kapsam kapsam dışı veri', () => {
     await openForm(page);
     await loadProfile(page, 'out_of_scope');
     await expectPanel(page, 'fibrosis_final', 'OUT_OF_SCOPE', 'gebe');
-    await expectPanel(page, 'osteo_final', 'OUT_OF_SCOPE', 'yaş 30');
+    await expectPanel(page, 'osteo_final', 'OUT_OF_SCOPE', 'girdiğiniz yaş: 30');
     await submit(page);
     await expect(page.getByTestId('result-fibrosis_final')).toHaveAttribute('data-status', 'NOT_APPLICABLE');
   });
@@ -188,7 +190,7 @@ test.describe('@kapsam kapsam dışı veri', () => {
     await openForm(page);
     await loadProfile(page, 'fibrosis_ready');
     await page.locator('#f-age_years').fill('19');
-    await expectPanel(page, 'fibrosis_final', 'OUT_OF_SCOPE', 'yaş 19');
+    await expectPanel(page, 'fibrosis_final', 'OUT_OF_SCOPE', 'girdiğiniz yaş: 19');
   });
 
   test('fibrozis: gebelik "bilmiyorum" -> Karar verilemez (ABSTAIN)', async ({ page }) => {
@@ -196,7 +198,7 @@ test.describe('@kapsam kapsam dışı veri', () => {
     await loadProfile(page, 'missing');
     await page.locator('#f-pregnant').selectOption('unknown');
     await expectPanel(page, 'fibrosis_final', 'MISSING');
-    await expect(page.getByTestId('panel-fibrosis_final')).toContainText('bilmiyorum');
+    await expect(page.getByTestId('panel-fibrosis_final')).toContainText('Gebelik durumu bilinmediği için bu analiz yapılamadı');
   });
 
   test('AF: formda yaş 95 -> panel Kapsam dışı', async ({ page }) => {

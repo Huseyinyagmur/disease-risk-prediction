@@ -49,12 +49,12 @@ test.describe('@gizlilik tarayıcı depolaması ve yenileme', () => {
 
     // Formu doldur, sonra yenile: hiçbir değer kalmamalı
     await mainNav(page).getByRole('button', { name: 'Veri girişi', exact: true }).click();
-    await loadProfile(page, 'fibrosis_ready'); // seçim yokken "Tümü" seçilir
+    await loadProfile(page, 'fibrosis_ready'); // seçim openForm'dan: Tümü
     await gotoStep(page, 'temel');
     await expect(page.locator('#f-age_years')).toHaveValue('58');
     await page.reload();
     await mainNav(page).getByRole('button', { name: 'Veri girişi', exact: true }).click();
-    await expect(page.getByTestId('selected-count')).toContainText('0 analiz'); // analiz seçimi de silinir
+    await expect(page.getByTestId('selected-count')).toContainText('3 analiz'); // Phase L: seçim bellekte tutulmaz; yenilenince varsayılana (3) döner
     await expect(page.getByTestId('profile-loaded')).toHaveCount(0);
     await page.getByTestId('select-all').click();
     await gotoStep(page, 'temel');

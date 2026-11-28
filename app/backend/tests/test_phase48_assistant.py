@@ -391,7 +391,8 @@ def test_label_pins_ground_status_terms(client, fake):
     client.post('/assistant/ask', json={'question': 'Neden sonuç üretilmedi?',
                                         'results': [dict(disease_key='osteoporosis', outcome='ABSTAIN', missing_fields=['fracture_hip'])]})
     user = fake.ollama.messages[-1][1]['content']
-    assert 'Sonuç üretilmedi (ABSTAIN)' in user and 'Osteoporoz (kemik erimesi)' in user and 'Genel (tüm analizler)' in user
+    # Phase L: 'Genel' yönlendirme durum başına ayrıldı; yalnız etiketin kendi durumu sabitlenir
+    assert 'Sonuç üretilmedi (ABSTAIN)' in user and 'Osteoporoz (kemik erimesi)' in user and 'Genel — sonuç üretilmedi' in user
     assert user.index('Sonuç üretilmedi (ABSTAIN)') < user.index('KULLANICI SORUSU')
 
 

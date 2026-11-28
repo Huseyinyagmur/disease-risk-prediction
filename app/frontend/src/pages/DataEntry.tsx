@@ -7,7 +7,8 @@ import { RoutingPanel } from '../components/RoutingPanel';
 import { PageTitle } from '../components/ui';
 import { DEMO_PROFILES } from '../demo/profiles';
 import { buildPayload, formFields, isRequired, isVisible, type FieldValue } from '../lib/form';
-import { analysisOptions, fieldsForSelection, REVIEW_STEP, SELECT_STEP, wizardSteps } from '../lib/selection';
+import { plainFieldError } from '../lib/plain';
+import { analysisOptions, fieldsForSelection, REVIEW_STEP, SELECT_STEP, skippedSections, wizardSteps } from '../lib/selection';
 import { t } from '../lib/ui';
 import { useSession } from '../state/session';
 
@@ -19,7 +20,9 @@ export function DataEntry() {
   const {
     schema, models, values, setValues, resetValues, setPrediction, go, profileLabel, setProfileLabel, selected, setSelected, step, setStep,
   } = useSession();
-  const [elig, setElig] = useState<EligibilityResponse | null>(null);
+  // Phase L (madde 5): yanıt, istendiği girdinin anahtarıyla saklanır; girdi değişince eski yanıt GÖSTERİLMEZ
+  // (önceden "Formu temizle" sonrası ~300–400 ms, istek hatasında süresiz eski READY durumu görünüyordu).
+  const [eligState, setEligState] = useState<{ key: string; resp: EligibilityResponse } | null>(null);
   const [eligLoading, setEligLoading] = useState(false);
   const [eligError, setEligError] = useState<string | null>(null);
   const [submitErrors, setSubmitErrors] = useState<{ byField: Record<string, string[]>; general: string[] }>({ byField: {}, general: [] });
@@ -38,17 +41,20 @@ export function DataEntry() {
     [schema, values, allowed],
   );
   const hasSelection = selected.length > 0;
+  const payloadKey = useMemo(() => (built ? JSON.stringify(built.fields) : ''), [built]);
+  const elig = eligState && eligState.key === payloadKey ? eligState.resp : null;
 
   // Canlı uygunluk sorgusu (debounce + eski yanıtları yok sayma). Analiz seçilmemişse sorgu yapılmaz.
   useEffect(() => {
     if (!schema || !built) return;
     if (!hasSelection) {
       seq.current++;
-      setElig(null);
+      setEligState(null);
       setEligLoading(false);
       return;
     }
     const my = ++seq.current;
+    const key = payloadKey;
     const ctrl = new AbortController();
     setEligLoading(true);
     const timer = setTimeout(() => {
@@ -56,7 +62,7 @@ export function DataEntry() {
         .eligibility(built.fields, ctrl.signal)
         .then((r) => {
           if (my !== seq.current) return;
-          setElig(r);
+          setEligState({ key, resp: r });
           setEligError(null);
         })
         .catch((e: unknown) => {
@@ -71,7 +77,7 @@ export function DataEntry() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [schema, built, hasSelection]);
+  }, [schema, built, payloadKey, hasSelection]);
 
   const steps = schema ? wizardSteps(schema, values, allowed, hasSelection) : [SELECT_STEP];
   const cur = steps.includes(step) ? step : SELECT_STEP;
@@ -90,12 +96,12 @@ export function DataEntry() {
   const generalErrors: string[] = [...submitErrors.general];
   for (const e of elig?.field_errors ?? []) {
     if (e.field) (backendErrors[e.field] ??= []).push(e.msg);
-    else generalErrors.push(e.msg);
+    else generalErrors.push(plainFieldError(schema, e.msg));
   }
   const errorsFor = (name: string): string[] => {
     const f = built?.formatErrors[name];
     if (f) return [f];
-    return backendErrors[name] ?? submitErrors.byField[name] ?? [];
+    return (backendErrors[name] ?? submitErrors.byField[name] ?? []).map((m) => plainFieldError(schema, m));
   };
   const visibleFields = formFields(schema).filter(([n]) => allowed.has(n) && isVisible(schema, values, n));
   const errorFields = visibleFields.filter(([n]) => errorsFor(n).length > 0);
@@ -160,6 +166,7 @@ export function DataEntry() {
   };
 
   const sec = sectionOf(cur);
+  const skipped = hasSelection ? skippedSections(schema, steps) : [];
   const afSelected = selected.includes('af');
 
   return (
@@ -188,18 +195,18 @@ export function DataEntry() {
         <form className="min-w-0 space-y-4" onSubmit={(e) => { e.preventDefault(); void submit(); }} noValidate aria-label={t(schema, 'page_title')}>
           <nav aria-label={t(schema, 'wizard_label')} data-testid="wizard-steps" className="rounded-lg border border-slate-200 bg-white p-3">
             <div className="mb-2 flex items-center justify-between gap-2 text-xs text-slate-700">
-              <span data-testid="step-of">{t(schema, 'step_of', { i: idx + 1, n: steps.length })}</span>
+              <span data-testid="step-of" className="text-sm font-semibold text-slate-900">{t(schema, 'step_of_named', { i: idx + 1, n: steps.length, name: stepTitle(cur) })}</span>
             </div>
             <div role="progressbar" aria-label={t(schema, 'wizard_label')} aria-valuemin={1} aria-valuemax={steps.length} aria-valuenow={idx + 1}
               aria-valuetext={t(schema, 'step_of', { i: idx + 1, n: steps.length })} data-testid="wizard-progress"
               className="mb-3 h-2 w-full overflow-hidden rounded bg-slate-200">
-              <div className="h-full bg-indigo-600 transition-all" style={{ width: `${Math.round(((idx + 1) / steps.length) * 100)}%` }} />
+              <div className="h-full bg-indigo-600 transition-[width] motion-reduce:transition-none" style={{ width: `${Math.round(((idx + 1) / steps.length) * 100)}%` }} />
             </div>
             <ol className="flex flex-wrap gap-1">
               {steps.map((s, i) => (
                 <li key={s}>
                   <button type="button" data-testid={`step-${s}`} aria-current={s === cur ? 'step' : undefined} onClick={() => setStep(s)}
-                    className={`rounded px-2 py-1 text-xs ${s === cur ? 'bg-slate-800 font-semibold text-white' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-100'}`}>
+                    className={`rounded px-3 py-1.5 text-sm ${s === cur ? 'bg-slate-800 font-semibold text-white' : i < idx ? 'border border-indigo-300 bg-indigo-50 text-indigo-950 hover:bg-indigo-100' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-100'}`}>
                     {i + 1}. {stepTitle(s)}
                     {errorSteps.includes(s) && <span className={s === cur ? 'ml-1 text-rose-200' : 'ml-1 text-rose-700'}> ⚠</span>}
                   </button>
@@ -222,9 +229,13 @@ export function DataEntry() {
 
             {sec && (
               <fieldset aria-labelledby="step-title" data-testid={`section-${sec.id}`}>
-                {sec.description_tr && <p className="mb-3 text-xs text-slate-700">{sec.description_tr}</p>}
+                {sec.description_tr && (
+                  <p className="mb-4 max-w-prose text-base text-slate-700" data-testid="step-why">
+                    <span className="font-semibold text-slate-900">{t(schema, 'step_why')}</span> {sec.description_tr}
+                  </p>
+                )}
                 {sec.id === 'temel' && afSelected && (
-                  <p className="mb-3 rounded border border-sky-300 bg-sky-50 p-2 text-xs text-sky-900" data-testid="af-form-note">{t(schema, 'af_form_note')}</p>
+                  <p className="mb-3 rounded border border-sky-300 bg-sky-50 p-2 text-sm text-sky-900" data-testid="af-form-note">{t(schema, 'af_form_note')}</p>
                 )}
                 <div className="grid gap-4 sm:grid-cols-2">
                   {fieldsOf(sec.id).map(([name, spec]) => (
@@ -244,7 +255,10 @@ export function DataEntry() {
                     <li key={o.diseaseKey}>{schema.ui?.disease_names_tr[o.diseaseKey] ?? o.diseaseKey}</li>
                   ))}
                 </ul>
-                {afSelected && <p className="rounded border border-sky-300 bg-sky-50 p-2 text-xs text-sky-900">{t(schema, 'af_form_note')}</p>}
+                {afSelected && <p className="rounded border border-sky-300 bg-sky-50 p-2 text-sm text-sky-900">{t(schema, 'af_form_note')}</p>}
+                {skipped.length > 0 && (
+                  <p className="text-sm text-slate-700" data-testid="steps-skipped">{t(schema, 'step_skipped', { x: skipped.map(stepTitle).join(', ') })}</p>
+                )}
                 <ul className="divide-y divide-slate-100 rounded border border-slate-200">
                   {steps.filter((s) => s !== SELECT_STEP && s !== REVIEW_STEP).map((s) => {
                     const fs = fieldsOf(s);

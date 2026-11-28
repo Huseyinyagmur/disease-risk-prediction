@@ -74,6 +74,24 @@ export interface UiText {
   analysis_groups_tr: { module_label: string; title: string; description: string; collapsed?: boolean }[];
   reason_replacements_tr?: [string, string][];
   text_tr: Record<string, string>;
+  /** Phase L: sade metin kuralları, gereksinim etiketleri, varsayılan seçim, ek sınırlılıklar, asistan önerileri. */
+  reason_rules_tr?: TextRule[];
+  field_error_rules_tr?: TextRule[];
+  unit_note_rules_tr?: TextRule[];
+  feature_labels_tr?: Record<string, string>;
+  unit_display_tr?: Record<string, string>;
+  disease_needs_tr?: Record<string, { text: string; none?: boolean }[]>;
+  default_selected_module_labels?: string[];
+  limitations_extra_tr?: Record<string, string[]>;
+  asst_examples_by_outcome_tr?: Record<string, string>;
+  asst_examples_by_disease_tr?: Record<string, string>;
+}
+
+export interface TextRule {
+  re: string;
+  text?: string;
+  hide?: boolean;
+  hide_if_other?: boolean;
 }
 
 export interface Metric {

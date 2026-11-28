@@ -51,6 +51,9 @@ export async function startAll(u: UserEvent) {
 /** Yalnız verilen hastalıkları (disease_key) seçer; adım değiştirmez. Deneysel grup kapalıysa önce açılır. */
 export async function selectOnly(u: UserEvent, keys: string[]) {
   await screen.findByTestId('analysis-select');
+  // Phase L: ilk açılışta varsayılan seçim (ana + araştırma modülü) var; önce temizlenir.
+  const none = screen.queryByTestId('select-none');
+  if (none) await u.click(none);
   for (const k of keys) {
     const box = screen.getByTestId(`select-${k}`);
     const det = box.closest('details');

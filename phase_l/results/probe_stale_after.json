@@ -1,0 +1,32 @@
+[
+ {
+  "t": 0,
+  "s": []
+ },
+ {
+  "t": 50,
+  "s": []
+ },
+ {
+  "t": 100,
+  "s": []
+ },
+ {
+  "t": 200,
+  "s": []
+ },
+ {
+  "t": 400,
+  "s": [
+   "panel-fibrosis_final=MISSING",
+   "panel-osteo_final=MISSING"
+  ]
+ },
+ {
+  "t": 1500,
+  "s": [
+   "panel-fibrosis_final=MISSING",
+   "panel-osteo_final=MISSING"
+  ]
+ }
+]

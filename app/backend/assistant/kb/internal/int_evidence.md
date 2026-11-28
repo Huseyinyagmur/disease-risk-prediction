@@ -20,7 +20,7 @@ license: proje içi (MIT)
 
 - Ana modüller (ana modül): En güçlü kanıta sahip analizler.
 - Araştırma modülü (araştırma modülü): Kanıtı sınırlı; araştırma amaçlı.
-- Deneysel modüller (deneysel): Kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizler. Sonuçları ana modüllerle aynı ağırlıkta yorumlamayın.
+- Deneysel modüller (isteğe bağlı) (deneysel): Kanıtı zayıf veya yalnız tek veri kaynağında test edilmiş analizler. Sonuçları ana modüllerle aynı ağırlıkta yorumlamayın.
 
 ## Atriyal fibrilasyon (EKG) — kanıt düzeyi
 

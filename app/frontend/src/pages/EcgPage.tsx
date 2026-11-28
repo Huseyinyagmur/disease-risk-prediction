@@ -4,11 +4,14 @@ import { EcgRrPanel } from '../components/EcgRrPanel';
 import { ResultCard } from '../components/ResultCard';
 import { PageTitle } from '../components/ui';
 import { categoryLabel } from '../lib/form';
+import { plainFieldError } from '../lib/plain';
+import { t } from '../lib/ui';
 import { useSession } from '../state/session';
 
+// Phase L: görünür başlık/açıklama app_config > ui.text_tr (ecg_sample_*); burada yalnız dosya eşlemesi.
 export const ECG_SAMPLES = [
-  { id: '00691', label: 'PTB-XL 00691 — kayıt etiketi: AF', files: ['00691_hr.hea', '00691_hr.dat'] },
-  { id: '00165', label: 'PTB-XL 00165 — kayıt etiketi: sinüs ritmi (SR)', files: ['00165_hr.hea', '00165_hr.dat'] },
+  { id: '00691', key: 'af', files: ['00691_hr.hea', '00691_hr.dat'] },
+  { id: '00165', key: 'sr', files: ['00165_hr.hea', '00165_hr.dat'] },
 ];
 
 type Stage = { kind: 'idle' } | { kind: 'upload'; frac: number } | { kind: 'processing'; since: number } | { kind: 'done' };
@@ -66,7 +69,7 @@ export function EcgPage() {
       setFiles(fs);
       setAge('60');
       setSex('male');
-      setSampleNote(`${s.label}. Açık PhysioNet kaydı (geliştirme kümesinden; test kaydı değil). Yaş/cinsiyet SENTETİK (60, erkek).`);
+      setSampleNote(t(schema, 'ecg_sample_loaded', { title: t(schema, `ecg_sample_${s.key}_title`), id: s.id }));
       setEcg(null);
     } catch (e) {
       setError(String((e as Error).message));
@@ -93,10 +96,10 @@ export function EcgPage() {
       setStage({ kind: 'idle' });
       if (e instanceof ApiError) {
         const { byField, general } = errorsByField(e.detail);
-        const msgs = [...general, ...Object.entries(byField).map(([k, v]) => `${k}: ${v.join(', ')}`)];
+        const msgs = [...general, ...Object.values(byField).flat().map((v) => plainFieldError(schema, v))];
         setError(
-          e.status === 429 ? 'AF pipeline meşgul (aynı anda tek kayıt işlenir); birkaç saniye sonra tekrar deneyin.'
-            : e.status === 413 ? 'Dosya boyutu sınırı (2 MB) aşıldı.'
+          e.status === 429 ? t(schema, 'ecg_err_busy')
+            : e.status === 413 ? t(schema, 'ecg_err_size')
               : `${e.status ? `HTTP ${e.status}: ` : ''}${msgs.join(' · ') || e.message}`,
         );
       } else setError(String(e));
@@ -149,16 +152,19 @@ export function EcgPage() {
           {files.length > 0 && picked.problems.length > 0 && (
             <p role="alert" className="text-xs text-rose-700">{picked.problems.join(' · ')}</p>
           )}
-          <div className="flex flex-wrap gap-2">
-            <span className="self-center text-xs text-slate-600">Örnek kayıt:</span>
-            {ECG_SAMPLES.map((s) => (
-              <button key={s.id} type="button" data-testid={`ecg-sample-${s.id}`} onClick={() => void loadSample(s.id)} disabled={busy}
-                className="rounded border border-violet-300 bg-violet-50 px-2 py-1 text-xs text-violet-900 hover:bg-violet-100">
-                {s.label}
-              </button>
-            ))}
+          <div data-testid="ecg-samples" className="rounded-lg border border-violet-300 bg-violet-50 p-3">
+            <h2 className="text-base font-semibold text-violet-950">{t(schema, 'ecg_samples_title')}</h2>
+            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              {ECG_SAMPLES.map((s) => (
+                <button key={s.id} type="button" data-testid={`ecg-sample-${s.id}`} onClick={() => void loadSample(s.id)} disabled={busy}
+                  className="rounded-lg border border-violet-400 bg-white px-4 py-3 text-left hover:bg-violet-100 disabled:opacity-50">
+                  <span className="block text-base font-semibold text-violet-950">{t(schema, `ecg_sample_${s.key}_title`)}</span>
+                  <span className="block text-sm text-slate-700">{t(schema, `ecg_sample_${s.key}_desc`)}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          {sampleNote && <p className="text-xs text-violet-900" data-testid="sample-note">{sampleNote}</p>}
+          {sampleNote && <p className="text-sm text-violet-900" data-testid="sample-note">{sampleNote}</p>}
 
           <div className="grid grid-cols-2 gap-3">
             <label className="flex flex-col gap-1 text-sm">
@@ -185,15 +191,16 @@ export function EcgPage() {
             <div data-testid="ecg-progress" aria-live="polite" className="space-y-1">
               <div className="h-2 w-full overflow-hidden rounded bg-slate-200">
                 {stage.kind === 'upload' ? (
-                  <div className="h-full bg-indigo-600 transition-all" style={{ width: `${Math.round(stage.frac * 100)}%` }} />
+                  <div className="h-full bg-indigo-600 transition-[width] motion-reduce:transition-none" style={{ width: `${Math.round(stage.frac * 100)}%` }} />
                 ) : (
-                  <div className="h-full w-1/3 animate-pulse bg-indigo-600" />
+                  <div className="h-full w-1/3 animate-pulse bg-indigo-600 motion-reduce:animate-none" />
                 )}
               </div>
+              <p className="text-sm font-medium text-slate-900" data-testid="ecg-wait">{t(schema, 'ecg_wait')}</p>
               <p className="text-xs text-slate-600">
                 {stage.kind === 'upload'
-                  ? `Yükleniyor… %${Math.round(stage.frac * 100)}`
-                  : `Sunucuda işleniyor (ilk 10 sn → ECGDeli delineasyonu → 10 feature → model)… ${((now - (stage.kind === 'processing' ? stage.since : now)) / 1000).toFixed(0)} sn (bu makinede ölçülen ≈ 7–30 sn, makine yüküne bağlı; üst sınır 60 sn)`}
+                  ? t(schema, 'ecg_uploading', { p: Math.round(stage.frac * 100) })
+                  : t(schema, 'ecg_processing', { s: ((now - (stage.kind === 'processing' ? stage.since : now)) / 1000).toFixed(0) })}
               </p>
             </div>
           )}

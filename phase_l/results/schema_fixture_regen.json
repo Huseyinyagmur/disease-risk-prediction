@@ -1,0 +1,54 @@
+{
+ "fixture": "app\\frontend\\src\\test\\fixtures\\schema.json",
+ "identical_except": [
+  "ui",
+  "form.field_ui_tr",
+  "form.sections (metin)"
+ ],
+ "phase": "L: ui metinleri, form.sections açıklamaları, virtual_field_labels_tr.ecg_record",
+ "section_text_changes": [
+  {
+   "id": "temel",
+   "old": {
+    "id": "temel",
+    "title_tr": "Temel bilgiler",
+    "optional": false
+   },
+   "new": {
+    "id": "temel",
+    "title_tr": "Temel bilgiler",
+    "optional": false,
+    "description_tr": "Yaş, cinsiyet ve gebelik durumu, her analizin kimler için geliştirildiğini kontrol etmek için sorulur."
+   }
+  },
+  {
+   "id": "olcumler",
+   "old": {
+    "id": "olcumler",
+    "title_tr": "Ölçümler",
+    "optional": false,
+    "description_tr": "Boy, kilo, bel çevresi ve oturarak, ≥ 5 dk dinlenme sonrası ardışık 3 tansiyon okuması."
+   },
+   "new": {
+    "id": "olcumler",
+    "title_tr": "Ölçümler",
+    "optional": false,
+    "description_tr": "Boy, kilo, bel çevresi ve tansiyon analizlerin çoğunda kullanılır. Tansiyonu oturarak, en az 5 dakika dinlendikten sonra art arda 3 kez ölçün."
+   }
+  },
+  {
+   "id": "oyku",
+   "old": {
+    "id": "oyku",
+    "title_tr": "Öykü ve ilaçlar",
+    "optional": false
+   },
+   "new": {
+    "id": "oyku",
+    "title_tr": "Öykü ve ilaçlar",
+    "optional": false,
+    "description_tr": "Aldığınız tanılar ve kullandığınız ilaçlar, bazı analizlerin size uygun olup olmadığını belirler; bir kısmı analizde de kullanılır."
+   }
+  }
+ ]
+}

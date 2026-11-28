@@ -6,20 +6,20 @@
   "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
  },
  "dim": 1024,
- "n_chunks": 469,
+ "n_chunks": 475,
  "n_docs": 47,
  "max_chars": 1200,
  "files": {
-  "chunks.jsonl": "f2655fb174150b03a680003b4eb1a2d61e2bcebd9574af50751e8bdc23ad009c",
-  "embeddings.f32": "8ff414f1fbdc0a6a76082c7c72d63eec9bea78ebda6712c10c893d55306f36db",
+  "chunks.jsonl": "3a914aa63dd7cb218714fc9f000669078748d48998448fa21d2f92769edbba0f",
+  "embeddings.f32": "b19737f7cd607fae41ebbe7dab7d01f1fb310c05a5326fa1b646a9333cbd76fc",
   "../sources.json": "ddb5f61c91741c9c330ff471729514569cf9c3a36bcc9d8fbaf299675007875b"
  },
  "documents": {
   "internal/int_about.md": "0138dde17fba78b26e0c1e647f9aab741922e0d43504bac728d992ef384eb7cc",
   "internal/int_analyses.md": "24f53a96dac227fbc07c04d57dbe80f211c68361f34a4f21b6b07b91712ce85d",
-  "internal/int_evidence.md": "81a65ddd0659aa244bc0f70841631c0311dbad18f56d7c4769b23ecb1cf6f75c",
-  "internal/int_glossary.md": "c458548486994e62702d047b0ab2c4eb6781ff57b2164d8fb91f2c9176db3fc2",
-  "internal/int_next_steps.md": "b9c1c67c8c84b107648db2e90b04c77bedebe0582eb1d9a9c5bb779229f33593",
+  "internal/int_evidence.md": "b1e4e058aa662ad61322c94ca2817b7cf9a41553053e6cb5265dab95aeb5bc21",
+  "internal/int_glossary.md": "ca7d5fa98746f7b682abb1aa4fb26ce9b02cda52cb26be7b6a6968b6545fed9e",
+  "internal/int_next_steps.md": "0d5f832793337e9dabcf08b4ed8eaf0d1724fc34a8eeb320bec21fb101816a26",
   "internal/mc_af_S4_DEVICE.md": "8d1df26efb92d6df349a4b73554a794e232a2d583251334da475aa7f1cbe022b",
   "internal/mc_anemia_LR16.md": "640865b509c52a6c2405de35bbd1bb047460345608a9ae48934457195318c357",
   "internal/mc_cad_DEVICE.md": "bacd4d14b684c6d2ee097d56f4df5d3396eb8b025cdebc2311883a2a080813e1",

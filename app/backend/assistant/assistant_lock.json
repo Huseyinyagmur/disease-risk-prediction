@@ -1,5 +1,5 @@
 {
- "phase": "XLVIII",
+ "phase": "XLVIII (indeks v2: Phase L)",
  "status": "LOCKED — Görev 1 seçimi (phase_xlviii/01_model_selection.md); 2026-11-21",
  "locked_utc": "2026-11-21",
  "ollama_version": "0.40.16",
@@ -24,7 +24,11 @@
   "num_predict": 512
  },
  "kb_index": {
-  "manifest_sha256": "52ba2471ba5b59bb0a19988f4085e4cf4cc165aee6dcd71d3fbc982966c58b7b"
+  "manifest_sha256": "19ef65c292753d835f428f2afddc35e92394b1c53e45e3795ab3a792bc0e2c62",
+  "version": "v2",
+  "previous_manifest_sha256": "52ba2471ba5b59bb0a19988f4085e4cf4cc165aee6dcd71d3fbc982966c58b7b",
+  "v2_reason": "Phase L (2026-11-28): \"Eşik üstü ne demek?\" yanıtında eşik altı ifadesi (\"dışlamaz\") eşik üstüne bağlanıyordu. Kök neden: sözlükte eşik üstü/altı tek parça ve \"Ne yapmalıyım?\" parçaları tüm durumları bir arada içeriyordu (phase_l/results/asst_probe_before.json). Düzeltme: iç belgelerde durum başına ayrı bölüm/parça; sohbet modeli, gömme modeli ve seçenekler DEĞİŞMEDİ. Aynı makinede iki kez üretildi, manifest SHA aynı.",
+  "v2_locked_utc": "2026-11-28"
  },
  "change_policy": "Model, digest, seçenek veya indeks değişirse v2 olarak gerekçesiyle yeniden kilitlenir; test seti sonucuna bakılarak değiştirilmez."
 }

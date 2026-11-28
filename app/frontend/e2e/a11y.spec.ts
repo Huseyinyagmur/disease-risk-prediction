@@ -6,7 +6,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { gotoStep, loadEcgSample, loadProfile, mainNav, openEcg, runEcg, submit } from './helpers';
 
-const OUT = process.env.AXE_OUT ?? '../../phase_xlviii/results/axe_results.json';
+const OUT = process.env.AXE_OUT ?? '../../phase_l/results/axe_results.json';
 const rows: { screen: string; viewport: string; violations: { id: string; impact: string | null; nodes: number; help: string; targets: string[] }[] }[] = [];
 
 async function audit(page: Page, screen: string) {
@@ -41,6 +41,8 @@ test.describe('@a11y erişilebilirlik', () => {
       await audit(page, 'giris');
       await page.getByTestId('start').click();
       await page.getByTestId('group-deneysel').locator('summary').click();
+      await audit(page, 'analiz_secimi_varsayilan'); // Phase L: varsayılan 3 analiz
+      await page.getByTestId('select-all').click();
       await audit(page, 'analiz_secimi');
       await loadProfile(page, 'fibrosis_ready');
       for (const s of ['temel', 'olcumler', 'oyku', 'laboratuvar', 'klinik', 'review']) {
@@ -54,7 +56,12 @@ test.describe('@a11y erişilebilirlik', () => {
       await submit(page);
       for (const c of await page.locator('[data-testid^="result-"] [data-testid="metrics"] summary').all()) await c.click();
       await audit(page, 'sonuclar_metrikler_acik');
+      await page.getByTestId('assistant-open').click(); // Phase L: yan panel (masaüstü) / tam ekran (mobil)
+      await expect(page.getByTestId('assistant-examples')).toBeVisible();
+      await audit(page, 'asistan_paneli');
+      await page.getByTestId('assistant-close').click();
       await openEcg(page);
+      await audit(page, 'ekg_ornek_kayitlar');
       await loadEcgSample(page, '00165');
       await runEcg(page);
       await audit(page, 'ekg_sonuc');
@@ -78,6 +85,9 @@ test.describe('@a11y erişilebilirlik', () => {
       throw new Error(`Tab ile ${target} odaklanamadı (son: ${await focused()})`);
     };
     await tabTo('select-liver_fibrosis');
+    await expect(page.getByTestId('select-liver_fibrosis')).toBeChecked(); // Phase L: varsayılan seçili
+    await page.keyboard.press('Space');
+    await expect(page.getByTestId('select-liver_fibrosis')).not.toBeChecked();
     await page.keyboard.press('Space');
     await expect(page.getByTestId('select-liver_fibrosis')).toBeChecked();
     // odak halkası görünür (outline veya box-shadow)

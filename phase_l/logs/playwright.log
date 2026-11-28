@@ -1,0 +1,47 @@
+
+Running 36 tests using 1 worker
+
+  ok 1 [chromium] › e2e\a11y.spec.ts:37:5 › @a11y erişilebilirlik › axe: tüm ekranlar (1440px) (17.0s)
+  ok 2 [chromium] › e2e\a11y.spec.ts:37:5 › @a11y erişilebilirlik › axe: tüm ekranlar (375px) (15.9s)
+  ok 3 [chromium] › e2e\a11y.spec.ts:75:3 › @a11y erişilebilirlik › klavye: analiz seçimi → İleri → odak adım başlığında → alan doldurma → Geri; görünür odak (421ms)
+  ok 4 [chromium] › e2e\assistant.spec.ts:28:3 › açıklama asistanı › her sayfada açılır; örnek soru → yerel model yanıtı, kaynak listesi, uyarı; bekleme göstergesi (4.6s)
+  ok 5 [chromium] › e2e\assistant.spec.ts:53:3 › açıklama asistanı › sonuç ekranından: yalnız etiketler gönderilir (ölçüm değeri yok); acil durum → 112 (LLM yok) (4.1s)
+  ok 6 [chromium] › e2e\assistant.spec.ts:85:3 › açıklama asistanı › v3: genel bilgi sorusunda acil kelimesi → en üstte 112 uyarı kutusu + normal yanıt; kişisel ifade → sabit 112 (2.4s)
+  ok 7 [chromium] › e2e\assistant.spec.ts:105:3 › açıklama asistanı › mobil (375 px): panel ekrana sığar, yatay kaydırma yok (470ms)
+  ok 8 [chromium] › e2e\mobile.spec.ts:48:5 › @mobil yerleşim › 375px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında (1.3s)
+  ok 9 [chromium] › e2e\mobile.spec.ts:48:5 › @mobil yerleşim › 768px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında (1.4s)
+  ok 10 [chromium] › e2e\mobile.spec.ts:48:5 › @mobil yerleşim › 1440px: tüm adımlar, sonuçlar, EKG, kartlar, hakkında (1.3s)
+  ok 11 [chromium] › e2e\privacy.spec.ts:14:3 › @gizlilik tarayıcı depolaması ve yenileme › form + sonuç + EKG sonrası depolama boş; yenilemede tüm veri silinir; dış istek yok (8.2s)
+  ok 12 [chromium] › e2e\privacy.spec.ts:72:3 › @gizlilik tarayıcı depolaması ve yenileme › sabit uyarı her ekranda görünür (569ms)
+  ok 13 [chromium] › e2e\scenarios.spec.ts:7:3 › @normal normal girdi › fibrozis: çalışabilir profil -> panel Çalışabilir -> sonuç OK, karar ve kanıt gösterilir (1.1s)
+  ok 14 [chromium] › e2e\scenarios.spec.ts:23:3 › @normal normal girdi › fibrozis: yalnız "Karaciğer fibrozisi" seçilir -> yalnız gerekli alanlar gönderilir, panel ve sonuç yalnız fibrozis (1.0s)
+  ok 15 [chromium] › e2e\scenarios.spec.ts:41:3 › @normal normal girdi › AF: PTB-XL AF örneği -> OK, 10 öznitelik, lead II grafiği ve RR takogramı (8.4s)
+  ok 16 [chromium] › e2e\scenarios.spec.ts:54:3 › @normal normal girdi › AF: PTB-XL sinüs ritmi örneği -> OK (7.4s)
+  ok 17 [chromium] › e2e\scenarios.spec.ts:61:3 › @normal normal girdi › AF: dosyalar sürükle-bırak yerine dosya seçiciyle yüklenir (7.2s)
+  ok 18 [chromium] › e2e\scenarios.spec.ts:73:3 › @eksik eksik girdi › fibrozis: eksik alanlı profil -> panel "Eksik: …" (laboratuvarlar) -> sonuç ABSTAIN ve neden (891ms)
+  ok 19 [chromium] › e2e\scenarios.spec.ts:84:3 › @eksik eksik girdi › fibrozis: laboratuvarlar tamamlanınca durum Eksik -> Çalışabilir olur (1.6s)
+  ok 20 [chromium] › e2e\scenarios.spec.ts:95:3 › @eksik eksik girdi › AF: formda panel "Eksik: EKG kaydı" gösterir (793ms)
+  ok 21 [chromium] › e2e\scenarios.spec.ts:101:3 › @eksik eksik girdi › AF: yalnız .hea yüklenince analiz başlatılamaz (259ms)
+  ok 22 [chromium] › e2e\scenarios.spec.ts:108:3 › @eksik eksik girdi › AF: yaş/cinsiyet yanıtsız -> ABSTAIN (eksik alan) (8.5s)
+  ok 23 [chromium] › e2e\scenarios.spec.ts:121:3 › @birim birim hatası › fibrozis: albümin g/L değeri g/dL biriminde -> alan altında aralık hatası; birim g/L seçilince düzelir ve sunucu dönüştürür (1.4s)
+  ok 24 [chromium] › e2e\scenarios.spec.ts:138:3 › @birim birim hatası › birim hatalı profil: glukoz ve kreatinin alan altı hataları; hesaplama engellenir (909ms)
+  ok 25 [chromium] › e2e\scenarios.spec.ts:153:3 › @birim birim hatası › AF: 250 Hz başlıklı kayıt -> ABSTAIN ("500 Hz değil") (397ms)
+  ok 26 [chromium] › e2e\scenarios.spec.ts:168:3 › @birim birim hatası › AF: yaş ay cinsinden girilmiş (720) -> sunucu 422 hatası gösterilir (570ms)
+  ok 27 [chromium] › e2e\scenarios.spec.ts:180:3 › @kapsam kapsam dışı veri › fibrozis: gebe kadın profili -> panel Kapsam dışı (gebe) -> sonuç NOT_APPLICABLE (974ms)
+  ok 28 [chromium] › e2e\scenarios.spec.ts:189:3 › @kapsam kapsam dışı veri › fibrozis: 19 yaş -> Kapsam dışı (yaş ≥ 20) (813ms)
+  ok 29 [chromium] › e2e\scenarios.spec.ts:196:3 › @kapsam kapsam dışı veri › fibrozis: gebelik "bilmiyorum" -> Karar verilemez (ABSTAIN) (751ms)
+  ok 30 [chromium] › e2e\scenarios.spec.ts:204:3 › @kapsam kapsam dışı veri › AF: formda yaş 95 -> panel Kapsam dışı (720ms)
+  ok 31 [chromium] › e2e\scenarios.spec.ts:210:3 › @kapsam kapsam dışı veri › AF: EKG ile yaş 95 -> NOT_APPLICABLE (7.4s)
+  ok 32 [chromium] › e2e\screenshots.spec.ts:10:3 › @screenshots › masaüstü (1440 px) (12.2s)
+  ok 33 [chromium] › e2e\screenshots.spec.ts:74:5 › @screenshots › tablet768 (768 px) (9.1s)
+  ok 34 [chromium] › e2e\screenshots.spec.ts:74:5 › @screenshots › mobile375 (375 px) (8.8s)
+  ok 35 [chromium] › e2e\screenshots.spec.ts:101:3 › @screenshots › Phase L ek görüntüler (masaüstü + tablet) (9.1s)
+{"run":0,"record":"00691","status":"OK","click_to_request_s":0.018,"request_to_first_byte_s":6.891,"server_wall_s":6.878,"octave_s":4.332,"upload_and_queue_minus_server_s":0.013,"download_s":0.0006,"response_bytes":19307,"render_after_response_s":0.067,"click_to_chart_s":6.976}
+{"run":0,"record":"00165","status":"OK","click_to_request_s":0.024,"request_to_first_byte_s":6.802,"server_wall_s":6.785,"octave_s":4.175,"upload_and_queue_minus_server_s":0.017,"download_s":0.001,"response_bytes":19525,"render_after_response_s":0.028,"click_to_chart_s":6.856}
+{"run":1,"record":"00691","status":"OK","click_to_request_s":0.023,"request_to_first_byte_s":6.924,"server_wall_s":6.91,"octave_s":4.384,"upload_and_queue_minus_server_s":0.014,"download_s":0.0004,"response_bytes":19307,"render_after_response_s":0.017,"click_to_chart_s":6.965}
+{"run":1,"record":"00165","status":"OK","click_to_request_s":0.017,"request_to_first_byte_s":6.794,"server_wall_s":6.781,"octave_s":4.173,"upload_and_queue_minus_server_s":0.013,"download_s":0.0007,"response_bytes":19526,"render_after_response_s":0.016,"click_to_chart_s":6.828}
+{"run":2,"record":"00691","status":"OK","click_to_request_s":0.012,"request_to_first_byte_s":6.914,"server_wall_s":6.9,"octave_s":4.36,"upload_and_queue_minus_server_s":0.014,"download_s":0.0005,"response_bytes":19308,"render_after_response_s":0.017,"click_to_chart_s":6.943}
+{"run":2,"record":"00165","status":"OK","click_to_request_s":0.009,"request_to_first_byte_s":6.733,"server_wall_s":6.721,"octave_s":4.197,"upload_and_queue_minus_server_s":0.012,"download_s":0.0004,"response_bytes":19525,"render_after_response_s":0.018,"click_to_chart_s":6.761}
+  ok 36 [chromium] › e2e\timing.spec.ts:10:3 › @timing › AF arayüz süre ayrıştırması (42.6s)
+
+  36 passed (3.2m)

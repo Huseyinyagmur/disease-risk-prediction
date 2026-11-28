@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { EligState, Evidence, Metric, Tier } from '../api/types';
+import { ELIG_LOOK } from '../lib/status';
 import { term, t } from '../lib/ui';
 import { useSession, type Page } from '../state/session';
 
@@ -61,18 +62,13 @@ export function PageTitle({ children, sub }: { children: ReactNode; sub?: ReactN
   );
 }
 
-const STATE_STYLE: Record<EligState, string> = {
-  READY: 'bg-emerald-100 text-emerald-900 border-emerald-300',
-  MISSING: 'bg-amber-100 text-amber-900 border-amber-300',
-  OUT_OF_SCOPE: 'bg-slate-200 text-slate-800 border-slate-300',
-  ABSTAIN: 'bg-rose-100 text-rose-900 border-rose-300',
-};
-
-/** Durum rozeti; metin terim sözlüğünden (app_config > ui.terms_tr.eligibility). */
+/** Durum rozeti; metin terim sözlüğünden (app_config > ui.terms_tr.eligibility). Phase L: renk + simge lib/status.ts. */
 export function StateBadge({ state }: { state: EligState }) {
   const { schema } = useSession();
+  const look = ELIG_LOOK[state];
   return (
-    <span data-testid="state-badge" data-state={state} className={`inline-block rounded border px-2 py-0.5 text-xs font-medium ${STATE_STYLE[state]}`}>
+    <span data-testid="state-badge" data-state={state} className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-sm font-medium ${look.cls}`}>
+      <span aria-hidden="true">{look.symbol}</span>
       {term(schema, 'eligibility', state)}
     </span>
   );
@@ -85,21 +81,28 @@ export function ModulePill({ label }: { label: string }) {
 
 const TIER_KEYS = ['internal_test', 'temporal', 'external'] as const;
 
+/** Phase L: yapılan kanıt düzeyi işaretli (✓); kayıtlı sonucu olmayan düzey üstü çizili + görünür kısa not.
+ * Veri: registry'den gelen evidence.tiers (uydurma yok; düzey yoksa "yok" denir). */
 export function EvidenceBadges({ evidence }: { evidence: Evidence }) {
   const { schema } = useSession();
+  const missing = TIER_KEYS.some((k) => !evidence.tiers[k]);
   return (
-    <div className="flex flex-wrap gap-1" data-testid="evidence-badges">
-      {TIER_KEYS.map((k) => {
-        const has = !!evidence.tiers[k];
-        const label = term(schema, 'tiers', k);
-        return (
-          <span key={k} title={has ? t(schema, 'evidence_has') : t(schema, 'evidence_none')}
-            className={`rounded border px-2 py-0.5 text-xs ${has ? 'border-teal-500 bg-teal-50 text-teal-900' : 'border-dashed border-slate-400 text-slate-600 line-through'}`}>
-            {label}
-            <span className="sr-only"> ({has ? t(schema, 'evidence_has') : t(schema, 'evidence_none')})</span>
-          </span>
-        );
-      })}
+    <div data-testid="evidence-badges">
+      <div className="flex flex-wrap gap-1">
+        {TIER_KEYS.map((k) => {
+          const has = !!evidence.tiers[k];
+          const label = term(schema, 'tiers', k);
+          return (
+            <span key={k} data-testid={`tier-${k}`} data-has={has ? 'true' : 'false'}
+              className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-sm ${has ? 'border-teal-700 bg-teal-50 text-teal-900' : 'border-dashed border-slate-400 text-slate-600'}`}>
+              {has && <span aria-hidden="true">✓</span>}
+              <span className={has ? '' : 'line-through'}>{label}</span>
+              {has ? <span className="sr-only"> ({t(schema, 'evidence_done')})</span> : <span className="text-xs">({t(schema, 'evidence_missing_short')})</span>}
+            </span>
+          );
+        })}
+      </div>
+      {missing && <p className="mt-1 text-xs text-slate-600" data-testid="evidence-missing-note">{t(schema, 'evidence_missing_note')}</p>}
     </div>
   );
 }

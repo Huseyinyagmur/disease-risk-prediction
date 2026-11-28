@@ -152,11 +152,14 @@ class Assistant:
         lp = self.cfg.get('label_pins', {})
         want = []
         valid = [r for r in results if r.get('disease_key') in self.disease_names and r.get('outcome') in guard.OUTCOMES]
+        osec = lp.get('outcome_section_tr', {})
         for r in valid:
+            name = self.disease_names[r['disease_key']]
             want += [tuple(x) for x in lp.get(r['outcome'], [])]
-            want += [(d, self.disease_names[r['disease_key']]) for d in lp.get('_disease_docs', [])]
-        if valid:
-            want += [tuple(x) for x in lp.get('_always', [])]
+            want += [(d, name) for d in lp.get('_disease_docs', [])]
+            # Phase L: hastalık yönlendirmesi yalnız etiketin KENDİ durumu için (ör. AF eşik üstünde eşik altı metni yok)
+            if r['outcome'] in osec:
+                want += [(d, f'{name} — {osec[r["outcome"]]}') for d in lp.get('_disease_outcome_docs', [])]
         out = []
         for doc, prefix in dict.fromkeys(want):
             for c in self.kb.by_doc.get(doc, []):
@@ -269,7 +272,11 @@ CITE_RE = re.compile(r'\[(\d{1,2}(?:\s*[,;–-]\s*\d{1,2})*)\]')
 
 def _renumber(ans: str, good: list):
     """LLM atıfları ([1], [1, 4], [2-3]) parça sırasından kaynak listesi (belge) sırasına eşlenir; aralık dışı atıf silinir.
-    Döner (yanıt, kullanılan parçalar). Atıf yoksa kaynak listesi boştur (alakasız kaynak gösterilmez)."""
+    Döner (yanıt, kullanılan parçalar). Atıf yoksa kaynak listesi boştur (alakasız kaynak gösterilmez).
+    Phase L: önce cümleye bağlanmayan atıflar (yalnız atıftan oluşan satır) silinir ve art arda yazılmış atıf grupları
+    ("[3], [3], [3]") tek gruba birleştirilir; kaynak listesi yalnız kalan atıflardan kurulur."""
+    ans = _tidy_citations(ans)
+
     def nums(g):
         out = []
         for part in re.split(r'\s*[,;]\s*', g):
@@ -293,6 +300,17 @@ def _renumber(ans: str, good: list):
     ans = re.sub(r'(\[[\d, ]+\])(\s*\1)+', r'\1', ans)
     ans = re.sub(r' +([.,;])', r'\1', ans)
     return ans, used
+
+
+_CITE_G = r'\[\d{1,2}(?:\s*[,;–-]\s*\d{1,2})*\]'
+_CITE_RUN = re.compile(rf'{_CITE_G}(?:\s*,?\s*{_CITE_G})+')
+_CITE_ONLY_LINE = re.compile(rf'(?m)^[ \t]*(?:{_CITE_G}[ \t,.;]*)+$')
+
+
+def _tidy_citations(ans: str) -> str:
+    ans = _CITE_RUN.sub(lambda m: '[' + ', '.join(re.findall(r'\d{1,2}(?:\s*[–-]\s*\d{1,2})?', m.group(0))) + ']', ans)
+    ans = _CITE_ONLY_LINE.sub('', ans)
+    return re.sub(r'\n{3,}', '\n\n', ans).strip()
 
 
 def _clean(s: str) -> str:

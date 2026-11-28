@@ -14,6 +14,8 @@ export async function openForm(page: Page, keys?: string[]) {
   await page.getByTestId('start').click();
   await expect(page.getByTestId('analysis-select')).toBeVisible();
   if (keys) {
+    // Phase L: ilk açılışta varsayılan seçim (ana + araştırma modülü) var; önce temizlenir
+    await page.getByTestId('select-none').click();
     for (const k of keys) {
       const box = page.getByTestId(`select-${k}`);
       if (!(await box.isVisible())) await page.getByTestId('group-deneysel').locator('summary').click();

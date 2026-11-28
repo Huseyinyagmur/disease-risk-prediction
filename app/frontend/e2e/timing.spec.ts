@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 import { writeFileSync } from 'node:fs';
 import { loadEcgSample, openEcg } from './helpers';
 
-const OUT = process.env.TIMING_OUT ?? '../../phase_xlviii/results/af_timing_browser.json';
+const OUT = process.env.TIMING_OUT ?? '../../phase_l/results/af_timing_browser.json';
 
 test.describe('@timing', () => {
   test('AF arayüz süre ayrıştırması', async ({ page }) => {

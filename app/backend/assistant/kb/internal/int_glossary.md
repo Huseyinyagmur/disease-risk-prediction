@@ -9,9 +9,13 @@ license: proje içi (MIT)
 
 # Terim sözlüğü
 
-## Eşik üstü / Eşik altı (ESIK_USTU / ESIK_ALTI)
+## Eşik üstü (ESIK_USTU)
 
-Eşik üstü / Eşik altı: Modelin araştırmada sabitlenmiş eşiğine göre sınıflaması. Tanı değildir; olasılık gösterilmez.
+Eşik üstü: Model sonucu, araştırmada sabitlenmiş eşiğin üstünde kaldı. Tanı değildir ve hastalık olduğu anlamına gelmez; olasılık gösterilmez. Sonucun bir hekimle değerlendirilmesi önerilir.
+
+## Eşik altı (ESIK_ALTI)
+
+Eşik altı: Model sonucu, araştırmada sabitlenmiş eşiğin altında kaldı. Tanı değildir; olasılık gösterilmez. Eşik altı (negatif) sonuç hastalığı dışlamaz.
 
 ## Sonuç üretilmedi (ABSTAIN)
 

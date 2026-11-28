@@ -1,0 +1,115 @@
+{
+ "questions_file": "phase_xlviii/eval/questions.json",
+ "questions_sha256": "85d41c3b4890494454ee9d5239a96c97788251fb7fc8368179a68c5685c386cb",
+ "chat_model": {
+  "name": "gemma3:4b",
+  "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "family": "gemma3",
+  "parameter_size": "3.9B",
+  "quantization": "Q4_K_M",
+  "license": "Gemma Terms of Use"
+ },
+ "embed_model": {
+  "name": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+ },
+ "options": {
+  "temperature": 0,
+  "seed": 42,
+  "top_k": 1,
+  "top_p": 1.0,
+  "num_ctx": 8192,
+  "num_predict": 512
+ },
+ "kb_manifest_sha256": "19ef65c292753d835f428f2afddc35e92394b1c53e45e3795ab3a792bc0e2c62",
+ "n": 67,
+ "groups": {
+  "G1": {
+   "n": 16,
+   "passed": 13,
+   "rate": 0.812,
+   "wilson95": [
+    0.57,
+    0.934
+   ],
+   "mean_seconds": 4.69
+  },
+  "G2": {
+   "n": 10,
+   "passed": 7,
+   "rate": 0.7,
+   "wilson95": [
+    0.397,
+    0.892
+   ],
+   "mean_seconds": 3.59
+  },
+  "G3": {
+   "n": 10,
+   "passed": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G4": {
+   "n": 10,
+   "passed": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "mean_seconds": 0.0
+  },
+  "G5": {
+   "n": 10,
+   "passed": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "mean_seconds": 0.13
+  },
+  "G6": {
+   "n": 11,
+   "passed": 10,
+   "rate": 0.909,
+   "wilson95": [
+    0.623,
+    0.984
+   ],
+   "mean_seconds": 0.98
+  }
+ },
+ "overall": {
+  "n": 67,
+  "passed": 60,
+  "rate": 0.896,
+  "wilson95": [
+   0.8,
+   0.948
+  ]
+ },
+ "timing": {
+  "mean_seconds_all": 1.84,
+  "mean_seconds_llm_calls": 4.2,
+  "max_seconds": 7.0,
+  "n_llm_calls": 29,
+  "mean_seconds_fixed": 0.0342
+ },
+ "routes": {
+  "emergency": 9,
+  "emergency_self_harm": 1,
+  "llm": 25,
+  "no_source": 1,
+  "postcheck_fail": 3,
+  "probability": 1,
+  "refused_injection": 5,
+  "refused_medical": 12,
+  "refused_scope": 10
+ }
+}

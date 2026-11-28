@@ -1,0 +1,727 @@
+{
+ "field_errors": {
+  "age_last_period_years=150 yıl makul aralık dışında [10, 70]": {
+   "case": "422_aralik_age_last_period_years",
+   "field": "age_last_period_years"
+  },
+  "age_years=250 yıl makul aralık dışında [18, 120]": {
+   "case": "422_aralik_age_years",
+   "field": "age_years"
+  },
+  "albumin_gdl=23 g/dL makul aralık dışında [1.0, 6.5]": {
+   "case": "422_aralik_albumin_gdl",
+   "field": "albumin_gdl"
+  },
+  "alcohol_drinks_per_day=70 içki/gün makul aralık dışında [0, 30]": {
+   "case": "422_aralik_alcohol_drinks_per_day",
+   "field": "alcohol_drinks_per_day"
+  },
+  "alp_ul=3010 U/L makul aralık dışında [10, 1500]": {
+   "case": "422_aralik_alp_ul",
+   "field": "alp_ul"
+  },
+  "alt_ul=2010 U/L makul aralık dışında [3, 1000]": {
+   "case": "422_aralik_alt_ul",
+   "field": "alt_ul"
+  },
+  "ast_ul=2010 U/L makul aralık dışında [3, 1000]": {
+   "case": "422_aralik_ast_ul",
+   "field": "ast_ul"
+  },
+  "cad_max_hr_bpm=530 atım/dk makul aralık dışında [20, 260]": {
+   "case": "422_aralik_cad_max_hr_bpm",
+   "field": "cad_max_hr_bpm"
+  },
+  "cad_st_depression_mm=50 mm makul aralık dışında [-10, 20]": {
+   "case": "422_aralik_cad_st_depression_mm",
+   "field": "cad_st_depression_mm"
+  },
+  "creatinine_mgdl=40 mg/dL makul aralık dışında [0.2, 15]": {
+   "case": "422_aralik_creatinine_mgdl",
+   "field": "creatinine_mgdl"
+  },
+  "dbp_1_mmhg=310 mmHg makul aralık dışında [30, 150]": {
+   "case": "422_aralik_dbp_1_mmhg",
+   "field": "dbp_1_mmhg"
+  },
+  "dbp_2_mmhg=310 mmHg makul aralık dışında [30, 150]": {
+   "case": "422_aralik_dbp_2_mmhg",
+   "field": "dbp_2_mmhg"
+  },
+  "dbp_3_mmhg=310 mmHg makul aralık dışında [30, 150]": {
+   "case": "422_aralik_dbp_3_mmhg",
+   "field": "dbp_3_mmhg"
+  },
+  "fev1_pre_ml=14010 mL makul aralık dışında [200, 7000]": {
+   "case": "422_aralik_fev1_pre_ml",
+   "field": "fev1_pre_ml"
+  },
+  "fvc_pre_ml=18010 mL makul aralık dışında [300, 9000]": {
+   "case": "422_aralik_fvc_pre_ml",
+   "field": "fvc_pre_ml"
+  },
+  "ggt_ul=4010 U/L makul aralık dışında [1, 2000]": {
+   "case": "422_aralik_ggt_ul",
+   "field": "ggt_ul"
+  },
+  "glucose_fasting_mgdl=1610 mg/dL makul aralık dışında [30, 800]": {
+   "case": "422_aralik_glucose_fasting_mgdl",
+   "field": "glucose_fasting_mgdl"
+  },
+  "glucose_serum_mgdl=1610 mg/dL makul aralık dışında [30, 800]": {
+   "case": "422_aralik_glucose_serum_mgdl",
+   "field": "glucose_serum_mgdl"
+  },
+  "hba1c_pct=46 % makul aralık dışında [3.0, 18.0]": {
+   "case": "422_aralik_hba1c_pct",
+   "field": "hba1c_pct"
+  },
+  "hdl_mgdl=410 mg/dL makul aralık dışında [5, 200]": {
+   "case": "422_aralik_hdl_mgdl",
+   "field": "hdl_mgdl"
+  },
+  "height_cm=470 cm makul aralık dışında [100, 230]": {
+   "case": "422_aralik_height_cm",
+   "field": "height_cm"
+  },
+  "hemoglobin_gdl=54 g/dL makul aralık dışında [3, 22]": {
+   "case": "422_aralik_hemoglobin_gdl",
+   "field": "hemoglobin_gdl"
+  },
+  "mcv_fl=290 fL makul aralık dışında [50, 140]": {
+   "case": "422_aralik_mcv_fl",
+   "field": "mcv_fl"
+  },
+  "platelets_k_ul=3010 10^3/µL makul aralık dışında [10, 1500]": {
+   "case": "422_aralik_platelets_k_ul",
+   "field": "platelets_k_ul"
+  },
+  "rbc_m_ul=28 10^6/µL makul aralık dışında [1.0, 9.0]": {
+   "case": "422_aralik_rbc_m_ul",
+   "field": "rbc_m_ul"
+  },
+  "rdw_pct=80 % makul aralık dışında [8, 35]": {
+   "case": "422_aralik_rdw_pct",
+   "field": "rdw_pct"
+  },
+  "rip3_pgml=10010 pg/mL makul aralık dışında [0, 5000]": {
+   "case": "422_aralik_rip3_pgml",
+   "field": "rip3_pgml"
+  },
+  "sbp_1_mmhg=530 mmHg makul aralık dışında [70, 260]": {
+   "case": "422_aralik_sbp_1_mmhg",
+   "field": "sbp_1_mmhg"
+  },
+  "sbp_2_mmhg=530 mmHg makul aralık dışında [70, 260]": {
+   "case": "422_aralik_sbp_2_mmhg",
+   "field": "sbp_2_mmhg"
+  },
+  "sbp_3_mmhg=530 mmHg makul aralık dışında [70, 260]": {
+   "case": "422_aralik_sbp_3_mmhg",
+   "field": "sbp_3_mmhg"
+  },
+  "tg_mgdl=10010 mg/dL makul aralık dışında [10, 5000]": {
+   "case": "422_aralik_tg_mgdl",
+   "field": "tg_mgdl"
+  },
+  "total_chol_mgdl=1210 mg/dL makul aralık dışında [50, 600]": {
+   "case": "422_aralik_total_chol_mgdl",
+   "field": "total_chol_mgdl"
+  },
+  "tutarsız okuma 1: sistolik (80) ≤ diyastolik (90)": {
+   "case": "422_tutarsiz",
+   "field": "sbp_1_mmhg"
+  },
+  "tutarsız spirometri: FEV1 > FVC": {
+   "case": "422_tutarsiz",
+   "field": "fev1_pre_ml"
+  },
+  "uric_acid_mgdl=50 mg/dL makul aralık dışında [0.5, 20]": {
+   "case": "422_aralik_uric_acid_mgdl",
+   "field": "uric_acid_mgdl"
+  },
+  "urine_albumin_mgl=20010 mg/L makul aralık dışında [0.1, 10000]": {
+   "case": "422_aralik_urine_albumin_mgl",
+   "field": "urine_albumin_mgl"
+  },
+  "urine_creatinine_mgdl=1210 mg/dL makul aralık dışında [5, 600]": {
+   "case": "422_aralik_urine_creatinine_mgdl",
+   "field": "urine_creatinine_mgdl"
+  },
+  "waist_cm=410 cm makul aralık dışında [40, 200]": {
+   "case": "422_aralik_waist_cm",
+   "field": "waist_cm"
+  },
+  "wbc_k_ul=210 10^3/µL makul aralık dışında [0.5, 100]": {
+   "case": "422_aralik_wbc_k_ul",
+   "field": "wbc_k_ul"
+  },
+  "weight_kg sayısal olmalı": {
+   "case": "422_metin",
+   "field": "weight_kg"
+  },
+  "weight_kg: desteklenmeyen birim 'stone' (kayıtlı birim 'kg')": {
+   "case": "422_birim",
+   "field": "weight_kg"
+  },
+  "weight_kg=610 kg makul aralık dışında [25, 300]": {
+   "case": "422_aralik_weight_kg",
+   "field": "weight_kg"
+  }
+ },
+ "n_cases": 74,
+ "note": "Phase L sentetik tarama (scan_reasons.py). Gerçek kişi verisi değildir.",
+ "reasons": {
+  "\"doktor zayıf/başarısız böbrek dedi mi\" yanıtsız: model yalnız farkında olmayan kişide geçerli": {
+   "case": "bos",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "AF modeli yalnız EKG kaydı (.hea + .dat/.mat) yüklenerek çalışır: POST /ecg/af": {
+   "case": "bos",
+   "model_id": "af_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "AF modeli yalnız EKG kaydı yüklenerek çalışır: POST /ecg/af (kilitli AF-ECGDELI-OCTAVE-v1)": {
+   "case": "bos",
+   "model_id": "af_S4_DEVICE",
+   "path": "/predict"
+  },
+  "age: yaş ≥ 90: PTB-XL eğitiminde >89 yaş gizlilik kodluydu (age_cap89_ptbxl), tahmin üretilmez": {
+   "case": "yas_95",
+   "model_id": "af_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "age=110 yıl model girdi aralığı dışında [20, 100]": {
+   "case": "yas_110",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "age=19 yıl model girdi aralığı dışında [20, 100]": {
+   "case": "yas_19",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "age=19 yıl model girdi aralığı dışında [20, 65]": {
+   "case": "yas_19",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "age=19 yıl model girdi aralığı dışında [20, 80]": {
+   "case": "yas_19",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "age=19 yıl model girdi aralığı dışında [40, 79]": {
+   "case": "yas_19",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "age=19 yıl model girdi aralığı dışında [50, 80]": {
+   "case": "yas_19",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "age=30 yıl model girdi aralığı dışında [40, 79]": {
+   "case": "yas_30",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "age=30 yıl model girdi aralığı dışında [50, 80]": {
+   "case": "yas_30",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "age=45 yıl model girdi aralığı dışında [50, 80]": {
+   "case": "yas_45",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "age=70 yıl model girdi aralığı dışında [20, 65]": {
+   "case": "yas_70",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "age=80 yıl model girdi aralığı dışında [20, 65]": {
+   "case": "yas_85",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "age=80 yıl model girdi aralığı dışında [40, 79]": {
+   "case": "yas_85",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "bmi=111.1 kg/m2 model girdi aralığı dışında [12, 80]": {
+   "case": "bmi_uc_yuksek",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "bmi=111.11 kg/m2 model girdi aralığı dışında [12, 80]": {
+   "case": "bmi_uc_yuksek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "bmi=7.5 kg/m2 model girdi aralığı dışında [12, 80]": {
+   "case": "bmi_uc_dusuk",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "cinsiyet yanıtsız: popülasyon uygunluğu doğrulanamıyor": {
+   "case": "bos",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "diyabet tanısı sorusu yanıtsız: model yalnız tanısız kişide geçerli": {
+   "case": "bos",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "diyabet tanısı var: model yalnız diyabet tanısı almamış kişide geçerli (doğrudan klinik izlem)": {
+   "case": "diyabet_tanili",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "diyaliz: model popülasyonu dışında": {
+   "case": "bobrek_tanili",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "egfr=2.80335 mL/dk/1.73m2 model girdi aralığı dışında [5, 160]": {
+   "case": "tahlil_uc",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_last_period_years": {
+   "case": "422_aralik_age_last_period_years",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years": {
+   "case": "yas_yanitsiz",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, cad_chest_pain_type, sbp_1_mmhg, total_chol_mgdl, glucose_fasting_mgdl, cad_resting_ecg, cad_max_hr_bpm, cad_exercise_angina, cad_st_depression_mm, cad_st_slope": {
+   "case": "bos",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, smoking_status, alcohol_drinks_per_day, told_diabetes, hba1c_pct, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, urine_albumin_mgl, urine_creatinine_mgdl": {
+   "case": "bos",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, smoking_status, alcohol_drinks_per_day, glucocorticoid_ge1month, fracture_hip, fracture_wrist, fracture_spine, fracture_after_age20, parent_hip_fracture": {
+   "case": "bos",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, smoking_status, fev1_pre_ml, fvc_pre_ml": {
+   "case": "bos",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, waist_cm, alt_ul, ast_ul, ggt_ul, alp_ul, albumin_gdl, platelets_k_ul, glucose_serum_mgdl, hba1c_pct, told_diabetes, tg_mgdl, hdl_mgdl, alcohol_drinks_per_day": {
+   "case": "bos",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): age_years, sex, weight_kg, height_cm, waist_cm, smoking_status, hba1c_pct, alt_ul, ast_ul, total_chol_mgdl, hdl_mgdl, creatinine_mgdl, wbc_k_ul, rbc_m_ul, mcv_fl, rdw_pct, albumin_gdl": {
+   "case": "bos",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): albumin_gdl": {
+   "case": "422_aralik_albumin_gdl",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): alcohol_drinks_per_day": {
+   "case": "422_aralik_alcohol_drinks_per_day",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): alp_ul": {
+   "case": "422_aralik_alp_ul",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): alt_ul": {
+   "case": "422_aralik_alt_ul",
+   "model_id": "dm_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): ast_ul": {
+   "case": "422_aralik_ast_ul",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): cad_max_hr_bpm": {
+   "case": "422_aralik_cad_max_hr_bpm",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): cad_st_depression_mm": {
+   "case": "422_aralik_cad_st_depression_mm",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): creatinine_mgdl": {
+   "case": "422_aralik_creatinine_mgdl",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): dbp_1_mmhg": {
+   "case": "422_aralik_dbp_1_mmhg",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): dbp_2_mmhg": {
+   "case": "422_aralik_dbp_2_mmhg",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): dbp_3_mmhg": {
+   "case": "422_aralik_dbp_3_mmhg",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): fev1_pre_ml": {
+   "case": "422_tutarsiz",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): fvc_pre_ml": {
+   "case": "422_aralik_fvc_pre_ml",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): ggt_ul": {
+   "case": "422_aralik_ggt_ul",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): glucose_fasting_mgdl": {
+   "case": "422_aralik_glucose_fasting_mgdl",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): glucose_serum_mgdl": {
+   "case": "422_aralik_glucose_serum_mgdl",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): hba1c_pct": {
+   "case": "422_aralik_hba1c_pct",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): hdl_mgdl": {
+   "case": "422_aralik_hdl_mgdl",
+   "model_id": "dm_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): height_cm": {
+   "case": "422_aralik_height_cm",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): hemoglobin_gdl": {
+   "case": "422_aralik_hemoglobin_gdl",
+   "model_id": "ckd_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): on_diabetes_pills": {
+   "case": "diyabet_tanili",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): on_insulin": {
+   "case": "diyabet_ilac",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): platelets_k_ul": {
+   "case": "422_aralik_platelets_k_ul",
+   "model_id": "fibrosis_final",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): race_ethnicity": {
+   "case": "irk_yanitsiz",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): sbp_1_mmhg": {
+   "case": "422_tutarsiz",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): sbp_2_mmhg": {
+   "case": "422_aralik_sbp_2_mmhg",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): sbp_3_mmhg": {
+   "case": "422_aralik_sbp_3_mmhg",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): sex": {
+   "case": "cinsiyet_yanitsiz",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): tg_mgdl": {
+   "case": "422_aralik_tg_mgdl",
+   "model_id": "dm_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): told_diabetes": {
+   "case": "diyabet_yanitsiz",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): told_diabetes, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_1_mmhg, sbp_2_mmhg, sbp_3_mmhg, dbp_1_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, family_hx_diabetes, recreational_activity, smoking_status": {
+   "case": "bos",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): told_diabetes, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_1_mmhg, sbp_2_mmhg, sbp_3_mmhg, dbp_1_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, family_hx_diabetes, recreational_activity, smoking_status, total_chol_mgdl, hdl_mgdl, tg_mgdl, alt_ul, uric_acid_mgdl": {
+   "case": "bos",
+   "model_id": "dm_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): told_weak_failing_kidneys, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, told_diabetes, hx_coronary_disease, hx_heart_failure, hx_stroke, smoking_status": {
+   "case": "bos",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): told_weak_failing_kidneys, age_years, sex, race_ethnicity, weight_kg, height_cm, waist_cm, sbp_2_mmhg, sbp_3_mmhg, dbp_2_mmhg, dbp_3_mmhg, told_hypertension, told_diabetes, hx_coronary_disease, hx_heart_failure, hx_stroke, smoking_status, glucose_serum_mgdl, hba1c_pct, total_chol_mgdl, hdl_mgdl, hemoglobin_gdl": {
+   "case": "bos",
+   "model_id": "ckd_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): total_chol_mgdl": {
+   "case": "422_aralik_total_chol_mgdl",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): uric_acid_mgdl": {
+   "case": "422_aralik_uric_acid_mgdl",
+   "model_id": "dm_B",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): urine_albumin_mgl": {
+   "case": "422_aralik_urine_albumin_mgl",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): urine_creatinine_mgdl": {
+   "case": "422_aralik_urine_creatinine_mgdl",
+   "model_id": "htn_M1",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): waist_cm": {
+   "case": "422_aralik_waist_cm",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "eksik zorunlu alan(lar): weight_kg": {
+   "case": "422_birim",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "gebe: model popülasyonu gebe olmayan kişilerdir": {
+   "case": "gebe_evet",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "gebelik durumu \"bilmiyorum\": popülasyon \"gebe değil\" doğrulanamıyor (katı yorum)": {
+   "case": "gebe_bilmiyorum",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "gebelik durumu yanıtsız (kadın; zorunlu soru): popülasyon \"gebe değil\" doğrulanamıyor": {
+   "case": "gebe_yanitsiz",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "pre-BD FEV1/FVC = 0.857 ≥ 0,70: model yalnız obstrüksiyonlu (bronkodilatör testi yapılmış) alt grupta geçerli": {
+   "case": "koah_oran_normal",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "pregnant: şemada olmayan değer 'maybe'": {
+   "case": "kategori_gecersiz",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "tanılı böbrek hastalığı: model yalnız böbrek hastalığı tanısı olmayan kişide geçerli": {
+   "case": "bobrek_tanili",
+   "model_id": "ckd_A",
+   "path": "/eligibility"
+  },
+  "yapısal boşluk (eğitimdeki tanım, eksik sayılmaz): age_last_period": {
+   "case": "yas_70_erkek",
+   "model_id": "osteo_final",
+   "path": "/predict"
+  },
+  "yaş 110 model popülasyonu dışında (18–89)": {
+   "case": "yas_110",
+   "model_id": "af_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 110 model popülasyonu dışında (20–100 (model girdi aralığı))": {
+   "case": "yas_110",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 110 model popülasyonu dışında (40–79)": {
+   "case": "yas_110",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 110: erkekte model popülasyonu 20–65": {
+   "case": "yas_110_erkek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 110: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_110",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 19 model popülasyonu dışında (20–100 (model girdi aralığı))": {
+   "case": "yas_19",
+   "model_id": "cad_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 19 model popülasyonu dışında (40–79)": {
+   "case": "yas_19",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 19 model popülasyonu dışında (≥ 20)": {
+   "case": "yas_19",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "yaş 19 model popülasyonu dışında (≥ 50)": {
+   "case": "yas_19",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "yaş 19: erkekte model popülasyonu 20–65": {
+   "case": "yas_19_erkek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 19: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_19",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 30 model popülasyonu dışında (40–79)": {
+   "case": "yas_30",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 30 model popülasyonu dışında (≥ 50)": {
+   "case": "yas_30",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "yaş 45 model popülasyonu dışında (≥ 50)": {
+   "case": "yas_45",
+   "model_id": "osteo_final",
+   "path": "/eligibility"
+  },
+  "yaş 45: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_45",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 55: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "tam",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 70: erkekte model popülasyonu 20–65": {
+   "case": "yas_70_erkek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 70: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_70",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 85 model popülasyonu dışında (40–79)": {
+   "case": "yas_85",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 85: erkekte model popülasyonu 20–65": {
+   "case": "yas_85_erkek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 85: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_85",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 95 model popülasyonu dışında (18–89)": {
+   "case": "yas_95",
+   "model_id": "af_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 95 model popülasyonu dışında (40–79)": {
+   "case": "yas_95",
+   "model_id": "copd_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "yaş 95: erkekte model popülasyonu 20–65": {
+   "case": "yas_95_erkek",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş 95: kadında model popülasyonu 20–44 (gebe olmayan)": {
+   "case": "yas_95",
+   "model_id": "anemia_LR16",
+   "path": "/eligibility"
+  },
+  "yaş yanıtsız: popülasyon uygunluğu doğrulanamıyor": {
+   "case": "bos",
+   "model_id": "af_S4_DEVICE",
+   "path": "/eligibility"
+  },
+  "ırk/etnik köken yanıtsız: policy.optional_race gereği varsayılan sınıf atanmaz": {
+   "case": "bos",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "şemada olmayan kategori: race_ethnicity='xyz'": {
+   "case": "kategori_gecersiz",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  },
+  "şemada olmayan kategori: smoking_status='sometimes'": {
+   "case": "kategori_gecersiz",
+   "model_id": "dm_A",
+   "path": "/eligibility"
+  }
+ },
+ "warnings": {
+  "Anemi hedefini tanımlayan hemoglobin değeri girildi. Bu durumda model yerine doğrudan klinik eşik kullanın.": {
+   "case": "tam"
+  },
+  "Böbrek hedefini tanımlayan ölçüm girildi (kreatinin → eGFR ve/veya idrar albümin/kreatinin → UACR). Bu durumda model yerine doğrudan klinik eşik kullanın.": {
+   "case": "tam"
+  },
+  "Diyabet hedefini tanımlayan ölçüm girildi (HbA1c / açlık plazma glukozu). Bu durumda model yerine doğrudan klinik eşik kullanın.": {
+   "case": "tam"
+  }
+ }
+}

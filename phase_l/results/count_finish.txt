@@ -1,0 +1,15 @@
+components/AssistantPanel.tsx:60:78 [info] raw-color-values: 50 raw colour value(s) such as text-indigo-800, text-indigo-950, text-slate-600, border-slate-300; the contract says which are tokens.
+components/ResultCard.tsx:45:80 [info] raw-color-values: 20 raw colour value(s) such as border-slate-200, bg-slate-50, bg-white, text-slate-900; the contract says which are tokens.
+components/AnalysisSelect.tsx:25:124 [info] raw-color-values: 29 raw colour value(s) such as border-indigo-600, bg-indigo-50, border-slate-300, bg-white; the contract says which are tokens.
+components/RoutingPanel.tsx:50:36 [info] raw-color-values: 18 raw colour value(s) such as border-slate-200, bg-white, text-slate-800, text-slate-600; the contract says which are tokens.
+components/ui.tsx:23:51 [info] raw-color-values: 39 raw colour value(s) such as border-amber-300, bg-amber-50, text-amber-900, border-slate-200; the contract says which are tokens.
+pages/Results.tsx:14:118 [info] raw-color-values: 16 raw colour value(s) such as border-slate-300, bg-white, text-slate-900, text-slate-700; the contract says which are tokens.
+pages/DataEntry.tsx:93:56 [info] raw-color-values: 68 raw colour value(s) such as text-slate-600, border-violet-400, bg-violet-50, text-violet-900; the contract says which are tokens.
+pages/EcgPage.tsx:128:83 [info] raw-color-values: 49 raw colour value(s) such as border-sky-300, bg-sky-50, text-sky-900, border-slate-200; the contract says which are tokens.
+pages/EcgPage.tsx:64:27 [warning] missing-ui-states: Data-driven UI has no visible loading state marker.
+lib/status.ts:21:22 [info] raw-color-values: 52 raw colour value(s) such as border-orange-700, bg-orange-50, text-orange-950, bg-orange-700; the contract says which are tokens.
+App.tsx:28:35 [info] raw-color-values: 2 raw colour value(s) such as border-slate-200, text-slate-500; the contract says which are tokens.
+(all):0:0 [warning] radius-off-scale: Corner radii outside the stated scale: 6px.
+files 10 | errors 0 | warnings 2 | accent hues 9 (red, indigo, orange, emerald, teal, violet, rose, sky, amber) | radii 4, 6, 8, 9999
+App.tsx:28:35 [info] raw-color-values: 2 raw colour value(s) such as border-slate-200, text-slate-500; the contract says which are tokens.
+files 10 | errors 0 | warnings 1 | accent hues 9 (red, indigo, orange, emerald, teal, violet, rose, sky, amber) | radii 4, 8, 9999

@@ -93,7 +93,8 @@ describe('veri giriş formu (sihirbaz)', () => {
     renderApp();
     await startAll(u);
     await u.type(screen.getByLabelText(/^Yaş/), '150');
-    expect(await screen.findByTestId('err-age_years')).toHaveTextContent('makul aralık dışında [18, 120]');
+    // Phase L: sunucu metni (age_years=150 … [18, 120]) alan etiketinden sade kalıpla gösterilir
+    expect(await screen.findByTestId('err-age_years')).toHaveTextContent(/^Yaş 18–120 yıl arasında olmalı\.$/);
     expect(screen.getByLabelText(/^Yaş/)).toHaveAttribute('aria-invalid', 'true');
     expect(screen.getByLabelText(/^Yaş/).getAttribute('aria-describedby')).toContain('err-age_years');
     expect(screen.getByTestId('error-count')).toHaveTextContent('1 alanda hata');
@@ -195,6 +196,8 @@ describe('analiz seçimine göre alan filtreleme (backend gerekli alan listesi)'
     mockFetch({ elig: () => eligFull });
     const u = userEvent.setup();
     renderApp();
+    // Phase L: ilk açılışta varsayılan seçim (ana + araştırma modülü); "Seçimi temizle" ile panel boşalır
+    await u.click(await screen.findByTestId('select-none'));
     expect(await screen.findByTestId('panel-empty')).toBeInTheDocument();
     await selectOnly(u, ['liver_fibrosis', 'osteoporosis']);
     await screen.findByTestId('panel-fibrosis_final');
@@ -210,6 +213,7 @@ describe('sihirbaz gezinme', () => {
     const u = userEvent.setup();
     renderApp();
     await screen.findByTestId('analysis-select');
+    await u.click(await screen.findByTestId('select-none')); // Phase L: varsayılan seçim temizlenir
     expect(screen.getByTestId('wizard-next')).toBeDisabled(); // seçim yok
     expect(screen.getByTestId('select-required')).toBeInTheDocument();
     expect(screen.queryByTestId('submit')).toBeNull();
@@ -218,7 +222,7 @@ describe('sihirbaz gezinme', () => {
     expect(bar).toHaveAttribute('aria-valuenow', '1');
     expect(bar).toHaveAttribute('aria-valuemax', '7');
     await u.click(screen.getByTestId('wizard-next'));
-    expect(screen.getByTestId('step-of')).toHaveTextContent('Adım 2 / 7');
+    expect(screen.getByTestId('step-of')).toHaveTextContent('Adım 2 / 7: Temel bilgiler');
     expect(screen.getByTestId('step-title')).toHaveFocus();
     expect(screen.getByTestId('step-temel')).toHaveAttribute('aria-current', 'step');
     await u.type(screen.getByLabelText(/^Yaş/), '58');
@@ -234,11 +238,23 @@ describe('sihirbaz gezinme', () => {
     expect(screen.getByTestId('wizard-back')).toBeDisabled();
   });
 
-  it('örnek profil, seçim yokken "Tümü"nü seçer; hesapla butonu form sonunda (sabit/üst üste binen çubuk değil)', async () => {
+  it('ilk açılışta yalnız ana modüller + araştırma modülü seçili; örnek profil seçimi değiştirmez; seçim yokken "Tümü"nü seçer', async () => {
     mockFetch();
     const u = userEvent.setup();
     renderApp();
-    await u.click(await screen.findByTestId('profile-fibrosis_ready'));
+    expect(await screen.findByTestId('selected-count')).toHaveTextContent('3 analiz seçildi');
+    for (const k of ['af', 'liver_fibrosis', 'osteoporosis']) expect(screen.getByTestId(`select-${k}`)).toBeChecked();
+    expect(screen.getByTestId('select-diabetes')).not.toBeChecked();
+    expect(screen.getByTestId('group-deneysel').tagName).toBe('DETAILS');
+    expect((screen.getByTestId('group-deneysel') as HTMLDetailsElement).open).toBe(false);
+    expect(screen.getByTestId('group-deneysel')).toHaveTextContent('Deneysel modüller (isteğe bağlı)');
+    expect(screen.getByTestId('needs-osteoporosis')).toHaveTextContent('Tahlil gerekmez');
+    expect(screen.getByTestId('needs-af')).toHaveTextContent('EKG kaydı gerekir');
+    expect(screen.getByTestId('needs-liver_fibrosis')).toHaveTextContent('Kan tahlili gerekir');
+    await u.click(screen.getByTestId('profile-fibrosis_ready'));
+    expect(screen.getByTestId('selected-count')).toHaveTextContent('3 analiz seçildi');
+    await u.click(screen.getByTestId('select-none'));
+    await u.click(screen.getByTestId('profile-fibrosis_ready'));
     expect(screen.getByTestId('selected-count')).toHaveTextContent('9 analiz seçildi');
     const bar = screen.getByTestId('wizard-bar');
     expect(bar.className).not.toMatch(/\b(sticky|fixed)\b/);
@@ -271,9 +287,11 @@ describe('canlı yönlendirme paneli', () => {
     );
     const an = screen.getByTestId('panel-anemia_LR16');
     expect(an).toHaveAttribute('data-state', 'OUT_OF_SCOPE');
-    expect(an).toHaveTextContent('Bu analiz size uygun değil: yaş 55: kadında analizin geliştirildiği grup 20–44');
+    expect(an).toHaveTextContent('Bu analiz size uygun değil: Bu analiz kadınlarda yalnız 20–44 yaş arası ve gebe olmayanlar için geliştirildi (girdiğiniz yaş: 55).');
+    expect(within(an).getByTestId('panel-line-anemia_LR16')).not.toHaveTextContent(/model popülasyonu|\[|=/);
     const af = screen.getByTestId('panel-af_S4_DEVICE');
-    expect(af).toHaveTextContent('EKG kaydı (.hea + .dat/.mat)');
+    expect(af).toHaveTextContent('EKG kaydı');
+    expect(within(af).getByTestId('panel-line-af_S4_DEVICE')).not.toHaveTextContent('.hea');
     const ids = screen.getAllByTestId(/^panel-(?!line|warnings|also|details)/).map((e) => e.getAttribute('data-testid'));
     expect(ids.slice(0, 2).sort()).toEqual(['panel-af_S4_DEVICE', 'panel-fibrosis_final']);
     expect(ids[2]).toBe('panel-osteo_final');
@@ -288,7 +306,7 @@ describe('canlı yönlendirme paneli', () => {
     renderApp();
     await startAll(u);
     const p = await screen.findByTestId(`panel-${e.models[2].model_id}`);
-    expect(p).toHaveTextContent('Sonuç üretilemez: gebelik durumu "bilmiyorum"');
+    expect(p).toHaveTextContent('Sonuç üretilemez: Gebelik durumu bilinmediği için bu analiz yapılamadı; model gebe olmayan kişilerde geliştirildi.');
   });
 
   it('sunucuya ulaşılamazsa panel hata gösterir', async () => {

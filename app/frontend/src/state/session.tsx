@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { api, ApiError } from '../api/client';
 import type { EcgResponse, ModelInfo, PredictResponse, Schema } from '../api/types';
 import type { FormValues } from '../lib/form';
+import { defaultSelection } from '../lib/selection';
 
 export type Page = 'home' | 'form' | 'results' | 'ecg' | 'models' | 'about';
 
@@ -53,6 +54,8 @@ export function SessionProvider({ children, initialPage = 'home' }: { children: 
         if (!alive) return;
         setSchema(s);
         setModels(m.models);
+        // Phase L: ilk açılışta yalnız ana modüller + araştırma modülü seçili (app_config > ui.default_selected_module_labels)
+        setSelectedState((cur) => (cur.length ? cur : defaultSelection(s, m.models)));
         setDisclaimer(typeof s.disclaimer === 'string' && s.disclaimer ? s.disclaimer : null);
       })
       .catch((e: unknown) => {

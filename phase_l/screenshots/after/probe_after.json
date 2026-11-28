@@ -1,0 +1,56 @@
+{
+ "desktop_localStorage_keys": [],
+ "desktop_empty_all_selected_panel": [
+  {
+   "after_ms": 0,
+   "items": []
+  },
+  {
+   "after_ms": 150,
+   "items": []
+  },
+  {
+   "after_ms": 1500,
+   "items": [
+    "af_S4_DEVICE=MISSING",
+    "fibrosis_final=MISSING",
+    "osteo_final=MISSING",
+    "cad_DEVICE=MISSING",
+    "dm_A=MISSING",
+    "dm_B=MISSING",
+    "anemia_LR16=MISSING",
+    "copd_S4_DEVICE=MISSING",
+    "htn_M1=MISSING",
+    "ckd_A=MISSING",
+    "ckd_B=MISSING"
+   ]
+  }
+ ],
+ "tablet768_localStorage_keys": [],
+ "tablet768_empty_all_selected_panel": [
+  {
+   "after_ms": 0,
+   "items": []
+  },
+  {
+   "after_ms": 150,
+   "items": []
+  },
+  {
+   "after_ms": 1500,
+   "items": [
+    "af_S4_DEVICE=MISSING",
+    "fibrosis_final=MISSING",
+    "osteo_final=MISSING",
+    "cad_DEVICE=MISSING",
+    "dm_A=MISSING",
+    "dm_B=MISSING",
+    "anemia_LR16=MISSING",
+    "copd_S4_DEVICE=MISSING",
+    "htn_M1=MISSING",
+    "ckd_A=MISSING",
+    "ckd_B=MISSING"
+   ]
+  }
+ ]
+}

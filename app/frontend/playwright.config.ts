@@ -4,7 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
 // "npm run build"; vite preview çalışmıyorsa başlatılır.
 // Sonuç dosyaları faz klasörüne yazılır (PW_OUT ile değiştirilebilir). AF testleri Octave çalıştırdığı için seri koşar
 // (backend aynı anda tek EKG işler).
-const OUT = process.env.PW_OUT ?? '../../phase_xlviii/results/playwright';
+const OUT = process.env.PW_OUT ?? '../../phase_l/results/playwright';
 
 export default defineConfig({
   testDir: './e2e',

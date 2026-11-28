@@ -1,7 +1,7 @@
 // Phase XLVIII: açıklama asistanına giden oturum ETİKETLERİ. Yalnız hastalık anahtarı, durum kodu ve eksik alan ADLARI
 // gönderilir; form değerleri, ölçümler, EKG sinyali veya öznitelik değerleri hiçbir zaman eklenmez.
 import type { AssistantOutcome, AssistantResultLabel, EcgResponse, ModelResult, PredictResponse, Schema } from '../api/types';
-import { needsEcg } from '../components/ResultCard';
+import { needsEcg } from './status';
 
 export function outcomeLabel(r: ModelResult, schema: Schema | null): AssistantOutcome {
   if (needsEcg(r, schema)) return 'ECG_REQUIRED';
